@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Prototope
 
 class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		Layer()
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 
