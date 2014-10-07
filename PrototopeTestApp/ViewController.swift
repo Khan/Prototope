@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let redView = View(parent: view)
+		let redView = Layer(parent: view)
 		redView.x = 200
 		redView.y = 200
 		redView.width = 100
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 		redView.backgroundColor = UIColor.redColor()
 		redView.cornerRadius = 10
 		redView.border = Border(color: UIColor.blackColor(), width: 4)
-		redView.shadow = Shadow(color: UIColor.blackColor(), alpha: 0.75, offset: CGSize(), radius: 10)
+		redView.shadow = Shadow(color: UIColor.blackColor(), alpha: 0.75, offset: Size(), radius: 10)
 	}
 
 }
