@@ -71,3 +71,29 @@ extension CGSize {
 		self.height = CGFloat(size.height)
 	}
 }
+
+// MARK: Rect
+
+public struct Rect {
+	public var origin: Point
+	public var size: Size
+
+	public init(x: Double = 0, y: Double = 0, width: Double = 0, height: Double = 0) {
+		origin = Point(x: x, y: y)
+		size = Size(width: width, height: height)
+	}
+
+	public init(_ rect: CGRect) {
+		origin = Point(rect.origin)
+		size = Size(rect.size)
+	}
+
+	// TODO: .midX, .minY, etc.
+}
+
+extension CGRect {
+	public init(_ rect: Rect) {
+		self.origin = CGPoint(rect.origin)
+		self.size = CGSize(rect.size)
+	}
+}
