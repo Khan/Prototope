@@ -117,16 +117,16 @@ public class Layer: Equatable {
 		set { view.center = view.convertPoint(CGPoint(newValue), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace) }
 	}
 
-  public func ancestorNamed(name: String) -> Layer? {
-    var currentLayer = parent
-    while currentLayer != nil {
-      if currentLayer!.name == name {
-        return currentLayer
-      }
-      currentLayer = currentLayer!.parent
-    }
-    return nil
-  }
+	public func ancestorNamed(name: String) -> Layer? {
+		var currentLayer = parent
+		while currentLayer != nil {
+			if currentLayer!.name == name {
+				return currentLayer
+			}
+			currentLayer = currentLayer!.parent
+		}
+		return nil
+	}
 
 	public let name: String?
 
