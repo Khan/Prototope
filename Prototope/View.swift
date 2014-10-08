@@ -154,6 +154,17 @@ public class Layer: Equatable {
 	private var layer: CALayer { return view.layer }
 }
 
+extension Layer: Printable {
+	public var description: String {
+		var output = ""
+		if let name = name {
+			output += "\(name): "
+		}
+		output += view.description
+		return output
+	}
+}
+
 public func ==(a: Layer, b: Layer) -> Bool {
 	return a === b
 }
