@@ -75,6 +75,11 @@ public class Layer {
 		set { layer.cornerRadius = CGFloat(newValue) }
 	}
 
+	public var userInteractionEnabled: Bool {
+		get { return view.userInteractionEnabled }
+		set { view.userInteractionEnabled = newValue }
+	}
+
 	public let name: String?
 
 	public var border: Border {
