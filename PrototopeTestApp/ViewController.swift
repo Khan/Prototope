@@ -14,11 +14,8 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let redView = Layer(parent: view)
-		redView.x = 200
-		redView.y = 200
-		redView.width = 100
-		redView.height = 100
+		let redView = Layer(parent: view, name: "Red!")
+		redView.frame = Rect(x: 300, y: 300, width: 100, height: 100)
 		redView.backgroundColor = UIColor.red
 		redView.cornerRadius = 10
 		redView.border = Border(color: UIColor.black, width: 4)

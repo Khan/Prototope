@@ -50,6 +50,16 @@ public class Layer {
 		set { layer.bounds.size = CGSize(newValue) }
 	}
 
+	public var frame: Rect {
+		get { return Rect(layer.frame) }
+		set { layer.frame = CGRect(newValue) }
+	}
+
+	public var bounds: Rect {
+		get { return Rect(layer.bounds) }
+		set { layer.bounds = CGRect(newValue) }
+	}
+
 	public var backgroundColor: UIColor? {
 		get { return view.backgroundColor }
 		set { view.backgroundColor = newValue }
