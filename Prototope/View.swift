@@ -47,6 +47,14 @@ public class Layer: Equatable {
 
 	public var sublayerAtFront: Layer? { return sublayers.last }
 
+	public func sublayerNamed(name: String) -> Layer? {
+		return filter(sublayers){ $0.name == name }.first
+	}
+
+	public func sublayerOfClass<Class: Layer>(klass: Class.Type) -> Layer? {
+		return filter(sublayers){ $0 is Class }.first
+	}
+
 	private var parentView: UIView? {
 		get { return view.superview }
 		set { newValue?.addSubview(view) }

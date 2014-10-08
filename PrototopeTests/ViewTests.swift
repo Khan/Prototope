@@ -44,4 +44,20 @@ class ViewTests: XCTestCase {
 		XCTAssertEqual(parent.sublayerAtFront!, child2)
 		XCTAssertNil(child2.sublayerAtFront)
 	}
+
+	func testSublayerNamed() {
+		let parent = Layer(parent: nil)
+		let child1 = Layer(parent: parent, name: "A")
+		let child2 = Layer(parent: parent, name: "B")
+		XCTAssertEqual(parent.sublayerNamed("A")!, child1)
+		XCTAssertEqual(parent.sublayerNamed("B")!, child2)
+	}
+
+	func testSublayerOfClass() {
+		class MyLayer: Layer {}
+		let parent = Layer(parent: nil)
+		let child1 = Layer(parent: parent)
+		let child2 = MyLayer(parent: parent)
+		XCTAssertEqual(parent.sublayerOfClass(MyLayer.self)!, child2)
+	}
 }
