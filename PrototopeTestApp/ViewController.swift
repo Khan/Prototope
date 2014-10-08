@@ -19,10 +19,10 @@ class ViewController: UIViewController {
 		redView.y = 200
 		redView.width = 100
 		redView.height = 100
-		redView.backgroundColor = UIColor.redColor()
+		redView.backgroundColor = UIColor.red
 		redView.cornerRadius = 10
-		redView.border = Border(color: UIColor.blackColor(), width: 4)
-		redView.shadow = Shadow(color: UIColor.blackColor(), alpha: 0.75, offset: Size(), radius: 10)
+		redView.border = Border(color: UIColor.black, width: 4)
+		redView.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 	}
 
 }

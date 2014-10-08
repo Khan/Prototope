@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB306C0F19DF77CC00113FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */; };
 		EB306C1119DF77CC00113FA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB306C1019DF77CC00113FA3 /* ViewController.swift */; };
 		EB306C1419DF77CD00113FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1219DF77CD00113FA3 /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrototopeTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB306C0D19DF77CC00113FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				EBE3A74E19DF78D500A77736 /* View.swift */,
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
+				EB1C2A6419E4B534000DC2C1 /* Color.swift */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
 			);
 			path = Prototope;
@@ -326,6 +329,7 @@
 			files = (
 				EBE3A77519DF79E900A77736 /* View.swift in Sources */,
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
+				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
