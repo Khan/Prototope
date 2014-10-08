@@ -45,6 +45,8 @@ public class Layer: Equatable {
 
 	public private(set) var sublayers: [Layer] = []
 
+	public var sublayerAtFront: Layer? { return sublayers.last }
+
 	private var parentView: UIView? {
 		get { return view.superview }
 		set { newValue?.addSubview(view) }
