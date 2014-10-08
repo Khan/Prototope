@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
+		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
+		EB1C2A7819E4D1CE000DC2C1 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
+		EB1C2A7C19E4D2B8000DC2C1 /* Prototope.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB306C0F19DF77CC00113FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */; };
 		EB306C1119DF77CC00113FA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB306C1019DF77CC00113FA3 /* ViewController.swift */; };
 		EB306C1419DF77CD00113FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1219DF77CD00113FA3 /* Main.storyboard */; };
@@ -20,12 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EBE3A76119DF79C400A77736 /* PBXContainerItemProxy */ = {
+		EB1C2A7919E4D1D2000DC2C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EB306C0819DF77CC00113FA3;
-			remoteInfo = PrototopeTestApp;
+			remoteGlobalIDString = EBE3A75519DF79C400A77736;
+			remoteInfo = Prototope;
 		};
 		EBE3A76819DF79C400A77736 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -44,6 +47,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		EB1C2A7B19E4D2AF000DC2C1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB1C2A7C19E4D2B8000DC2C1 /* Prototope.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBE3A77119DF79C400A77736 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,6 +72,10 @@
 
 /* Begin PBXFileReference section */
 		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		EB1C2A6C19E4D19B000DC2C1 /* PrototopeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB1C2A6F19E4D19B000DC2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PrototopeTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrototopeTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB306C0D19DF77CC00113FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,11 +87,17 @@
 		EBE3A74E19DF78D500A77736 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		EBE3A75619DF79C400A77736 /* Prototope.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Prototope.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE3A75919DF79C400A77736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBE3A76019DF79C400A77736 /* PrototopeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBE3A76519DF79C400A77736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EB1C2A6919E4D19B000DC2C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB1C2A7819E4D1CE000DC2C1 /* Prototope.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB306C0619DF77CC00113FA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,21 +113,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBE3A75D19DF79C400A77736 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB1C2A6D19E4D19B000DC2C1 /* PrototopeTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */,
+				EB1C2A6E19E4D19B000DC2C1 /* Supporting Files */,
+				EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */,
+			);
+			path = PrototopeTests;
+			sourceTree = "<group>";
+		};
+		EB1C2A6E19E4D19B000DC2C1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB1C2A6F19E4D19B000DC2C1 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EB306C0019DF77CC00113FA3 = {
 			isa = PBXGroup;
 			children = (
 				EB306C3319DF78A900113FA3 /* Prototope */,
-				EBE3A76319DF79C400A77736 /* PrototopeTests */,
+				EB1C2A6D19E4D19B000DC2C1 /* PrototopeTests */,
 				EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */,
 				EB306C0A19DF77CC00113FA3 /* Products */,
 			);
@@ -115,7 +149,7 @@
 			children = (
 				EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */,
 				EBE3A75619DF79C400A77736 /* Prototope.framework */,
-				EBE3A76019DF79C400A77736 /* PrototopeTests.xctest */,
+				EB1C2A6C19E4D19B000DC2C1 /* PrototopeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,22 +194,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		EBE3A76319DF79C400A77736 /* PrototopeTests */ = {
-			isa = PBXGroup;
-			children = (
-				EBE3A76419DF79C400A77736 /* Supporting Files */,
-			);
-			path = PrototopeTests;
-			sourceTree = "<group>";
-		};
-		EBE3A76419DF79C400A77736 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				EBE3A76519DF79C400A77736 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -189,6 +207,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		EB1C2A6B19E4D19B000DC2C1 /* PrototopeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB1C2A7219E4D19B000DC2C1 /* Build configuration list for PBXNativeTarget "PrototopeTests" */;
+			buildPhases = (
+				EB1C2A6819E4D19B000DC2C1 /* Sources */,
+				EB1C2A6919E4D19B000DC2C1 /* Frameworks */,
+				EB1C2A6A19E4D19B000DC2C1 /* Resources */,
+				EB1C2A7B19E4D2AF000DC2C1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB1C2A7A19E4D1D2000DC2C1 /* PBXTargetDependency */,
+			);
+			name = PrototopeTests;
+			productName = PrototopeTests;
+			productReference = EB1C2A6C19E4D19B000DC2C1 /* PrototopeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EB306C0819DF77CC00113FA3 /* PrototopeTestApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB306C2819DF77CD00113FA3 /* Build configuration list for PBXNativeTarget "PrototopeTestApp" */;
@@ -227,24 +264,6 @@
 			productReference = EBE3A75619DF79C400A77736 /* Prototope.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		EBE3A75F19DF79C400A77736 /* PrototopeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EBE3A77219DF79C400A77736 /* Build configuration list for PBXNativeTarget "PrototopeTests" */;
-			buildPhases = (
-				EBE3A75C19DF79C400A77736 /* Sources */,
-				EBE3A75D19DF79C400A77736 /* Frameworks */,
-				EBE3A75E19DF79C400A77736 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EBE3A76219DF79C400A77736 /* PBXTargetDependency */,
-			);
-			name = PrototopeTests;
-			productName = PrototopeTests;
-			productReference = EBE3A76019DF79C400A77736 /* PrototopeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -254,15 +273,14 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Khan Academy";
 				TargetAttributes = {
+					EB1C2A6B19E4D19B000DC2C1 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
 					EB306C0819DF77CC00113FA3 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
 					EBE3A75519DF79C400A77736 = {
 						CreatedOnToolsVersion = 6.0.1;
-					};
-					EBE3A75F19DF79C400A77736 = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = EB306C0819DF77CC00113FA3;
 					};
 				};
 			};
@@ -280,13 +298,20 @@
 			projectRoot = "";
 			targets = (
 				EBE3A75519DF79C400A77736 /* Prototope */,
-				EBE3A75F19DF79C400A77736 /* PrototopeTests */,
 				EB306C0819DF77CC00113FA3 /* PrototopeTestApp */,
+				EB1C2A6B19E4D19B000DC2C1 /* PrototopeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EB1C2A6A19E4D19B000DC2C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB306C0719DF77CC00113FA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,16 +329,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBE3A75E19DF79C400A77736 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EB1C2A6819E4D19B000DC2C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB306C0519DF77CC00113FA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,20 +359,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBE3A75C19DF79C400A77736 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EBE3A76219DF79C400A77736 /* PBXTargetDependency */ = {
+		EB1C2A7A19E4D1D2000DC2C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EB306C0819DF77CC00113FA3 /* PrototopeTestApp */;
-			targetProxy = EBE3A76119DF79C400A77736 /* PBXContainerItemProxy */;
+			target = EBE3A75519DF79C400A77736 /* Prototope */;
+			targetProxy = EB1C2A7919E4D1D2000DC2C1 /* PBXContainerItemProxy */;
 		};
 		EBE3A76919DF79C400A77736 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -380,6 +399,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EB1C2A7319E4D19B000DC2C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrototopeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PrototopeTests/PrototopeTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EB1C2A7419E4D19B000DC2C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrototopeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PrototopeTests/PrototopeTests-Bridging-Header.h";
+			};
+			name = Release;
+		};
 		EB306C2619DF77CD00113FA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -521,41 +575,17 @@
 			};
 			name = Release;
 		};
-		EBE3A77319DF79C400A77736 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PrototopeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrototopeTestApp.app/PrototopeTestApp";
-			};
-			name = Debug;
-		};
-		EBE3A77419DF79C400A77736 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PrototopeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrototopeTestApp.app/PrototopeTestApp";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EB1C2A7219E4D19B000DC2C1 /* Build configuration list for PBXNativeTarget "PrototopeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB1C2A7319E4D19B000DC2C1 /* Debug */,
+				EB1C2A7419E4D19B000DC2C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		EB306C0419DF77CC00113FA3 /* Build configuration list for PBXProject "Prototope" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -579,15 +609,6 @@
 			buildConfigurations = (
 				EBE3A76F19DF79C400A77736 /* Debug */,
 				EBE3A77019DF79C400A77736 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EBE3A77219DF79C400A77736 /* Build configuration list for PBXNativeTarget "PrototopeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EBE3A77319DF79C400A77736 /* Debug */,
-				EBE3A77419DF79C400A77736 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

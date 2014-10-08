@@ -13,12 +13,13 @@ public func setRootLayer(fromView view: UIView) {
 	RootLayer = Layer(wrappingView: view, name: "Root")
 }
 
-public class Layer {
+public class Layer: Equatable {
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
 		self.view = UIView()
 		self.name = name
-		self.parentView = parent?.view
+
+		self.parentDidChange()
 	}
 
 	private init(wrappingView: UIView, name: String? = nil) {
@@ -27,8 +28,22 @@ public class Layer {
 	}
 
 	public weak var parent: Layer? {
-		didSet { parentView = parent?.view }
+		willSet {
+			if let parentSublayers = self.parent?.sublayers {
+				self.parent!.sublayers = parentSublayers.filter{ $0 !== self }
+			}
+		}
+		didSet {
+			parentDidChange()
+		}
 	}
+	
+	private func parentDidChange() {
+		parentView = parent?.view
+		parent?.sublayers.append(self)
+	}
+
+	public private(set) var sublayers: [Layer] = []
 
 	private var parentView: UIView? {
 		get { return view.superview }
@@ -126,6 +141,10 @@ public class Layer {
 
 	private var view: UIView
 	private var layer: CALayer { return view.layer }
+}
+
+public func ==(a: Layer, b: Layer) -> Bool {
+	return a === b
 }
 
 public struct Border {
