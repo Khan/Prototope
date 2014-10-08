@@ -80,6 +80,11 @@ public class Layer {
 		set { view.userInteractionEnabled = newValue }
 	}
 
+	public var globalPosition: Point {
+		get { return Point(view.convertPoint(view.center, toCoordinateSpace: UIScreen.mainScreen().coordinateSpace)) }
+		set { view.center = view.convertPoint(CGPoint(newValue), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace) }
+	}
+
 	public let name: String?
 
 	public var border: Border {
