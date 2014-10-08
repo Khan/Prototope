@@ -55,6 +55,20 @@ public class Layer: Equatable {
 		return filter(sublayers){ $0 is Class }.first
 	}
 
+	public func descendentNamed(name: String) -> Layer? {
+		if self.name == name {
+			return self
+		}
+
+		for sublayer in sublayers {
+			if let match = sublayer.descendentNamed(name) {
+				return match
+			}
+		}
+
+		return nil
+	}
+
 	private var parentView: UIView? {
 		get { return view.superview }
 		set { newValue?.addSubview(view) }
