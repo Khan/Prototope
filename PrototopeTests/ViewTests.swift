@@ -22,4 +22,17 @@ class ViewTests: XCTestCase {
 		XCTAssertEqual(parent1.sublayers, [])
 		XCTAssertEqual(parent2.sublayers, [child])
 	}
+
+	func testAncestorNamed() {
+		let superparent = Layer(parent: nil, name: "A")
+		let parent = Layer(parent: superparent, name: "B")
+		let child = Layer(parent: parent, name: "C")
+
+		XCTAssertEqual(child.ancestorNamed("A")!, superparent)
+		XCTAssertNil(child.ancestorNamed("D"))
+
+		let alternativeParent = Layer(parent: superparent, name: "A")
+		child.parent = alternativeParent
+		XCTAssertEqual(child.ancestorNamed("A")!, alternativeParent)
+	}
 }
