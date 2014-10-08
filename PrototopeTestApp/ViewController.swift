@@ -14,12 +14,14 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let redView = Layer(parent: view, name: "Red!")
-		redView.frame = Rect(x: 300, y: 300, width: 100, height: 100)
-		redView.backgroundColor = UIColor.red
-		redView.cornerRadius = 10
-		redView.border = Border(color: UIColor.black, width: 4)
-		redView.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
+		setRootLayer(fromView: view)
+
+		let redLayer = Layer(parent: RootLayer, name: "Red!")
+		redLayer.frame = Rect(x: 300, y: 300, width: 100, height: 100)
+		redLayer.backgroundColor = UIColor.red
+		redLayer.cornerRadius = 10
+		redLayer.border = Border(color: UIColor.black, width: 4)
+		redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 	}
 
 }

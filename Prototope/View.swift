@@ -8,16 +8,31 @@
 
 import UIKit
 
+public private(set) var RootLayer: Layer!
+public func setRootLayer(fromView view: UIView) {
+	RootLayer = Layer(wrappingView: view, name: "Root")
+}
+
 public class Layer {
-	public convenience init(parent: Layer? = nil, name: String? = nil) {
-		self.init(parent: parent?.view, name: name)
+	public init(parent: Layer? = nil, name: String? = nil) {
+		self.parent = parent
+		self.view = UIView()
+		self.name = name
+		self.parentView = parent?.view
 	}
 
-	public init(parent: UIView? = nil, name: String? = nil) {
-		view = UIView()
-		parent?.addSubview(view)
+	private init(wrappingView: UIView, name: String? = nil) {
+		view = wrappingView
+		self.name = name
+	}
 
-		self.name = name // TODO: Dynamic UIView subclassing so the name shows up in Reveal.
+	public weak var parent: Layer? {
+		didSet { parentView = parent?.view }
+	}
+
+	private var parentView: UIView? {
+		get { return view.superview }
+		set { newValue?.addSubview(view) }
 	}
 
 	public var x: Double {
