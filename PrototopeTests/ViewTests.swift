@@ -69,5 +69,8 @@ class ViewTests: XCTestCase {
 
 		XCTAssertEqual(superparent.descendentNamed("C")!, child)
 		XCTAssertNil(superparent.descendentNamed("What?"))
+
+		XCTAssertEqual(superparent.descendentAtPath(["B", "C"])!, child)
+		XCTAssertNil(superparent.descendentAtPath(["C"]))
 	}
 }

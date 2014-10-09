@@ -69,6 +69,10 @@ public class Layer: Equatable {
 		return nil
 	}
 
+	public func descendentAtPath(pathElements: [String]) -> Layer? {
+		return reduce(pathElements, self) { $0?.sublayerNamed($1) }
+	}
+
 	private var parentView: UIView? {
 		get { return view.superview }
 		set { newValue?.addSubview(view) }
