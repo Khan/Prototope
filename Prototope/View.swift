@@ -29,8 +29,9 @@ public class Layer: Equatable {
 
 	public weak var parent: Layer? {
 		willSet {
-			if let parentSublayers = self.parent?.sublayers {
-				self.parent!.sublayers.removeAtIndex(find(parentSublayers, self)!)
+			if let parent = self.parent {
+				parent.sublayers.removeAtIndex(find(parent.sublayers, self)!)
+				view.removeFromSuperview()
 			}
 		}
 		didSet {
@@ -198,6 +199,14 @@ public class Layer: Equatable {
 			layer.shadowOpacity = Float(newValue.alpha)
 			layer.shadowOffset = CGSize(newValue.offset)
 			layer.shadowRadius = CGFloat(newValue.radius)
+		}
+	}
+
+	public private(set) var willBeRemovedSoon: Bool = false
+	public func removeAfterDuration(duration: NSTimeInterval) {
+		willBeRemovedSoon = true
+		afterDuration(duration) {
+			self.parent = nil
 		}
 	}
 

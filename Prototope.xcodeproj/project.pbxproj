@@ -17,6 +17,7 @@
 		EB306C1619DF77CD00113FA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1519DF77CD00113FA3 /* Images.xcassets */; };
 		EB306C1919DF77CD00113FA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1719DF77CD00113FA3 /* LaunchScreen.xib */; };
 		EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBABE67C19E4AEF100483EEF /* Geometry.swift */; };
+		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EBE3A76B19DF79C400A77736 /* Prototope.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EBE3A77519DF79E900A77736 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A74E19DF78D500A77736 /* View.swift */; };
@@ -84,6 +85,7 @@
 		EB306C1519DF77CD00113FA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EB306C1819DF77CD00113FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EBABE67C19E4AEF100483EEF /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		EBE3A75619DF79C400A77736 /* Prototope.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Prototope.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE3A75919DF79C400A77736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
 				EB1C2A6419E4B534000DC2C1 /* Color.swift */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
+				EBE17A0519E65D1B00C308E5 /* Timing.swift */,
 			);
 			path = Prototope;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				EBE3A77519DF79E900A77736 /* View.swift in Sources */,
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
+				EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +589,7 @@
 				EB1C2A7419E4D19B000DC2C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB306C0419DF77CC00113FA3 /* Build configuration list for PBXProject "Prototope" */ = {
 			isa = XCConfigurationList;
