@@ -154,6 +154,17 @@ public class Layer: Equatable {
 		return nil
 	}
 
+	public func ancestorOfClass<Class: Layer>(klass: Class.Type) -> Layer? {
+		var currentLayer = parent
+		while currentLayer != nil {
+			if currentLayer! is Class {
+				return currentLayer
+			}
+			currentLayer = currentLayer!.parent
+		}
+		return nil
+	}
+
 	public let name: String?
 
 	public var border: Border {

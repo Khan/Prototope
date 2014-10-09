@@ -53,12 +53,15 @@ class ViewTests: XCTestCase {
 		XCTAssertEqual(parent.sublayerNamed("B")!, child2)
 	}
 
-	func testSublayerOfClass() {
+	func testAccessorsOfClass() {
 		class MyLayer: Layer {}
-		let parent = Layer(parent: nil)
+		let parent = MyLayer(parent: nil)
 		let child1 = Layer(parent: parent)
 		let child2 = MyLayer(parent: parent)
 		XCTAssertEqual(parent.sublayerOfClass(MyLayer.self)!, child2)
+		XCTAssertEqual(child2.ancestorOfClass(MyLayer.self)!, parent)
+		XCTAssertNil(child2.sublayerOfClass(MyLayer.self))
+		XCTAssertNil(parent.ancestorOfClass(MyLayer.self))
 	}
 
 	func testDescendentNamed() {
