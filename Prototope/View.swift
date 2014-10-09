@@ -131,6 +131,11 @@ public class Layer: Equatable {
 		set { view.backgroundColor = newValue }
 	}
 
+	public var alpha: Double {
+		get { return Double(view.alpha) }
+		set { view.alpha = CGFloat(newValue) }
+	}
+
 	public var anchorPoint: Point {
 		get { return Point(layer.anchorPoint) }
 		set { layer.anchorPoint = CGPoint(newValue) }
