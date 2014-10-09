@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 		redLayer.border = Border(color: UIColor.black, width: 4)
 		redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 
-		redLayer.removeAfterDuration(3)
+		redLayer.fadeOutAndRemoveAfterDuration(3)
 	}
 
 }

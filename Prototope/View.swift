@@ -215,6 +215,15 @@ public class Layer: Equatable {
 		}
 	}
 
+	public func fadeOutAndRemoveAfterDuration(duration: NSTimeInterval) {
+		willBeRemovedSoon = true
+		animateWithDuration(duration, animations: {
+			self.alpha = 0
+		}, completionHandler: {
+			self.parent = nil
+		})
+	}
+
 	private var view: UIView
 	private var layer: CALayer { return view.layer }
 }
