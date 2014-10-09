@@ -1,5 +1,5 @@
 # Prototope
 
-There are a whole lot of things you don't want to have to deal with when you're prototyping: UIKit's idiosyncracies, certain production-level safety concepts, casting of `Double` to `CGFloat`, etc. By contrast, there are many things you do a lot when prototyping: quickly getting an image on the screen, moving stuff around, etc.
+There are a whole lot of things you don't want to have to deal with when you're prototyping: UIKit's idiosyncracies, certain production-level safety concepts, casting of `Double` to `CGFloat`, certain Swift conceptual overhead, etc. By contrast, there are many things you do a lot when prototyping: quickly getting an image on the screen, moving stuff around, etc.
 
 This is an attempt to make a lightweight library with interfaces well-suited for rapidly prototyping.
