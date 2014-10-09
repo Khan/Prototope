@@ -30,7 +30,7 @@ public class Layer: Equatable {
 	public weak var parent: Layer? {
 		willSet {
 			if let parentSublayers = self.parent?.sublayers {
-				self.parent!.sublayers = parentSublayers.filter{ $0 !== self }
+				self.parent!.sublayers.removeAtIndex(find(parentSublayers, self)!)
 			}
 		}
 		didSet {
@@ -44,6 +44,13 @@ public class Layer: Equatable {
 	}
 
 	public private(set) var sublayers: [Layer] = []
+
+	public func removeAllSublayers() {
+		// TODO: This could be way faster.
+		for sublayer in sublayers {
+			sublayer.parent = nil
+		}
+	}
 
 	public var sublayerAtFront: Layer? { return sublayers.last }
 

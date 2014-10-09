@@ -76,4 +76,15 @@ class ViewTests: XCTestCase {
 		XCTAssertEqual(superparent.descendentAtPath(["B", "C"])!, child)
 		XCTAssertNil(superparent.descendentAtPath(["C"]))
 	}
+
+	func testRemoveAllSublayers() {
+		let parent = Layer(parent: nil)
+		let child1 = Layer(parent: parent)
+		let child2 = Layer(parent: parent)
+
+		parent.removeAllSublayers()
+		XCTAssertEqual(parent.sublayers, [])
+		XCTAssertNil(child1.parent)
+		XCTAssertNil(child2.parent)
+	}
 }
