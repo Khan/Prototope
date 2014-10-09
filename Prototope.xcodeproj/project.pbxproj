@@ -183,8 +183,8 @@
 				EBE3A74E19DF78D500A77736 /* View.swift */,
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
 				EB1C2A6419E4B534000DC2C1 /* Color.swift */,
-				EBE3A75819DF79C400A77736 /* Supporting Files */,
 				EBE17A0519E65D1B00C308E5 /* Timing.swift */,
+				EBE3A75819DF79C400A77736 /* Supporting Files */,
 			);
 			path = Prototope;
 			sourceTree = "<group>";
