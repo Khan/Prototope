@@ -150,6 +150,11 @@ public class Layer: Equatable {
 		set { view.center = view.convertPoint(CGPoint(newValue), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace) }
 	}
 
+	public func containsGlobalPoint(point: Point) -> Bool {
+		let localPoint = view.convertPoint(CGPoint(point), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace)
+		return view.pointInside(localPoint, withEvent: nil)
+	}
+
 	public func ancestorNamed(name: String) -> Layer? {
 		var currentLayer = parent
 		while currentLayer != nil {

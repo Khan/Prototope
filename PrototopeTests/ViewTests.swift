@@ -87,4 +87,16 @@ class ViewTests: XCTestCase {
 		XCTAssertNil(child1.parent)
 		XCTAssertNil(child2.parent)
 	}
+
+	func testContainsGlobalPoint() {
+		let parent = Layer(parent: nil)
+		parent.frame = Rect(x: 0, y: 0, width: 200, height: 200)
+		let child1 = Layer(parent: parent)
+		child1.frame = Rect(x: 30, y: 30, width: 50, height: 50)
+
+		XCTAssertTrue(child1.containsGlobalPoint(Point(x: 30, y: 30)))
+		XCTAssertFalse(child1.containsGlobalPoint(Point(x: 29, y: 30)))
+		XCTAssertFalse(child1.containsGlobalPoint(Point(x: 80, y: 30)))
+		XCTAssertTrue(child1.containsGlobalPoint(Point(x: 79, y: 30)))
+	}
 }
