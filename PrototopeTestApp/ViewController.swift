@@ -16,14 +16,12 @@ class ViewController: UIViewController {
 
 		setRootLayer(fromView: view)
 
-		let redLayer = Layer(parent: RootLayer, name: "Red!")
+		let redLayer = Layer(parent: RootLayer, imageName: "paint")
 		redLayer.frame = Rect(x: 300, y: 300, width: 100, height: 100)
 		redLayer.backgroundColor = UIColor.red
 		redLayer.cornerRadius = 10
 		redLayer.border = Border(color: UIColor.black, width: 4)
 		redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
-
-		redLayer.fadeOutAndRemoveAfterDuration(3)
 	}
 
 }

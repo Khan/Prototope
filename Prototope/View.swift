@@ -16,10 +16,15 @@ public func setRootLayer(fromView view: UIView) {
 public class Layer: Equatable {
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
-		self.view = UIView()
+		self.view = UIImageView() // TODO: dynamic switch the view type depending on whether we're using an image or not
 		self.name = name
 
 		self.parentDidChange()
+	}
+
+	public convenience init(parent: Layer?, imageName: String) {
+		self.init(parent: parent, name: imageName)
+		(self.view as UIImageView).image = UIImage(named: imageName)
 	}
 
 	private init(wrappingView: UIView, name: String? = nil) {
