@@ -19,4 +19,13 @@ class MathTests: XCTestCase {
 	func testMap() {
 		XCTAssertEqual(map(4, fromInterval: (2, 8), toInterval: (1, 4)), 2)
 	}
+
+	func testClip() {
+		var result: Double = clip(5, min: 3, max: 4)
+		XCTAssertEqual(result, 4)
+		result = clip(2, min: 3, max: 4)
+		XCTAssertEqual(result, 3)
+		result = clip(3.5, min: 3, max: 4)
+		XCTAssertEqual(result, 3.5)
+	}
 }
