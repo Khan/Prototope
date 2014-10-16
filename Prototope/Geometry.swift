@@ -23,6 +23,12 @@ public struct Point {
 		self.x = Double(point.x)
 		self.y = Double(point.y)
 	}
+
+	public func distanceToPoint(point: Point) -> Double {
+		let dx = point.x - self.x
+		let dy = point.y - self.y
+		return sqrt(dx*dx + dy*dy)
+	}
 }
 
 public func +(a: Point, b: Point) -> Point {
