@@ -206,6 +206,35 @@ public class Layer: Equatable {
 		}
 	}
 
+	public var rotationDegrees: Double {
+		get {
+			return rotationRadians * 180 / M_PI
+		}
+		set {
+			rotationRadians = newValue * M_PI / 180
+		}
+	}
+
+	public var rotationRadians: Double = 0 {
+		didSet { updateTransform() }
+	}
+
+	public var scale: Double {
+		get { return scaleX }
+		set {
+			scaleX = newValue
+			scaleY = newValue
+		}
+	}
+
+	public var scaleX: Double = 1 {
+		didSet { updateTransform() }
+	}
+
+	public var scaleY: Double = 1 {
+		didSet { updateTransform() }
+	}
+
 	public var border: Border {
 		get {
 			return Border(color: UIColor(CGColor: layer.borderColor), width: Double(layer.borderWidth))
@@ -243,6 +272,10 @@ public class Layer: Equatable {
 		}, completionHandler: {
 			self.parent = nil
 		})
+	}
+
+	private func updateTransform() {
+		layer.transform = CATransform3DRotate(CATransform3DMakeScale(CGFloat(scaleX), CGFloat(scaleY), 1), CGFloat(rotationRadians), 0, 0, 1)
 	}
 
 	private var view: UIView

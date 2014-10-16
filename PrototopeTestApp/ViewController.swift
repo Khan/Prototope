@@ -22,6 +22,11 @@ class ViewController: UIViewController {
 		redLayer.cornerRadius = 10
 		redLayer.border = Border(color: UIColor.black, width: 4)
 		redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
+
+		afterDuration(0.5) {
+			redLayer.rotationDegrees = 30
+			redLayer.scale = 2
+		}
 	}
 
 }

@@ -8,6 +8,6 @@
 
 import Foundation
 
-func afterDuration(duration: NSTimeInterval, action: () -> Void) {
+public func afterDuration(duration: NSTimeInterval, action: () -> Void) {
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), action)
 }
