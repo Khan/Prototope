@@ -24,7 +24,7 @@ public class Layer: Equatable {
 
 	public convenience init(parent: Layer?, imageName: String) {
 		self.init(parent: parent, name: imageName)
-		(self.view as UIImageView).image = UIImage(named: imageName)
+		self.image = Image(name: imageName)
 	}
 
 	private init(wrappingView: UIView, name: String? = nil) {
@@ -190,6 +190,20 @@ public class Layer: Equatable {
 
 	public let name: String?
 
+	public var image: Image? {
+		get {
+			if let uiImage = imageView.image {
+				return Image(uiImage)
+			} else {
+				return nil
+			}
+		}
+		set {
+			imageView.image = newValue?.uiImage
+			// TODO: set bounds
+		}
+	}
+
 	public var border: Border {
 		get {
 			return Border(color: UIColor(CGColor: layer.borderColor), width: Double(layer.borderWidth))
@@ -231,6 +245,7 @@ public class Layer: Equatable {
 
 	private var view: UIView
 	private var layer: CALayer { return view.layer }
+	private var imageView: UIImageView { return view as UIImageView }
 }
 
 extension Layer: Printable {
