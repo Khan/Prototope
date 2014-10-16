@@ -12,6 +12,7 @@ public struct Image {
 	public init!(name: String) {
 		if let image = UIImage(named: name) {
 			uiImage = image
+			self.name = name
 		} else {
 			fatalError("Image named \(name) not found")
 			return nil
@@ -25,6 +26,8 @@ public struct Image {
 	public var size: Size {
 		return Size(uiImage.size)
 	}
+
+	public var name: String!
 
 	var uiImage: UIImage
 }
