@@ -17,6 +17,6 @@ class MathTests: XCTestCase {
 	}
 
 	func testMap() {
-		XCTAssertEqual(map(value: 4, fromInterval: (2, 8), toInterval: (1, 4)), 2)
+		XCTAssertEqual(map(4, fromInterval: (2, 8), toInterval: (1, 4)), 2)
 	}
 }
