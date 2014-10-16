@@ -25,6 +25,7 @@ public class Layer: Equatable {
 	public convenience init(parent: Layer?, imageName: String) {
 		self.init(parent: parent, name: imageName)
 		self.image = Image(name: imageName)
+		imageDidChange()
 	}
 
 	private init(wrappingView: UIView, name: String? = nil) {
@@ -44,11 +45,6 @@ public class Layer: Equatable {
 		}
 	}
 	
-	private func parentDidChange() {
-		parentView = parent?.view
-		parent?.sublayers.append(self)
-	}
-
 	public private(set) var sublayers: [Layer] = []
 
 	public func removeAllSublayers() {
@@ -191,19 +187,7 @@ public class Layer: Equatable {
 	public let name: String?
 
 	public var image: Image? {
-		get {
-			if let uiImage = imageView.image {
-				return Image(uiImage)
-			} else {
-				return nil
-			}
-		}
-		set {
-			if let image = newValue {
-				imageView.image = image.uiImage
-				size = image.size
-			}
-		}
+		didSet { imageDidChange() }
 	}
 
 	public var rotationDegrees: Double {
@@ -276,6 +260,18 @@ public class Layer: Equatable {
 
 	private func updateTransform() {
 		layer.transform = CATransform3DRotate(CATransform3DMakeScale(CGFloat(scaleX), CGFloat(scaleY), 1), CGFloat(rotationRadians), 0, 0, 1)
+	}
+
+	private func parentDidChange() {
+		parentView = parent?.view
+		parent?.sublayers.append(self)
+	}
+
+	private func imageDidChange() {
+		if let image = image {
+			imageView.image = image.uiImage
+			size = image.size
+		}
 	}
 
 	private var view: UIView
