@@ -19,6 +19,7 @@
 		EB50FA1219F04A07007A3C32 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50FA1119F04A07007A3C32 /* Image.swift */; };
 		EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBABE67C19E4AEF100483EEF /* Geometry.swift */; };
 		EBB565DB19F074B000D93DE3 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DA19F074B000D93DE3 /* Math.swift */; };
+		EBB565DD19F0774F00D93DE3 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DC19F0774F00D93DE3 /* MathTests.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -90,6 +91,7 @@
 		EB50FA1119F04A07007A3C32 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		EBABE67C19E4AEF100483EEF /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		EBB565DA19F074B000D93DE3 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		EBB565DC19F0774F00D93DE3 /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */,
 				EB1C2A6E19E4D19B000DC2C1 /* Supporting Files */,
 				EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */,
+				EBB565DC19F0774F00D93DE3 /* MathTests.swift */,
 			);
 			path = PrototopeTests;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */,
+				EBB565DD19F0774F00D93DE3 /* MathTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
