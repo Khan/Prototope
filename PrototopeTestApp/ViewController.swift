@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 		setRootLayer(fromView: view)
 
 		let redLayer = Layer(parent: RootLayer, imageName: "paint")
-		redLayer.frame = Rect(x: 300, y: 300, width: 100, height: 100)
+		redLayer.frame.origin = Point(x: 50, y: 50)
 		redLayer.backgroundColor = UIColor.red
 		redLayer.cornerRadius = 10
 		redLayer.border = Border(color: UIColor.black, width: 4)

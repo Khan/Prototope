@@ -199,8 +199,10 @@ public class Layer: Equatable {
 			}
 		}
 		set {
-			imageView.image = newValue?.uiImage
-			// TODO: set bounds
+			if let image = newValue {
+				imageView.image = image.uiImage
+				size = image.size
+			}
 		}
 	}
 
