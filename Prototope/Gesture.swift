@@ -32,7 +32,6 @@ public class TapGesture: GestureType {
 		tapGestureRecognizer = UITapGestureRecognizer(target: tapGestureHandler, action: "handleGestureRecognizer:")
 	}
 
-
 	deinit {
 		tapGestureRecognizer.removeTarget(tapGestureHandler, action: "handleGestureRecognizer:")
 	}
