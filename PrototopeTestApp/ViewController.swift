@@ -24,10 +24,14 @@ class ViewController: UIViewController {
 		redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 
 		redLayer.gestures.append(TapGesture(handler: { _ in
-			redLayer.position.y += 10
+			println("Tap gesture triggered")
 		}))
 
-		redLayer.touchesBeganHandler = { touches in dump(touches); return true }
+		redLayer.touchesBeganHandler = { _ in println("Touches began"); return true }
+		redLayer.touchesMovedHandler = { _ in println("Touches moved"); return true }
+		redLayer.touchesEndedHandler = { _ in println("Touches ended"); return true }
+		redLayer.touchesCancelledHandler = { _ in println("Touches cancelled"); return true }
+
 
 		afterDuration(0.5) {
 			redLayer.rotationDegrees = 30
