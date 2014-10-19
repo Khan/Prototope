@@ -17,7 +17,7 @@ public class Layer: Equatable {
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
 		self.name = name
-		self.view = UIImageView() // TODO: dynamic switch the view type depending on whether we're using an image or not
+		self.view = TouchForwardingImageView() // TODO: dynamic switch the view type depending on whether we're using an image or not
 		self.view.userInteractionEnabled = true
 
 		self.parentDidChange()
@@ -274,6 +274,26 @@ public class Layer: Equatable {
 		}
 	}
 
+	public var touchesBeganHandler: ([Touch] -> Bool)? {
+		get { return imageView.touchesBeganHandler }
+		set { imageView.touchesBeganHandler = newValue }
+	}
+
+	public var touchesMovedHandler: ([Touch] -> Bool)? {
+		get { return imageView.touchesMovedHandler }
+		set { imageView.touchesMovedHandler = newValue }
+	}
+
+	public var touchesEndedHandler: ([Touch] -> Bool)? {
+		get { return imageView.touchesEndedHandler }
+		set { imageView.touchesEndedHandler = newValue }
+	}
+
+	public var touchesCancelledHandler: ([Touch] -> Bool)? {
+		get { return imageView.touchesCancelledHandler }
+		set { imageView.touchesCancelledHandler = newValue }
+	}
+
 	// MARK: Internal interfaces
 
 	private func updateTransform() {
@@ -294,7 +314,54 @@ public class Layer: Equatable {
 
 	var view: UIView
 	private var layer: CALayer { return view.layer }
-	private var imageView: UIImageView { return view as UIImageView }
+	private var imageView: TouchForwardingImageView { return view as TouchForwardingImageView }
+
+
+	class TouchForwardingImageView: UIImageView {
+		required init(coder aDecoder: NSCoder) {
+			fatalError("This method intentionally not implemented.")
+		}
+
+		override init(frame: CGRect) {
+			super.init(frame: frame)
+		}
+
+		override convenience init() {
+			self.init(frame: CGRect())
+		}
+
+		var touchesBeganHandler: ([Touch] -> Bool)?
+		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+			let shouldForward = touchesBeganHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			if shouldForward {
+				super.touchesBegan(touches, withEvent: event)
+			}
+		}
+
+		var touchesMovedHandler: ([Touch] -> Bool)?
+		override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+			let shouldForward = touchesMovedHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			if shouldForward {
+				super.touchesBegan(touches, withEvent: event)
+			}
+		}
+
+		var touchesEndedHandler: ([Touch] -> Bool)?
+		override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+			let shouldForward = touchesEndedHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			if shouldForward {
+				super.touchesBegan(touches, withEvent: event)
+			}
+		}
+
+		var touchesCancelledHandler: ([Touch] -> Bool)?
+		override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
+			let shouldForward = touchesCancelledHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			if shouldForward {
+				super.touchesBegan(touches, withEvent: event)
+			}
+		}
+	}
 }
 
 extension Layer: Printable {

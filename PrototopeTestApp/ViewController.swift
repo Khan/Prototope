@@ -27,6 +27,8 @@ class ViewController: UIViewController {
 			redLayer.position.y += 10
 		}))
 
+		redLayer.touchesBeganHandler = { touches in dump(touches); return true }
+
 		afterDuration(0.5) {
 			redLayer.rotationDegrees = 30
 			redLayer.scale = 2

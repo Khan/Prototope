@@ -75,3 +75,10 @@ public class TapGesture: GestureType {
 public protocol _GestureType {
 	weak var hostLayer: Layer? { get nonmutating set }
 }
+
+extension Touch {
+	init(_ touch: UITouch) {
+		globalLocation = Point(touch.locationInView(nil))
+		timestamp = touch.timestamp
+	}
+}
