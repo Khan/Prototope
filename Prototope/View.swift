@@ -16,8 +16,9 @@ public func setRootLayer(fromView view: UIView) {
 public class Layer: Equatable {
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
-		self.view = UIImageView() // TODO: dynamic switch the view type depending on whether we're using an image or not
 		self.name = name
+		self.view = UIImageView() // TODO: dynamic switch the view type depending on whether we're using an image or not
+		self.view.userInteractionEnabled = true
 
 		self.parentDidChange()
 	}
@@ -153,13 +154,20 @@ public class Layer: Equatable {
 	}
 
 	public var globalPosition: Point {
-		get { return Point(view.convertPoint(view.center, toCoordinateSpace: UIScreen.mainScreen().coordinateSpace)) }
-		set { view.center = view.convertPoint(CGPoint(newValue), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace) }
+		get { return convertLocalPointToGlobalPoint(position) }
+		set { position = convertGlobalPointToLocalPoint(newValue) }
 	}
 
 	public func containsGlobalPoint(point: Point) -> Bool {
-		let localPoint = view.convertPoint(CGPoint(point), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace)
-		return view.pointInside(localPoint, withEvent: nil)
+		return view.pointInside(CGPoint(convertGlobalPointToLocalPoint(point)), withEvent: nil)
+	}
+
+	public func convertGlobalPointToLocalPoint(globalPoint: Point) -> Point {
+		return Point(view.convertPoint(CGPoint(globalPoint), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace))
+	}
+
+	public func convertLocalPointToGlobalPoint(localPoint: Point) -> Point {
+		return Point(view.convertPoint(CGPoint(localPoint), toCoordinateSpace: UIScreen.mainScreen().coordinateSpace))
 	}
 
 	public func ancestorNamed(name: String) -> Layer? {
@@ -258,6 +266,16 @@ public class Layer: Equatable {
 		})
 	}
 
+	public var gestures: [GestureType] = [] {
+		didSet {
+			for gesture in gestures {
+				gesture.hostLayer = self
+			}
+		}
+	}
+
+	// MARK: Internal interfaces
+
 	private func updateTransform() {
 		layer.transform = CATransform3DRotate(CATransform3DMakeScale(CGFloat(scaleX), CGFloat(scaleY), 1), CGFloat(rotationRadians), 0, 0, 1)
 	}
@@ -274,7 +292,7 @@ public class Layer: Equatable {
 		}
 	}
 
-	private var view: UIView
+	var view: UIView
 	private var layer: CALayer { return view.layer }
 	private var imageView: UIImageView { return view as UIImageView }
 }

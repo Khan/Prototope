@@ -21,6 +21,7 @@
 		EBB565DB19F074B000D93DE3 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DA19F074B000D93DE3 /* Math.swift */; };
 		EBB565DD19F0774F00D93DE3 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DC19F0774F00D93DE3 /* MathTests.swift */; };
 		EBB565DF19F07A2900D93DE3 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */; };
+		EBBA431719F45186000B81BE /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA431619F45186000B81BE /* Gesture.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -94,6 +95,7 @@
 		EBB565DA19F074B000D93DE3 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		EBB565DC19F0774F00D93DE3 /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
+		EBBA431619F45186000B81BE /* Gesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				EBE17A0719E65E5500C308E5 /* Animation.swift */,
 				EB50FA1119F04A07007A3C32 /* Image.swift */,
 				EBB565DA19F074B000D93DE3 /* Math.swift */,
+				EBBA431619F45186000B81BE /* Gesture.swift */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
 			);
 			path = Prototope;
@@ -380,6 +383,7 @@
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
 				EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */,
 				EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */,
+				EBBA431719F45186000B81BE /* Gesture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

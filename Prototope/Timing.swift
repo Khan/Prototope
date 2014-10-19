@@ -8,6 +8,9 @@
 
 import Foundation
 
-public func afterDuration(duration: NSTimeInterval, action: () -> Void) {
+public typealias TimeInterval = NSTimeInterval
+public typealias Timestamp = NSTimeInterval
+
+public func afterDuration(duration: TimeInterval, action: () -> Void) {
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), action)
 }
