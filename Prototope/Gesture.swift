@@ -9,12 +9,20 @@
 import UIKit
 
 public struct Touch {
-	let globalLocation: Point
-	let timestamp: Timestamp
+	public let globalLocation: Point
+	public let timestamp: Timestamp
 
 	func locationInLayer(layer: Layer) -> Point {
 		return layer.convertGlobalPointToLocalPoint(globalLocation)
 	}
+}
+
+public struct TouchHistory {
+	public let firstTouch: Touch
+	public let previousTouch: Touch
+	public let currentTouch: Touch
+
+	// TODO: velocity...
 }
 
 public protocol GestureType: _GestureType {}
