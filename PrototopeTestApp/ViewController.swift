@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 		redLayer.border = Border(color: UIColor.black, width: 4)
 		redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 
-		redLayer.gestures.append(TapGesture(actionHandler: { _ in
+		redLayer.gestures.append(TapGesture(handler: { _ in
 			redLayer.position.y += 10
 		}))
 

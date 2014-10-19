@@ -27,8 +27,8 @@ public enum ContinuousGestureState {
 }
 
 public class TapGesture: GestureType {
-	public init(actionHandler: (localLocation: Point) -> (), numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1) {
-		tapGestureHandler = TapGestureHandler(actionHandler: actionHandler)
+	public init(handler: (localLocation: Point) -> (), numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1) {
+		tapGestureHandler = TapGestureHandler(actionHandler: handler)
 		tapGestureRecognizer = UITapGestureRecognizer(target: tapGestureHandler, action: "handleGestureRecognizer:")
 	}
 
