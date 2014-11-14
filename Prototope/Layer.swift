@@ -338,6 +338,8 @@ public class Layer: Equatable {
 
 		private var activeTouchSequences = [UITouchID: UITouchSequence]()
 
+		// TODO(andy): Maybe don't modify activeTouchSequences if the handler wants to pass the touch along?
+
 		var touchesBeganHandler: TouchesHandler?
 		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
 			let newTouchSequenceMappings = touchSequenceMappingsFromTouchSequences(touchSequencesFromTouchSet(touches))
