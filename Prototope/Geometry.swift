@@ -31,6 +31,12 @@ public struct Point {
 	}
 }
 
+extension Point: Printable {
+	public var description: String {
+		return "{x: \(x), y: \(y)}"
+	}
+}
+
 public func +(a: Point, b: Point) -> Point {
 	return Point(x: a.x + b.x, y: a.y + b.y)
 }

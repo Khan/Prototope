@@ -19,6 +19,12 @@ public struct TouchSample {
 	}
 }
 
+extension TouchSample: Printable {
+	public var description: String {
+		return "{globalLocation: \(globalLocation), timestamp: \(timestamp)}"
+	}
+}
+
 public struct TouchSequence<ID> {
 	public let samples: [TouchSample]
 	public var id: ID
@@ -49,8 +55,12 @@ public struct TouchSequence<ID> {
 	// TODO: velocity...
 }
 
+public func +<ID>(a: TouchSequence<ID>, b: TouchSequence<ID>) -> TouchSequence<ID> {
+	return TouchSequence(samples: a.samples + b.samples, id: a.id)
+}
+
 public struct UITouchID: Hashable {
-	init(touch: UITouch) {
+	init(_ touch: UITouch) {
 		self.touch = touch
 	}
 

@@ -18,6 +18,7 @@
 		EB306C1919DF77CD00113FA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1719DF77CD00113FA3 /* LaunchScreen.xib */; };
 		EB50FA1219F04A07007A3C32 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50FA1119F04A07007A3C32 /* Image.swift */; };
 		EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBABE67C19E4AEF100483EEF /* Geometry.swift */; };
+		EBB3505F1A166E690046AD07 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB3505E1A166E690046AD07 /* Dictionary+Extensions.swift */; };
 		EBB565DB19F074B000D93DE3 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DA19F074B000D93DE3 /* Math.swift */; };
 		EBB565DD19F0774F00D93DE3 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DC19F0774F00D93DE3 /* MathTests.swift */; };
 		EBB565DF19F07A2900D93DE3 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */; };
@@ -92,6 +93,7 @@
 		EB306C1819DF77CD00113FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EB50FA1119F04A07007A3C32 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		EBABE67C19E4AEF100483EEF /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		EBB3505E1A166E690046AD07 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		EBB565DA19F074B000D93DE3 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		EBB565DC19F0774F00D93DE3 /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		EB306C3319DF78A900113FA3 /* Prototope */ = {
 			isa = PBXGroup;
 			children = (
+				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A74E19DF78D500A77736 /* Layer.swift */,
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
 				EB1C2A6419E4B534000DC2C1 /* Color.swift */,
@@ -205,6 +208,14 @@
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
 			);
 			path = Prototope;
+			sourceTree = "<group>";
+		};
+		EBB3505D1A166E5E0046AD07 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EBB3505E1A166E690046AD07 /* Dictionary+Extensions.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		EBE3A75819DF79C400A77736 /* Supporting Files */ = {
@@ -378,6 +389,7 @@
 			files = (
 				EBE3A77519DF79E900A77736 /* Layer.swift in Sources */,
 				EB50FA1219F04A07007A3C32 /* Image.swift in Sources */,
+				EBB3505F1A166E690046AD07 /* Dictionary+Extensions.swift in Sources */,
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,

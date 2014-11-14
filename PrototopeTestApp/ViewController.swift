@@ -28,7 +28,12 @@ class ViewController: UIViewController {
 		}))
 
 		redLayer.touchesBeganHandler = { _ in println("Touches began"); return true }
-		redLayer.touchesMovedHandler = { _ in println("Touches moved"); return true }
+		redLayer.touchesMovedHandler = { sequences in
+			for (_, sequence) in sequences {
+				println(sequence.samples)
+			}
+			return true
+		}
 		redLayer.touchesEndedHandler = { _ in println("Touches ended"); return true }
 		redLayer.touchesCancelledHandler = { _ in println("Touches cancelled"); return true }
 

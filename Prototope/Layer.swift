@@ -332,9 +332,13 @@ public class Layer: Equatable {
 			self.init(frame: CGRect())
 		}
 
+		private var activeTouchSequences = [UITouchID: UITouchSequence]()
+
 		var touchesBeganHandler: TouchesHandler?
 		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-			let shouldForward = touchesBeganHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			let newTouchSequenceMappings = touchSequenceMappingsFromTouchSequences(touchSequencesFromTouchSet(touches))
+			activeTouchSequences = activeTouchSequences + newTouchSequenceMappings
+			let shouldForward = touchesBeganHandler?(newTouchSequenceMappings) ?? true
 			if shouldForward {
 				super.touchesBegan(touches, withEvent: event)
 			}
@@ -342,7 +346,11 @@ public class Layer: Equatable {
 
 		var touchesMovedHandler: TouchesHandler?
 		override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-			let shouldForward = touchesMovedHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			let movedTouchSequences = addTouchSequences(touchSequencesFromTouchSet(touches), intoMappings: activeTouchSequences)
+			let movedTouchSequenceMappings = touchSequenceMappingsFromTouchSequences(movedTouchSequences)
+			activeTouchSequences = activeTouchSequences + movedTouchSequenceMappings
+
+			let shouldForward = touchesMovedHandler?(movedTouchSequenceMappings) ?? true
 			if shouldForward {
 				super.touchesBegan(touches, withEvent: event)
 			}
@@ -350,7 +358,11 @@ public class Layer: Equatable {
 
 		var touchesEndedHandler: TouchesHandler?
 		override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-			let shouldForward = touchesEndedHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			let endedTouchSequences = addTouchSequences(touchSequencesFromTouchSet(touches), intoMappings: activeTouchSequences)
+			let endedTouchSequencesMappings = touchSequenceMappingsFromTouchSequences(endedTouchSequences)
+			activeTouchSequences = activeTouchSequences - endedTouchSequencesMappings
+
+			let shouldForward = touchesEndedHandler?(endedTouchSequencesMappings) ?? true
 			if shouldForward {
 				super.touchesBegan(touches, withEvent: event)
 			}
@@ -358,7 +370,11 @@ public class Layer: Equatable {
 
 		var touchesCancelledHandler: TouchesHandler?
 		override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
-			let shouldForward = touchesCancelledHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
+			let cancelledTouchSequences = addTouchSequences(touchSequencesFromTouchSet(touches), intoMappings: activeTouchSequences)
+			let endedTouchSequencesMappings = touchSequenceMappingsFromTouchSequences(cancelledTouchSequences)
+			activeTouchSequences = activeTouchSequences - endedTouchSequencesMappings
+
+			let shouldForward = touchesCancelledHandler?(endedTouchSequencesMappings) ?? true
 			if shouldForward {
 				super.touchesBegan(touches, withEvent: event)
 			}
@@ -403,4 +419,21 @@ public struct Shadow {
 		self.offset = offset
 		self.radius = radius
 	}
+}
+
+private typealias UITouchSequence = TouchSequence<UITouchID>
+
+private func touchSequencesFromTouchSet(touches: NSSet) -> [UITouchSequence] {
+	return map(touches) {
+		let touch = $0 as UITouch
+		return TouchSequence(samples: [TouchSample(touch)], id: UITouchID(touch))
+	}
+}
+
+private func touchSequenceMappingsFromTouchSequences<ID>(touchSequences: [TouchSequence<ID>]) -> [ID: TouchSequence<ID>] {
+	return dictionaryFromElements(touchSequences.map { ($0.id, $0) })
+}
+
+private func addTouchSequences<ID>(sequences: [TouchSequence<ID>], intoMappings mappings: [ID: TouchSequence<ID>]) -> [TouchSequence<ID>] {
+	return sequences.map { (mappings[$0.id] ?? TouchSequence(samples: [], id: $0.id)) + $0 }
 }
