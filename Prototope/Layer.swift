@@ -276,6 +276,10 @@ public class Layer: Equatable {
 
 	public typealias TouchesHandler = [UITouchID: TouchSequence<UITouchID>] -> Bool
 
+	public var activeTouchSequences: [UITouchID: TouchSequence<UITouchID>] {
+		return imageView.activeTouchSequences
+	}
+
 	public var touchesBeganHandler: TouchesHandler? {
 		get { return imageView.touchesBeganHandler }
 		set { imageView.touchesBeganHandler = newValue }
