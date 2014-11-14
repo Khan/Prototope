@@ -8,7 +8,9 @@
 
 import UIKit
 
-public struct Touch {
+// MARK: Touch
+
+public struct TouchSample {
 	public let globalLocation: Point
 	public let timestamp: Timestamp
 
@@ -17,13 +19,54 @@ public struct Touch {
 	}
 }
 
-public struct TouchHistory {
-	public let firstTouch: Touch
-	public let previousTouch: Touch
-	public let currentTouch: Touch
+public struct TouchSequence<ID> {
+	public let samples: [TouchSample]
+	public var id: ID
+
+	public var firstSample: TouchSample {
+		return samples.first! // Touch sequences must have at least one touch sample
+	}
+
+	public var previousSample: TouchSample? {
+		let index = samples.count - 2
+		return index >= 0 ? samples[index] : nil
+	}
+
+	public var currentSample: TouchSample {
+		return samples.last! // Touch sequences must have at least one touch sample
+	}
+
+	public init(samples: [TouchSample], id: ID) {
+		precondition(samples.count >= 1)
+		self.samples = samples
+		self.id = id
+	}
+
+	public func touchSequenceByAppendingSample(sample: TouchSample) -> TouchSequence<ID> {
+		return TouchSequence(samples: samples + [sample], id: id)
+	}
 
 	// TODO: velocity...
 }
+
+public struct UITouchID: Hashable {
+	init(touch: UITouch) {
+		self.touch = touch
+	}
+
+	public var hashValue: Int {
+		return self.touch.hashValue
+	}
+
+	private let touch: UITouch
+}
+
+public func ==(a: UITouchID, b: UITouchID) -> Bool {
+	return a.touch === b.touch
+}
+
+
+// MARK: Gesture
 
 public protocol GestureType: _GestureType {}
 
@@ -83,7 +126,7 @@ public protocol _GestureType {
 	weak var hostLayer: Layer? { get nonmutating set }
 }
 
-extension Touch {
+extension TouchSample {
 	init(_ touch: UITouch) {
 		globalLocation = Point(touch.locationInView(nil))
 		timestamp = touch.timestamp

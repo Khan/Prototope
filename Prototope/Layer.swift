@@ -274,22 +274,24 @@ public class Layer: Equatable {
 		}
 	}
 
-	public var touchesBeganHandler: ([Touch] -> Bool)? {
+	public typealias TouchesHandler = [UITouchID: TouchSequence<UITouchID>] -> Bool
+
+	public var touchesBeganHandler: TouchesHandler? {
 		get { return imageView.touchesBeganHandler }
 		set { imageView.touchesBeganHandler = newValue }
 	}
 
-	public var touchesMovedHandler: ([Touch] -> Bool)? {
+	public var touchesMovedHandler: TouchesHandler? {
 		get { return imageView.touchesMovedHandler }
 		set { imageView.touchesMovedHandler = newValue }
 	}
 
-	public var touchesEndedHandler: ([Touch] -> Bool)? {
+	public var touchesEndedHandler: TouchesHandler? {
 		get { return imageView.touchesEndedHandler }
 		set { imageView.touchesEndedHandler = newValue }
 	}
 
-	public var touchesCancelledHandler: ([Touch] -> Bool)? {
+	public var touchesCancelledHandler: TouchesHandler? {
 		get { return imageView.touchesCancelledHandler }
 		set { imageView.touchesCancelledHandler = newValue }
 	}
@@ -330,7 +332,7 @@ public class Layer: Equatable {
 			self.init(frame: CGRect())
 		}
 
-		var touchesBeganHandler: ([Touch] -> Bool)?
+		var touchesBeganHandler: TouchesHandler?
 		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
 			let shouldForward = touchesBeganHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
 			if shouldForward {
@@ -338,7 +340,7 @@ public class Layer: Equatable {
 			}
 		}
 
-		var touchesMovedHandler: ([Touch] -> Bool)?
+		var touchesMovedHandler: TouchesHandler?
 		override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
 			let shouldForward = touchesMovedHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
 			if shouldForward {
@@ -346,7 +348,7 @@ public class Layer: Equatable {
 			}
 		}
 
-		var touchesEndedHandler: ([Touch] -> Bool)?
+		var touchesEndedHandler: TouchesHandler?
 		override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
 			let shouldForward = touchesEndedHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
 			if shouldForward {
@@ -354,7 +356,7 @@ public class Layer: Equatable {
 			}
 		}
 
-		var touchesCancelledHandler: ([Touch] -> Bool)?
+		var touchesCancelledHandler: TouchesHandler?
 		override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
 			let shouldForward = touchesCancelledHandler?(touches.allObjects.map { Touch($0 as UITouch) }) ?? true
 			if shouldForward {
