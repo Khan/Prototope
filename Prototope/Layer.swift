@@ -342,11 +342,13 @@ public class Layer: Equatable {
 		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
 			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
+			let oldActiveTouchSequences = activeTouchSequences
+			activeTouchSequences = activeTouchSequences + newSequenceMappings
+
 			let shouldForward = touchesBeganHandler?(newSequenceMappings) ?? true
 			if shouldForward {
 				super.touchesBegan(touches, withEvent: event)
-			} else {
-				activeTouchSequences = activeTouchSequences + newSequenceMappings
+				activeTouchSequences = oldActiveTouchSequences
 			}
 		}
 
@@ -354,11 +356,13 @@ public class Layer: Equatable {
 		override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
 			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
+			let oldActiveTouchSequences = activeTouchSequences
+			activeTouchSequences = activeTouchSequences + newSequenceMappings
+
 			let shouldForward = touchesMovedHandler?(newSequenceMappings) ?? true
 			if shouldForward {
 				super.touchesMoved(touches, withEvent: event)
-			} else {
-				activeTouchSequences = activeTouchSequences + newSequenceMappings
+				activeTouchSequences = oldActiveTouchSequences
 			}
 		}
 
@@ -366,11 +370,12 @@ public class Layer: Equatable {
 		override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
 			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
+			let oldActiveTouchSequences = activeTouchSequences
+			activeTouchSequences = activeTouchSequences - newSequenceMappings
+
 			let shouldForward = touchesEndedHandler?(newSequenceMappings) ?? true
 			if shouldForward {
 				super.touchesEnded(touches, withEvent: event)
-			} else {
-				activeTouchSequences = activeTouchSequences - newSequenceMappings
 			}
 		}
 
@@ -378,11 +383,13 @@ public class Layer: Equatable {
 		override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
 			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
+			let oldActiveTouchSequences = activeTouchSequences
+			activeTouchSequences = activeTouchSequences - newSequenceMappings
+
 			let shouldForward = touchesCancelledHandler?(newSequenceMappings) ?? true
 			if shouldForward {
 				super.touchesCancelled(touches, withEvent: event)
-			} else {
-				activeTouchSequences = activeTouchSequences - newSequenceMappings
+				activeTouchSequences = oldActiveTouchSequences
 			}
 		}
 	}
