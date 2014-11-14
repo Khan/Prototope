@@ -338,51 +338,51 @@ public class Layer: Equatable {
 
 		private var activeTouchSequences = [UITouchID: UITouchSequence]()
 
-		// TODO(andy): Maybe don't modify activeTouchSequences if the handler wants to pass the touch along?
-
 		var touchesBeganHandler: TouchesHandler?
 		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-			let newTouchSequenceMappings = touchSequenceMappingsFromTouchSequences(touchSequencesFromTouchSet(touches))
-			activeTouchSequences = activeTouchSequences + newTouchSequenceMappings
-			let shouldForward = touchesBeganHandler?(newTouchSequenceMappings) ?? true
+			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
+
+			let shouldForward = touchesBeganHandler?(newSequenceMappings) ?? true
 			if shouldForward {
 				super.touchesBegan(touches, withEvent: event)
+			} else {
+				activeTouchSequences = activeTouchSequences + newSequenceMappings
 			}
 		}
 
 		var touchesMovedHandler: TouchesHandler?
 		override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-			let movedTouchSequences = addTouchSequences(touchSequencesFromTouchSet(touches), intoMappings: activeTouchSequences)
-			let movedTouchSequenceMappings = touchSequenceMappingsFromTouchSequences(movedTouchSequences)
-			activeTouchSequences = activeTouchSequences + movedTouchSequenceMappings
+			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
-			let shouldForward = touchesMovedHandler?(movedTouchSequenceMappings) ?? true
+			let shouldForward = touchesMovedHandler?(newSequenceMappings) ?? true
 			if shouldForward {
-				super.touchesBegan(touches, withEvent: event)
+				super.touchesMoved(touches, withEvent: event)
+			} else {
+				activeTouchSequences = activeTouchSequences + newSequenceMappings
 			}
 		}
 
 		var touchesEndedHandler: TouchesHandler?
 		override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-			let endedTouchSequences = addTouchSequences(touchSequencesFromTouchSet(touches), intoMappings: activeTouchSequences)
-			let endedTouchSequencesMappings = touchSequenceMappingsFromTouchSequences(endedTouchSequences)
-			activeTouchSequences = activeTouchSequences - endedTouchSequencesMappings
+			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
-			let shouldForward = touchesEndedHandler?(endedTouchSequencesMappings) ?? true
+			let shouldForward = touchesEndedHandler?(newSequenceMappings) ?? true
 			if shouldForward {
-				super.touchesBegan(touches, withEvent: event)
+				super.touchesEnded(touches, withEvent: event)
+			} else {
+				activeTouchSequences = activeTouchSequences - newSequenceMappings
 			}
 		}
 
 		var touchesCancelledHandler: TouchesHandler?
 		override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
-			let cancelledTouchSequences = addTouchSequences(touchSequencesFromTouchSet(touches), intoMappings: activeTouchSequences)
-			let endedTouchSequencesMappings = touchSequenceMappingsFromTouchSequences(cancelledTouchSequences)
-			activeTouchSequences = activeTouchSequences - endedTouchSequencesMappings
+			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
-			let shouldForward = touchesCancelledHandler?(endedTouchSequencesMappings) ?? true
+			let shouldForward = touchesCancelledHandler?(newSequenceMappings) ?? true
 			if shouldForward {
-				super.touchesBegan(touches, withEvent: event)
+				super.touchesCancelled(touches, withEvent: event)
+			} else {
+				activeTouchSequences = activeTouchSequences - newSequenceMappings
 			}
 		}
 	}
@@ -440,6 +440,11 @@ private func touchSequenceMappingsFromTouchSequences<ID>(touchSequences: [TouchS
 	return dictionaryFromElements(touchSequences.map { ($0.id, $0) })
 }
 
-private func addTouchSequences<ID>(sequences: [TouchSequence<ID>], intoMappings mappings: [ID: TouchSequence<ID>]) -> [TouchSequence<ID>] {
+private func incorporateTouchSequences<ID>(sequences: [TouchSequence<ID>], intoTouchSequenceMappings mappings: [ID: TouchSequence<ID>]) -> [TouchSequence<ID>] {
 	return sequences.map { (mappings[$0.id] ?? TouchSequence(samples: [], id: $0.id)) + $0 }
+}
+
+private func incorporateTouches(touches: NSSet, intoTouchSequenceMappings mappings: [UITouchID: TouchSequence<UITouchID>]) -> [UITouchID: TouchSequence<UITouchID>] {
+	let updatedTouchSequences = incorporateTouchSequences(touchSequencesFromTouchSet(touches), intoTouchSequenceMappings: mappings)
+	return touchSequenceMappingsFromTouchSequences(updatedTouchSequences)
 }
