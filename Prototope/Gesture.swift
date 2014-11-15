@@ -127,12 +127,7 @@ public class TapGesture: GestureType {
 	private let tapGestureHandler: TapGestureHandler
 
 	public weak var hostLayer: Layer? {
-		didSet {
-			if hostLayer !== oldValue {
-				oldValue?.view.removeGestureRecognizer(tapGestureRecognizer)
-				hostLayer?.view.addGestureRecognizer(tapGestureRecognizer)
-			}
-		}
+		didSet { handleTransferOfGesture(tapGestureRecognizer, oldValue, hostLayer) }
 	}
 
 	@objc class TapGestureHandler: NSObject {
@@ -145,6 +140,13 @@ public class TapGesture: GestureType {
 		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
 			actionHandler(Point(gestureRecognizer.locationInView(gestureRecognizer.view)))
 		}
+	}
+}
+
+private func handleTransferOfGesture(gesture: UIGestureRecognizer, fromLayer: Layer?, toLayer: Layer?) {
+	if fromLayer !== toLayer {
+		fromLayer?.view.removeGestureRecognizer(gesture)
+		toLayer?.view.addGestureRecognizer(gesture)
 	}
 }
 
