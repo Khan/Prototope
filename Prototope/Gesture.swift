@@ -25,7 +25,7 @@ extension TouchSample: Printable {
 	}
 }
 
-public struct TouchSequence<ID> {
+public struct TouchSequence<ID: Printable>: Printable {
 	public let samples: [TouchSample]
 	public var id: ID
 
@@ -43,7 +43,7 @@ public struct TouchSequence<ID> {
 	}
 
 	public init(samples: [TouchSample], id: ID) {
-		precondition(samples.count >= 1)
+		precondition(samples.count >= 0)
 		self.samples = samples
 		self.id = id
 	}
@@ -53,22 +53,36 @@ public struct TouchSequence<ID> {
 	}
 
 	// TODO: velocity...
+
+	public var description: String {
+		return "{id: \(id), samples: \(samples)}"
+	}
 }
 
 public func +<ID>(a: TouchSequence<ID>, b: TouchSequence<ID>) -> TouchSequence<ID> {
 	return TouchSequence(samples: a.samples + b.samples, id: a.id)
 }
 
-public struct UITouchID: Hashable {
+public struct UITouchID: Hashable, Printable {
 	init(_ touch: UITouch) {
 		self.touch = touch
+		if UITouchID.touchesToIdentifiers[touch] == nil {
+			UITouchID.touchesToIdentifiers[touch] = UITouchID.nextIdentifier
+			UITouchID.nextIdentifier++
+		}
 	}
+
+	private static var touchesToIdentifiers = [UITouch: Int]()
+	private static var nextIdentifier = 0
 
 	public var hashValue: Int {
 		return self.touch.hashValue
 	}
 
+	public var description: String { return "\(UITouchID.touchesToIdentifiers[touch]!)" }
+
 	private let touch: UITouch
+
 }
 
 public func ==(a: UITouchID, b: UITouchID) -> Bool {
@@ -88,9 +102,11 @@ public enum ContinuousGestureState {
 }
 
 public class TapGesture: GestureType {
-	public init(handler: (localLocation: Point) -> (), numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1) {
+	public init(_ handler: (localLocation: Point) -> (), numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1) {
 		tapGestureHandler = TapGestureHandler(actionHandler: handler)
 		tapGestureRecognizer = UITapGestureRecognizer(target: tapGestureHandler, action: "handleGestureRecognizer:")
+		tapGestureRecognizer.numberOfTapsRequired = numberOfTapsRequired
+		tapGestureRecognizer.numberOfTouchesRequired = numberOfTouchesRequired
 	}
 
 	deinit {

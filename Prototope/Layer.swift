@@ -18,6 +18,7 @@ public class Layer: Equatable {
 		self.parent = parent
 		self.name = name
 		self.view = TouchForwardingImageView() // TODO: dynamic switch the view type depending on whether we're using an image or not
+		self.view.multipleTouchEnabled = true
 		self.view.userInteractionEnabled = true
 
 		self.parentDidChange()
@@ -275,6 +276,7 @@ public class Layer: Equatable {
 	}
 
 	public typealias TouchesHandler = [UITouchID: TouchSequence<UITouchID>] -> Bool
+	public typealias TouchHandler = TouchSequence<UITouchID> -> Void
 
 	public var activeTouchSequences: [UITouchID: TouchSequence<UITouchID>] {
 		return imageView.activeTouchSequences
@@ -285,9 +287,19 @@ public class Layer: Equatable {
 		set { imageView.touchesBeganHandler = newValue }
 	}
 
+	public var touchBeganHandler: TouchHandler? {
+		get { return imageView.touchBeganHandler }
+		set { imageView.touchBeganHandler = newValue }
+	}
+
 	public var touchesMovedHandler: TouchesHandler? {
 		get { return imageView.touchesMovedHandler }
 		set { imageView.touchesMovedHandler = newValue }
+	}
+
+	public var touchMovedHandler: TouchHandler? {
+		get { return imageView.touchMovedHandler }
+		set { imageView.touchMovedHandler = newValue }
 	}
 
 	public var touchesEndedHandler: TouchesHandler? {
@@ -295,9 +307,19 @@ public class Layer: Equatable {
 		set { imageView.touchesEndedHandler = newValue }
 	}
 
+	public var touchEndedHandler: TouchHandler? {
+		get { return imageView.touchEndedHandler }
+		set { imageView.touchEndedHandler = newValue }
+	}
+
 	public var touchesCancelledHandler: TouchesHandler? {
 		get { return imageView.touchesCancelledHandler }
 		set { imageView.touchesCancelledHandler = newValue }
+	}
+
+	public var touchCancelledHandler: TouchHandler? {
+		get { return imageView.touchCancelledHandler }
+		set { imageView.touchCancelledHandler = newValue }
 	}
 
 	// MARK: Internal interfaces
@@ -336,60 +358,57 @@ public class Layer: Equatable {
 			self.init(frame: CGRect())
 		}
 
-		private var activeTouchSequences = [UITouchID: UITouchSequence]()
+		private typealias TouchSequenceMapping = [UITouchID: UITouchSequence]
+		private var activeTouchSequences = TouchSequenceMapping()
 
-		var touchesBeganHandler: TouchesHandler?
-		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+		private func handleTouches(touches: NSSet, event: UIEvent, touchesHandler: TouchesHandler?, touchHandler: TouchHandler?, touchSequenceMappingMergeFunction: (TouchSequenceMapping, TouchSequenceMapping) -> TouchSequenceMapping) -> Bool {
+			precondition(touchesHandler == nil || touchHandler == nil, "Can't set both a touches*Handler and a touch*Handler")
+
 			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
 
-			let oldActiveTouchSequences = activeTouchSequences
-			activeTouchSequences = activeTouchSequences + newSequenceMappings
+			activeTouchSequences = touchSequenceMappingMergeFunction(activeTouchSequences, newSequenceMappings)
 
-			let shouldForward = touchesBeganHandler?(newSequenceMappings) ?? true
-			if shouldForward {
+			if let touchHandler = touchHandler {
+				for (_, touchSequence) in newSequenceMappings {
+					touchHandler(touchSequence)
+				}
+				return true
+			} else if let touchesHandler = touchesHandler {
+				return touchesHandler(newSequenceMappings)
+			} else {
+				return false
+			}
+		}
+
+		var touchesBeganHandler: TouchesHandler?
+		var touchBeganHandler: TouchHandler?
+		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+			if !handleTouches(touches, event: event, touchesHandler: touchesBeganHandler, touchHandler: touchBeganHandler, touchSequenceMappingMergeFunction: +) {
 				super.touchesBegan(touches, withEvent: event)
-				activeTouchSequences = oldActiveTouchSequences
 			}
 		}
 
 		var touchesMovedHandler: TouchesHandler?
+		var touchMovedHandler: TouchHandler?
 		override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
-
-			let oldActiveTouchSequences = activeTouchSequences
-			activeTouchSequences = activeTouchSequences + newSequenceMappings
-
-			let shouldForward = touchesMovedHandler?(newSequenceMappings) ?? true
-			if shouldForward {
+			if !handleTouches(touches, event: event, touchesHandler: touchesMovedHandler, touchHandler: touchMovedHandler, touchSequenceMappingMergeFunction: +) {
 				super.touchesMoved(touches, withEvent: event)
-				activeTouchSequences = oldActiveTouchSequences
 			}
 		}
 
 		var touchesEndedHandler: TouchesHandler?
+		var touchEndedHandler: TouchHandler?
 		override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
-
-			let oldActiveTouchSequences = activeTouchSequences
-			activeTouchSequences = activeTouchSequences - newSequenceMappings
-
-			let shouldForward = touchesEndedHandler?(newSequenceMappings) ?? true
-			if shouldForward {
+			if !handleTouches(touches, event: event, touchesHandler: touchesEndedHandler, touchHandler: touchEndedHandler, touchSequenceMappingMergeFunction: -) {
 				super.touchesEnded(touches, withEvent: event)
 			}
 		}
 
 		var touchesCancelledHandler: TouchesHandler?
+		var touchCancelledHandler: TouchHandler?
 		override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
-			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
-
-			let oldActiveTouchSequences = activeTouchSequences
-			activeTouchSequences = activeTouchSequences - newSequenceMappings
-
-			let shouldForward = touchesCancelledHandler?(newSequenceMappings) ?? true
-			if shouldForward {
+			if !handleTouches(touches, event: event, touchesHandler: touchesCancelledHandler, touchHandler: touchCancelledHandler, touchSequenceMappingMergeFunction: -) {
 				super.touchesCancelled(touches, withEvent: event)
-				activeTouchSequences = oldActiveTouchSequences
 			}
 		}
 	}
