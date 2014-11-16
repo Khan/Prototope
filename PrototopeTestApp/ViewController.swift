@@ -16,9 +16,9 @@ class ViewController: UIViewController {
 
 		setRootLayer(fromView: view)
 
-		for i in 0..<10 {
+		for i in 0..<6 {
 			let layer = makeRedLayer("Layer \(i)")
-			layer.x = Double(i) * 80
+			layer.x = Double(i) * 150
 		}
 
 	}
@@ -35,7 +35,9 @@ func makeRedLayer(name: String) -> Layer {
 	redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 
 	redLayer.gestures.append(PanGesture{ phase, centroidSequence in
-		println("\(phase): \(centroidSequence.currentVelocityInLayer(redLayer))")
+		if let previousSample = centroidSequence.previousSample {
+			redLayer.position += (centroidSequence.currentSample.globalLocation - previousSample.globalLocation)
+		}
 	})
 	redLayer.gestures.append(TapGesture({ location in
 		println("\(redLayer.name): \(location)")

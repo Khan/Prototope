@@ -41,16 +41,32 @@ public func +(a: Point, b: Point) -> Point {
 	return Point(x: a.x + b.x, y: a.y + b.y)
 }
 
+public func +=(inout a: Point, b: Point) {
+	a = a + b
+}
+
 public func -(a: Point, b: Point) -> Point {
 	return Point(x: a.x - b.x, y: a.y - b.y)
+}
+
+public func -=(inout a: Point, b: Point) {
+	a = a - b
 }
 
 public func *(a: Point, scalar: Double) -> Point {
 	return Point(x: a.x * scalar, y: a.y * scalar)
 }
 
+public func *=(inout a: Point, scalar: Double) {
+	a = a * scalar
+}
+
 public func /(a: Point, scalar: Double) -> Point {
 	return a * (1.0 / scalar)
+}
+
+public func /=(inout a: Point, scalar: Double) {
+	a = a / scalar
 }
 
 extension CGPoint {
@@ -79,6 +95,10 @@ public struct Size {
 
 public func *(a: Size, scalar: Double) -> Size {
 	return Size(width: a.width * scalar, height: a.height * scalar)
+}
+
+public func *=(inout a: Size, scalar: Double) {
+	a = a * scalar
 }
 
 extension CGSize {
