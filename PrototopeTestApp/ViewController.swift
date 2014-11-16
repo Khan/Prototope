@@ -35,7 +35,7 @@ func makeRedLayer(name: String) -> Layer {
 	redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 
 	redLayer.gestures.append(PanGesture{ phase, centroidSequence in
-		println("\(phase): \(centroidSequence)")
+		println("\(phase): \(centroidSequence.currentVelocityInLayer(redLayer))")
 	})
 	redLayer.gestures.append(TapGesture({ location in
 		println("\(redLayer.name): \(location)")

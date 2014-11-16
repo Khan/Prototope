@@ -49,6 +49,10 @@ public func *(a: Point, scalar: Double) -> Point {
 	return Point(x: a.x * scalar, y: a.y * scalar)
 }
 
+public func /(a: Point, scalar: Double) -> Point {
+	return a * (1.0 / scalar)
+}
+
 extension CGPoint {
 	public init(_ point: Point) {
 		self.x = CGFloat(point.x)

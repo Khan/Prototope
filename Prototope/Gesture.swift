@@ -14,7 +14,7 @@ public struct TouchSample {
 	public let globalLocation: Point
 	public let timestamp: Timestamp
 
-	func locationInLayer(layer: Layer) -> Point {
+	public func locationInLayer(layer: Layer) -> Point {
 		return layer.convertGlobalPointToLocalPoint(globalLocation)
 	}
 }
@@ -52,14 +52,21 @@ public struct TouchSequence<ID: Printable>: Printable {
 		return TouchSequence(samples: samples + [sample], id: id)
 	}
 
-	// TODO
-	// Maybe don't actually expose this?
-	public func velocitiesInLayer(layer: Layer) -> [Point] {
-		return [Point()]
-	}
-
 	public func currentVelocityInLayer(layer: Layer) -> Point {
-		return velocitiesInLayer(layer).last!
+		if samples.count <= 1 {
+			return Point()
+		} else {
+			let velocitySmoothingFactor = 0.6
+			func velocitySampleFromSample(a: TouchSample, toSample b: TouchSample) -> Point {
+				return (b.locationInLayer(layer) - a.locationInLayer(layer)) / (b.timestamp - a.timestamp)
+			}
+
+			var velocity = velocitySampleFromSample(samples[0], toSample: samples[1])
+			for sampleIndex in 2..<samples.count {
+				velocity = velocity * velocitySmoothingFactor + velocitySampleFromSample(samples[sampleIndex - 1], toSample: samples[sampleIndex]) * (1 - velocitySmoothingFactor)
+			}
+			return velocity
+		}
 	}
 
 	public func currentGlobalVelocity() -> Point {
