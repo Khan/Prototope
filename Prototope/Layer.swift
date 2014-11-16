@@ -279,47 +279,58 @@ public class Layer: Equatable {
 	public typealias TouchHandler = TouchSequence<UITouchID> -> Void
 
 	public var activeTouchSequences: [UITouchID: TouchSequence<UITouchID>] {
-		return imageView.activeTouchSequences
+		return imageView?.activeTouchSequences ?? [UITouchID: UITouchSequence]()
 	}
 
 	public var touchesBeganHandler: TouchesHandler? {
-		get { return imageView.touchesBeganHandler }
-		set { imageView.touchesBeganHandler = newValue }
+		get { return imageView?.touchesBeganHandler }
+		set { imageView?.touchesBeganHandler = newValue }
 	}
 
 	public var touchBeganHandler: TouchHandler? {
-		get { return imageView.touchBeganHandler }
-		set { imageView.touchBeganHandler = newValue }
+		get { return imageView?.touchBeganHandler }
+		set { imageView?.touchBeganHandler = newValue }
 	}
 
 	public var touchesMovedHandler: TouchesHandler? {
-		get { return imageView.touchesMovedHandler }
-		set { imageView.touchesMovedHandler = newValue }
+		get { return imageView?.touchesMovedHandler }
+		set { imageView?.touchesMovedHandler = newValue }
 	}
 
 	public var touchMovedHandler: TouchHandler? {
-		get { return imageView.touchMovedHandler }
-		set { imageView.touchMovedHandler = newValue }
+		get { return imageView?.touchMovedHandler }
+		set { imageView?.touchMovedHandler = newValue }
 	}
 
 	public var touchesEndedHandler: TouchesHandler? {
-		get { return imageView.touchesEndedHandler }
-		set { imageView.touchesEndedHandler = newValue }
+		get { return imageView?.touchesEndedHandler }
+		set { imageView?.touchesEndedHandler = newValue }
 	}
 
 	public var touchEndedHandler: TouchHandler? {
-		get { return imageView.touchEndedHandler }
-		set { imageView.touchEndedHandler = newValue }
+		get { return imageView?.touchEndedHandler }
+		set { imageView?.touchEndedHandler = newValue }
 	}
 
 	public var touchesCancelledHandler: TouchesHandler? {
-		get { return imageView.touchesCancelledHandler }
-		set { imageView.touchesCancelledHandler = newValue }
+		get { return imageView?.touchesCancelledHandler }
+		set { imageView?.touchesCancelledHandler = newValue }
 	}
 
 	public var touchCancelledHandler: TouchHandler? {
-		get { return imageView.touchCancelledHandler }
-		set { imageView.touchCancelledHandler = newValue }
+		get { return imageView?.touchCancelledHandler }
+		set { imageView?.touchCancelledHandler = newValue }
+	}
+
+	public var touchedDescendents: [Layer] {
+		var accumulator = [Layer]()
+		if activeTouchSequences.count > 0 {
+			accumulator.append(self)
+		}
+		for sublayer in sublayers {
+			accumulator += sublayer.touchedDescendents
+		}
+		return accumulator
 	}
 
 	// MARK: Internal interfaces
@@ -335,14 +346,14 @@ public class Layer: Equatable {
 
 	private func imageDidChange() {
 		if let image = image {
-			imageView.image = image.uiImage
+			imageView?.image = image.uiImage
 			size = image.size
 		}
 	}
 
 	var view: UIView
 	private var layer: CALayer { return view.layer }
-	private var imageView: TouchForwardingImageView { return view as TouchForwardingImageView }
+	private var imageView: TouchForwardingImageView? { return view as? TouchForwardingImageView }
 
 
 	class TouchForwardingImageView: UIImageView {
