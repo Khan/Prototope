@@ -146,7 +146,7 @@ private extension ContinuousGesturePhase {
 }
 
 public class TapGesture: GestureType {
-	public init(_ handler: (localLocation: Point) -> (), numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1) {
+	public init(_ handler: (globalLocation: Point) -> (), numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1) {
 		tapGestureHandler = TapGestureHandler(actionHandler: handler)
 		tapGestureRecognizer = UITapGestureRecognizer(target: tapGestureHandler, action: "handleGestureRecognizer:")
 		tapGestureRecognizer.numberOfTapsRequired = numberOfTapsRequired
@@ -182,8 +182,7 @@ public class TapGesture: GestureType {
 		private let actionHandler: Point -> ()
 
 		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-			println(gestureRecognizer.state.rawValue)
-			actionHandler(Point(gestureRecognizer.locationInView(gestureRecognizer.view)))
+			actionHandler(Point(gestureRecognizer.locationInView(nil)))
 		}
 	}
 }
