@@ -52,7 +52,19 @@ public struct TouchSequence<ID: Printable>: Printable {
 		return TouchSequence(samples: samples + [sample], id: id)
 	}
 
-	// TODO: velocity...
+	// TODO
+	// Maybe don't actually expose this?
+	public func velocitiesInLayer(layer: Layer) -> [Point] {
+		return [Point()]
+	}
+
+	public func currentVelocityInLayer(layer: Layer) -> Point {
+		return velocitiesInLayer(layer).last!
+	}
+
+	public func currentGlobalVelocity() -> Point {
+		return currentVelocityInLayer(RootLayer)
+	}
 
 	public var description: String {
 		return "{id: \(id), samples: \(samples)}"
@@ -94,11 +106,43 @@ public func ==(a: UITouchID, b: UITouchID) -> Bool {
 
 public protocol GestureType: _GestureType {}
 
-public enum ContinuousGestureState {
+public enum ContinuousGesturePhase {
 	case Began
 	case Changed
 	case Ended
 	case Cancelled
+}
+
+extension ContinuousGesturePhase: Printable {
+	public var description: String {
+		switch self {
+		case .Began:
+			return "Began"
+		case .Changed:
+			return "Changed"
+		case .Ended:
+			return "Ended"
+		case .Cancelled:
+			return "Cancelled"
+		}
+	}
+}
+
+private extension ContinuousGesturePhase {
+	init?(_ uiGestureState: UIGestureRecognizerState) {
+		switch uiGestureState {
+		case .Possible, .Failed:
+			return nil
+		case .Began:
+			self = .Began
+		case .Changed:
+			self = .Changed
+		case .Ended:
+			self = .Ended
+		case .Cancelled:
+			self = .Cancelled
+		}
+	}
 }
 
 public class TapGesture: GestureType {
@@ -138,7 +182,70 @@ public class TapGesture: GestureType {
 		private let actionHandler: Point -> ()
 
 		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+			println(gestureRecognizer.state.rawValue)
 			actionHandler(Point(gestureRecognizer.locationInView(gestureRecognizer.view)))
+		}
+	}
+}
+
+public class PanGesture: GestureType {
+
+	private let panGestureRecognizer: UIPanGestureRecognizer
+	private let panGestureHandler: PanGestureHandler
+
+	public weak var hostLayer: Layer? {
+		didSet { handleTransferOfGesture(panGestureRecognizer, oldValue, hostLayer) }
+	}
+
+	public init(_ handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> (), minimumNumberOfTouches: Int = 1, maximumNumberOfTouches: Int = Int.max) {
+		panGestureHandler = PanGestureHandler(actionHandler: handler)
+		panGestureRecognizer = UIPanGestureRecognizer(target: panGestureHandler, action: "handleGestureRecognizer:")
+		panGestureRecognizer.minimumNumberOfTouches = minimumNumberOfTouches
+		panGestureRecognizer.maximumNumberOfTouches = maximumNumberOfTouches
+	}
+
+	deinit {
+		panGestureRecognizer.removeTarget(panGestureHandler, action: "handleGestureRecognizer:")
+	}
+
+	public struct State {
+		public let phase: ContinuousGesturePhase
+		public let centroidSequence: TouchSequence<Int>
+	}
+
+	@objc class PanGestureHandler: NSObject {
+		private let actionHandler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()
+		private var centroidSequence: TouchSequence<Int>?
+
+		init(actionHandler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
+			self.actionHandler = actionHandler
+		}
+
+		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+			let panGesture = gestureRecognizer as UIPanGestureRecognizer
+			switch panGesture.state {
+			case .Began:
+				// Reset the gesture to record translation relative to the starting centroid; we'll interpret subsequent translations as centroid positions.
+				let centroidWindowLocation = panGesture.locationInView(nil)
+				panGesture.setTranslation(centroidWindowLocation, inView: nil)
+
+				struct IDState { static var nextCentroidSequenceID = 0 }
+				centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: CACurrentMediaTime())], id: IDState.nextCentroidSequenceID)
+				IDState.nextCentroidSequenceID++
+			case .Changed, .Ended, .Cancelled:
+				centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(panGesture.translationInView(panGesture.view!.window!)), timestamp: CACurrentMediaTime()))
+			case .Possible, .Failed:
+				fatalError("Unexpected gesture state")
+			}
+
+			actionHandler(phase: ContinuousGesturePhase(panGesture.state)!, centroidSequence: centroidSequence!)
+
+			switch panGesture.state {
+			case .Ended, .Cancelled:
+				centroidSequence = nil
+			case .Began, .Changed, .Possible, .Failed:
+				break
+			}
 		}
 	}
 }
