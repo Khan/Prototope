@@ -369,6 +369,13 @@ public class Layer: Equatable {
 			self.init(frame: CGRect())
 		}
 
+		override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+			// Hit test the presentation layer instead of the model layer.
+			let screenPoint = layer.convertPoint(point, toLayer: nil)
+			let presentationLayerPoint = layer.presentationLayer().convertPoint(screenPoint, fromLayer: nil)
+			return super.pointInside(presentationLayerPoint, withEvent: event)
+		}
+
 		private typealias TouchSequenceMapping = [UITouchID: UITouchSequence]
 		private var activeTouchSequences = TouchSequenceMapping()
 

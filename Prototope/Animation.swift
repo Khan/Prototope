@@ -10,10 +10,10 @@ import UIKit
 
 // TODO: Revisit. Don't really like these yet.
 
-func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void) {
-	UIView.animateWithDuration(duration, delay: 0.0, options: nil, animations: animations, completion: nil)
+public func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void) {
+	UIView.animateWithDuration(duration, delay: 0.0, options: .AllowUserInteraction, animations: animations, completion: nil)
 }
 
-func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void, #completionHandler: () -> Void) {
-	UIView.animateWithDuration(duration, delay: 0.0, options: nil, animations: animations, completion: { _ in completionHandler() })
+public func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void, #completionHandler: () -> Void) {
+	UIView.animateWithDuration(duration, delay: 0.0, options: .AllowUserInteraction, animations: animations, completion: { _ in completionHandler() })
 }
