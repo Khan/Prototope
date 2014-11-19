@@ -93,6 +93,14 @@ public struct Size {
 	}
 }
 
+public func +(a: Size, b: Size) -> Size {
+	return Size(width: a.width + b.width, height: a.height + b.height)
+}
+
+public func +=(inout a: Size, b: Size) {
+	a = a + b
+}
+
 public func *(a: Size, scalar: Double) -> Size {
 	return Size(width: a.width * scalar, height: a.height * scalar)
 }

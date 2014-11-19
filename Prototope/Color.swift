@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO(andy): Hide UIColor
+
 extension UIColor {
 	public class var black: UIColor { return blackColor() }
 	public class var darkGray: UIColor { return darkGrayColor() }

@@ -30,7 +30,7 @@ func makeRedLayer(name: String) -> Layer {
 	redLayer.image = Image(name: "paint")
 	redLayer.frame.origin = Point(x: 50, y: 50)
 	redLayer.backgroundColor = UIColor.red
-	redLayer.cornerRadius = 10
+	redLayer.cornerRadius = 10 // TODO(andy) mask to bounds when using corner radius
 	redLayer.border = Border(color: UIColor.black, width: 4)
 	redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 
@@ -40,9 +40,7 @@ func makeRedLayer(name: String) -> Layer {
 		}
 	})
 	redLayer.gestures.append(TapGesture { location in
-		redLayer.animators.position.target = redLayer.position + Point(x: 20, y: 20)
-		redLayer.animators.position.speed = 50
-		redLayer.animators.position.bounciness = 1
+		redLayer.animators.frame.target = Rect(x: 30, y: 30, width: 50, height: 50)
 	})
 	return redLayer
 }

@@ -25,18 +25,39 @@ extension Layer {
 
 public class LayerAnimatorStore {
 	public var x: Animator<Double>
+	public var y: Animator<Double>
 	public var position: Animator<Point>
+//	public var width: Animator<Double>
+//	public var height: Animator<Double>
+	public var size: Animator<Size>
+	public var frame: Animator<Rect>
+	public var bounds: Animator<Rect>
+	public var backgroundColor: Animator<UIColor>
+	public var alpha: Animator<Double>
+//	public var anchorPoint: Animator<Point>
+//	public var cornerRadius: Animator<Double>
+/*	TODO:
+	scale, scaleX, scaleY, rotationDegrees, rotationRadians,
+	border, shadow, globalPosition
+*/
 
 	private weak var layer: Layer?
 
 	init(layer: Layer) {
 		self.layer = layer
 		x = Animator(layer: layer, propertyName: kPOPLayerPositionX)
+		y = Animator(layer: layer, propertyName: kPOPLayerPositionY)
 		position = Animator(layer: layer, propertyName: kPOPLayerPosition)
-	}
+		size = Animator(layer: layer, propertyName: kPOPLayerSize)
+		bounds = Animator(layer: layer, propertyName: kPOPLayerBounds)
+		frame = Animator(layer: layer, propertyName: kPOPViewFrame)
+		backgroundColor = Animator(layer: layer, propertyName: kPOPViewBackgroundColor)
+		alpha = Animator(layer: layer, propertyName: kPOPViewAlpha)
+ 	}
 }
 
-public class Animator<Target: NSValueConvertible> {
+public class Animator<Target: AnimatorValueConvertible> {
+	// TODO(andy): Clear target value when animation completes.
 	public var target: Target? {
 		didSet {
 			updateAnimationCreatingIfNecessary(true)
@@ -72,24 +93,42 @@ public class Animator<Target: NSValueConvertible> {
 		if let animation = animation {
 			animation.springSpeed = CGFloat(speed)
 			animation.springBounciness = CGFloat(bounciness)
-			animation.toValue = target?.toNSValue()
+			animation.toValue = target?.toAnimatorValue()
 		}
 	}
 }
 
-public protocol NSValueConvertible {
-	func toNSValue() -> NSValue
+public protocol AnimatorValueConvertible {
+	func toAnimatorValue() -> AnyObject
 }
 
-extension Double: NSValueConvertible {
-	public func toNSValue() -> NSValue {
+extension Double: AnimatorValueConvertible {
+	public func toAnimatorValue() -> AnyObject {
 		return NSNumber(double: self)
 	}
 }
 
-extension Point: NSValueConvertible {
-	public func toNSValue() -> NSValue {
+extension Point: AnimatorValueConvertible {
+	public func toAnimatorValue() -> AnyObject {
 		return NSValue(CGPoint: CGPoint(self))
+	}
+}
+
+extension Size: AnimatorValueConvertible {
+	public func toAnimatorValue() -> AnyObject {
+		return NSValue(CGSize: CGSize(self))
+	}
+}
+
+extension Rect: AnimatorValueConvertible {
+	public func toAnimatorValue() -> AnyObject {
+		return NSValue(CGRect: CGRect(self))
+	}
+}
+
+extension UIColor: AnimatorValueConvertible {
+	public func toAnimatorValue() -> AnyObject {
+		return self
 	}
 }
 
