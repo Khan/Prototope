@@ -39,8 +39,10 @@ func makeRedLayer(name: String) -> Layer {
 			redLayer.position += (centroidSequence.currentSample.globalLocation - previousSample.globalLocation)
 		}
 	})
-	redLayer.gestures.append(TapGesture({ location in
-		redLayer.animators.x.target = redLayer.x + 300
-	}, numberOfTapsRequired: 2))
+	redLayer.gestures.append(TapGesture { location in
+		redLayer.animators.position.target = redLayer.position + Point(x: 20, y: 20)
+		redLayer.animators.position.speed = 50
+		redLayer.animators.position.bounciness = 1
+	})
 	return redLayer
 }

@@ -25,12 +25,14 @@ extension Layer {
 
 public class LayerAnimatorStore {
 	public var x: Animator<Double>
+	public var position: Animator<Point>
 
 	private weak var layer: Layer?
 
 	init(layer: Layer) {
 		self.layer = layer
 		x = Animator(layer: layer, propertyName: kPOPLayerPositionX)
+		position = Animator(layer: layer, propertyName: kPOPLayerPosition)
 	}
 }
 
@@ -82,6 +84,12 @@ public protocol NSValueConvertible {
 extension Double: NSValueConvertible {
 	public func toNSValue() -> NSValue {
 		return NSNumber(double: self)
+	}
+}
+
+extension Point: NSValueConvertible {
+	public func toNSValue() -> NSValue {
+		return NSValue(CGPoint: CGPoint(self))
 	}
 }
 

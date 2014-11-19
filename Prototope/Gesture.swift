@@ -189,7 +189,6 @@ public class TapGesture: GestureType {
 		private let actionHandler: Point -> ()
 
 		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-			println("\(gestureRecognizer.view): \(gestureRecognizer.state.rawValue)")
 			actionHandler(Point(gestureRecognizer.locationInView(nil)))
 		}
 	}
