@@ -34,9 +34,13 @@ func makeRedLayer(name: String) -> Layer {
 	redLayer.border = Border(color: UIColor.black, width: 4)
 	redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
 
-	redLayer.gestures.append(PanGesture{ _, centroidSequence in
+	redLayer.gestures.append(PanGesture{ phase, centroidSequence in
 		if let previousSample = centroidSequence.previousSample {
 			redLayer.position += (centroidSequence.currentSample.globalLocation - previousSample.globalLocation)
+		}
+		if phase == .Ended {
+			redLayer.animators.position.target = Point(x: 100, y: 100)
+			redLayer.animators.position.velocity = centroidSequence.currentVelocityInLayer(RootLayer)
 		}
 	})
 	redLayer.gestures.append(TapGesture { location in

@@ -59,21 +59,19 @@ public class LayerAnimatorStore {
 public class Animator<Target: AnimatorValueConvertible> {
 	// TODO(andy): Clear target value when animation completes.
 	public var target: Target? {
-		didSet {
-			updateAnimationCreatingIfNecessary(true)
-		}
+		didSet { updateAnimationCreatingIfNecessary(true) }
 	}
 
 	public var speed: Double = 4.0 {
-		didSet {
-			updateAnimationCreatingIfNecessary(false)
-		}
+		didSet { updateAnimationCreatingIfNecessary(false) }
 	}
 
 	public var bounciness: Double = 12.0 {
-		didSet {
-			updateAnimationCreatingIfNecessary(false)
-		}
+		didSet { updateAnimationCreatingIfNecessary(false) }
+	}
+
+	public var velocity: Target? {
+		didSet { updateAnimationCreatingIfNecessary(false) }
 	}
 
 	let property: POPAnimatableProperty
@@ -100,6 +98,9 @@ public class Animator<Target: AnimatorValueConvertible> {
 			animation.springSpeed = CGFloat(speed)
 			animation.springBounciness = CGFloat(bounciness)
 			animation.toValue = target?.toAnimatorValue()
+			if let velocityValue: AnyObject = target?.toAnimatorValue() {
+				animation.velocity = velocityValue
+			}
 		}
 	}
 }
