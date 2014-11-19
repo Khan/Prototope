@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
 		EB1C2A7819E4D1CE000DC2C1 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -31,6 +32,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EB12A8421A19A6AC0018C229 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC191218162FB53A00E0CC76;
+			remoteInfo = pop;
+		};
+		EB12A8441A19A6AC0018C229 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC68857F18C7B60000C6194C;
+			remoteInfo = "pop-osx";
+		};
+		EB12A8461A19A6AC0018C229 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ECF01ED318C92B7F009E0AD1;
+			remoteInfo = "pop-tests";
+		};
+		EB12A8481A19A6AC0018C229 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC7E319918C93D6500B38170;
+			remoteInfo = "pop-tests-osx";
+		};
+		EB12A84A1A19A6BC0018C229 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EC191217162FB53A00E0CC76;
+			remoteInfo = pop;
+		};
 		EB1C2A7919E4D1D2000DC2C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -79,10 +115,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = ThirdParty/pop/pop.xcodeproj; sourceTree = "<group>"; };
+		EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		EB1C2A6C19E4D19B000DC2C1 /* PrototopeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1C2A6F19E4D19B000DC2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PrototopeTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PrototopeTests-Bridging-Header.h"; path = "PrototopeTests/PrototopeTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrototopeTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB306C0D19DF77CC00113FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,20 +164,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB12A83C1A19A6AC0018C229 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB12A8431A19A6AC0018C229 /* libpop.a */,
+				EB12A8451A19A6AC0018C229 /* pop.framework */,
+				EB12A8471A19A6AC0018C229 /* pop-tests.octest */,
+				EB12A8491A19A6AC0018C229 /* pop-tests-osx.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		EB1C2A6D19E4D19B000DC2C1 /* PrototopeTests */ = {
 			isa = PBXGroup;
 			children = (
 				EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */,
 				EB1C2A6E19E4D19B000DC2C1 /* Supporting Files */,
-				EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */,
 				EBB565DC19F0774F00D93DE3 /* MathTests.swift */,
 				EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */,
+				EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */,
 			);
 			path = PrototopeTests;
 			sourceTree = "<group>";
@@ -157,6 +207,7 @@
 			children = (
 				EB306C3319DF78A900113FA3 /* Prototope */,
 				EB1C2A6D19E4D19B000DC2C1 /* PrototopeTests */,
+				EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */,
 				EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */,
 				EB306C0A19DF77CC00113FA3 /* Products */,
 			);
@@ -206,6 +257,7 @@
 				EBB565DA19F074B000D93DE3 /* Math.swift */,
 				EBBA431619F45186000B81BE /* Gesture.swift */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
+				EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */,
 			);
 			path = Prototope;
 			sourceTree = "<group>";
@@ -290,6 +342,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EB12A84B1A19A6BC0018C229 /* PBXTargetDependency */,
 			);
 			name = Prototope;
 			productName = Prototope;
@@ -328,6 +381,12 @@
 			mainGroup = EB306C0019DF77CC00113FA3;
 			productRefGroup = EB306C0A19DF77CC00113FA3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EB12A83C1A19A6AC0018C229 /* Products */;
+					ProjectRef = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				EBE3A75519DF79C400A77736 /* Prototope */,
@@ -336,6 +395,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EB12A8431A19A6AC0018C229 /* libpop.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libpop.a;
+			remoteRef = EB12A8421A19A6AC0018C229 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB12A8451A19A6AC0018C229 /* pop.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = pop.framework;
+			remoteRef = EB12A8441A19A6AC0018C229 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB12A8471A19A6AC0018C229 /* pop-tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "pop-tests.octest";
+			remoteRef = EB12A8461A19A6AC0018C229 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB12A8491A19A6AC0018C229 /* pop-tests-osx.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "pop-tests-osx.octest";
+			remoteRef = EB12A8481A19A6AC0018C229 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		EB1C2A6A19E4D19B000DC2C1 /* Resources */ = {
@@ -403,6 +493,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EB12A84B1A19A6BC0018C229 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = pop;
+			targetProxy = EB12A84A1A19A6BC0018C229 /* PBXContainerItemProxy */;
+		};
 		EB1C2A7A19E4D1D2000DC2C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EBE3A75519DF79C400A77736 /* Prototope */;
@@ -560,6 +655,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"ThirdParty/**",
+				);
 				INFOPLIST_FILE = PrototopeTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -573,6 +673,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"ThirdParty/**",
+				);
 				INFOPLIST_FILE = PrototopeTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -592,11 +697,18 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"ThirdParty/**",
+				);
 				INFOPLIST_FILE = Prototope/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Prototope/Prototope-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -611,11 +723,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"ThirdParty/**",
+				);
 				INFOPLIST_FILE = Prototope/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Prototope/Prototope-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

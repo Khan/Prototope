@@ -13,7 +13,7 @@ public func setRootLayer(fromView view: UIView) {
 	RootLayer = Layer(wrappingView: view, name: "Root")
 }
 
-public class Layer: Equatable {
+public class Layer: Equatable, Hashable {
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
 		self.name = name
@@ -331,6 +331,10 @@ public class Layer: Equatable {
 			accumulator += sublayer.touchedDescendents
 		}
 		return accumulator
+	}
+
+	public var hashValue: Int {
+		return view.hashValue
 	}
 
 	// MARK: Internal interfaces

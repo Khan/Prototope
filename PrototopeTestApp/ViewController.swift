@@ -40,9 +40,7 @@ func makeRedLayer(name: String) -> Layer {
 		}
 	})
 	redLayer.gestures.append(TapGesture({ location in
-		animateWithDuration(3) {
-			redLayer.x += 300
-		}
+		redLayer.animators.x.target = redLayer.x + 300
 	}, numberOfTapsRequired: 2))
 	return redLayer
 }

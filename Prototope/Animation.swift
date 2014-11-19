@@ -8,6 +8,83 @@
 
 import UIKit
 
+
+private var layersToAnimatorStores = [Layer: LayerAnimatorStore]()
+
+extension Layer {
+	public var animators: LayerAnimatorStore {
+		if let animatorStore = layersToAnimatorStores[self] {
+			return animatorStore
+		} else {
+			let animatorStore = LayerAnimatorStore(layer: self)
+			layersToAnimatorStores[self] = animatorStore
+			return animatorStore
+		}
+	}
+}
+
+public class LayerAnimatorStore {
+	public var x: Animator<Double>
+
+	private weak var layer: Layer?
+
+	init(layer: Layer) {
+		self.layer = layer
+		x = Animator(layer: layer, propertyName: kPOPLayerPositionX)
+	}
+}
+
+public class Animator<Target: NSValueConvertible> {
+	public var target: Target? {
+		didSet {
+			updateAnimationCreatingIfNecessary(true)
+		}
+	}
+
+	public var speed: Double = 4.0 {
+		didSet {
+			updateAnimationCreatingIfNecessary(false)
+		}
+	}
+
+	public var bounciness: Double = 12.0 {
+		didSet {
+			updateAnimationCreatingIfNecessary(false)
+		}
+	}
+
+	let propertyName: String
+	private weak var layer: Layer?
+
+	init(layer: Layer, propertyName: String) {
+		self.propertyName = propertyName
+		self.layer = layer
+	}
+
+	private func updateAnimationCreatingIfNecessary(createIfNecessary: Bool) {
+		var animation = layer?.view.pop_animationForKey(propertyName) as POPSpringAnimation?
+		if animation == nil && createIfNecessary {
+			animation = POPSpringAnimation(propertyNamed: propertyName)
+			layer?.view.pop_addAnimation(animation, forKey: propertyName)
+		}
+		if let animation = animation {
+			animation.springSpeed = CGFloat(speed)
+			animation.springBounciness = CGFloat(bounciness)
+			animation.toValue = target?.toNSValue()
+		}
+	}
+}
+
+public protocol NSValueConvertible {
+	func toNSValue() -> NSValue
+}
+
+extension Double: NSValueConvertible {
+	public func toNSValue() -> NSValue {
+		return NSNumber(double: self)
+	}
+}
+
 // TODO: Revisit. Don't really like these yet.
 
 public func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void) {
