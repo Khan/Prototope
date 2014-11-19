@@ -76,19 +76,25 @@ public class Animator<Target: AnimatorValueConvertible> {
 		}
 	}
 
-	let propertyName: String
+	let property: POPAnimatableProperty
 	private weak var layer: Layer?
 
-	init(layer: Layer, propertyName: String) {
-		self.propertyName = propertyName
+	init(layer: Layer, property: POPAnimatableProperty) {
+		self.property = property
 		self.layer = layer
 	}
 
+	convenience init(layer: Layer, propertyName: String) {
+		let property = POPAnimatableProperty.propertyWithName(propertyName) as POPAnimatableProperty
+		self.init(layer: layer, property: property)
+	}
+
 	private func updateAnimationCreatingIfNecessary(createIfNecessary: Bool) {
-		var animation = layer?.view.pop_animationForKey(propertyName) as POPSpringAnimation?
+		var animation = layer?.view.pop_animationForKey(property.name) as POPSpringAnimation?
 		if animation == nil && createIfNecessary {
-			animation = POPSpringAnimation(propertyNamed: propertyName)
-			layer?.view.pop_addAnimation(animation, forKey: propertyName)
+			animation = POPSpringAnimation()
+			animation!.property = property
+			layer?.view.pop_addAnimation(animation!, forKey: property.name)
 		}
 		if let animation = animation {
 			animation.springSpeed = CGFloat(speed)
