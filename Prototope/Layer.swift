@@ -377,10 +377,14 @@ public class Layer: Equatable, Hashable {
 		}
 
 		override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-			// Hit test the presentation layer instead of the model layer.
-			let screenPoint = layer.convertPoint(point, toLayer: nil)
-			let presentationLayerPoint = layer.presentationLayer().convertPoint(screenPoint, fromLayer: nil)
-			return super.pointInside(presentationLayerPoint, withEvent: event)
+			// Try to hit test the presentation layer instead of the model layer.
+			if let presentationLayer = layer.presentationLayer() as? CALayer {
+				let screenPoint = layer.convertPoint(point, toLayer: nil)
+				let presentationLayerPoint = layer.presentationLayer().convertPoint(screenPoint, fromLayer: nil)
+				return super.pointInside(presentationLayerPoint, withEvent: event)
+			} else {
+				return super.pointInside(point, withEvent: event)
+			}
 		}
 
 		private typealias TouchSequenceMapping = [UITouchID: UITouchSequence]
