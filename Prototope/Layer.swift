@@ -8,12 +8,12 @@
 
 import UIKit
 
-public private(set) var RootLayer: Layer!
-public func setRootLayer(fromView view: UIView) {
-	RootLayer = Layer(wrappingView: view, name: "Root")
-}
-
 public class Layer: Equatable, Hashable {
+	public class func setRoot(fromView view: UIView) {
+		_rootLayer = Layer(wrappingView: view, name: "Root")
+	}
+	public class var root: Layer { return _rootLayer }
+
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
 		self.name = name
@@ -499,3 +499,5 @@ private func incorporateTouches(touches: NSSet, intoTouchSequenceMappings mappin
 	let updatedTouchSequences = incorporateTouchSequences(touchSequencesFromTouchSet(touches), intoTouchSequenceMappings: mappings)
 	return touchSequenceMappingsFromTouchSequences(updatedTouchSequences)
 }
+
+private var _rootLayer: Layer!

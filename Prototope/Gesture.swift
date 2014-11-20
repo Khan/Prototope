@@ -70,7 +70,7 @@ public struct TouchSequence<ID: Printable>: Printable {
 	}
 
 	public func currentGlobalVelocity() -> Point {
-		return currentVelocityInLayer(RootLayer)
+		return currentVelocityInLayer(Layer.root)
 	}
 
 	public var description: String {

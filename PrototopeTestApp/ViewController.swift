@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		setRootLayer(fromView: view)
+		Layer.setRoot(fromView: view)
 
 		for i in 0..<5 {
 			let layer = makeRedLayer("Layer \(i)")
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
 }
 
 func makeRedLayer(name: String) -> Layer {
-	let redLayer = Layer(parent: RootLayer, name: name)
+	let redLayer = Layer(parent: Layer.root, name: name)
 	redLayer.image = Image(name: "paint")
 	redLayer.frame.origin = Point(x: 50, y: 50)
 	redLayer.backgroundColor = Color.red
@@ -39,7 +39,7 @@ func makeRedLayer(name: String) -> Layer {
 		}
 		if phase == .Ended {
 			redLayer.animators.position.target = Point(x: 100, y: 100)
-			redLayer.animators.position.velocity = centroidSequence.currentVelocityInLayer(RootLayer)
+			redLayer.animators.position.velocity = centroidSequence.currentVelocityInLayer(Layer.root)
 		}
 	})
 	redLayer.gestures.append(TapGesture { location in
