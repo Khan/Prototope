@@ -29,10 +29,10 @@ func makeRedLayer(name: String) -> Layer {
 	let redLayer = Layer(parent: RootLayer, name: name)
 	redLayer.image = Image(name: "paint")
 	redLayer.frame.origin = Point(x: 50, y: 50)
-	redLayer.backgroundColor = UIColor.red
+	redLayer.backgroundColor = Color.red
 	redLayer.cornerRadius = 10 // TODO(andy) mask to bounds when using corner radius
-	redLayer.border = Border(color: UIColor.black, width: 4)
-	redLayer.shadow = Shadow(color: UIColor.black, alpha: 0.75, offset: Size(), radius: 10)
+	redLayer.border = Border(color: Color.black, width: 4)
+	redLayer.shadow = Shadow(color: Color.black, alpha: 0.75, offset: Size(), radius: 10)
 
 	redLayer.gestures.append(PanGesture{ phase, centroidSequence in
 		if let previousSample = centroidSequence.previousSample {

@@ -129,9 +129,9 @@ public class Layer: Equatable, Hashable {
 		set { layer.bounds = CGRect(newValue) }
 	}
 
-	public var backgroundColor: UIColor? {
-		get { return view.backgroundColor }
-		set { view.backgroundColor = newValue }
+	public var backgroundColor: Color? {
+		get { return view.backgroundColor != nil ? Color(view.backgroundColor!) : nil }
+		set { view.backgroundColor = newValue?.uiColor }
 	}
 
 	public var alpha: Double {
@@ -230,20 +230,20 @@ public class Layer: Equatable, Hashable {
 
 	public var border: Border {
 		get {
-			return Border(color: UIColor(CGColor: layer.borderColor), width: Double(layer.borderWidth))
+			return Border(color: Color(UIColor(CGColor: layer.borderColor)), width: Double(layer.borderWidth))
 		}
 		set {
-			layer.borderColor = newValue.color.CGColor
+			layer.borderColor = newValue.color.uiColor.CGColor
 			layer.borderWidth = CGFloat(newValue.width)
 		}
 	}
 
 	public var shadow: Shadow {
 		get {
-			return Shadow(color: UIColor(CGColor: layer.shadowColor), alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
+			return Shadow(color: Color(UIColor(CGColor: layer.shadowColor)), alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
 		}
 		set {
-			layer.shadowColor = newValue.color.CGColor
+			layer.shadowColor = newValue.color.uiColor.CGColor
 			layer.shadowOpacity = Float(newValue.alpha)
 			layer.shadowOffset = CGSize(newValue.offset)
 			layer.shadowRadius = CGFloat(newValue.radius)
@@ -452,22 +452,22 @@ public func ==(a: Layer, b: Layer) -> Bool {
 }
 
 public struct Border {
-	public var color: UIColor
+	public var color: Color
 	public var width: Double
 
-	public init(color: UIColor, width: Double) {
+	public init(color: Color, width: Double) {
 		self.color = color
 		self.width = width
 	}
 }
 
 public struct Shadow {
-	public var color: UIColor
+	public var color: Color
 	public var alpha: Double
 	public var offset: Size
 	public var radius: Double
 
-	public init(color: UIColor, alpha: Double, offset: Size, radius: Double) {
+	public init(color: Color, alpha: Double, offset: Size, radius: Double) {
 		self.color = color
 		self.alpha = alpha
 		self.offset = offset

@@ -8,22 +8,38 @@
 
 import UIKit
 
-// TODO(andy): Hide UIColor
+public struct Color {
+	let uiColor: UIColor
 
-extension UIColor {
-	public class var black: UIColor { return blackColor() }
-	public class var darkGray: UIColor { return darkGrayColor() }
-	public class var lightGray: UIColor { return lightGrayColor() }
-	public class var white: UIColor { return whiteColor() }
-	public class var gray: UIColor { return grayColor() }
-	public class var red: UIColor { return redColor() }
-	public class var green: UIColor { return greenColor() }
-	public class var blue: UIColor { return blueColor() }
-	public class var cyan: UIColor { return cyanColor() }
-	public class var yellow: UIColor { return yellowColor() }
-	public class var magenta: UIColor { return magentaColor() }
-	public class var orange: UIColor { return orangeColor() }
-	public class var purple: UIColor { return purpleColor() }
-	public class var brown: UIColor { return brownColor() }
-	public class var clear: UIColor { return clearColor() }
+	public init(red: Double, green: Double, blue: Double, alpha: Double = 1.0) {
+		uiColor = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
+	}
+
+	public init(white: Double, alpha: Double = 1.0) {
+		uiColor = UIColor(white: CGFloat(white), alpha: CGFloat(alpha))
+	}
+
+	public init(hue: Double, saturation: Double, brightness: Double, alpha: Double = 1.0) {
+		uiColor = UIColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: CGFloat(brightness), alpha: CGFloat(alpha))
+	}
+
+	init(_ uiColor: UIColor) {
+		self.uiColor = uiColor
+	}
+
+	public static var black: Color { return Color(UIColor.blackColor()) }
+	public static var darkGray: Color { return Color(UIColor.darkGrayColor()) }
+	public static var lightGray: Color { return Color(UIColor.lightGrayColor()) }
+	public static var white: Color { return Color(UIColor.whiteColor()) }
+	public static var gray: Color { return Color(UIColor.grayColor()) }
+	public static var red: Color { return Color(UIColor.redColor()) }
+	public static var green: Color { return Color(UIColor.greenColor()) }
+	public static var blue: Color { return Color(UIColor.blueColor()) }
+	public static var cyan: Color { return Color(UIColor.cyanColor()) }
+	public static var yellow: Color { return Color(UIColor.yellowColor()) }
+	public static var magenta: Color { return Color(UIColor.magentaColor()) }
+	public static var orange: Color { return Color(UIColor.orangeColor()) }
+	public static var purple: Color { return Color(UIColor.purpleColor()) }
+	public static var brown: Color { return Color(UIColor.brownColor()) }
+	public static var clear: Color { return Color(UIColor.clearColor()) }
 }

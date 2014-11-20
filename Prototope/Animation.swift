@@ -32,7 +32,7 @@ public class LayerAnimatorStore {
 	public var size: Animator<Size>
 	public var frame: Animator<Rect>
 	public var bounds: Animator<Rect>
-	public var backgroundColor: Animator<UIColor>
+	public var backgroundColor: Animator<Color>
 	public var alpha: Animator<Double>
 //	public var anchorPoint: Animator<Point>
 //	public var cornerRadius: Animator<Double>
@@ -153,9 +153,9 @@ extension Rect: AnimatorValueConvertible {
 	}
 }
 
-extension UIColor: AnimatorValueConvertible {
+extension Color: AnimatorValueConvertible {
 	public func toAnimatorValue() -> AnyObject {
-		return self
+		return self.uiColor
 	}
 }
 
