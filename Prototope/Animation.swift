@@ -161,10 +161,6 @@ extension UIColor: AnimatorValueConvertible {
 
 // TODO: Revisit. Don't really like these yet.
 
-public func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void) {
-	UIView.animateWithDuration(duration, delay: 0.0, options: .AllowUserInteraction, animations: animations, completion: nil)
-}
-
-public func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void, #completionHandler: () -> Void) {
-	UIView.animateWithDuration(duration, delay: 0.0, options: .AllowUserInteraction, animations: animations, completion: { _ in completionHandler() })
+public func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void, completionHandler: (() -> Void)? = nil) {
+	UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: animations, completion: { _ in completionHandler?(); return })
 }
