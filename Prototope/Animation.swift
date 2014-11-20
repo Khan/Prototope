@@ -57,7 +57,6 @@ public class LayerAnimatorStore {
 }
 
 public class Animator<Target: AnimatorValueConvertible> {
-	// TODO(andy): Clear target value when animation completes.
 	public var target: Target? {
 		didSet { updateAnimationCreatingIfNecessary(true) }
 	}
@@ -75,8 +74,12 @@ public class Animator<Target: AnimatorValueConvertible> {
 	}
 
 	public var completionHandler: (() -> Void)? {
-		get { return animationDelegate.completionHandler }
-		set { animationDelegate.completionHandler = newValue }
+		didSet {
+			animationDelegate.completionHandler = { [weak self] in
+				self?.completionHandler?()
+				self?.target = nil
+			}
+		}
 	}
 
 	let property: POPAnimatableProperty
