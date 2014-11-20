@@ -263,7 +263,7 @@ public class Layer: Equatable, Hashable {
 
 	public func fadeOutAndRemoveAfterDuration(duration: NSTimeInterval) {
 		willBeRemovedSoon = true
-		animateWithDuration(duration, animations: {
+		Layer.animateWithDuration(duration, animations: {
 			self.alpha = 0
 		}, completionHandler: {
 			self.parent = nil

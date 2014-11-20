@@ -164,6 +164,32 @@ extension Color: AnimatorValueConvertible {
 
 // TODO: Revisit. Don't really like these yet.
 
-public func animateWithDuration(duration: NSTimeInterval, #animations: () -> Void, completionHandler: (() -> Void)? = nil) {
-	UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: animations, completion: { _ in completionHandler?(); return })
+extension Layer {
+
+	public enum AnimationCurve {
+		case Linear
+		case EaseIn
+		case EaseOut
+		case EaseInOut
+	}
+
+	public class func animateWithDuration(duration: NSTimeInterval, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
+		animateWithDuration(duration, curve: .EaseInOut, animations: animations, completionHandler: completionHandler)
+	}
+
+	public class func animateWithDuration(duration: NSTimeInterval, curve: AnimationCurve, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
+		var curveOption: UIViewAnimationOptions = nil
+		switch curve {
+		case .Linear:
+			curveOption = .CurveLinear
+		case .EaseIn:
+			curveOption = .CurveEaseIn
+		case .EaseOut:
+			curveOption = .CurveEaseOut
+		case .EaseInOut:
+			curveOption = .CurveEaseInOut
+		}
+		UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction | curveOption, animations: animations, completion: { _ in completionHandler?(); return })
+	}
+	
 }
