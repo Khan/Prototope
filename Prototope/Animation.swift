@@ -74,8 +74,14 @@ public class Animator<Target: AnimatorValueConvertible> {
 		didSet { updateAnimationCreatingIfNecessary(false) }
 	}
 
+	public var completionHandler: (() -> Void)? {
+		get { return animationDelegate.completionHandler }
+		set { animationDelegate.completionHandler = newValue }
+	}
+
 	let property: POPAnimatableProperty
 	private weak var layer: Layer?
+	private let animationDelegate = AnimationDelegate()
 
 	init(layer: Layer, property: POPAnimatableProperty) {
 		self.property = property
@@ -87,13 +93,19 @@ public class Animator<Target: AnimatorValueConvertible> {
 		self.init(layer: layer, property: property)
 	}
 
+	public func stop() {
+		layer?.view.pop_removeAnimationForKey(property.name)
+	}
+
 	private func updateAnimationCreatingIfNecessary(createIfNecessary: Bool) {
 		var animation = layer?.view.pop_animationForKey(property.name) as POPSpringAnimation?
 		if animation == nil && createIfNecessary {
 			animation = POPSpringAnimation()
+			animation!.delegate = animationDelegate
 			animation!.property = property
 			layer?.view.pop_addAnimation(animation!, forKey: property.name)
 		}
+
 		if let animation = animation {
 			animation.springSpeed = CGFloat(speed)
 			animation.springBounciness = CGFloat(bounciness)
@@ -102,6 +114,14 @@ public class Animator<Target: AnimatorValueConvertible> {
 				animation.velocity = velocityValue
 			}
 		}
+	}
+}
+
+@objc private class AnimationDelegate: NSObject, POPAnimationDelegate {
+	var completionHandler: (() -> Void)?
+
+	func pop_animationDidStop(animation: POPAnimation, finished: Bool) {
+		completionHandler?()
 	}
 }
 
