@@ -58,7 +58,13 @@ public class LayerAnimatorStore {
 
 public class Animator<Target: AnimatorValueConvertible> {
 	public var target: Target? {
-		didSet { updateAnimationCreatingIfNecessary(true) }
+		didSet {
+			if target != nil {
+				updateAnimationCreatingIfNecessary(true)
+			} else {
+				stop()
+			}
+		}
 	}
 
 	public var speed: Double = 4.0 {
@@ -110,6 +116,7 @@ public class Animator<Target: AnimatorValueConvertible> {
 		}
 
 		if let animation = animation {
+			precondition(target != nil)
 			animation.springSpeed = CGFloat(speed)
 			animation.springBounciness = CGFloat(bounciness)
 			animation.toValue = target?.toAnimatorValue()
