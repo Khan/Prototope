@@ -43,6 +43,7 @@ func makeRedLayer(name: String) -> Layer {
 		}
 	})
 	redLayer.gestures.append(TapGesture { location in
+		Sound(name: "Glass").play()
 		redLayer.animators.frame.target = Rect(x: 30, y: 30, width: 50, height: 50)
 		redLayer.animators.frame.completionHandler = { println("Converged") }
 	})
