@@ -20,7 +20,6 @@ class ViewController: UIViewController {
 			let layer = makeRedLayer("Layer \(i)")
 			layer.y = Double(i) * 250
 		}
-
 	}
 
 }
