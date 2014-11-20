@@ -153,9 +153,14 @@ private extension ContinuousGesturePhase {
 }
 
 public class TapGesture: GestureType {
-	public init(_ handler: (globalLocation: Point) -> (), numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1) {
+	public convenience init(_ handler: (globalLocation: Point) -> ()) {
+		self.init(handler: handler)
+	}
+
+	public init(cancelsTouchesInLayer: Bool = true, numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1, handler: (globalLocation: Point) -> ()) {
 		tapGestureHandler = TapGestureHandler(actionHandler: handler)
 		tapGestureRecognizer = UITapGestureRecognizer(target: tapGestureHandler, action: "handleGestureRecognizer:")
+		tapGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
 		tapGestureRecognizer.numberOfTapsRequired = numberOfTapsRequired
 		tapGestureRecognizer.numberOfTouchesRequired = numberOfTouchesRequired
 	}
@@ -203,9 +208,14 @@ public class PanGesture: GestureType {
 		didSet { handleTransferOfGesture(panGestureRecognizer, oldValue, hostLayer) }
 	}
 
-	public init(_ handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> (), minimumNumberOfTouches: Int = 1, maximumNumberOfTouches: Int = Int.max) {
+	public convenience init(_ handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
+		self.init(handler: handler)
+	}
+
+	public init(minimumNumberOfTouches: Int = 1, maximumNumberOfTouches: Int = Int.max, cancelsTouchesInLayer: Bool = true, handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
 		panGestureHandler = PanGestureHandler(actionHandler: handler)
 		panGestureRecognizer = UIPanGestureRecognizer(target: panGestureHandler, action: "handleGestureRecognizer:")
+		panGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
 		panGestureRecognizer.minimumNumberOfTouches = minimumNumberOfTouches
 		panGestureRecognizer.maximumNumberOfTouches = maximumNumberOfTouches
 	}
