@@ -30,7 +30,7 @@ func makeRedLayer(name: String) -> Layer {
 	redLayer.image = Image(name: "paint")
 	redLayer.frame.origin = Point(x: 50, y: 50)
 	redLayer.backgroundColor = Color.red
-	redLayer.cornerRadius = 10 // TODO(andy) mask to bounds when using corner radius
+	redLayer.cornerRadius = 10
 	redLayer.border = Border(color: Color.black, width: 4)
 	redLayer.shadow = Shadow(color: Color.black, alpha: 0.75, offset: Size(), radius: 10)
 

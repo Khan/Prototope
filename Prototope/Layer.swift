@@ -146,7 +146,10 @@ public class Layer: Equatable, Hashable {
 
 	public var cornerRadius: Double {
 		get { return Double(layer.cornerRadius) }
-		set { layer.cornerRadius = CGFloat(newValue) }
+		set {
+			layer.cornerRadius = CGFloat(newValue)
+			layer.masksToBounds = layer.cornerRadius > 0
+		}
 	}
 
 	public var userInteractionEnabled: Bool {
