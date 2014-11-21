@@ -8,33 +8,60 @@
 
 import UIKit
 
+/**
+	Layers are the fundamental building block of Prototope.
+
+    A layer displays content (a color, an image, etc.) and can route touch events.
+
+	Layers are stored in a tree. It's possible to make a layer without a parent, but
+	only layers in the tree starting at Layer.root will be displayed.
+
+	An example of making a red layer, ready for display:
+
+		let redLayer = Layer(parent: Layer.root)
+		redLayer.backgroundColor = Color.red
+		redLayer.frame = Rect(x: 50, y: 50, width: 100, height: 100)
+*/
 public class Layer: Equatable, Hashable {
+
+	// MARK: Accessing the root layer
+
+	/** This method establishes the view specified as the root layer of the scene.
+		You'd normally call this during initialization of the scene. */
 	public class func setRoot(fromView view: UIView) {
 		_rootLayer = Layer(wrappingView: view, name: "Root")
 	}
+
+	/** The root layer of the scene. Defines the global coordinate system. */
 	public class var root: Layer { return _rootLayer }
 
+	/** Creates a layer with an optional parent and name. **/
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
 		self.name = name
-		self.view = TouchForwardingImageView() // TODO: dynamic switch the view type depending on whether we're using an image or not
+		self.view = TouchForwardingImageView() // TODO: dynamically switch the view type depending on whether we're using an image or not
 		self.view.multipleTouchEnabled = true
 		self.view.userInteractionEnabled = true
 
 		self.parentDidChange()
 	}
 
+	/** Convenience initializer; makes a layer which displays an image by name.
+		The layer will adopt its size from the image and its name from imageName. */
 	public convenience init(parent: Layer?, imageName: String) {
 		self.init(parent: parent, name: imageName)
 		self.image = Image(name: imageName)
 		imageDidChange()
 	}
 
-	private init(wrappingView: UIView, name: String? = nil) {
-		view = wrappingView
-		self.name = name
-	}
 
+	// MARK: Layer hierarchy access and manipulation
+
+	/** The layer's parent layer. The parent layer will be nil when the layer is
+		not attached to a hierarchy, or when the receiver is the root layer.
+
+		Setting this property will move the layer to a new parent (or remove it
+		from the layer hierarchy if you set the parent to nil. */
 	public weak var parent: Layer? {
 		willSet {
 			if let parent = self.parent {
@@ -46,9 +73,11 @@ public class Layer: Equatable, Hashable {
 			parentDidChange()
 		}
 	}
-	
+
+	/** An array of all this layer's sublayers. */
 	public private(set) var sublayers: [Layer] = []
 
+	/** Removes all of the receivers' sublayers from the hierarchy. */
 	public func removeAllSublayers() {
 		// TODO: This could be way faster.
 		for sublayer in sublayers {
@@ -56,16 +85,16 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+	/** Returns the sublayer which will be visually ordered to the front. */
 	public var sublayerAtFront: Layer? { return sublayers.last }
 
+	/** Returns the sublayer whose name matches the argument, or nil if it is not found. */
 	public func sublayerNamed(name: String) -> Layer? {
 		return filter(sublayers){ $0.name == name }.first
 	}
 
-	public func sublayerOfClass<Class: Layer>(klass: Class.Type) -> Layer? {
-		return filter(sublayers){ $0 is Class }.first
-	}
-
+	/** Returns the descendent (at any level) whose name matches the argument, or nil
+		if it is not found. */
 	public func descendentNamed(name: String) -> Layer? {
 		if self.name == name {
 			return self
@@ -80,68 +109,107 @@ public class Layer: Equatable, Hashable {
 		return nil
 	}
 
+	/** Attempts to find a layer at a particular named path by calling sublayerNamed
+		once at each level, for each element in pathElements. Returns nil if not found.
+
+		Example:
+			let a = Layer()
+			let b = Layer(parent: a, name: "foo")
+			let c = Layer(parent: b, name: "bar")
+			a.descendentAtPath(["foo", "bar"]) // returns c
+			a.descendentAtPath(["foo", "quux"]) // returns nil */
 	public func descendentAtPath(pathElements: [String]) -> Layer? {
 		return reduce(pathElements, self) { $0?.sublayerNamed($1) }
 	}
 
-	private var parentView: UIView? {
-		get { return view.superview }
-		set { newValue?.addSubview(view) }
-	}
+	// MARK: Geometry
 
+	/** The x position of the layer's anchor point (by default the center), relative to
+		the origin of its parent layer and expressed in the parent coordinate space.
+		Animatable. */
 	public var x: Double {
 		get { return Double(layer.position.x) }
 		set { layer.position.x = CGFloat(newValue) }
 	}
 
+	/** The y position of the layer's anchor point (by default the center), relative to
+		the origin of its parent layer and expressed in the parent coordinate space.
+		Animatable. */
 	public var y: Double {
 		get { return Double(layer.position.y) }
 		set { layer.position.y = CGFloat(newValue) }
 	}
 
+	/** The position of the layer's anchor point (by default the center), relative to the
+		origin of its parent layer and expressed in the parent coordinate space.
+		Animatable. */
 	public var position: Point {
 		get { return Point(layer.position) }
 		set { layer.position = CGPoint(newValue) }
 	}
 
+	/** The layer's width, expressed in its own coordinate space. Animatable (but not yet
+		via the dynamic animators). */
 	public var width: Double {
 		get { return Double(layer.bounds.size.width) }
 		set { layer.bounds.size.width = CGFloat(newValue) }
 	}
 
+	/** The layer's height, expressed in its own coordinate space. Animatable (but not yet
+		via the dynamic animators). */
 	public var height: Double {
 		get { return Double(layer.bounds.size.height) }
 		set { layer.bounds.size.height = CGFloat(newValue) }
 	}
 
+	/** The layer's size, expressed in its own coordinate space. Animatable. */
 	public var size: Size {
 		get { return Size(layer.bounds.size) }
 		set { layer.bounds.size = CGSize(newValue) }
 	}
 
+	/** The origin and extent of the layer expressed in its parent layer's coordinate space.
+		Animatable. */
 	public var frame: Rect {
 		get { return Rect(layer.frame) }
 		set { layer.frame = CGRect(newValue) }
 	}
 
+	/** The visible region of the layer, expressed in its own coordinate space. The x and y
+		position define the visible origin (e.g. if you set bounds.y = 50, the top 50 pixels
+		of the layer's image will be cut off); the width and height define its size. Animatable. */
 	public var bounds: Rect {
 		get { return Rect(layer.bounds) }
 		set { layer.bounds = CGRect(newValue) }
 	}
 
+	/** A layer's position is defined in terms of its anchor point, which defaults to the center.
+		e.g. if you changed the anchor point to the upper-left hand corner, the layer's position
+		would define the position of that corner.
+
+		The anchor point also defines the point about which transformations are applied. e.g. for
+		rotation, it defines the center of rotation.
+
+		The anchor point is specified in unit coordinates: (0, 0) is the upper-left; (1, 1) is the
+		lower-right. */
+	public var anchorPoint: Point {
+		get { return Point(layer.anchorPoint) }
+		set { layer.anchorPoint = CGPoint(newValue) }
+	}
+
+	// MARK: Appearance
+
+	/** The layer's background color. Will be displayed behind images and borders, above shadows.
+		Animatable. */
 	public var backgroundColor: Color? {
 		get { return view.backgroundColor != nil ? Color(view.backgroundColor!) : nil }
 		set { view.backgroundColor = newValue?.uiColor }
 	}
 
+	/** The layer's opacity (from 0 to 1). Animatable. */
 	public var alpha: Double {
 		get { return Double(view.alpha) }
 		set { view.alpha = CGFloat(newValue) }
-	}
-
-	public var anchorPoint: Point {
-		get { return Point(layer.anchorPoint) }
-		set { layer.anchorPoint = CGPoint(newValue) }
 	}
 
 	public var cornerRadius: Double {
@@ -358,10 +426,23 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+	private init(wrappingView: UIView, name: String? = nil) {
+		view = wrappingView
+		self.name = name
+	}
+
+	// MARK: UIKit mapping
+
 	var view: UIView
 	private var layer: CALayer { return view.layer }
 	private var imageView: TouchForwardingImageView? { return view as? TouchForwardingImageView }
 
+	private var parentView: UIView? {
+		get { return view.superview }
+		set { newValue?.addSubview(view) }
+	}
+
+	// MARK: Touch handling implementation
 
 	class TouchForwardingImageView: UIImageView {
 		required init(coder aDecoder: NSCoder) {
