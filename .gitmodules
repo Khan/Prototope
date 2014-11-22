@@ -1,0 +1,3 @@
+[submodule "ThirdParty/pop"]
+	path = ThirdParty/pop
+	url = git@github.com:facebook/pop.git
