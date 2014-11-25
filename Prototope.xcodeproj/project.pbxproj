@@ -177,6 +177,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9EC148211A20FB1C004C7129 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */,
+			);
+			name = ThirdParty;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		EB12A83C1A19A6AC0018C229 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,7 +222,6 @@
 			children = (
 				EB306C3319DF78A900113FA3 /* Prototope */,
 				EB1C2A6D19E4D19B000DC2C1 /* PrototopeTests */,
-				EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */,
 				EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */,
 				EB306C0A19DF77CC00113FA3 /* Products */,
 			);
@@ -254,6 +262,7 @@
 		EB306C3319DF78A900113FA3 /* Prototope */ = {
 			isa = PBXGroup;
 			children = (
+				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A74E19DF78D500A77736 /* Layer.swift */,
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
