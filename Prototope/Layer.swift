@@ -611,16 +611,6 @@ public func ==(a: Layer, b: Layer) -> Bool {
 	return a === b
 }
 
-public struct Border {
-	public var color: Color
-	public var width: Double
-
-	public init(color: Color, width: Double) {
-		self.color = color
-		self.width = width
-	}
-}
-
 public struct Shadow {
 	public var color: Color
 	public var alpha: Double
