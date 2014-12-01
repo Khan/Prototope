@@ -35,6 +35,8 @@ public class Layer: Equatable, Hashable {
 	/** The root layer of the scene. Defines the global coordinate system. */
 	public class var root: Layer { return _rootLayer }
 
+	// MARK: Creating and identifying layers
+
 	/** Creates a layer with an optional parent and name. **/
 	public init(parent: Layer? = nil, name: String? = nil) {
 		self.parent = parent
@@ -54,6 +56,9 @@ public class Layer: Equatable, Hashable {
 		imageDidChange()
 	}
 
+	/** Layers have an optional name that can be used to find them via various
+		convenience methods. Defaults to nil. */
+	public let name: String?
 
 	// MARK: Layer hierarchy access and manipulation
 
@@ -122,6 +127,19 @@ public class Layer: Equatable, Hashable {
 		return reduce(pathElements, self) { $0?.sublayerNamed($1) }
 	}
 
+	/** Attempts to find a layer in the series of parent layers between the receiver and
+		the root layer which has a given name. Returns nil if none is found. */
+	public func ancestorNamed(name: String) -> Layer? {
+		var currentLayer = parent
+		while currentLayer != nil {
+			if currentLayer!.name == name {
+				return currentLayer
+			}
+			currentLayer = currentLayer!.parent
+		}
+		return nil
+	}
+
 	// MARK: Geometry
 
 	/** The x position of the layer's anchor point (by default the center), relative to
@@ -177,7 +195,8 @@ public class Layer: Equatable, Hashable {
 
 	/** The visible region of the layer, expressed in its own coordinate space. The x and y
 		position define the visible origin (e.g. if you set bounds.y = 50, the top 50 pixels
-		of the layer's image will be cut off); the width and height define its size. Animatable. */
+		of the layer's image will be cut off); the width and height define its size.
+		Animatable. */
 	public var bounds: Rect {
 		get { return Rect(layer.bounds) }
 		set { layer.bounds = CGRect(newValue) }
@@ -197,79 +216,8 @@ public class Layer: Equatable, Hashable {
 		set { layer.anchorPoint = CGPoint(newValue) }
 	}
 
-	// MARK: Appearance
-
-	/** The layer's background color. Will be displayed behind images and borders, above shadows.
-		Animatable. */
-	public var backgroundColor: Color? {
-		get { return view.backgroundColor != nil ? Color(view.backgroundColor!) : nil }
-		set { view.backgroundColor = newValue?.uiColor }
-	}
-
-	/** The layer's opacity (from 0 to 1). Animatable. */
-	public var alpha: Double {
-		get { return Double(view.alpha) }
-		set { view.alpha = CGFloat(newValue) }
-	}
-
-	public var cornerRadius: Double {
-		get { return Double(layer.cornerRadius) }
-		set {
-			layer.cornerRadius = CGFloat(newValue)
-			layer.masksToBounds = layer.cornerRadius > 0
-		}
-	}
-
-	public var userInteractionEnabled: Bool {
-		get { return view.userInteractionEnabled }
-		set { view.userInteractionEnabled = newValue }
-	}
-
-	public var globalPosition: Point {
-		get { return convertLocalPointToGlobalPoint(position) }
-		set { position = convertGlobalPointToLocalPoint(newValue) }
-	}
-
-	public func containsGlobalPoint(point: Point) -> Bool {
-		return view.pointInside(CGPoint(convertGlobalPointToLocalPoint(point)), withEvent: nil)
-	}
-
-	public func convertGlobalPointToLocalPoint(globalPoint: Point) -> Point {
-		return Point(view.convertPoint(CGPoint(globalPoint), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace))
-	}
-
-	public func convertLocalPointToGlobalPoint(localPoint: Point) -> Point {
-		return Point(view.convertPoint(CGPoint(localPoint), toCoordinateSpace: UIScreen.mainScreen().coordinateSpace))
-	}
-
-	public func ancestorNamed(name: String) -> Layer? {
-		var currentLayer = parent
-		while currentLayer != nil {
-			if currentLayer!.name == name {
-				return currentLayer
-			}
-			currentLayer = currentLayer!.parent
-		}
-		return nil
-	}
-
-	public func ancestorOfClass<Class: Layer>(klass: Class.Type) -> Layer? {
-		var currentLayer = parent
-		while currentLayer != nil {
-			if currentLayer! is Class {
-				return currentLayer
-			}
-			currentLayer = currentLayer!.parent
-		}
-		return nil
-	}
-
-	public let name: String?
-
-	public var image: Image? {
-		didSet { imageDidChange() }
-	}
-
+	/** The rotation of the layer specified in degrees. May be used interchangeably with
+	rotationRadians. Defaults to 0. */
 	public var rotationDegrees: Double {
 		get {
 			return rotationRadians * 180 / M_PI
@@ -279,10 +227,14 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+	/** The rotation of the layer specified in radians. May be used interchangeably with
+	rotationDegrees. Defaults to 0. */
 	public var rotationRadians: Double = 0 {
 		didSet { updateTransform() }
 	}
 
+	/** The scaling factor of the layer. Setting this value will set both scaleX and scaleY
+	to the new value. Defaults to 1. */
 	public var scale: Double {
 		get { return scaleX }
 		set {
@@ -291,14 +243,74 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+	/** The scaling factor of the layer along the x dimension. Defaults to 1. */
 	public var scaleX: Double = 1 {
 		didSet { updateTransform() }
 	}
 
+	/** The scaling factor of the layer along the y dimension. Defaults to 1. */
 	public var scaleY: Double = 1 {
 		didSet { updateTransform() }
 	}
 
+	/** Returns the layer's position in the root layer's coordinate space. */
+	public var globalPosition: Point {
+		get { return convertLocalPointToGlobalPoint(position) }
+		set { position = convertGlobalPointToLocalPoint(newValue) }
+	}
+
+	/** Returns whether the layer contains a given point, interpreted in the root layer's
+		coordinate space. */
+	public func containsGlobalPoint(point: Point) -> Bool {
+		return view.pointInside(CGPoint(convertGlobalPointToLocalPoint(point)), withEvent: nil)
+	}
+
+	/** Converts a point specified in the root layer's coordinate space to that same point
+		expressed in the receiver's coordinate space. */
+	public func convertGlobalPointToLocalPoint(globalPoint: Point) -> Point {
+		return Point(view.convertPoint(CGPoint(globalPoint), fromCoordinateSpace: UIScreen.mainScreen().coordinateSpace))
+	}
+
+	/** Converts a point specified in the receiver's coordinate space to that same point
+		expressed in the root layer's coordinate space. */
+	public func convertLocalPointToGlobalPoint(localPoint: Point) -> Point {
+		return Point(view.convertPoint(CGPoint(localPoint), toCoordinateSpace: UIScreen.mainScreen().coordinateSpace))
+	}
+
+	// MARK: Appearance
+
+	/** The layer's background color. Will be displayed behind images and borders, above
+		shadows. Defaults to nil. Animatable. */
+	public var backgroundColor: Color? {
+		get { return view.backgroundColor != nil ? Color(view.backgroundColor!) : nil }
+		set { view.backgroundColor = newValue?.uiColor }
+	}
+
+	/** The layer's opacity (from 0 to 1). Animatable. Defaults to 1. */
+	public var alpha: Double {
+		get { return Double(view.alpha) }
+		set { view.alpha = CGFloat(newValue) }
+	}
+
+	/** The layer's corner radius. Setting this to a non-zero value will also cause the
+		layer to be masked at its corners. Defaults to 0. */
+	public var cornerRadius: Double {
+		get { return Double(layer.cornerRadius) }
+		set {
+			layer.cornerRadius = CGFloat(newValue)
+			layer.masksToBounds = layer.cornerRadius > 0
+		}
+	}
+
+	/** An optional image which the layer displays. When set, changes the layer's size to
+		match the image's. Defaults to nil. */
+	public var image: Image? {
+		didSet { imageDidChange() }
+	}
+
+	/** The border drawn around the layer, inset into the layer's bounds, and on top of any of
+		the other layer content. Respects the corner radius. Defaults to a clear border with
+		a 0 width. */
 	public var border: Border {
 		get {
 			return Border(color: Color(UIColor(CGColor: layer.borderColor)), width: Double(layer.borderWidth))
@@ -309,6 +321,9 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+	/** The shadow drawn beneath the layer. If the layer has no background color, this shadow
+		will respect the alpha values of the layer's image: clear parts of the image will not
+		generate a shadow. */
 	public var shadow: Shadow {
 		get {
 			return Shadow(color: Color(UIColor(CGColor: layer.shadowColor)), alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
@@ -320,6 +335,127 @@ public class Layer: Equatable, Hashable {
 			layer.shadowRadius = CGFloat(newValue.radius)
 		}
 	}
+
+	/** When false, touches that hit this layer or its sublayers are discarded. Defaults
+		to true. */
+	public var userInteractionEnabled: Bool {
+		get { return view.userInteractionEnabled }
+		set { view.userInteractionEnabled = newValue }
+	}
+
+	// MARK: Touches and gestures
+
+	/** An array of the layer's gestures. Append a gesture to this list to add it to the layer.
+		Defaults to the empty list. */
+	public var gestures: [GestureType] = [] {
+		didSet {
+			for gesture in gestures {
+				gesture.hostLayer = self
+			}
+		}
+	}
+
+	/** A layer's touchesXXXHandler property is set to a closure of this type. It takes a
+		dictionary whose keys are touch sequences' IDs and whose values are a touch sequence;
+		it should return whether or not the event was handled. If the return value is false
+		the touches event will be passed along to the parent layer. */
+	public typealias TouchesHandler = [UITouchID: TouchSequence<UITouchID>] -> Bool
+
+	/** A layer's touchXXXHandler property is set to a closure of this type. These handlers
+		can be used as more convenient variants of the touchesXXXHandlers for situations in
+		which the touches can be considered independently. These handlers are passed a touch
+		sequence and don't need to return a value.
+
+		If multiple touches are involved in a single event for a single layer, this handler
+		will be invoked once for each of those touches.
+
+		If a touchXXXHandler is set for a given event, events are never passed along to the
+		parent layer (if you need dynamic bubbling behavior, use touchesXXXHandlers). */
+	public typealias TouchHandler = TouchSequence<UITouchID> -> Void
+
+	/** A dictionary whose keys are touch sequence IDs and whose values are touch sequences.
+		This dictionary contains a value for each touch currently active on this layer.
+
+		When a touch or touches handler is running, this property will already have been
+		updated to a value incorporating the new touch event. */
+	public var activeTouchSequences: [UITouchID: TouchSequence<UITouchID>] {
+		return imageView?.activeTouchSequences ?? [UITouchID: UITouchSequence]()
+	}
+
+	/** A handler for when new touches arrive. See the TouchesHandler documentation for more
+		details. */
+	public var touchesBeganHandler: TouchesHandler? {
+		get { return imageView?.touchesBeganHandler }
+		set { imageView?.touchesBeganHandler = newValue }
+	}
+
+	/** A handler for when a new touch arrives. See the TouchHandler documentation for more
+		details. */
+	public var touchBeganHandler: TouchHandler? {
+		get { return imageView?.touchBeganHandler }
+		set { imageView?.touchBeganHandler = newValue }
+	}
+
+	/** A handler for when touches move. See the TouchesHandler documentation for more
+		details. */
+	public var touchesMovedHandler: TouchesHandler? {
+		get { return imageView?.touchesMovedHandler }
+		set { imageView?.touchesMovedHandler = newValue }
+	}
+
+	/** A handler for when a touch moves. See the TouchHandler documentation for more details. */
+	public var touchMovedHandler: TouchHandler? {
+		get { return imageView?.touchMovedHandler }
+		set { imageView?.touchMovedHandler = newValue }
+	}
+
+	/** A handler for when touches end. See the TouchesHandler documentation for more
+		details. */
+	public var touchesEndedHandler: TouchesHandler? {
+		get { return imageView?.touchesEndedHandler }
+		set { imageView?.touchesEndedHandler = newValue }
+	}
+
+	/** A handler for when a touch ends. See the TouchHandler documentation for more details. */
+	public var touchEndedHandler: TouchHandler? {
+		get { return imageView?.touchEndedHandler }
+		set { imageView?.touchEndedHandler = newValue }
+	}
+
+	/** A handler for when touches are cancelled. This may happen because a gesture with
+		cancelsTouchesInView set to true has recognized, because of palm rejection, or because
+		a system event (like a system gesture) has cancelled the touch.
+	
+		See TouchesHandler documentation for more details. */
+	public var touchesCancelledHandler: TouchesHandler? {
+		get { return imageView?.touchesCancelledHandler }
+		set { imageView?.touchesCancelledHandler = newValue }
+	}
+
+	/** A handler for when a touch is cancelled. This may happen because a gesture with
+		cancelsTouchesInView set to true has recognized, because of palm rejection, or because
+		a system event (like a system gesture) has cancelled the touch.
+
+		See TouchesHandler documentation for more details. */
+	public var touchCancelledHandler: TouchHandler? {
+		get { return imageView?.touchCancelledHandler }
+		set { imageView?.touchCancelledHandler = newValue }
+	}
+
+	/** Returns a list of descendent layers of the receiver (including self) which are actively
+		being touched, or [] if none are. */
+	public var touchedDescendents: [Layer] {
+		var accumulator = [Layer]()
+		if activeTouchSequences.count > 0 {
+			accumulator.append(self)
+		}
+		for sublayer in sublayers {
+			accumulator += sublayer.touchedDescendents
+		}
+		return accumulator
+	}
+
+	// MARK: Convenience utilities
 
 	public private(set) var willBeRemovedSoon: Bool = false
 	public func removeAfterDuration(duration: NSTimeInterval) {
@@ -333,82 +469,12 @@ public class Layer: Equatable, Hashable {
 		willBeRemovedSoon = true
 		Layer.animateWithDuration(duration, animations: {
 			self.alpha = 0
-		}, completionHandler: {
-			self.parent = nil
+			}, completionHandler: {
+				self.parent = nil
 		})
 	}
 
-	public var gestures: [GestureType] = [] {
-		didSet {
-			for gesture in gestures {
-				gesture.hostLayer = self
-			}
-		}
-	}
-
-	public typealias TouchesHandler = [UITouchID: TouchSequence<UITouchID>] -> Bool
-	public typealias TouchHandler = TouchSequence<UITouchID> -> Void
-
-	public var activeTouchSequences: [UITouchID: TouchSequence<UITouchID>] {
-		return imageView?.activeTouchSequences ?? [UITouchID: UITouchSequence]()
-	}
-
-	public var touchesBeganHandler: TouchesHandler? {
-		get { return imageView?.touchesBeganHandler }
-		set { imageView?.touchesBeganHandler = newValue }
-	}
-
-	public var touchBeganHandler: TouchHandler? {
-		get { return imageView?.touchBeganHandler }
-		set { imageView?.touchBeganHandler = newValue }
-	}
-
-	public var touchesMovedHandler: TouchesHandler? {
-		get { return imageView?.touchesMovedHandler }
-		set { imageView?.touchesMovedHandler = newValue }
-	}
-
-	public var touchMovedHandler: TouchHandler? {
-		get { return imageView?.touchMovedHandler }
-		set { imageView?.touchMovedHandler = newValue }
-	}
-
-	public var touchesEndedHandler: TouchesHandler? {
-		get { return imageView?.touchesEndedHandler }
-		set { imageView?.touchesEndedHandler = newValue }
-	}
-
-	public var touchEndedHandler: TouchHandler? {
-		get { return imageView?.touchEndedHandler }
-		set { imageView?.touchEndedHandler = newValue }
-	}
-
-	public var touchesCancelledHandler: TouchesHandler? {
-		get { return imageView?.touchesCancelledHandler }
-		set { imageView?.touchesCancelledHandler = newValue }
-	}
-
-	public var touchCancelledHandler: TouchHandler? {
-		get { return imageView?.touchCancelledHandler }
-		set { imageView?.touchCancelledHandler = newValue }
-	}
-
-	public var touchedDescendents: [Layer] {
-		var accumulator = [Layer]()
-		if activeTouchSequences.count > 0 {
-			accumulator.append(self)
-		}
-		for sublayer in sublayers {
-			accumulator += sublayer.touchedDescendents
-		}
-		return accumulator
-	}
-
-	public var hashValue: Int {
-		return view.hashValue
-	}
-
-	// MARK: Internal interfaces
+	// MARK: - Internal interfaces
 
 	private func updateTransform() {
 		layer.transform = CATransform3DRotate(CATransform3DMakeScale(CGFloat(scaleX), CGFloat(scaleY), 1), CGFloat(rotationRadians), 0, 0, 1)
@@ -521,6 +587,12 @@ public class Layer: Equatable, Hashable {
 				super.touchesCancelled(touches, withEvent: event)
 			}
 		}
+	}
+}
+
+extension Layer: Hashable {
+	public var hashValue: Int {
+		return view.hashValue
 	}
 }
 
