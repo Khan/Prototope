@@ -16,6 +16,23 @@ class PointTests: XCTestCase {
 	}
 
 	func testLength() {
-		XCTAssertEqualWithAccuracy(Point(x: 3, y: 4).length, 5, 0.001)
+		XCTAssertEqual(Point(x: 3, y: 4).length, 5)
+	}
+}
+
+class RectTests: XCTestCase {
+	func testComputedLocations() {
+		let testRect = Rect(x: 5, y: 10, width: 20, height: 30)
+		XCTAssertEqual(testRect.minX, 5)
+		XCTAssertEqual(testRect.midX, 15)
+		XCTAssertEqual(testRect.maxX, 25)
+		XCTAssertEqual(testRect.minY, 10)
+		XCTAssertEqual(testRect.midY, 25)
+		XCTAssertEqual(testRect.maxY, 40)
+
+		XCTAssertEqual(testRect.center, Point(x: 15, y: 25))
+		var updatedRect = testRect
+		updatedRect.center += Point(x: 15, y: 10)
+		XCTAssertEqual(updatedRect.center, Point(x: 30, y: 35))
 	}
 }

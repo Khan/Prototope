@@ -11,7 +11,7 @@ import CoreGraphics
 // MARK: - Point
 
 /** Represents a 2D point (or vector). */
-public struct Point {
+public struct Point: Equatable {
 	public var x: Double
 	public var y: Double
 
@@ -40,6 +40,10 @@ public struct Point {
 	public var length: Double {
 		return sqrt(x*x + y*y)
 	}
+}
+
+public func ==(a: Point, b: Point) -> Bool {
+	return a.x == b.x && a.y == b.y
 }
 
 extension Point: Printable {
@@ -100,7 +104,7 @@ extension CGPoint {
 // MARK: - Size
 
 /** Represents a size in 2D space. */
-public struct Size {
+public struct Size: Equatable {
 	public var width: Double
 	public var height: Double
 
@@ -117,6 +121,10 @@ public struct Size {
 		self.width = Double(size.width)
 		self.height = Double(size.height)
 	}
+}
+
+public func ==(a: Size, b: Size) -> Bool {
+	return a.width == b.width && a.height == b.height
 }
 
 /** Returns a Size whose width is the sum of the two sizes' widths; ditto for height. */
@@ -147,26 +155,63 @@ extension CGSize {
 	}
 }
 
-// MARK: Rect
 
-public struct Rect {
+// MARK: - Rect
+
+/** Represents a rectangle in 2D space. */
+public struct Rect: Equatable {
+	/** The rectangle's corners are formed by adding its size to this origin, which represents
+		the corner without either size dimension added to it. */
 	public var origin: Point
+
+	/** The rectangle's corners are formed by adding the components of this size to its origin. */
 	public var size: Size
+
+	/** The smallest X value touched by this rectangle. */
+	public var minX: Double { return Double(CGRectGetMinX(CGRect(self))) }
+
+	/** The X value at the middle of this rectangle. */
+	public var midX: Double { return Double(CGRectGetMidX(CGRect(self))) }
+
+	/** The largest X value touched by this rectangle. */
+	public var maxX: Double { return Double(CGRectGetMaxX(CGRect(self))) }
+
+	/** The smallest Y value touched by this rectangle. */
+	public var minY: Double { return Double(CGRectGetMinY(CGRect(self))) }
+
+	/** The Y value at the middle of this rectangle. */
+	public var midY: Double { return Double(CGRectGetMidY(CGRect(self))) }
+
+	/** The largest Y value touched by this rectangle. */
+	public var maxY: Double { return Double(CGRectGetMaxY(CGRect(self))) }
+
+	/** The center of the rectangle. */
+	public var center: Point {
+		get { return Point(x: midX, y: midY) }
+		set { origin += newValue - center }
+	}
+
+	/** Rect(x: 0, y: 0, width: 0, height: 0). */
+	public static let zero = Rect(x: 0, y: 0, width: 0, height: 0)
 
 	public init(x: Double = 0, y: Double = 0, width: Double = 0, height: Double = 0) {
 		origin = Point(x: x, y: y)
 		size = Size(width: width, height: height)
 	}
 
+	/** Constructs a Rect from a CGRect. */
 	public init(_ rect: CGRect) {
 		origin = Point(rect.origin)
 		size = Size(rect.size)
 	}
+}
 
-	// TODO: .midX, .minY, etc.
+public func ==(a: Rect, b: Rect) -> Bool {
+	return a.origin == b.origin && a.size == b.size
 }
 
 extension CGRect {
+	/** Constructs a CGRect from a Rect. */
 	public init(_ rect: Rect) {
 		self.origin = CGPoint(rect.origin)
 		self.size = CGSize(rect.size)
