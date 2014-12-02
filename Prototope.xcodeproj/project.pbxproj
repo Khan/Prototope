@@ -33,6 +33,7 @@
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EBE3A76B19DF79C400A77736 /* Prototope.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EBE3A77519DF79E900A77736 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A74E19DF78D500A77736 /* Layer.swift */; };
+		EBF59A941A2E2B5000AB8C67 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF59A931A2E2B5000AB8C67 /* Shadow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,7 @@
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		EBE3A75619DF79C400A77736 /* Prototope.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Prototope.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE3A75919DF79C400A77736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBF59A931A2E2B5000AB8C67 /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 				EBE3A74E19DF78D500A77736 /* Layer.swift */,
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
 				EB8BC1C91A2CE7B5005E799C /* Border.swift */,
+				EBF59A931A2E2B5000AB8C67 /* Shadow.swift */,
 				EB1C2A6419E4B534000DC2C1 /* Color.swift */,
 				EBE17A0519E65D1B00C308E5 /* Timing.swift */,
 				EBE17A0719E65E5500C308E5 /* Animation.swift */,
@@ -508,6 +511,7 @@
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
+				EBF59A941A2E2B5000AB8C67 /* Shadow.swift in Sources */,
 				EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */,
 				EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */,
 				EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */,

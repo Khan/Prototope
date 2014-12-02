@@ -8,21 +8,26 @@
 
 import UIKit
 
+/** A simple representation of color. */
 public struct Color {
 	let uiColor: UIColor
 
+	/** Constructs a color from RGB and alpha values. Arguments range from 0.0 to 1.0. */
 	public init(red: Double, green: Double, blue: Double, alpha: Double = 1.0) {
 		uiColor = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
 	}
 
+	/** Constructs a grayscale color. Arguments range from 0.0 to 1.0.  */
 	public init(white: Double, alpha: Double = 1.0) {
 		uiColor = UIColor(white: CGFloat(white), alpha: CGFloat(alpha))
 	}
 
+	/** Constructs a color from HSB and alpha values. Arguments range from 0.0 to 1.0. */
 	public init(hue: Double, saturation: Double, brightness: Double, alpha: Double = 1.0) {
 		uiColor = UIColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: CGFloat(brightness), alpha: CGFloat(alpha))
 	}
 
+	/** Constructs a Color from a UIColor. */
 	init(_ uiColor: UIColor) {
 		self.uiColor = uiColor
 	}

@@ -611,20 +611,6 @@ public func ==(a: Layer, b: Layer) -> Bool {
 	return a === b
 }
 
-public struct Shadow {
-	public var color: Color
-	public var alpha: Double
-	public var offset: Size
-	public var radius: Double
-
-	public init(color: Color, alpha: Double, offset: Size, radius: Double) {
-		self.color = color
-		self.alpha = alpha
-		self.offset = offset
-		self.radius = radius
-	}
-}
-
 private typealias UITouchSequence = TouchSequence<UITouchID>
 
 private func touchSequencesFromTouchSet(touches: NSSet) -> [UITouchSequence] {
