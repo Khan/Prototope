@@ -14,4 +14,8 @@ class PointTests: XCTestCase {
 	func testDistanceToPoint() {
 		XCTAssertEqualWithAccuracy(Point(x: 5, y: 5).distanceToPoint(Point(x: 10, y:10)), sqrt(2) * 5, 0.001)
 	}
+
+	func testLength() {
+		XCTAssertEqualWithAccuracy(Point(x: 3, y: 4).length, 5, 0.001)
+	}
 }

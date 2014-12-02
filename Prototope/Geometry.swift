@@ -8,8 +8,9 @@
 
 import CoreGraphics
 
-// Mark: Point
+// - MARK: Point
 
+/** Represents a 2D point (or vector). */
 public struct Point {
 	public var x: Double
 	public var y: Double
@@ -24,10 +25,16 @@ public struct Point {
 		self.y = Double(point.y)
 	}
 
+	/** Computes traditional 2D (i.e. Euclidean) distance to another point. */
 	public func distanceToPoint(point: Point) -> Double {
 		let dx = point.x - self.x
 		let dy = point.y - self.y
 		return sqrt(dx*dx + dy*dy)
+	}
+
+	/** Computes the magnitude of the point, interpreted as a vector. */
+	public var length: Double {
+		return sqrt(x*x + y*y)
 	}
 }
 
@@ -37,39 +44,48 @@ extension Point: Printable {
 	}
 }
 
+/** Performs vector addition. */
 public func +(a: Point, b: Point) -> Point {
 	return Point(x: a.x + b.x, y: a.y + b.y)
 }
 
+/** Performs vector addition. */
 public func +=(inout a: Point, b: Point) {
 	a = a + b
 }
 
+/** Performs vector subtraction. */
 public func -(a: Point, b: Point) -> Point {
 	return Point(x: a.x - b.x, y: a.y - b.y)
 }
 
+/** Performs vector subtraction. */
 public func -=(inout a: Point, b: Point) {
 	a = a - b
 }
 
+/** Multiplies both point dimensions by scalar. */
 public func *(a: Point, scalar: Double) -> Point {
 	return Point(x: a.x * scalar, y: a.y * scalar)
 }
 
+/** Multiplies both point dimensions by scalar. */
 public func *=(inout a: Point, scalar: Double) {
 	a = a * scalar
 }
 
+/** Divides both point dimensions by scalar. */
 public func /(a: Point, scalar: Double) -> Point {
 	return a * (1.0 / scalar)
 }
 
+/** Divides both point dimensions by scalar. */
 public func /=(inout a: Point, scalar: Double) {
 	a = a / scalar
 }
 
 extension CGPoint {
+	/** Converts a CGPoint to a Point. */
 	public init(_ point: Point) {
 		self.x = CGFloat(point.x)
 		self.y = CGFloat(point.y)
