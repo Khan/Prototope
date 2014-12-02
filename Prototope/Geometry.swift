@@ -8,18 +8,22 @@
 
 import CoreGraphics
 
-// - MARK: Point
+// MARK: - Point
 
 /** Represents a 2D point (or vector). */
 public struct Point {
 	public var x: Double
 	public var y: Double
 
+	/** Point(x: 0, y: 0). */
+	static public let zero = Point(x: 0, y: 0)
+
 	public init(x: Double = 0, y: Double = 0) {
 		self.x = x
 		self.y = y
 	}
 
+	/** Constructs a Point from a CGPoint. */
 	public init(_ point: CGPoint) {
 		self.x = Double(point.x)
 		self.y = Double(point.y)
@@ -85,47 +89,58 @@ public func /=(inout a: Point, scalar: Double) {
 }
 
 extension CGPoint {
-	/** Converts a CGPoint to a Point. */
+	/** Constructs a CGPoint from a Point. */
 	public init(_ point: Point) {
 		self.x = CGFloat(point.x)
 		self.y = CGFloat(point.y)
 	}
 }
 
-// MARK: Size
 
+// MARK: - Size
+
+/** Represents a size in 2D space. */
 public struct Size {
 	public var width: Double
 	public var height: Double
+
+	/** Size(width: 0, height: 0). */
+	static public let zero = Size(width: 0, height: 0)
 
 	public init(width: Double = 0, height: Double = 0) {
 		self.width = width
 		self.height = height
 	}
 
+	/** Constructs a Size from a CGSize. */
 	public init(_ size: CGSize) {
 		self.width = Double(size.width)
 		self.height = Double(size.height)
 	}
 }
 
+/** Returns a Size whose width is the sum of the two sizes' widths; ditto for height. */
 public func +(a: Size, b: Size) -> Size {
 	return Size(width: a.width + b.width, height: a.height + b.height)
 }
 
+/** Adds the argument's width to the receiver's width; ditto for width. */
 public func +=(inout a: Size, b: Size) {
 	a = a + b
 }
 
+/** Computes a new Size by multiplying the size's width and height by scalar. */
 public func *(a: Size, scalar: Double) -> Size {
 	return Size(width: a.width * scalar, height: a.height * scalar)
 }
 
+/** Multiplies the size's width and height by scalar (in place). */
 public func *=(inout a: Size, scalar: Double) {
 	a = a * scalar
 }
 
 extension CGSize {
+	/** Constructs a CGSize from a Size. */
 	public init(_ size: Size) {
 		self.width = CGFloat(size.width)
 		self.height = CGFloat(size.height)
