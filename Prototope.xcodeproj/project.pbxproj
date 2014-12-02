@@ -264,8 +264,6 @@
 		EB306C3319DF78A900113FA3 /* Prototope */ = {
 			isa = PBXGroup;
 			children = (
-				9EC148211A20FB1C004C7129 /* ThirdParty */,
-				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A74E19DF78D500A77736 /* Layer.swift */,
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
 				EB8BC1C91A2CE7B5005E799C /* Border.swift */,
@@ -277,6 +275,8 @@
 				EBBA431619F45186000B81BE /* Gesture.swift */,
 				EBA837161A1DADDF00D23C9D /* Heartbeat.swift */,
 				EBA8371B1A1DB51000D23C9D /* Sound.swift */,
+				9EC148211A20FB1C004C7129 /* ThirdParty */,
+				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
 				EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */,
 			);
