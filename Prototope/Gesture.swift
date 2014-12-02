@@ -246,10 +246,10 @@ public class PanGesture: GestureType {
 				panGesture.setTranslation(centroidWindowLocation, inView: nil)
 
 				struct IDState { static var nextCentroidSequenceID = 0 }
-				centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: CACurrentMediaTime())], id: IDState.nextCentroidSequenceID)
+				centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: Timestamp.currentTimestamp)], id: IDState.nextCentroidSequenceID)
 				IDState.nextCentroidSequenceID++
 			case .Changed, .Ended, .Cancelled:
-				centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(panGesture.translationInView(panGesture.view!.window!)), timestamp: CACurrentMediaTime()))
+				centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(panGesture.translationInView(panGesture.view!.window!)), timestamp: Timestamp.currentTimestamp))
 			case .Possible, .Failed:
 				fatalError("Unexpected gesture state")
 			}
@@ -280,6 +280,6 @@ public protocol _GestureType {
 extension TouchSample {
 	init(_ touch: UITouch) {
 		globalLocation = Point(touch.locationInView(nil))
-		timestamp = touch.timestamp
+		timestamp = Timestamp(touch.timestamp)
 	}
 }

@@ -15,7 +15,7 @@ public class Heartbeat {
 	}
 
 	public var timestamp: Timestamp {
-		return displayLink.timestamp
+		return Timestamp(displayLink.timestamp)
 	}
 
 	private let handler: Heartbeat -> ()
