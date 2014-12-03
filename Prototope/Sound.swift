@@ -9,19 +9,10 @@
 import Foundation
 import AudioToolbox
 
+/** Provides a simple way to play sound files. Supports .aif, .aiff, .wav, and .caf files. */
 public struct Sound {
-	private static let validExtensions = ["caf", "aif", "aiff", "wav"]
-	private let systemSoundID: SystemSoundID!
-
-	private static func bundlePathForSoundNamed(name: String) -> String? {
-		for fileExtension in validExtensions {
-			if let path = NSBundle.mainBundle().pathForResource(name, ofType: fileExtension) {
-				return path
-			}
-		}
-		return nil
-	}
-
+	/** Creates a sound from a filename. No need to include the file extension: Prototope will
+		try all the valid extensions. */
 	public init!(name: String) {
 		if let cachedSound = cachedSounds[name] {
 			self = cachedSound
@@ -39,6 +30,20 @@ public struct Sound {
 
 	public func play() {
 		AudioServicesPlaySystemSound(systemSoundID)
+	}
+
+	// MARK: Private interfaces
+
+	private static let validExtensions = ["caf", "aif", "aiff", "wav"]
+	private let systemSoundID: SystemSoundID!
+
+	private static func bundlePathForSoundNamed(name: String) -> String? {
+		for fileExtension in validExtensions {
+			if let path = NSBundle.mainBundle().pathForResource(name, ofType: fileExtension) {
+				return path
+			}
+		}
+		return nil
 	}
 }
 
