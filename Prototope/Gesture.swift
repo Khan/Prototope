@@ -8,12 +8,17 @@
 
 import UIKit
 
-// MARK: Touch
+// MARK: Touches
 
+/** Represents the state of a touch at a particular time. */
 public struct TouchSample {
+	/** The location of the touch sample in the root layer's coordinate system. */
 	public let globalLocation: Point
+
+	/** The time at which the touch arrived. */
 	public let timestamp: Timestamp
 
+	/** The location of the touch sample, converted into a target layer's coordinate system. */
 	public func locationInLayer(layer: Layer) -> Point {
 		return layer.convertGlobalPointToLocalPoint(globalLocation)
 	}
@@ -21,37 +26,38 @@ public struct TouchSample {
 
 extension TouchSample: Printable {
 	public var description: String {
-		return "{globalLocation: \(globalLocation), timestamp: \(timestamp)}"
+		return "<TouchSample: globalLocation: \(globalLocation), timestamp: \(timestamp)>"
 	}
 }
 
+/** Represents a series of touch samples over time. */
 public struct TouchSequence<ID: Printable>: Printable {
+	/** Touch samples ordered by arrival time. */
 	public let samples: [TouchSample]
+
+	/** An identifier that can be used to distinguish this touch sequence from e.g. other
+		touch sequences that might be proceeding simultaneously. You might think of it as
+		a "finger identifier". */
 	public var id: ID
 
-	public var firstSample: TouchSample {
-		return samples.first! // Touch sequences must have at least one touch sample
+	/** The first touch sample. */
+	public var firstSample: TouchSample! {
+		return samples.first // Touch sequences, when exposed to API clients, always have at least one sample.
 	}
 
+	/** The next-to-last touch sample (if one exists). */
 	public var previousSample: TouchSample? {
 		let index = samples.count - 2
 		return index >= 0 ? samples[index] : nil
 	}
 
-	public var currentSample: TouchSample {
-		return samples.last! // Touch sequences must have at least one touch sample
+	/** The most recent touch sample. */
+	public var currentSample: TouchSample! {
+		return samples.last // Touch sequences, when exposed to API clients, always have at least one sample.
 	}
 
-	public init(samples: [TouchSample], id: ID) {
-		precondition(samples.count >= 0)
-		self.samples = samples
-		self.id = id
-	}
-
-	public func touchSequenceByAppendingSample(sample: TouchSample) -> TouchSequence<ID> {
-		return TouchSequence(samples: samples + [sample], id: id)
-	}
-
+	/** The approximate current velocity of the touch sequence, specified in points per second
+		in the layer's coordinate space. */
 	public func currentVelocityInLayer(layer: Layer) -> Point {
 		if samples.count <= 1 {
 			return Point()
@@ -69,8 +75,21 @@ public struct TouchSequence<ID: Printable>: Printable {
 		}
 	}
 
+	/** The approximate current velocity of the touch sequence, specified in points per second
+		in the root layer's coordinate space. */
 	public func currentGlobalVelocity() -> Point {
 		return currentVelocityInLayer(Layer.root)
+	}
+
+	public init(samples: [TouchSample], id: ID) {
+		precondition(samples.count >= 0)
+		self.samples = samples
+		self.id = id
+	}
+
+	/** Create a new touch sequence by adding a sample onto the end of the sample list. */
+	public func touchSequenceByAppendingSample(sample: TouchSample) -> TouchSequence<ID> {
+		return TouchSequence(samples: samples + [sample], id: id)
 	}
 
 	public var description: String {
@@ -78,10 +97,12 @@ public struct TouchSequence<ID: Printable>: Printable {
 	}
 }
 
+/** Creates a new touch sequence by adding the samples in the constituent sequences. */
 public func +<ID>(a: TouchSequence<ID>, b: TouchSequence<ID>) -> TouchSequence<ID> {
 	return TouchSequence(samples: a.samples + b.samples, id: a.id)
 }
 
+/** Only public because Swift requires it. Intended to be an opaque wrapper of UITouches. */
 public struct UITouchID: Hashable, Printable {
 	init(_ touch: UITouch) {
 		self.touch = touch
