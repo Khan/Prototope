@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: Touches
+// MARK: - Touches
 
 /** Represents the state of a touch at a particular time. */
 public struct TouchSample {
@@ -130,10 +130,147 @@ public func ==(a: UITouchID, b: UITouchID) -> Bool {
 }
 
 
-// MARK: Gesture
+// MARK: - Gesture
 
-public protocol GestureType: _GestureType {}
+/* See conceptual documentation at Layer.gestures. */
 
+/** A gesture which recognizes standard iOS taps. */
+public class TapGesture: GestureType {
+	/** The handler will be invoked with the location the tap occurred, expressed in the root layer's
+		coordinate space. */
+	public convenience init(_ handler: (globalLocation: Point) -> ()) {
+		self.init(handler: handler)
+	}
+
+	/** When cancelsTouchesInLayer is true, touches being handled via touchXXXHandlers will be cancelled
+		(and touch[es]CancelledHandler will be invoked) when the gesture recognizes.
+		
+		The handler will be invoked with the location the tap occurred, expressed in the root layer's
+		coordinate space. */
+	public init(cancelsTouchesInLayer: Bool = true, numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1, handler: (globalLocation: Point) -> ()) {
+		tapGestureHandler = TapGestureHandler(actionHandler: handler)
+		tapGestureRecognizer = UITapGestureRecognizer(target: tapGestureHandler, action: "handleGestureRecognizer:")
+		tapGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
+		tapGestureRecognizer.numberOfTapsRequired = numberOfTapsRequired
+		tapGestureRecognizer.numberOfTouchesRequired = numberOfTouchesRequired
+	}
+
+	deinit {
+		tapGestureRecognizer.removeTarget(tapGestureHandler, action: "handleGestureRecognizer:")
+	}
+
+	/** The number of fingers which must simultaneously touch the gesture's view to count as a tap. */
+	public var numberOfTouchesRequired: Int {
+		get { return tapGestureRecognizer.numberOfTouchesRequired }
+		set { tapGestureRecognizer.numberOfTouchesRequired = newValue }
+	}
+
+	/** The number of sequential taps which must be recognized before the gesture's handler is fired. */
+	public var numberOfTapsRequired: Int {
+		get { return tapGestureRecognizer.numberOfTapsRequired }
+		set { tapGestureRecognizer.numberOfTapsRequired = newValue }
+	}
+
+	private let tapGestureRecognizer: UITapGestureRecognizer
+	private let tapGestureHandler: TapGestureHandler
+
+	public weak var hostLayer: Layer? {
+		didSet { handleTransferOfGesture(tapGestureRecognizer, oldValue, hostLayer) }
+	}
+
+	@objc class TapGestureHandler: NSObject {
+		init(actionHandler: Point -> ()) {
+			self.actionHandler = actionHandler
+		}
+
+		private let actionHandler: Point -> ()
+
+		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+			actionHandler(Point(gestureRecognizer.locationInView(nil)))
+		}
+	}
+}
+
+/** A pan gesture recognizes a standard iOS pan: it doesn't begin until the user's moved at least 10
+	points, then it tracks new touches coming and going over time (up to the maximumNumberOfTouches).
+	It exposes simple access to the path of the center of all the touches. */
+public class PanGesture: GestureType {
+	/** The handler will be invoked as the gesture recognizes and updates; it's passed both the gesture's current
+		phase (see ContinuousGesturePhase documentation) and also a touch sequence representing the center of
+		all the touches involved in the pan gesture. */
+	public convenience init(_ handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
+		self.init(handler: handler)
+	}
+
+	/** The pan gesture won't recognize until minimumNumberOfTouches arrive, and it will ignore all touches
+		beyond maximumNumberOfTouches (but won't be cancelled if that many arrive once the gesture has already
+		begun).
+
+		When cancelsTouchesInLayer is true, touches being handled via touchXXXHandlers will be cancelled
+		(and touch[es]CancelledHandler will be invoked) when the gesture recognizes.
+
+		The handler will be invoked as the gesture recognizes and updates; it's passed both the gesture's current
+		phase (see ContinuousGesturePhase documentation) and also a touch sequence representing the center of
+		all the touches involved in the pan gesture. */
+	public init(minimumNumberOfTouches: Int = 1, maximumNumberOfTouches: Int = Int.max, cancelsTouchesInLayer: Bool = true, handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
+		panGestureHandler = PanGestureHandler(actionHandler: handler)
+		panGestureRecognizer = UIPanGestureRecognizer(target: panGestureHandler, action: "handleGestureRecognizer:")
+		panGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
+		panGestureRecognizer.minimumNumberOfTouches = minimumNumberOfTouches
+		panGestureRecognizer.maximumNumberOfTouches = maximumNumberOfTouches
+	}
+
+	private let panGestureRecognizer: UIPanGestureRecognizer
+	private let panGestureHandler: PanGestureHandler
+
+	public weak var hostLayer: Layer? {
+		didSet { handleTransferOfGesture(panGestureRecognizer, oldValue, hostLayer) }
+	}
+
+	deinit {
+		panGestureRecognizer.removeTarget(panGestureHandler, action: "handleGestureRecognizer:")
+	}
+
+	@objc class PanGestureHandler: NSObject {
+		private let actionHandler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()
+		private var centroidSequence: TouchSequence<Int>?
+
+		init(actionHandler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
+			self.actionHandler = actionHandler
+		}
+
+		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+			let panGesture = gestureRecognizer as UIPanGestureRecognizer
+			switch panGesture.state {
+			case .Began:
+				// Reset the gesture to record translation relative to the starting centroid; we'll interpret subsequent translations as centroid positions.
+				let centroidWindowLocation = panGesture.locationInView(nil)
+				panGesture.setTranslation(centroidWindowLocation, inView: nil)
+
+				struct IDState { static var nextCentroidSequenceID = 0 }
+				centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: Timestamp.currentTimestamp)], id: IDState.nextCentroidSequenceID)
+				IDState.nextCentroidSequenceID++
+			case .Changed, .Ended, .Cancelled:
+				centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(panGesture.translationInView(panGesture.view!.window!)), timestamp: Timestamp.currentTimestamp))
+			case .Possible, .Failed:
+				fatalError("Unexpected gesture state")
+			}
+
+			actionHandler(phase: ContinuousGesturePhase(panGesture.state)!, centroidSequence: centroidSequence!)
+
+			switch panGesture.state {
+			case .Ended, .Cancelled:
+				centroidSequence = nil
+			case .Began, .Changed, .Possible, .Failed:
+				break
+			}
+		}
+	}
+}
+
+/** Continuous gestures are different from discrete gestures in that they pass through several phases.
+	A discrete gesture simply recognizes--then it's done. A continuous gesture begins, then may change
+	over the course of several events, then ends (or is cancelled). */
 public enum ContinuousGesturePhase {
 	case Began
 	case Changed
@@ -173,119 +310,9 @@ private extension ContinuousGesturePhase {
 	}
 }
 
-public class TapGesture: GestureType {
-	public convenience init(_ handler: (globalLocation: Point) -> ()) {
-		self.init(handler: handler)
-	}
+// MARK: -
 
-	public init(cancelsTouchesInLayer: Bool = true, numberOfTapsRequired: Int = 1, numberOfTouchesRequired: Int = 1, handler: (globalLocation: Point) -> ()) {
-		tapGestureHandler = TapGestureHandler(actionHandler: handler)
-		tapGestureRecognizer = UITapGestureRecognizer(target: tapGestureHandler, action: "handleGestureRecognizer:")
-		tapGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
-		tapGestureRecognizer.numberOfTapsRequired = numberOfTapsRequired
-		tapGestureRecognizer.numberOfTouchesRequired = numberOfTouchesRequired
-	}
-
-	deinit {
-		tapGestureRecognizer.removeTarget(tapGestureHandler, action: "handleGestureRecognizer:")
-	}
-
-	public var numberOfTouchesRequired: Int {
-		get { return tapGestureRecognizer.numberOfTouchesRequired }
-		set { tapGestureRecognizer.numberOfTouchesRequired = newValue }
-	}
-
-	public var numberOfTapsRequired: Int {
-		get { return tapGestureRecognizer.numberOfTapsRequired }
-		set { tapGestureRecognizer.numberOfTapsRequired = newValue }
-	}
-
-	private let tapGestureRecognizer: UITapGestureRecognizer
-	private let tapGestureHandler: TapGestureHandler
-
-	public weak var hostLayer: Layer? {
-		didSet { handleTransferOfGesture(tapGestureRecognizer, oldValue, hostLayer) }
-	}
-
-	@objc class TapGestureHandler: NSObject {
-		init(actionHandler: Point -> ()) {
-			self.actionHandler = actionHandler
-		}
-
-		private let actionHandler: Point -> ()
-
-		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-			actionHandler(Point(gestureRecognizer.locationInView(nil)))
-		}
-	}
-}
-
-public class PanGesture: GestureType {
-
-	private let panGestureRecognizer: UIPanGestureRecognizer
-	private let panGestureHandler: PanGestureHandler
-
-	public weak var hostLayer: Layer? {
-		didSet { handleTransferOfGesture(panGestureRecognizer, oldValue, hostLayer) }
-	}
-
-	public convenience init(_ handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
-		self.init(handler: handler)
-	}
-
-	public init(minimumNumberOfTouches: Int = 1, maximumNumberOfTouches: Int = Int.max, cancelsTouchesInLayer: Bool = true, handler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
-		panGestureHandler = PanGestureHandler(actionHandler: handler)
-		panGestureRecognizer = UIPanGestureRecognizer(target: panGestureHandler, action: "handleGestureRecognizer:")
-		panGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
-		panGestureRecognizer.minimumNumberOfTouches = minimumNumberOfTouches
-		panGestureRecognizer.maximumNumberOfTouches = maximumNumberOfTouches
-	}
-
-	deinit {
-		panGestureRecognizer.removeTarget(panGestureHandler, action: "handleGestureRecognizer:")
-	}
-
-	public struct State {
-		public let phase: ContinuousGesturePhase
-		public let centroidSequence: TouchSequence<Int>
-	}
-
-	@objc class PanGestureHandler: NSObject {
-		private let actionHandler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()
-		private var centroidSequence: TouchSequence<Int>?
-
-		init(actionHandler: (phase: ContinuousGesturePhase, centroidSequence: TouchSequence<Int>) -> ()) {
-			self.actionHandler = actionHandler
-		}
-
-		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-			let panGesture = gestureRecognizer as UIPanGestureRecognizer
-			switch panGesture.state {
-			case .Began:
-				// Reset the gesture to record translation relative to the starting centroid; we'll interpret subsequent translations as centroid positions.
-				let centroidWindowLocation = panGesture.locationInView(nil)
-				panGesture.setTranslation(centroidWindowLocation, inView: nil)
-
-				struct IDState { static var nextCentroidSequenceID = 0 }
-				centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: Timestamp.currentTimestamp)], id: IDState.nextCentroidSequenceID)
-				IDState.nextCentroidSequenceID++
-			case .Changed, .Ended, .Cancelled:
-				centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(panGesture.translationInView(panGesture.view!.window!)), timestamp: Timestamp.currentTimestamp))
-			case .Possible, .Failed:
-				fatalError("Unexpected gesture state")
-			}
-
-			actionHandler(phase: ContinuousGesturePhase(panGesture.state)!, centroidSequence: centroidSequence!)
-
-			switch panGesture.state {
-			case .Ended, .Cancelled:
-				centroidSequence = nil
-			case .Began, .Changed, .Possible, .Failed:
-				break
-			}
-		}
-	}
-}
+public protocol GestureType: _GestureType {}
 
 private func handleTransferOfGesture(gesture: UIGestureRecognizer, fromLayer: Layer?, toLayer: Layer?) {
 	if fromLayer !== toLayer {
