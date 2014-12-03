@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Dynamic animation APIs
+
 extension Layer {
 	/** Provides access to a collection of dynamic animators for the properties on this layer.
 		If you want a layer to animate towards a point in a physical fashion (i.e. with speed
@@ -149,6 +151,49 @@ public class Animator<Target: AnimatorValueConvertible> {
 	}
 }
 
+// MARK: - Traditional time-based animation APIs
+// TODO: Revisit. Don't really like these yet.
+
+extension Layer {
+	/** Traditional cubic bezier animation curves. */
+	public enum AnimationCurve {
+		case Linear
+		case EaseIn
+		case EaseOut
+		case EaseInOut
+	}
+
+	/** Implicitly animates all animatable changes made inside the animations block and calls the
+		completion handler when they're complete. Attempts to compose reasonably with animations
+		that are already in flight, but that's not always possible. If you're looking to take into
+		account initial velocity or to have a more realistic physical simulation, see Layer.animators. */
+	public class func animateWithDuration(duration: NSTimeInterval, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
+		animateWithDuration(duration, curve: .EaseInOut, animations: animations, completionHandler: completionHandler)
+	}
+
+	/** Implicitly animates all animatable changes made inside the animations block and calls the
+		completion handler when they're complete. Attempts to compose reasonably with animations
+		that are already in flight, but that's not always possible. If you're looking to take into
+		account initial velocity or to have a more realistic physical simulation, see Layer.animators. */
+	public class func animateWithDuration(duration: NSTimeInterval, curve: AnimationCurve, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
+		var curveOption: UIViewAnimationOptions = nil
+		switch curve {
+		case .Linear:
+			curveOption = .CurveLinear
+		case .EaseIn:
+			curveOption = .CurveEaseIn
+		case .EaseOut:
+			curveOption = .CurveEaseOut
+		case .EaseInOut:
+			curveOption = .CurveEaseInOut
+		}
+		UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction | curveOption, animations: animations, completion: { _ in completionHandler?(); return })
+	}
+
+}
+
+// MARK: - Internal interfaces
+
 @objc private class AnimationDelegate: NSObject, POPAnimationDelegate {
 	var completionHandler: (() -> Void)?
 
@@ -193,35 +238,3 @@ extension Color: AnimatorValueConvertible {
 }
 
 private var layersToAnimatorStores = [Layer: LayerAnimatorStore]()
-
-// TODO: Revisit. Don't really like these yet.
-
-extension Layer {
-
-	public enum AnimationCurve {
-		case Linear
-		case EaseIn
-		case EaseOut
-		case EaseInOut
-	}
-
-	public class func animateWithDuration(duration: NSTimeInterval, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
-		animateWithDuration(duration, curve: .EaseInOut, animations: animations, completionHandler: completionHandler)
-	}
-
-	public class func animateWithDuration(duration: NSTimeInterval, curve: AnimationCurve, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
-		var curveOption: UIViewAnimationOptions = nil
-		switch curve {
-		case .Linear:
-			curveOption = .CurveLinear
-		case .EaseIn:
-			curveOption = .CurveEaseIn
-		case .EaseOut:
-			curveOption = .CurveEaseOut
-		case .EaseInOut:
-			curveOption = .CurveEaseInOut
-		}
-		UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction | curveOption, animations: animations, completion: { _ in completionHandler?(); return })
-	}
-	
-}
