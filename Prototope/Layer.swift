@@ -56,6 +56,14 @@ public class Layer: Equatable, Hashable {
 		imageDidChange()
 	}
 
+	/** Creates a Prototope Layer by wrapping a CALayer. The result may not have
+	access to all the normal Prototope functionality--beware! You should mostly
+	control this Layer via CALayer's APIs, not Prototope's. */
+	public convenience init(wrappingCALayer: CALayer, name: String? = nil) {
+		let wrappingView = CALayerWrappingView(wrappedLayer: wrappingCALayer)
+		self.init(wrappingView: wrappingView, name: name)
+	}
+
 	/** Layers have an optional name that can be used to find them via various
 		convenience methods. Defaults to nil. */
 	public let name: String?
@@ -596,6 +604,28 @@ public class Layer: Equatable, Hashable {
 			if !handleTouches(touches, event: event, touchesHandler: touchesCancelledHandler, touchHandler: touchCancelledHandler, touchSequenceMappingMergeFunction: -) {
 				super.touchesCancelled(touches, withEvent: event)
 			}
+		}
+	}
+
+	// MARK: CALayerWrappingView
+
+	class CALayerWrappingView: UIView {
+		let wrappedLayer: CALayer
+		init(wrappedLayer: CALayer) {
+			self.wrappedLayer = wrappedLayer
+
+			super.init(frame: wrappedLayer.frame)
+
+			layer.addSublayer(wrappedLayer)
+			setNeedsLayout()
+		}
+
+		required init(coder aDecoder: NSCoder) {
+			fatalError("init(coder:) has intentionally not been implemented")
+		}
+
+		override func layoutSubviews() {
+			wrappedLayer.frame = bounds
 		}
 	}
 }
