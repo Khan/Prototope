@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */; };
+		EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */; };
 		EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */; };
 		EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */; };
