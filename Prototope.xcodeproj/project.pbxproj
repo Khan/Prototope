@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */; };
+		EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */; };
+		EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */; };
+		EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */; };
 		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
@@ -120,6 +124,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFTunableSpec.h; path = ThirdParty/TunableSpec/KFTunableSpec.h; sourceTree = "<group>"; };
+		EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KFTunableSpec.m; path = ThirdParty/TunableSpec/KFTunableSpec.m; sourceTree = "<group>"; };
+		EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TunableSpec.swift; path = ThirdParty/TunableSpec/TunableSpec.swift; sourceTree = "<group>"; };
+		EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tunable.swift; sourceTree = "<group>"; };
 		EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = ThirdParty/pop/pop.xcodeproj; sourceTree = "<group>"; };
 		EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -184,10 +192,21 @@
 		9EC148211A20FB1C004C7129 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				EB04E5D01A6606D500FD1EE3 /* TunableSpec */,
 				EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */,
 			);
 			name = ThirdParty;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		EB04E5D01A6606D500FD1EE3 /* TunableSpec */ = {
+			isa = PBXGroup;
+			children = (
+				EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */,
+				EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */,
+				EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */,
+			);
+			name = TunableSpec;
 			sourceTree = "<group>";
 		};
 		EB12A83C1A19A6AC0018C229 /* Products */ = {
@@ -270,6 +289,7 @@
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
 				EB8BC1C91A2CE7B5005E799C /* Border.swift */,
 				EBF59A931A2E2B5000AB8C67 /* Shadow.swift */,
+				EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */,
 				EB1C2A6419E4B534000DC2C1 /* Color.swift */,
 				EBE17A0519E65D1B00C308E5 /* Timing.swift */,
 				EBE17A0719E65E5500C308E5 /* Animation.swift */,
@@ -309,6 +329,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,11 +526,14 @@
 			files = (
 				EBE3A77519DF79E900A77736 /* Layer.swift in Sources */,
 				EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */,
+				EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */,
+				EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */,
 				EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */,
 				EB50FA1219F04A07007A3C32 /* Image.swift in Sources */,
 				EBB3505F1A166E690046AD07 /* Dictionary+Extensions.swift in Sources */,
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
+				EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */,
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
 				EBF59A941A2E2B5000AB8C67 /* Shadow.swift in Sources */,
 				EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */,

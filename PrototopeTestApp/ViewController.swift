@@ -17,17 +17,16 @@ class ViewController: UIViewController {
 		Layer.setRoot(fromView: view)
 
 		for i in 0..<5 {
-			let layer = makeRedLayer("Layer \(i)")
-			layer.y = Double(i) * 250
+			let layer = makeRedLayer("Layer \(i)", Double(i) * 250)
 		}
 	}
 
 }
 
-func makeRedLayer(name: String) -> Layer {
+func makeRedLayer(name: String, y: Double) -> Layer {
 	let redLayer = Layer(parent: Layer.root, name: name)
 	redLayer.image = Image(name: "paint")
-	redLayer.frame.origin = Point(x: 50, y: 50)
+	tunable(50, name: "x") { value in redLayer.frame.origin = Point(x: value, y: y) }
 	redLayer.backgroundColor = Color.red
 	redLayer.cornerRadius = 10
 	redLayer.border = Border(color: Color.black, width: 4)
@@ -43,9 +42,11 @@ func makeRedLayer(name: String) -> Layer {
 		}
 	})
 	redLayer.gestures.append(TapGesture { location in
-		Sound(name: "Glass").play()
-		redLayer.animators.frame.target = Rect(x: 30, y: 30, width: 50, height: 50)
-		redLayer.animators.frame.completionHandler = { println("Converged") }
+		if tunable(true, name: "shrinks when tapped") {
+			Sound(name: "Glass").play()
+			redLayer.animators.frame.target = Rect(x: 30, y: 30, width: 50, height: 50)
+			redLayer.animators.frame.completionHandler = { println("Converged") }
+		}
 	})
 	return redLayer
 }

@@ -7,3 +7,4 @@
 //
 
 #import <pop/POP.h>
+#import "KFTunableSpec.h"
