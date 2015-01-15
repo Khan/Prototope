@@ -27,6 +27,23 @@ public struct Color {
 		uiColor = UIColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: CGFloat(brightness), alpha: CGFloat(alpha))
 	}
 
+	/** Construct a color from a hex value and with alpha from 0.0 - 1.0.
+		i.e. Color(hex: 0x336699, alpha: 0.2)
+	 */
+	public init(hex: UInt32, alpha: Float) {
+	    var r = CGFloat((hex >> 16) & 0xff) / 255.0
+	    var g = CGFloat((hex >> 8) & 0xff) / 255.0
+	    var b = CGFloat(hex & 0xff) / 255.0
+	    uiColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(alpha))
+	}
+
+	/** Construct an opaque color from a hex value
+		i.e. Color(hex: 0x336699)
+	 */
+	public init(hex: UInt32) {
+		self.init(hex: hex, alpha: 1.0)
+	}
+
 	/** Constructs a Color from a UIColor. */
 	init(_ uiColor: UIColor) {
 		self.uiColor = uiColor
