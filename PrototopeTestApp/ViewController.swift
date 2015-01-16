@@ -33,7 +33,9 @@ func makeRedLayer(name: String, y: Double) -> Layer {
 	redLayer.shadow = Shadow(color: Color.black, alpha: 0.75, offset: Size(), radius: 10)
 
 	redLayer.gestures.append(PanGesture{ phase, centroidSequence in
-		if let previousSample = centroidSequence.previousSample {
+		if phase == .Began {
+			redLayer.animators.position.stop()
+    	} else if let previousSample = centroidSequence.previousSample {
 			redLayer.position += (centroidSequence.currentSample.globalLocation - previousSample.globalLocation)
 		}
 		if phase == .Ended {
