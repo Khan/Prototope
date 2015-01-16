@@ -144,7 +144,7 @@ public class Animator<Target: AnimatorValueConvertible> {
 			animation.springSpeed = CGFloat(springSpeed)
 			animation.springBounciness = CGFloat(springBounciness)
 			animation.toValue = target?.toAnimatorValue()
-			if let velocityValue: AnyObject = target?.toAnimatorValue() {
+			if let velocityValue: AnyObject = velocity?.toAnimatorValue() {
 				animation.velocity = velocityValue
 			}
 		}
