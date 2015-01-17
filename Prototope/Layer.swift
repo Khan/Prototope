@@ -11,7 +11,7 @@ import UIKit
 /**
 	Layers are the fundamental building block of Prototope.
 
-    A layer displays content (a color, an image, etc.) and can route touch events.
+	A layer displays content (a color, an image, etc.) and can route touch events.
 
 	Layers are stored in a tree. It's possible to make a layer without a parent, but
 	only layers in the tree starting at Layer.root will be displayed.
@@ -307,7 +307,7 @@ public class Layer: Equatable, Hashable {
 		get { return Double(layer.cornerRadius) }
 		set {
 			layer.cornerRadius = CGFloat(newValue)
-			layer.masksToBounds = layer.cornerRadius > 0
+			layer.masksToBounds = self._shouldMaskToBounds()
 		}
 	}
 
@@ -342,6 +342,7 @@ public class Layer: Equatable, Hashable {
 			layer.shadowOpacity = Float(newValue.alpha)
 			layer.shadowOffset = CGSize(newValue.offset)
 			layer.shadowRadius = CGFloat(newValue.radius)
+			layer.masksToBounds = self._shouldMaskToBounds()
 		}
 	}
 
@@ -355,16 +356,16 @@ public class Layer: Equatable, Hashable {
 	// MARK: Touches and gestures
 
 	/** An array of the layer's gestures. Append a gesture to this list to add it to the layer.
-	
+
 		Gestures are like a higher-level abstraction than the Layer touch handler API. For
 		instance, a pan gesture consumes a series of touch events but does not actually begin
 		until the user moves a certain distance with a specified number of fingers.
-	
+
 		Gestures can also be exclusive: by default, if a gesture recognizes, traditional
 		touch handlers for that subtree will be cancelled. You can control this with the
 		cancelsTouchesInView property. Also by default, if one gesture recognizes, it will
 		prevent all other gestures involved in that touch from recognizing.
-	
+
 		Defaults to the empty list. */
 	public var gestures: [GestureType] = [] {
 		didSet {
@@ -444,7 +445,7 @@ public class Layer: Equatable, Hashable {
 	/** A handler for when touches are cancelled. This may happen because a gesture with
 		cancelsTouchesInView set to true has recognized, because of palm rejection, or because
 		a system event (like a system gesture) has cancelled the touch.
-	
+
 		See TouchesHandler documentation for more details. */
 	public var touchesCancelledHandler: TouchesHandler? {
 		get { return imageView?.touchesCancelledHandler }
@@ -493,6 +494,34 @@ public class Layer: Equatable, Hashable {
 		})
 	}
 
+	private func _shouldMaskToBounds() -> Bool {
+		if let image = image {
+			if (self.shadow.alpha > 0 && self.cornerRadius > 0) {
+				var prefix: String = "layers"
+				if let offendingLayer = self.name {
+					prefix = "your layer '\(offendingLayer)'"
+				}
+				// in this case unless you have a complex hierarchy,
+				// you should probably use a rounded image.
+				fatalError("⚠️ \(prefix) can't have images, shadows and corner radii set all at the same time. 😣")
+				return false
+			}
+
+			// don't set masksToBounds unless you have an image and a corner radius
+			if (self.cornerRadius > 0) {
+				return true
+			}
+		}
+
+		// if you have a shadow set but no image, don't clip so you can see the shadow
+		if (self.shadow.alpha > 0) {
+			return false
+		}
+
+		// otherwise, always clip (making sublayers easier to crop/etc by default)
+		return true
+	}
+
 	// MARK: - Internal interfaces
 
 	private func updateTransform() {
@@ -508,6 +537,7 @@ public class Layer: Equatable, Hashable {
 		if let image = image {
 			imageView?.image = image.uiImage
 			size = image.size
+			layer.masksToBounds = self._shouldMaskToBounds()
 		}
 	}
 
