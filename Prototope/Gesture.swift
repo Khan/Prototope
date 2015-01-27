@@ -268,6 +268,79 @@ public class PanGesture: GestureType {
 	}
 }
 
+/** A rotation gesture recognizes a standard iOS rotation: it doesn't begin until the user's moved some number of points, then it tracks new touches coming and going over time as well as rotation relative to the beginning of the gesture and the current rotation velocity. It exposes simple access to the path of the center of all the touches and the rotation and rotation velocity values. */
+public class RotationGesture: GestureType {
+    /** The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation), rotation relative to the state at the beginning 
+    of the gesture in radians, rotation velocity in radians per second and also a touch sequence representing the center of all the touches involved in the rotation gesture. */
+    public convenience init(_ handler: (phase: ContinuousGesturePhase, rotationRadians: Double, rotationVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()) {
+        self.init(handler: handler)
+    }
+    
+    /** 
+    
+    When cancelsTouchesInLayer is true, touches being handled via touchXXXHandlers will be cancelled
+    (and touch[es]CancelledHandler will be invoked) when the gesture recognizes.
+    
+    The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation), rotation relative to the state at the beginning
+    of the gesture in radians, rotation velocity in radians per second and also a touch sequence representing the center of all the touches involved in the rotation gesture. */
+    public init(cancelsTouchesInLayer: Bool = true, handler: (phase: ContinuousGesturePhase, rotationRadians: Double, rotationVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()) {
+        rotationGestureHandler = RotationGestureHandler(actionHandler: handler)
+        rotationGestureRecognizer = UIRotationGestureRecognizer(target: rotationGestureHandler, action: "handleGestureRecognizer:")
+        rotationGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
+    }
+    
+    private let rotationGestureRecognizer: UIRotationGestureRecognizer
+    private let rotationGestureHandler: RotationGestureHandler
+    
+    public weak var hostLayer: Layer? {
+        didSet { handleTransferOfGesture(rotationGestureRecognizer, oldValue, hostLayer) }
+    }
+    
+    deinit {
+        rotationGestureRecognizer.removeTarget(rotationGestureHandler, action: "handleGestureRecognizer:")
+    }
+    
+    @objc class RotationGestureHandler: NSObject {
+        private let actionHandler: (phase: ContinuousGesturePhase, rotationRadians: Double, rotationVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()
+        private var centroidSequence: TouchSequence<Int>?
+        
+        init(actionHandler: (phase: ContinuousGesturePhase, rotationRadians: Double, rotationVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()) {
+            self.actionHandler = actionHandler
+        }
+        
+        func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+            let rotationGesture = gestureRecognizer as UIRotationGestureRecognizer
+            switch rotationGesture.state {
+            case .Began:
+                // Reset the gesture to record rotation relative to the starting rotation
+                let centroidWindowLocation = rotationGesture.locationInView(nil)
+                
+                struct IDState { static var nextCentroidSequenceID = 0 }
+                centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: Timestamp.currentTimestamp)], id: IDState.nextCentroidSequenceID)
+                IDState.nextCentroidSequenceID++
+            case .Changed, .Ended, .Cancelled:
+                let centroid = rotationGesture.locationInView(nil)
+                centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(centroid), timestamp: Timestamp.currentTimestamp))
+            case .Possible, .Failed:
+                fatalError("Unexpected gesture state")
+            }
+            
+            let rotation = rotationGesture.rotation
+            let velocity = rotationGesture.velocity
+            actionHandler(phase: ContinuousGesturePhase(rotationGesture.state)!, rotationRadians: Double(rotation), rotationVelocity: Double(velocity), centroidSequence: centroidSequence!)
+            
+            switch rotationGesture.state {
+            case .Ended, .Cancelled:
+                centroidSequence = nil
+            case .Began, .Changed, .Possible, .Failed:
+                break
+            }
+        }
+    }
+}
+
 /** Continuous gestures are different from discrete gestures in that they pass through several phases.
 	A discrete gesture simply recognizes--then it's done. A continuous gesture begins, then may change
 	over the course of several events, then ends (or is cancelled). */
