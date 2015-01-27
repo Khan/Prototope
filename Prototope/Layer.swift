@@ -238,8 +238,13 @@ public class Layer: Equatable, Hashable {
 
 	/** The rotation of the layer specified in radians. May be used interchangeably with
 	rotationDegrees. Defaults to 0. */
-	public var rotationRadians: Double = 0 {
-		didSet { updateTransform() }
+	public var rotationRadians: Double {
+        get {
+            return layer.valueForKeyPath("transform.rotation.z") as Double
+        }
+		set {
+            layer.setValue(newValue, forKeyPath: "transform.rotation.z")
+        }
 	}
 
 	/** The scaling factor of the layer. Setting this value will set both scaleX and scaleY
@@ -253,13 +258,23 @@ public class Layer: Equatable, Hashable {
 	}
 
 	/** The scaling factor of the layer along the x dimension. Defaults to 1. */
-	public var scaleX: Double = 1 {
-		didSet { updateTransform() }
+	public var scaleX: Double {
+        get {
+            return layer.valueForKeyPath("transform.scale.x") as Double
+        }
+        set {
+            layer.setValue(newValue, forKeyPath: "transform.scale.x")
+        }
 	}
 
 	/** The scaling factor of the layer along the y dimension. Defaults to 1. */
-	public var scaleY: Double = 1 {
-		didSet { updateTransform() }
+	public var scaleY: Double {
+        get {
+            return layer.valueForKeyPath("transform.scale.y") as Double
+        }
+        set {
+            layer.setValue(newValue, forKeyPath: "transform.scale.y")
+        }
 	}
 
 	/** Returns the layer's position in the root layer's coordinate space. */
@@ -523,10 +538,6 @@ public class Layer: Equatable, Hashable {
 	}
 
 	// MARK: - Internal interfaces
-
-	private func updateTransform() {
-		layer.transform = CATransform3DRotate(CATransform3DMakeScale(CGFloat(scaleX), CGFloat(scaleY), 1), CGFloat(rotationRadians), 0, 0, 1)
-	}
 
 	private func parentDidChange() {
 		parentView = parent?.view
