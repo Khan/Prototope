@@ -36,18 +36,20 @@ import Foundation
 	3. Copy and paste the contents into TunableSpec.json in your project (included with OhaiPrototope). */
 
 /** Returns the tunable value stored in TunableValues.json under `name`. If none is present, returns `defaultValue`. */
-public func tunable(defaultValue: Double, #name: String) -> Double {
+public func tunable(defaultValue: Double, #name: String, min: Double? = nil, max: Double? = nil) -> Double {
 	if let specItem = defaultSpec._KFSpecItemForKey(name) {
 		return (specItem.objectValue as NSNumber).doubleValue
 	} else {
-		defaultSpec.addDoubleSpecItemForKey(name, defaultValue: defaultValue)
+        let minValue = min ?? 0
+        let maxValue = max ?? 2 * defaultValue
+		defaultSpec.addDoubleSpecItemForKey(name, defaultValue: defaultValue, minValue: minValue, maxValue: maxValue)
 		return defaultValue
 	}
 }
 
 /** Whenever the named tunable value changes, runs `maintain` with the new value. Runs `maintain` once initially with the existing or default value. */
-public func tunable(defaultValue: Double, #name: String, #maintain: Double -> Void) {
-	tunable(defaultValue, name: name) // Make sure it exists
+public func tunable(defaultValue: Double, #name: String, min: Double? = nil, max: Double? = nil, #maintain: Double -> Void) {
+    tunable(defaultValue, name: name, min: min, max: max) // Make sure it exists
 	defaultSpec.withDoubleForKey(name, owner: UIApplication.sharedApplication(), maintain: { owner, value in maintain(value) })
 }
 
