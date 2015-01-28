@@ -314,7 +314,6 @@ public class RotationGesture: GestureType {
             let rotationGesture = gestureRecognizer as UIRotationGestureRecognizer
             switch rotationGesture.state {
             case .Began:
-                // Reset the gesture to record rotation relative to the starting rotation
                 let centroidWindowLocation = rotationGesture.locationInView(nil)
                 
                 struct IDState { static var nextCentroidSequenceID = 0 }
