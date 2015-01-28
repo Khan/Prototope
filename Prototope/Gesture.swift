@@ -294,6 +294,78 @@ public class RotationGesture: GestureType {
     }
 }
 
+/** A pinch gesture recognizes a standard iOS pinch: it doesn't begin until the user's moved some number of points, then it tracks new touches coming and going over time as well as scale relative to the beginning of the gesture and the current scale velocity. It exposes simple access to the path of the center of all the touches and the scale and scale velocity values. */
+public class PinchGesture: GestureType {
+    /** The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation), scale relative to the state at the beginning
+    of the gesture, scale velocity in scale per second and also a touch sequence representing the center of all the touches involved in the pinch gesture. */
+    public convenience init(_ handler: (phase: ContinuousGesturePhase, scale: Double, scaleVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()) {
+        self.init(handler: handler)
+    }
+    
+    /**
+    
+    When cancelsTouchesInLayer is true, touches being handled via touchXXXHandlers will be cancelled
+    (and touch[es]CancelledHandler will be invoked) when the gesture recognizes.
+    
+    The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation), scale relative to the state at the beginning
+    of the gesture, scale velocity in scale per second and also a touch sequence representing the center of all the touches involved in the pinch gesture. */
+    public init(cancelsTouchesInLayer: Bool = true, handler: (phase: ContinuousGesturePhase, scale: Double, scaleVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()) {
+        pinchGestureHandler = PinchGestureHandler(actionHandler: handler)
+        pinchGestureRecognizer = UIPinchGestureRecognizer(target: pinchGestureHandler, action: "handleGestureRecognizer:")
+        pinchGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
+    }
+    
+    private let pinchGestureRecognizer: UIPinchGestureRecognizer
+    private let pinchGestureHandler: PinchGestureHandler
+    
+    public weak var hostLayer: Layer? {
+        didSet { handleTransferOfGesture(pinchGestureRecognizer, oldValue, hostLayer) }
+    }
+    
+    deinit {
+        pinchGestureRecognizer.removeTarget(pinchGestureHandler, action: "handleGestureRecognizer:")
+    }
+    
+    @objc class PinchGestureHandler: NSObject {
+        private let actionHandler: (phase: ContinuousGesturePhase, scale: Double, scaleVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()
+        private var centroidSequence: TouchSequence<Int>?
+        
+        init(actionHandler: (phase: ContinuousGesturePhase, scale: Double, scaleVelocity: Double, centroidSequence: TouchSequence<Int>) -> ()) {
+            self.actionHandler = actionHandler
+        }
+        
+        func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+            let pinchGesture = gestureRecognizer as UIPinchGestureRecognizer
+            switch pinchGesture.state {
+            case .Began:
+                let centroidWindowLocation = pinchGesture.locationInView(nil)
+                
+                struct IDState { static var nextCentroidSequenceID = 0 }
+                centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: Timestamp.currentTimestamp)], id: IDState.nextCentroidSequenceID)
+                IDState.nextCentroidSequenceID++
+            case .Changed, .Ended, .Cancelled:
+                let centroid = pinchGesture.locationInView(nil)
+                centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(centroid), timestamp: Timestamp.currentTimestamp))
+            case .Possible, .Failed:
+                fatalError("Unexpected gesture state")
+            }
+            
+            let scale = pinchGesture.scale
+            let velocity = pinchGesture.velocity
+            actionHandler(phase: ContinuousGesturePhase(pinchGesture.state)!, scale: Double(scale), scaleVelocity: Double(velocity), centroidSequence: centroidSequence!)
+            
+            switch pinchGesture.state {
+            case .Ended, .Cancelled:
+                centroidSequence = nil
+            case .Began, .Changed, .Possible, .Failed:
+                break
+            }
+        }
+    }
+}
+
 /** Continuous gestures are different from discrete gestures in that they pass through several phases.
 	A discrete gesture simply recognizes--then it's done. A continuous gesture begins, then may change
 	over the course of several events, then ends (or is cancelled). */
