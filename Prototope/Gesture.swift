@@ -268,7 +268,7 @@ public class PanGesture: GestureType {
 	}
 }
 
-/** A rotation gesture recognizes a standard iOS rotation: it doesn't begin until the user's moved some number of points, then it tracks new touches coming and going over time as well as rotation relative to the beginning of the gesture and the current rotation velocity. It exposes simple access to the path of the center of all the touches and the rotation and rotation velocity values. */
+/** A rotation gesture recognizes a standard iOS rotation: it doesn't begin until the user's rotated by some number of degrees, then it tracks new touches coming and going over time as well as rotation relative to the beginning of the gesture and the current rotation velocity. It exposes simple access to the path of the center of all the touches and the rotation and rotation velocity values. */
 public class RotationGesture: GestureType {
     /** The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
     phase (see ContinuousGesturePhase documentation), rotation relative to the state at the beginning 
