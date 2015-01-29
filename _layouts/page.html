@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+  </header>
+
+  <article class="post-content">
+    {{ content }}
+  </article>
+
+</div>
+
+
+<!-- TODO: minify/concat all js -->
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="{{ "/js/underscore-min.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/app.js" | prepend: site.baseurl }}"></script>
