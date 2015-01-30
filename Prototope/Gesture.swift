@@ -196,7 +196,7 @@ public class PanGesture: GestureType {
 	}
 }
 
-/** A rotation gesture represents the state of a rotation gesture at a single point in time */
+/** A rotation sample represents the state of a rotation gesture at a single point in time */
 public struct RotationSample: SampleType {
     public let rotationRadians: Double
     public let velocity: Double
