@@ -16,11 +16,21 @@
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
 		EB1C2A7819E4D1CE000DC2C1 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EB1C2A7C19E4D2B8000DC2C1 /* Prototope.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB2D4BC91A7C9089005A67EE /* JSTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D4BC81A7C9089005A67EE /* JSTest.swift */; };
+		EB2D4BCB1A7C9136005A67EE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2D4BCA1A7C9136005A67EE /* JavaScriptCore.framework */; };
+		EB2D4BCC1A7C9154005A67EE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2D4BCA1A7C9136005A67EE /* JavaScriptCore.framework */; };
 		EB306C0F19DF77CC00113FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */; };
 		EB306C1119DF77CC00113FA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB306C1019DF77CC00113FA3 /* ViewController.swift */; };
 		EB306C1419DF77CD00113FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1219DF77CD00113FA3 /* Main.storyboard */; };
 		EB306C1619DF77CD00113FA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1519DF77CD00113FA3 /* Images.xcassets */; };
 		EB306C1919DF77CD00113FA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1719DF77CD00113FA3 /* LaunchScreen.xib */; };
+		EB453D941A7AB0B2006F2A72 /* PrototopeJSBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB453D9A1A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
+		EB453DA31A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB453DA21A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift */; };
+		EB453DA61A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
+		EB453DA71A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB453DB11A7AB116006F2A72 /* LayerBridge.swift */; };
+		EB453DB31A7AB17B006F2A72 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EB50FA1219F04A07007A3C32 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50FA1119F04A07007A3C32 /* Image.swift */; };
 		EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
@@ -83,6 +93,27 @@
 			remoteGlobalIDString = EBE3A75519DF79C400A77736;
 			remoteInfo = Prototope;
 		};
+		EB453D9B1A7AB0B2006F2A72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB453D8E1A7AB0B2006F2A72;
+			remoteInfo = PrototopeJSBridge;
+		};
+		EB453D9D1A7AB0B2006F2A72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB306C0819DF77CC00113FA3;
+			remoteInfo = PrototopeTestApp;
+		};
+		EB453DA41A7AB0B2006F2A72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB453D8E1A7AB0B2006F2A72;
+			remoteInfo = PrototopeJSBridge;
+		};
 		EBE3A76819DF79C400A77736 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -117,6 +148,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				EBE3A76B19DF79C400A77736 /* Prototope.framework in Embed Frameworks */,
+				EB453DA71A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +167,8 @@
 		EB1C2A6F19E4D19B000DC2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB1C2A7519E4D1AB000DC2C1 /* PrototopeTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PrototopeTests-Bridging-Header.h"; path = "PrototopeTests/PrototopeTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
+		EB2D4BC81A7C9089005A67EE /* JSTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSTest.swift; sourceTree = "<group>"; };
+		EB2D4BCA1A7C9136005A67EE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrototopeTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB306C0D19DF77CC00113FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +176,13 @@
 		EB306C1319DF77CD00113FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB306C1519DF77CD00113FA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EB306C1819DF77CD00113FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PrototopeJSBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB453D921A7AB0B2006F2A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrototopeJSBridge.h; sourceTree = "<group>"; };
+		EB453D991A7AB0B2006F2A72 /* PrototopeJSBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeJSBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB453DA11A7AB0B2006F2A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB453DA21A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototopeJSBridgeTests.swift; sourceTree = "<group>"; };
+		EB453DB11A7AB116006F2A72 /* LayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerBridge.swift; sourceTree = "<group>"; };
 		EB50FA1119F04A07007A3C32 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
@@ -174,7 +215,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB2D4BCB1A7C9136005A67EE /* JavaScriptCore.framework in Frameworks */,
 				EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */,
+				EB453DA61A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB453D8B1A7AB0B2006F2A72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB2D4BCC1A7C9154005A67EE /* JavaScriptCore.framework in Frameworks */,
+				EB453DB31A7AB17B006F2A72 /* Prototope.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB453D961A7AB0B2006F2A72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB453D9A1A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,9 +303,12 @@
 		EB306C0019DF77CC00113FA3 = {
 			isa = PBXGroup;
 			children = (
+				EB2D4BCA1A7C9136005A67EE /* JavaScriptCore.framework */,
 				EB306C3319DF78A900113FA3 /* Prototope */,
 				EB1C2A6D19E4D19B000DC2C1 /* PrototopeTests */,
 				EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */,
+				EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */,
+				EB453D9F1A7AB0B2006F2A72 /* PrototopeJSBridgeTests */,
 				EB306C0A19DF77CC00113FA3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -256,6 +319,8 @@
 				EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */,
 				EBE3A75619DF79C400A77736 /* Prototope.framework */,
 				EB1C2A6C19E4D19B000DC2C1 /* PrototopeTests.xctest */,
+				EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */,
+				EB453D991A7AB0B2006F2A72 /* PrototopeJSBridgeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -265,6 +330,7 @@
 			children = (
 				EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */,
 				EB306C1019DF77CC00113FA3 /* ViewController.swift */,
+				EB2D4BC81A7C9089005A67EE /* JSTest.swift */,
 				EB306C1219DF77CD00113FA3 /* Main.storyboard */,
 				EB306C1519DF77CD00113FA3 /* Images.xcassets */,
 				EB306C1719DF77CD00113FA3 /* LaunchScreen.xib */,
@@ -306,6 +372,41 @@
 			path = Prototope;
 			sourceTree = "<group>";
 		};
+		EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */ = {
+			isa = PBXGroup;
+			children = (
+				EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */,
+				EB453D911A7AB0B2006F2A72 /* Supporting Files */,
+				EB453DB11A7AB116006F2A72 /* LayerBridge.swift */,
+			);
+			path = PrototopeJSBridge;
+			sourceTree = "<group>";
+		};
+		EB453D911A7AB0B2006F2A72 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB453D921A7AB0B2006F2A72 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB453D9F1A7AB0B2006F2A72 /* PrototopeJSBridgeTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB453DA21A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift */,
+				EB453DA01A7AB0B2006F2A72 /* Supporting Files */,
+			);
+			path = PrototopeJSBridgeTests;
+			sourceTree = "<group>";
+		};
+		EB453DA01A7AB0B2006F2A72 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB453DA11A7AB0B2006F2A72 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EBB3505D1A166E5E0046AD07 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +426,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		EB453D8C1A7AB0B2006F2A72 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB453D941A7AB0B2006F2A72 /* PrototopeJSBridge.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBE3A75319DF79C400A77736 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,11 +478,49 @@
 			dependencies = (
 				EBE3A76919DF79C400A77736 /* PBXTargetDependency */,
 				EBE3A76D19DF79C400A77736 /* PBXTargetDependency */,
+				EB453DA51A7AB0B2006F2A72 /* PBXTargetDependency */,
 			);
 			name = PrototopeTestApp;
 			productName = Prototope;
 			productReference = EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB453DAF1A7AB0B2006F2A72 /* Build configuration list for PBXNativeTarget "PrototopeJSBridge" */;
+			buildPhases = (
+				EB453D8A1A7AB0B2006F2A72 /* Sources */,
+				EB453D8B1A7AB0B2006F2A72 /* Frameworks */,
+				EB453D8C1A7AB0B2006F2A72 /* Headers */,
+				EB453D8D1A7AB0B2006F2A72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PrototopeJSBridge;
+			productName = PrototopeJSBridge;
+			productReference = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EB453D981A7AB0B2006F2A72 /* PrototopeJSBridgeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB453DB01A7AB0B2006F2A72 /* Build configuration list for PBXNativeTarget "PrototopeJSBridgeTests" */;
+			buildPhases = (
+				EB453D951A7AB0B2006F2A72 /* Sources */,
+				EB453D961A7AB0B2006F2A72 /* Frameworks */,
+				EB453D971A7AB0B2006F2A72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB453D9C1A7AB0B2006F2A72 /* PBXTargetDependency */,
+				EB453D9E1A7AB0B2006F2A72 /* PBXTargetDependency */,
+			);
+			name = PrototopeJSBridgeTests;
+			productName = PrototopeJSBridgeTests;
+			productReference = EB453D991A7AB0B2006F2A72 /* PrototopeJSBridgeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		EBE3A75519DF79C400A77736 /* Prototope */ = {
 			isa = PBXNativeTarget;
@@ -410,6 +557,14 @@
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = K5T4H4978B;
 					};
+					EB453D8E1A7AB0B2006F2A72 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = K5T4H4978B;
+					};
+					EB453D981A7AB0B2006F2A72 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = EB306C0819DF77CC00113FA3;
+					};
 					EBE3A75519DF79C400A77736 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -437,6 +592,8 @@
 				EBE3A75519DF79C400A77736 /* Prototope */,
 				EB306C0819DF77CC00113FA3 /* PrototopeTestApp */,
 				EB1C2A6B19E4D19B000DC2C1 /* PrototopeTests */,
+				EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */,
+				EB453D981A7AB0B2006F2A72 /* PrototopeJSBridgeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -491,6 +648,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB453D8D1A7AB0B2006F2A72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB453D971A7AB0B2006F2A72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBE3A75419DF79C400A77736 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -517,6 +688,23 @@
 			files = (
 				EB306C1119DF77CC00113FA3 /* ViewController.swift in Sources */,
 				EB306C0F19DF77CC00113FA3 /* AppDelegate.swift in Sources */,
+				EB2D4BC91A7C9089005A67EE /* JSTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB453D8A1A7AB0B2006F2A72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB453D951A7AB0B2006F2A72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB453DA31A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +743,21 @@
 			isa = PBXTargetDependency;
 			target = EBE3A75519DF79C400A77736 /* Prototope */;
 			targetProxy = EB1C2A7919E4D1D2000DC2C1 /* PBXContainerItemProxy */;
+		};
+		EB453D9C1A7AB0B2006F2A72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */;
+			targetProxy = EB453D9B1A7AB0B2006F2A72 /* PBXContainerItemProxy */;
+		};
+		EB453D9E1A7AB0B2006F2A72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB306C0819DF77CC00113FA3 /* PrototopeTestApp */;
+			targetProxy = EB453D9D1A7AB0B2006F2A72 /* PBXContainerItemProxy */;
+		};
+		EB453DA51A7AB0B2006F2A72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */;
+			targetProxy = EB453DA41A7AB0B2006F2A72 /* PBXContainerItemProxy */;
 		};
 		EBE3A76919DF79C400A77736 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -748,6 +951,91 @@
 			};
 			name = Release;
 		};
+		EB453DA81A7AB0B2006F2A72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrototopeJSBridge/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EB453DA91A7AB0B2006F2A72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PrototopeJSBridge/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EB453DAA1A7AB0B2006F2A72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrototopeJSBridgeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrototopeTestApp.app/PrototopeTestApp";
+			};
+			name = Debug;
+		};
+		EB453DAB1A7AB0B2006F2A72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrototopeJSBridgeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrototopeTestApp.app/PrototopeTestApp";
+			};
+			name = Release;
+		};
 		EBE3A76F19DF79C400A77736 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -826,6 +1114,24 @@
 			buildConfigurations = (
 				EB306C2919DF77CD00113FA3 /* Debug */,
 				EB306C2A19DF77CD00113FA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB453DAF1A7AB0B2006F2A72 /* Build configuration list for PBXNativeTarget "PrototopeJSBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB453DA81A7AB0B2006F2A72 /* Debug */,
+				EB453DA91A7AB0B2006F2A72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB453DB01A7AB0B2006F2A72 /* Build configuration list for PBXNativeTarget "PrototopeJSBridgeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB453DAA1A7AB0B2006F2A72 /* Debug */,
+				EB453DAB1A7AB0B2006F2A72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
