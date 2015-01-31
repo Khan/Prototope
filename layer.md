@@ -184,12 +184,15 @@ sled: Layer = Layer(nil, "dogesled")
 </li>
 <li class="method">
     <h4>public func containsGlobalPoint(point: Point) -> Bool</h4>
+    <p>Is a point in <code>Layer.root</code>'s coordinate space enclosed by this Layer?
 </li>
 <li class="method">
     <h4>public func convertGlobalPointToLocalPoint(globalPoint: Point) -> Point</h4>
+    <p>Returns a point in the Layer's coordinate space (i.e. if you have somehow captured a touch event in <code>Layer.root</code> but you want to know where in your layer that is)
 </li>
 <li class="method">
     <h4>public func convertLocalPointToGlobalPoint(localPoint: Point) -> Point</h4>
+    <p>Returns a point from your special layer in the coordinate space of <code>Layer.root</code>
 </li>
 </ul>
 
@@ -198,21 +201,30 @@ sled: Layer = Layer(nil, "dogesled")
 <ul>
 <li class="variable">
     <h4>public var backgroundColor: Color?</h4>
+    <p>Sets the background color of the layer. Look at the color docs.
 </li>
 <li class="variable">
     <h4>public var alpha: Double</h4>
+    <p>Sets the opacity of the layer and all its descendents. If you only want to change the opacity of the background color, that can be set in <code>backgroundColor</code> directly.
 </li>
 <li class="variable">
     <h4>public var cornerRadius: Double</h4>
+    <p>Sets how rounded the corners are in device points.
+    <p>By default, setting a corner radius will crop the contents (images) of the layer so that the radius is visible.
 </li>
 <li class="variable">
     <h4>public var image: Image?</h4>
+    <p>Sets an image to be the primary content of the layer.
 </li>
 <li class="variable">
     <h4>public var border: Border</h4>
+    <p>Sets the border properties of the layer.
 </li>
 <li class="variable">
     <h4>public var shadow: Shadow</h4>
+    <p>Sets the shadow of the layer.
+    <p>If a shadow and a corner radius are set, you cannot also have an image in your layer. This is because for corner radius to work, the layer needs to clip its contents, but in order for shadows to work, you can't clip the content.
+    <p>A fix, however, if you want all three, is to round the image (png) outright and then apply a shadow, the Shadow property is set on the opaque portions of a layer's image.
 </li>
 </ul>
 
