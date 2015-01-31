@@ -14,3 +14,20 @@ exclude: [vendor]
 
 # Build settings
 markdown: kramdown
+
+collections:
+  methods:
+    output: false
+    layout: api
+
+  docs:
+    output: true
+    permalink: /api_docs/:path/
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "methods"
+    values:
+      layout: "api"

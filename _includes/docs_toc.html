@@ -1,0 +1,5 @@
+<ul class="api-nav">
+{% for proto_class in site.docs %}
+    <li><a href="{{ site.baseurl }}{{ proto_class.url }}">{{ proto_class.title }}</a></li>
+{% endfor %}
+</ul>

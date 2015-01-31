@@ -1,0 +1,12 @@
+<h2>Class Variables</h2>
+
+{{ content}}
+
+{% for var in page.variables %}
+<li class="{{page.doctype | join: " "}}">
+<h4>{{ var.name }}</h4>
+{% if var.desc != "" %}
+<p> {{ var.desc }}
+{% endif %}
+</li>
+{% endfor %}
