@@ -230,12 +230,19 @@ sled: Layer = Layer(nil, "dogesled")
 
 ### Touches and Gestures
 
+Gestures are like a higher-level abstraction than the Layer touch handler API. For instance, a pan gesture consumes a series of touch events but does not actually begin until the user moves a certain distance with a specified number of fingers.
+
+Gestures can also be exclusive: by default, if a gesture recognizes, traditional touch handlers for that subtree will be cancelled. You can control this with the cancelsTouchesInView property. Also by default, if one gesture recognizes, it will prevent all other gestures involved in that touch from recognizing.
+
+Please refer to the documentation for TouchHandler and TouchesHandler.
 <ul>
 <li class="variable">
     <h4>public var userInteractionEnabled: Bool</h4>
+    <p>When false, touches that hit this layer or its sublayers are discarded. Defaults to true
 </li>
 <li class="variable">
     <h4>public var gestures: [GestureType] = []</h4>
+    <p>Append Gestures to this property to add them to the layer. By default, this is an empty list.
 </li>
 <li class="typealias">
     <h4>public typealias TouchesHandler = [UITouchID: TouchSequence&lt;UITouchID&gt;] -> Bool</h4>
@@ -280,18 +287,23 @@ sled: Layer = Layer(nil, "dogesled")
 <ul>
 <li class="variable">
     <h4>public private(set) var willBeRemovedSoon: Bool = false</h4>
+    <p>This might as well be called <code>swansong()</code>
 </li>
 <li class="method">
     <h4>public func removeAfterDuration(duration: NSTimeInterval)</h4>
+    <p>Although the argument is an <code>NSTimeInterval</code>, you can enter seconds here with <code>double</code> resolution.
 </li>
 <li class="method">
     <h4>public func fadeOutAndRemoveAfterDuration(duration: NSTimeInterval)</h4>
+    <p>Although the argument is an <code>NSTimeInterval</code>, you can enter seconds here with <code>double</code> resolution.
 </li>
 <li class="variable">
     <h4>public var hashValue: Int</h4>
+    <p>a property that returns a hash for your layer (presumably to compare it with another layer, as in <code>==</code> below)
 </li>
 <li class="variable">
     <h4>public var description: String</h4>
+    <p>a readonly property that creates a printable version of your layer
 </li>
 <li class="method">
     <h4>public func ==(a: Layer, b: Layer) -> Bool</h4>
