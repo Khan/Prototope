@@ -11,19 +11,24 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol ImageJSExport: JSExport {
-	init(name: String)
+	init?(args: NSDictionary)
 }
 
 @objc public class ImageBridge: NSObject, ImageJSExport, BridgeType {
-	var image: Image
+	var image: Image!
 
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "Image")
 	}
 
-	required public init(name: String) {
-		image = Image(name: name)
-		super.init()
+	required public init?(args: NSDictionary) {
+		if let imageName = args["name"] as String? {
+			image = Image(name: imageName)
+			super.init()
+		} else {
+			super.init()
+			return nil
+		}
 	}
 
 	init(_ image: Image) {
