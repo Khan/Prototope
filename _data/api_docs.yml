@@ -13,6 +13,18 @@
   - init
   - vars
 
+- title: Heartbeat
+  docs:
+  - init
+  - stop
+  - vars
+
+- title: Image
+  docs:
+    - init
+    - init_name
+    - vars
+
 - title: Layer
 
 - title: LayerAnimatorStore
