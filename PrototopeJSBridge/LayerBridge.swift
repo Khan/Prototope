@@ -14,13 +14,11 @@ import JavaScriptCore
 	class var root: LayerJSExport { get } // Not automatically imported via JSExport.
     
     // MARK: Creating and identifying layers
-
     // TODO: what to do with the imageName Layer initializer?
 	init(parent: LayerJSExport? /* JSC crashes if I write LayerBridge here */, name: String?)
     var name: String? { get }
     
     // MARK: Layer hierarchy access and manipulation
-    
     var parent: LayerJSExport! { get set }
     var sublayers: [LayerJSExport] { get}
     func removeAllSublayers()
@@ -31,7 +29,6 @@ import JavaScriptCore
     func ancestorNamed(name: String) -> LayerJSExport?
     
     // MARK: Geometry
-    
     var x: Double { get set }
     var y: Double { get set }
     var position: CGPoint { get set }
@@ -55,7 +52,7 @@ import JavaScriptCore
     var backgroundColor: ColorJSExport? { get set }
     var alpha: Double { get set }
     var cornerRadius: Double { get set }
-//    var image: ImageBridge? { get set }
+    var image: ImageJSExport? { get set }
     var border: BorderJSExport? { get set }
     var shadow: ShadowJSExport? { get set }
 
@@ -225,6 +222,15 @@ import JavaScriptCore
         get { return layer.cornerRadius }
         set { layer.cornerRadius = newValue }
     }
+
+	public var image: ImageJSExport? {
+		get {
+			return layer.image != nil ? ImageBridge(layer.image!) : nil
+		}
+		set {
+			layer.image = (newValue as JSExport as ImageBridge).image
+		}
+	}
 
 	public var border: BorderJSExport? {
 		get {
