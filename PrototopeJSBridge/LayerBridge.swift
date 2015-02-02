@@ -14,8 +14,7 @@ import JavaScriptCore
 	class var root: LayerJSExport { get } // Not automatically imported via JSExport.
     
     // MARK: Creating and identifying layers
-    // TODO: what to do with the imageName Layer initializer?
-	init(parent: LayerJSExport? /* JSC crashes if I write LayerBridge here */, name: String?)
+	init(args: NSDictionary)
     var name: String? { get }
     
     // MARK: Layer hierarchy access and manipulation
@@ -85,10 +84,14 @@ import JavaScriptCore
     }
     
     // MARK: Creating and identifying layers
-    
-    required public init(parent: LayerJSExport?, name: String?) {
-        layer = Layer(parent: (parent as LayerBridge).layer, name: name)
-        layer.backgroundColor = Color.green
+
+    required public init(args: NSDictionary) {
+		let parentLayer = (args["parent"] as LayerBridge?)?.layer
+		if let imageName = args["imageName"] as String? {
+			layer = Layer(parent: parentLayer, imageName: imageName)
+		} else {
+			layer = Layer(parent: parentLayer, name: (args["name"] as String?))
+		}
         super.init()
     }
     
