@@ -11,7 +11,7 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol ColorJSExport: JSExport {
-    init(red: Double, green: Double, blue: Double, alpha: Double)
+	init(args: NSDictionary)
 }
 
 @objc public class ColorBridge: NSObject, ColorJSExport, BridgeType {
@@ -38,8 +38,13 @@ import JavaScriptCore
     
     let color: Color
     
-    required public init(red: Double, green: Double, blue: Double, alpha: Double) {
-        color = Color(red: red, green: green, blue: blue, alpha: alpha)
+    required public init(args: NSDictionary) {
+        color = Color(
+			red: (args["red"] as Double?) ?? 0,
+			green: (args["green"] as Double?) ?? 0,
+			blue: (args["blue"] as Double?) ?? 0,
+			alpha: (args["alpha"] as Double?) ?? 1
+		)
         super.init()
     }
     
