@@ -13,11 +13,14 @@ layout: default
     {% for section in site.data.api_docs %}
 
         {% if section.title == page.title %}
+
+            {% if section.docs|size > 0  %}
             <h2>Method reference</h2>
+            {% endif %}
 
             {% for doc in section.docs %}
                 {% for m in site.methods %}
-                    {% if doc == m.slug %}
+                    {% if doc == m.slug and m.relative_path contains page.slug %}
                         {{ m.output }}
                     {% endif %}
                 {% endfor %}

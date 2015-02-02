@@ -1,5 +1,6 @@
 ---
 layout: api_doc
+slug: color
 title: Color
 ---
 

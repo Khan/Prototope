@@ -192,7 +192,7 @@ sled: Layer = Layer(nil, "dogesled")
 </li>
 <li class="method">
     <h4>public func convertLocalPointToGlobalPoint(localPoint: Point) -> Point</h4>
-    <p>Returns a point from your special layer in the coordinate space of <code>Layer.root</code>
+    <p>Returns a point from your special layer in the coordinate space of <code>Layer.root</code></p>
 </li>
 </ul>
 
