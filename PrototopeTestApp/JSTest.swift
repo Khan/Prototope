@@ -16,5 +16,5 @@ func makeJSLayer() {
 	context.exceptionHandler = { _, value in println("Exception: \(value)") }
 	context.setObject(LayerBridge.self, forKeyedSubscript: "Layer")
 	context.objectForKeyedSubscript("Layer").setObject(LayerBridge.root, forKeyedSubscript: "root")
-	context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.frame = {x: 75, y: 80, width: 40, height: 40};")
+	println(context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.frame = {x: 75, y: 80, width: 40, height: 40}"))
 }
