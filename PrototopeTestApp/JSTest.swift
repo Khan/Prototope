@@ -16,5 +16,6 @@ func makeJSLayer() {
 	context.exceptionHandler = { _, value in println("Exception: \(value)") }
     LayerBridge.addToContext(context)
     ColorBridge.addToContext(context)
-	println(context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.frame = {x: 75, y: 80, width: 40, height: 40}; layer.backgroundColor = Color.yellow"))
+	BorderBridge.addToContext(context)
+	println(context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.frame = {x: 75, y: 80, width: 40, height: 40}; layer.backgroundColor = Color.yellow; layer.border = new Border(Color.black, 2)"))
 }

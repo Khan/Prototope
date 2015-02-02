@@ -56,7 +56,7 @@ import JavaScriptCore
     var alpha: Double { get set }
     var cornerRadius: Double { get set }
 //    var image: ImageBridge? { get set }
-//    var border: BorderBridge? { get set }
+    var border: BorderJSExport { get set }
 //    var shadow: ShadowBridge? { get set }
     
 }
@@ -225,5 +225,10 @@ import JavaScriptCore
         get { return layer.cornerRadius }
         set { layer.cornerRadius = newValue }
     }
+
+	public var border: BorderJSExport {
+		get { return BorderBridge(layer.border) }
+		set { layer.border = (newValue as JSExport as BorderBridge).border }
+	}
     
 }
