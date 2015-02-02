@@ -56,9 +56,9 @@ import JavaScriptCore
     var alpha: Double { get set }
     var cornerRadius: Double { get set }
 //    var image: ImageBridge? { get set }
-    var border: BorderJSExport { get set }
-//    var shadow: ShadowBridge? { get set }
-    
+    var border: BorderJSExport? { get set }
+    var shadow: ShadowJSExport? { get set }
+
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -226,9 +226,30 @@ import JavaScriptCore
         set { layer.cornerRadius = newValue }
     }
 
-	public var border: BorderJSExport {
-		get { return BorderBridge(layer.border) }
-		set { layer.border = (newValue as JSExport as BorderBridge).border }
+	public var border: BorderJSExport? {
+		get {
+			return BorderBridge(layer.border)
+		}
+		set {
+			if let border = border {
+				layer.border = (newValue as JSExport as BorderBridge).border
+			} else {
+				layer.border = Border(color: Color.clear, width: 0)
+			}
+		}
 	}
-    
+
+	public var shadow: ShadowJSExport? {
+		get {
+			return ShadowBridge(layer.shadow)
+		}
+		set {
+			if let shadow = shadow {
+				layer.shadow = (newValue as JSExport as ShadowBridge).shadow
+			} else {
+				layer.shadow = Shadow(color: Color.clear, alpha: 0, offset: Size(width: 0, height: 0), radius: 0)
+			}
+		}
+	}
+
 }
