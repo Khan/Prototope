@@ -13,6 +13,14 @@
   - init
   - vars
 
+- title: Color
+  docs:
+  - init_rgba
+  - init_hex
+  - init_hsb
+  - init_white
+  - vars
+
 - title: Heartbeat
   docs:
   - init
@@ -31,13 +39,11 @@
   docs:
   - vars
 
-- title: Color
+- title: Math
   docs:
-  - init_rgba
-  - init_hex
-  - init_hsb
-  - init_white
-  - vars
+  - clip
+  - interpolate
+  - map
 
 - title: Point
   docs:
@@ -53,9 +59,24 @@
   - convenience_methods
   - vars
 
+- title: Shadow
+  docs:
+  - init
+  - vars
+
 - title: Size
   docs:
   - init
   - init_cgsize
   - convenience_methods
   - vars
+
+- title: Timestamp
+  docs:
+  - convenience_methods
+  - vars
+
+- title: Sound
+  docs:
+  - init
+  - play
