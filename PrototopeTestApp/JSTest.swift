@@ -18,5 +18,6 @@ func makeJSLayer() {
     ColorBridge.addToContext(context)
 	BorderBridge.addToContext(context)
 	ShadowBridge.addToContext(context)
-	println(context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.frame = {x: 75, y: 80, width: 40, height: 40}; layer.backgroundColor = Color.yellow; layer.shadow = new Shadow(Color.black, 1.0, {width: 2, height: 2}, 5)"))
+	ImageBridge.addToContext(context)
+	println(context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.image = new Image('paint'); layer.frame = {x: 75, y: 80, width: 40, height: 40}; layer.border = new Border({color: Color.black, width: 2})"))
 }

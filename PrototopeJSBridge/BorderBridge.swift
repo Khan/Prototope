@@ -11,7 +11,7 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol BorderJSExport: JSExport {
-	init(color: ColorJSExport, width: Double)
+	init(args: NSDictionary)
 	// TODO: make these work again... will require notifying the owning layer bridge of a change. yuck.
 //	var color: ColorJSExport { get set }
 //	var width: Double { get set }
@@ -24,8 +24,11 @@ import JavaScriptCore
 		context.setObject(self, forKeyedSubscript: "Border")
 	}
 
-	required public init(color: ColorJSExport, width: Double) {
-		border = Border(color: (color as JSExport as ColorBridge).color, width: width)
+	required public init(args: NSDictionary) {
+		border = Border(
+			color: (args["color"] as ColorBridge?)?.color ?? Color.black,
+			width: (args["width"] as Double?) ?? 0.0
+		)
 		super.init()
 	}
 
