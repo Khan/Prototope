@@ -27,6 +27,9 @@
   - init_white
   - vars
 
-- title: Geometry
+- title: Point
   docs:
-  - TKTKTKTK
+  - init
+  - init_point
+  - distancetopoint
+  - convenience_methods
