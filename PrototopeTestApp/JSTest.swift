@@ -14,7 +14,7 @@ func makeJSLayer() {
 	let vm = JSVirtualMachine()
 	let context = JSContext(virtualMachine: vm)
 	context.exceptionHandler = { _, value in println("Exception: \(value)") }
-	context.setObject(LayerBridge.self, forKeyedSubscript: "Layer")
-	context.objectForKeyedSubscript("Layer").setObject(LayerBridge.root, forKeyedSubscript: "root")
-	println(context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.frame = {x: 75, y: 80, width: 40, height: 40}"))
+    LayerBridge.addToContext(context)
+    ColorBridge.addToContext(context)
+	println(context.evaluateScript("var layer = new Layer(Layer.root, 'foo'); layer.frame = {x: 75, y: 80, width: 40, height: 40}; layer.backgroundColor = new Color(0.3, 0.2, 0.5);"))
 }

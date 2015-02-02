@@ -346,14 +346,14 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+    // MARK: Touches and gestures
+    
 	/** When false, touches that hit this layer or its sublayers are discarded. Defaults
 		to true. */
 	public var userInteractionEnabled: Bool {
 		get { return view.userInteractionEnabled }
 		set { view.userInteractionEnabled = newValue }
 	}
-
-	// MARK: Touches and gestures
 
 	/** An array of the layer's gestures. Append a gesture to this list to add it to the layer.
 

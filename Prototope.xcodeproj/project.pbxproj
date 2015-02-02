@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE281A7F1B01001E63CE /* BridgeType.swift */; };
+		6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */; };
 		EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */; };
 		EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */; };
@@ -156,6 +158,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6175CE281A7F1B01001E63CE /* BridgeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeType.swift; sourceTree = "<group>"; };
+		6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBridge.swift; sourceTree = "<group>"; };
 		EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFTunableSpec.h; path = ThirdParty/TunableSpec/KFTunableSpec.h; sourceTree = "<group>"; };
 		EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KFTunableSpec.m; path = ThirdParty/TunableSpec/KFTunableSpec.m; sourceTree = "<group>"; };
 		EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TunableSpec.swift; path = ThirdParty/TunableSpec/TunableSpec.swift; sourceTree = "<group>"; };
@@ -375,9 +379,11 @@
 		EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */ = {
 			isa = PBXGroup;
 			children = (
+				6175CE281A7F1B01001E63CE /* BridgeType.swift */,
+				EB453DB11A7AB116006F2A72 /* LayerBridge.swift */,
+				6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */,
 				EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */,
 				EB453D911A7AB0B2006F2A72 /* Supporting Files */,
-				EB453DB11A7AB116006F2A72 /* LayerBridge.swift */,
 			);
 			path = PrototopeJSBridge;
 			sourceTree = "<group>";
@@ -696,6 +702,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */,
+				6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */,
 				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

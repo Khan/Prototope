@@ -11,7 +11,7 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol LayerJSExport: JSExport {
-	class var root: LayerBridge { get } // Not automatically imported via JSExport.
+	class var root: LayerJSExport { get } // Not automatically imported via JSExport.
     
     // MARK: Creating and identifying layers
 
@@ -21,14 +21,14 @@ import JavaScriptCore
     
     // MARK: Layer hierarchy access and manipulation
     
-    var parent: LayerBridge? { get set }
-    var sublayers: [LayerBridge] { get}
+    var parent: LayerJSExport! { get set }
+    var sublayers: [LayerJSExport] { get}
     func removeAllSublayers()
-    var sublayerAtFront: LayerBridge? { get }
-    func sublayerNamed(name: String) -> LayerBridge?
-    func descendentNamed(name: String) -> LayerBridge?
-    func descendentAtPath(pathElements: [String]) -> LayerBridge?
-    func ancestorNamed(name: String) -> LayerBridge?
+    var sublayerAtFront: LayerJSExport? { get }
+    func sublayerNamed(name: String) -> LayerJSExport?
+    func descendentNamed(name: String) -> LayerJSExport?
+    func descendentAtPath(pathElements: [String]) -> LayerJSExport?
+    func ancestorNamed(name: String) -> LayerJSExport?
     
     // MARK: Geometry
     
@@ -50,143 +50,180 @@ import JavaScriptCore
     func containsGlobalPoint(point: CGPoint) -> Bool
     func convertGlobalPointToLocalPoint(globalPoint: CGPoint) -> CGPoint
     func convertLocalPointToGlobalPoint(localPoint: CGPoint) -> CGPoint
+    
+    // MARK: Appearance
+    var backgroundColor: ColorJSExport? { get set }
+    var alpha: Double { get set }
+    var cornerRadius: Double { get set }
+//    var image: ImageBridge? { get set }
+//    var border: BorderBridge? { get set }
+//    var shadow: ShadowBridge? { get set }
+    
 }
 
-@objc public class LayerBridge: NSObject, LayerJSExport, Printable {
-	public var layer: Layer!
-
-	public class var root: LayerBridge {
-		return LayerBridge(wrappingLayer: Layer.root)!
-	}
-
-	private init?(wrappingLayer: Layer?) {
+@objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
+    
+    public class func addToContext(context: JSContext) {
+        context.setObject(LayerBridge.self, forKeyedSubscript: "Layer")
+        context.objectForKeyedSubscript("Layer").setObject(LayerBridge.root, forKeyedSubscript: "root")
+    }
+    
+    public var layer: Layer!
+    
+    public class var root: LayerJSExport {
+        return LayerBridge(wrappingLayer: Layer.root)!
+    }
+    
+    private init?(wrappingLayer: Layer?) {
         super.init()
         if let wrappingLayer = wrappingLayer {
             layer = wrappingLayer
         } else {
             return nil
         }
-	}
+    }
     
     public override var description: String {
         return "<LayerBridge: \(layer)>"
     }
     
     // MARK: Creating and identifying layers
-
-	required public init(parent: LayerJSExport?, name: String?) {
-		layer = Layer(parent: (parent as LayerBridge).layer, name: name)
-		layer.backgroundColor = Color.green
-		super.init()
-	}
+    
+    required public init(parent: LayerJSExport?, name: String?) {
+        layer = Layer(parent: (parent as LayerBridge).layer, name: name)
+        layer.backgroundColor = Color.green
+        super.init()
+    }
     
     public var name: String? {
         get { return layer.name }
     }
     
     // MARK: Layer hierarchy access and manipulation
-
-    public var parent: LayerBridge? {
+    
+    public var parent: LayerJSExport! {
         get { return layer.parent != nil ? LayerBridge(wrappingLayer: layer.parent!) : nil }
-        set { layer.parent = newValue?.layer }
+        set {
+            if let newParent = newValue {
+                layer.parent = (newParent as JSExport as LayerBridge).layer
+            } else {
+                layer.parent = nil
+            }
+        }
     }
     
-    public var sublayers: [LayerBridge] {
+    public var sublayers: [LayerJSExport] {
         return layer.sublayers.map { LayerBridge(wrappingLayer: $0)! }
     }
     
     public func removeAllSublayers() { layer.removeAllSublayers() }
     
-    public var sublayerAtFront: LayerBridge? { return LayerBridge(wrappingLayer: layer.sublayerAtFront) }
+    public var sublayerAtFront: LayerJSExport? { return LayerBridge(wrappingLayer: layer.sublayerAtFront) }
     
-    public func sublayerNamed(name: String) -> LayerBridge? { return LayerBridge(wrappingLayer: layer.sublayerNamed(name)) }
+    public func sublayerNamed(name: String) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.sublayerNamed(name)) }
     
-    public func descendentNamed(name: String) -> LayerBridge? { return LayerBridge(wrappingLayer: layer.descendentNamed(name)) }
+    public func descendentNamed(name: String) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.descendentNamed(name)) }
     
-    public func descendentAtPath(pathElements: [String]) -> LayerBridge? { return LayerBridge(wrappingLayer: layer.descendentAtPath(pathElements)) }
+    public func descendentAtPath(pathElements: [String]) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.descendentAtPath(pathElements)) }
     
-    public func ancestorNamed(name: String) -> LayerBridge? { return LayerBridge(wrappingLayer: layer.ancestorNamed(name)) }
+    public func ancestorNamed(name: String) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.ancestorNamed(name)) }
     
     // MARK: Geometry
-
+    
     public var x: Double {
-    get { return layer.x }
-    set { layer.x = newValue }
+        get { return layer.x }
+        set { layer.x = newValue }
     }
-
+    
     public var y: Double {
-    get { return layer.y }
-    set { layer.y = newValue }
+        get { return layer.y }
+        set { layer.y = newValue }
     }
     
     public var position: CGPoint {
-    get { return CGPoint(layer.position) }
-    set { layer.position = Point(newValue) }
+        get { return CGPoint(layer.position) }
+        set { layer.position = Point(newValue) }
     }
-
+    
     public var width: Double {
-    get { return layer.width }
-    set { layer.width = newValue }
+        get { return layer.width }
+        set { layer.width = newValue }
     }
     
     public var height: Double {
-    get { return layer.height }
-    set { layer.height = newValue }
+        get { return layer.height }
+        set { layer.height = newValue }
     }
-
+    
     public var size: CGSize {
-    get { return CGSize(layer.size) }
-    set { layer.size = Size(newValue) }
+        get { return CGSize(layer.size) }
+        set { layer.size = Size(newValue) }
     }
     
     public var frame: CGRect {
-    get { return CGRect(layer.frame) }
-    set { layer.frame = Rect(newValue) }
+        get { return CGRect(layer.frame) }
+        set { layer.frame = Rect(newValue) }
     }
     
     public var bounds: CGRect {
-    get { return CGRect(layer.bounds) }
-    set { layer.bounds = Rect(newValue) }
+        get { return CGRect(layer.bounds) }
+        set { layer.bounds = Rect(newValue) }
     }
     
     public var anchorPoint: CGPoint {
-    get { return CGPoint(layer.anchorPoint) }
-    set { layer.anchorPoint = Point(newValue) }
+        get { return CGPoint(layer.anchorPoint) }
+        set { layer.anchorPoint = Point(newValue) }
     }
     
     public var rotationDegrees: Double {
-    get { return layer.rotationDegrees }
-    set { layer.rotationDegrees = newValue }
+        get { return layer.rotationDegrees }
+        set { layer.rotationDegrees = newValue }
     }
-
+    
     public var rotationRadians: Double {
-    get { return layer.rotationRadians }
-    set { layer.rotationRadians = newValue }
+        get { return layer.rotationRadians }
+        set { layer.rotationRadians = newValue }
     }
-
+    
     public var scale: Double {
-    get { return layer.scale }
-    set { layer.scale = newValue }
+        get { return layer.scale }
+        set { layer.scale = newValue }
     }
-
+    
     public var scaleX: Double {
-    get { return layer.scaleX }
-    set { layer.scaleX = newValue }
+        get { return layer.scaleX }
+        set { layer.scaleX = newValue }
     }
     
     public var scaleY: Double {
-    get { return layer.scaleY }
-    set { layer.scaleY = newValue }
+        get { return layer.scaleY }
+        set { layer.scaleY = newValue }
     }
-
+    
     public var globalPosition: CGPoint {
-    get { return CGPoint(layer.globalPosition) }
-    set { layer.globalPosition = Point(newValue) }
+        get { return CGPoint(layer.globalPosition) }
+        set { layer.globalPosition = Point(newValue) }
     }
     
     public func containsGlobalPoint(point: CGPoint) -> Bool { return layer.containsGlobalPoint(Point(point)) }
     public func convertGlobalPointToLocalPoint(globalPoint: CGPoint) -> CGPoint { return CGPoint(layer.convertGlobalPointToLocalPoint(Point(globalPoint))) }
     public func convertLocalPointToGlobalPoint(localPoint: CGPoint) -> CGPoint { return CGPoint(layer.convertLocalPointToGlobalPoint(Point(localPoint))) }
     
-
+    // MARK: Appearance
+    
+    public var backgroundColor: ColorJSExport? {
+        get { return layer.backgroundColor != nil ? ColorBridge(layer.backgroundColor!) : nil }
+        set { layer.backgroundColor = (newValue as ColorBridge).color }
+    }
+    
+    public var alpha: Double {
+        get { return layer.alpha }
+        set { layer.alpha = newValue }
+    }
+    
+    public var cornerRadius: Double {
+        get { return layer.cornerRadius }
+        set { layer.cornerRadius = newValue }
+    }
+    
 }
