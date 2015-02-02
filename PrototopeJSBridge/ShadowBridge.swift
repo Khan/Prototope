@@ -11,7 +11,7 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol ShadowJSExport: JSExport {
-	init(color: ColorJSExport, alpha: Double, offset: CGSize, radius: Double)
+	init(args: NSDictionary)
 	// TODO make mutable properties, but will need to notify layerbridge owner on changes (yuuuck)
 }
 
@@ -22,8 +22,13 @@ import JavaScriptCore
 		context.setObject(self, forKeyedSubscript: "Shadow")
 	}
 
-	required public init(color: ColorJSExport, alpha: Double, offset: CGSize, radius: Double) {
-		shadow = Shadow(color: (color as JSExport as ColorBridge).color, alpha: alpha, offset: Size(offset), radius: radius)
+	required public init(args: NSDictionary) {
+		shadow = Shadow(
+			color: (args["color"] as ColorBridge?)?.color ?? Color.black,
+			alpha: (args["alpha"] as Double?) ?? 1.0,
+			offset: Size((args["offset"] as JSValue?)?.toSize() ?? CGSizeZero),
+			radius: (args["radius"] as Double?) ?? 3.0
+		)
 		super.init()
 	}
 
