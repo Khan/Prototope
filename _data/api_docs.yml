@@ -33,3 +33,17 @@
   - init_point
   - distancetopoint
   - convenience_methods
+  - vars
+
+- title: Rect
+  docs:
+  - init
+  - convenience_methods
+  - vars
+
+- title: Size
+  docs:
+  - init
+  - init_cgsize
+  - convenience_methods
+  - vars

@@ -1,7 +1,7 @@
 ---
 layout: api_doc
-slug: point
-title: Point
+slug: size
+title: Size
 doctype:
     - struct
 ---

@@ -1,5 +1,5 @@
 ---
-slug: color_vars
+slug: vars
 layout: variables
 doctype:
     - variable

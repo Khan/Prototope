@@ -14,13 +14,15 @@ layout: default
 
         {% if section.title == page.title %}
 
+            {% assign slugpath = page.slug | prepend:'/' | append:'/' %}
+
             {% if section.docs|size > 0  %}
             <h2>Method reference</h2>
             {% endif %}
 
             {% for doc in section.docs %}
                 {% for m in site.methods %}
-                    {% if doc == m.slug and m.relative_path contains page.slug %}
+                    {% if doc == m.slug and m.relative_path contains slugpath %}
                         {{ m.output }}
                     {% endif %}
                 {% endfor %}

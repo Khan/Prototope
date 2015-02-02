@@ -5,10 +5,10 @@ doctype:
     - variable
 variables:
   -
-    name: "public var x: Double"
+    name: "public var width: Double"
     desc: ""
   -
-    name: "public var y: Double"
+    name: "public var height: Double"
     desc: ""
   -
     name: "public var length: Double"
