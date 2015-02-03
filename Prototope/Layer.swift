@@ -494,6 +494,8 @@ public class Layer: Equatable, Hashable {
 		})
 	}
 
+	// MARK: - Internal interfaces
+
 	private func _shouldMaskToBounds() -> Bool {
 		if let image = image {
 			if (self.shadow.alpha > 0 && self.cornerRadius > 0) {
@@ -521,8 +523,6 @@ public class Layer: Equatable, Hashable {
 		// otherwise, always clip (making sublayers easier to crop/etc by default)
 		return true
 	}
-
-	// MARK: - Internal interfaces
 
 	private func updateTransform() {
 		layer.transform = CATransform3DRotate(CATransform3DMakeScale(CGFloat(scaleX), CGFloat(scaleY), 1), CGFloat(rotationRadians), 0, 0, 1)
