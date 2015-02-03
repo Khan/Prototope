@@ -199,11 +199,24 @@ public class PanGesture: GestureType {
 /** A rotation sample represents the state of a rotation gesture at a single point in time */
 public struct RotationSample: SampleType {
     public let rotationRadians: Double
-    public let velocity: Double
-    public let centroid: TouchSample
+    public let velocityRadians: Double
     
+    public var rotationDegrees: Double {
+        get {
+            return rotationRadians * 180 / M_PI
+        }
+    }
+    
+    public var velocityDegrees: Double {
+        get {
+            return velocityRadians * 180 / M_PI
+        }
+    }
+    
+    public let centroid: TouchSample
+
     public var description: String {
-        return "{RotationSample: ⟳\(rotationRadians)rad ∂⟳\(velocity)rad/s @\(centroid)}"
+        return "<RotationSample: ⟳\(rotationDegrees)° ∂⟳\(velocityDegrees)°/s, \(rotationRadians)rad \(velocityRadians)rad/s, @\(centroid)>"
     }
 }
 
@@ -254,7 +267,7 @@ public class RotationGesture: GestureType {
             
             let centroidPoint = rotationGesture.locationInView(nil)
             let touchSample = TouchSample(globalLocation: Point(centroidPoint), timestamp: Timestamp.currentTimestamp)
-            let sample = RotationSample(rotationRadians: rotation, velocity: velocity, centroid: touchSample)
+            let sample = RotationSample(rotationRadians: rotation, velocityRadians: velocity, centroid: touchSample)
             
             switch rotationGesture.state {
             case .Began:
