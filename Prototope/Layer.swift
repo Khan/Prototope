@@ -149,6 +149,14 @@ public class Layer: Equatable, Hashable {
 		return nil
 	}
 
+    /** Sets the zPosition of the layer. Higher values go towards the screen as the
+        z axis increases towards your face. Measured in points and defaults to 0.
+        Animatable, but not yet with dynamic animators. */
+    public var zPosition: Double {
+		get { return Double(layer.zPosition) }
+		set { layer.zPosition = CGFloat(newValue) }
+	}
+
 	// MARK: Geometry
 
 	/** The x position of the layer's anchor point (by default the center), relative to
