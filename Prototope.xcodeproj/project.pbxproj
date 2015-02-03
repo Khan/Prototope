@@ -28,7 +28,6 @@
 		EB306C1919DF77CD00113FA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1719DF77CD00113FA3 /* LaunchScreen.xib */; };
 		EB453D941A7AB0B2006F2A72 /* PrototopeJSBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB453D9A1A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
-		EB453DA31A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB453DA21A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift */; };
 		EB453DA61A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
 		EB453DA71A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB453DB11A7AB116006F2A72 /* LayerBridge.swift */; };
@@ -49,6 +48,8 @@
 		EBC43D641A8010770075272A /* ImageBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D631A8010770075272A /* ImageBridge.swift */; };
 		EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D661A8042740075272A /* GeometryBridge.swift */; };
 		EBC43D6F1A81916E0075272A /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D6E1A81916E0075272A /* Context.swift */; };
+		EBC43D721A8195600075272A /* GeometryBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D711A8195600075272A /* GeometryBridgeTests.swift */; };
+		EBC43D741A81959B0075272A /* JSBridgeTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D731A81959B0075272A /* JSBridgeTestCase.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -190,7 +191,6 @@
 		EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrototopeJSBridge.h; sourceTree = "<group>"; };
 		EB453D991A7AB0B2006F2A72 /* PrototopeJSBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeJSBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB453DA11A7AB0B2006F2A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB453DA21A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototopeJSBridgeTests.swift; sourceTree = "<group>"; };
 		EB453DB11A7AB116006F2A72 /* LayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerBridge.swift; sourceTree = "<group>"; };
 		EB50FA1119F04A07007A3C32 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
@@ -208,6 +208,8 @@
 		EBC43D631A8010770075272A /* ImageBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBridge.swift; sourceTree = "<group>"; };
 		EBC43D661A8042740075272A /* GeometryBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryBridge.swift; sourceTree = "<group>"; };
 		EBC43D6E1A81916E0075272A /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		EBC43D711A8195600075272A /* GeometryBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryBridgeTests.swift; sourceTree = "<group>"; };
+		EBC43D731A81959B0075272A /* JSBridgeTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBridgeTestCase.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -409,7 +411,8 @@
 		EB453D9F1A7AB0B2006F2A72 /* PrototopeJSBridgeTests */ = {
 			isa = PBXGroup;
 			children = (
-				EB453DA21A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift */,
+				EBC43D731A81959B0075272A /* JSBridgeTestCase.swift */,
+				EBC43D711A8195600075272A /* GeometryBridgeTests.swift */,
 				EB453DA01A7AB0B2006F2A72 /* Supporting Files */,
 			);
 			path = PrototopeJSBridgeTests;
@@ -740,7 +743,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB453DA31A7AB0B2006F2A72 /* PrototopeJSBridgeTests.swift in Sources */,
+				EBC43D721A8195600075272A /* GeometryBridgeTests.swift in Sources */,
+				EBC43D741A81959B0075272A /* JSBridgeTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,6 +1045,7 @@
 		EB453DAA1A7AB0B2006F2A72 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1053,6 +1058,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrototopeTestApp.app/PrototopeTestApp";
 			};
 			name = Debug;
@@ -1060,6 +1066,7 @@
 		EB453DAB1A7AB0B2006F2A72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
