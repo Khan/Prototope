@@ -47,6 +47,7 @@
 		EBC43D5D1A7FF8920075272A /* BorderBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D5C1A7FF8920075272A /* BorderBridge.swift */; };
 		EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D611A8007320075272A /* ShadowBridge.swift */; };
 		EBC43D641A8010770075272A /* ImageBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D631A8010770075272A /* ImageBridge.swift */; };
+		EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D661A8042740075272A /* GeometryBridge.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -204,6 +205,7 @@
 		EBC43D5C1A7FF8920075272A /* BorderBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderBridge.swift; sourceTree = "<group>"; };
 		EBC43D611A8007320075272A /* ShadowBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowBridge.swift; sourceTree = "<group>"; };
 		EBC43D631A8010770075272A /* ImageBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBridge.swift; sourceTree = "<group>"; };
+		EBC43D661A8042740075272A /* GeometryBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryBridge.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 			children = (
 				6175CE281A7F1B01001E63CE /* BridgeType.swift */,
 				EB453DB11A7AB116006F2A72 /* LayerBridge.swift */,
+				EBC43D661A8042740075272A /* GeometryBridge.swift */,
 				6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */,
 				EBC43D5C1A7FF8920075272A /* BorderBridge.swift */,
 				EBC43D611A8007320075272A /* ShadowBridge.swift */,
@@ -716,6 +719,7 @@
 				6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */,
 				EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
+				EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */,
 				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
