@@ -34,8 +34,8 @@ import JavaScriptCore
     var width: Double { get set }
     var height: Double { get set }
     var size: SizeJSExport { get set }
-    var frame: CGRect { get set }
-    var bounds: CGRect { get set }
+    var frame: RectJSExport { get set }
+    var bounds: RectJSExport { get set }
     var anchorPoint: PointJSExport { get set }
     var rotationDegrees: Double { get set }
     var rotationRadians: Double { get set }
@@ -160,14 +160,14 @@ import JavaScriptCore
         set { layer.size = (newValue as JSExport as SizeBridge).size }
     }
     
-    public var frame: CGRect {
-        get { return CGRect(layer.frame) }
-        set { layer.frame = Rect(newValue) }
+    public var frame: RectJSExport {
+        get { return RectBridge(layer.frame) }
+        set { layer.frame = (newValue as JSExport as RectBridge).rect }
     }
     
-    public var bounds: CGRect {
-        get { return CGRect(layer.bounds) }
-        set { layer.bounds = Rect(newValue) }
+    public var bounds: RectJSExport {
+        get { return RectBridge(layer.bounds) }
+        set { layer.bounds = (newValue as JSExport as RectBridge).rect }
     }
     
     public var anchorPoint: PointJSExport {
