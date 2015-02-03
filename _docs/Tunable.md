@@ -2,6 +2,7 @@
 layout: api_doc
 slug: tunable
 title: Tunable
+doctype: meta
 ---
 
 These functions allow you to take a value and make it tunable by a slider or a switch!

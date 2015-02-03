@@ -2,6 +2,7 @@
 layout: api_doc
 slug: layer
 title: Layer
+doctype: class
 ---
 
 

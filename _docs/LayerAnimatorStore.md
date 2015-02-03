@@ -2,6 +2,7 @@
 slug: layeranimatorstore
 layout: api_doc
 title: LayerAnimatorStore
+doctype: class
 ---
 See documentation for Layer.animators for more detail on the role of this object.
 
