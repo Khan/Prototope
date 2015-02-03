@@ -11,7 +11,8 @@
 
 {% for var in page.variables %}
 <li class="{% if var.type %}{{ var.type | join: " "}}{% else %}{{page.doctype | join: " "}}{% endif %}">
-    <h4>{{ var.name | escape }}</h4>
+    <a href="#{{page.slug}}-{{forloop.index}}" class="permalink">&#9875;</a>
+    <h4 id="{{page.slug}}-{{forloop.index}}">{{ var.name | escape }}</h4>
 
     {% if var.desc != "" %}
     <p> {{ var.desc | markdownify }}

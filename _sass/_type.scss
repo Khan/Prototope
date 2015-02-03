@@ -11,7 +11,36 @@ li.method, li.variable, li.typealias {
       margin-top: 30px;
       white-space: pre-wrap;
 }
-.doc-nav {
-    width: 250px;
-    position: absolute;
+
+.permalink {
+  position: absolute;
+  margin-left: -28px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+li:hover .permalink {
+  opacity: 1;
+}
+
+.api-nav {
+  margin-left: 0;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+
+  > li {
+    list-style: none;
+    padding: 0;
+    margin: 0 1em 0 0 ;
+    display: inline-block;
+    font-family: "input mono cond";
+    font-size: 13px;
+    line-height: 28px;
+
+    &.header {
+      color: #aaa;
+    }
+  }
 }

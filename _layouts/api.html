@@ -1,5 +1,6 @@
 <li class="{{page.doctype | join: " "}}">
-<h4>{{ page.title | escape }}</h4>
+<a href="#{{page.slug}}" class="permalink">&#9875;</a>
+<h4 id="{{page.slug}}">{{ page.title | escape }}</h4>
 
 {{ content | markdownify }}
 
