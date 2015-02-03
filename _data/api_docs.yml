@@ -71,12 +71,21 @@
   - convenience_methods
   - vars
 
+- title: Sound
+  docs:
+  - init
+  - play
+
 - title: Timestamp
   docs:
   - convenience_methods
   - vars
 
-- title: Sound
+- title: Tunable
   docs:
-  - init
-  - play
+  - tunable_bool
+  - tunable_bool_maintain
+  - tunable_double
+  - tunable_double_maintain
+  - tunable_point
+  - tunable_point_maintain
