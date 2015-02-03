@@ -30,22 +30,22 @@ import JavaScriptCore
     // MARK: Geometry
     var x: Double { get set }
     var y: Double { get set }
-    var position: CGPoint { get set }
+    var position: PointJSExport { get set }
     var width: Double { get set }
     var height: Double { get set }
     var size: CGSize { get set }
     var frame: CGRect { get set }
     var bounds: CGRect { get set }
-    var anchorPoint: CGPoint { get set }
+    var anchorPoint: PointJSExport { get set }
     var rotationDegrees: Double { get set }
     var rotationRadians: Double { get set }
     var scale: Double { get set }
     var scaleX: Double { get set }
     var scaleY: Double { get set }
-    var globalPosition: CGPoint { get set }
-    func containsGlobalPoint(point: CGPoint) -> Bool
-    func convertGlobalPointToLocalPoint(globalPoint: CGPoint) -> CGPoint
-    func convertLocalPointToGlobalPoint(localPoint: CGPoint) -> CGPoint
+    var globalPosition: PointJSExport { get set }
+    func containsGlobalPoint(point: PointJSExport) -> Bool
+    func convertGlobalPointToLocalPoint(globalPoint: PointJSExport) -> PointJSExport
+    func convertLocalPointToGlobalPoint(localPoint: PointJSExport) -> PointJSExport
     
     // MARK: Appearance
     var backgroundColor: ColorJSExport? { get set }
@@ -140,9 +140,9 @@ import JavaScriptCore
         set { layer.y = newValue }
     }
     
-    public var position: CGPoint {
-        get { return CGPoint(layer.position) }
-        set { layer.position = Point(newValue) }
+    public var position: PointJSExport {
+        get { return PointBridge(layer.position) }
+        set { layer.position = (newValue as JSExport as PointBridge).point }
     }
     
     public var width: Double {
@@ -170,9 +170,9 @@ import JavaScriptCore
         set { layer.bounds = Rect(newValue) }
     }
     
-    public var anchorPoint: CGPoint {
-        get { return CGPoint(layer.anchorPoint) }
-        set { layer.anchorPoint = Point(newValue) }
+    public var anchorPoint: PointJSExport {
+        get { return PointBridge(layer.anchorPoint) }
+        set { layer.anchorPoint = (newValue as JSExport as PointBridge).point }
     }
     
     public var rotationDegrees: Double {
@@ -200,14 +200,14 @@ import JavaScriptCore
         set { layer.scaleY = newValue }
     }
     
-    public var globalPosition: CGPoint {
-        get { return CGPoint(layer.globalPosition) }
-        set { layer.globalPosition = Point(newValue) }
+    public var globalPosition: PointJSExport {
+        get { return PointBridge(layer.globalPosition) }
+        set { layer.globalPosition = (newValue as JSExport as PointBridge).point }
     }
     
-    public func containsGlobalPoint(point: CGPoint) -> Bool { return layer.containsGlobalPoint(Point(point)) }
-    public func convertGlobalPointToLocalPoint(globalPoint: CGPoint) -> CGPoint { return CGPoint(layer.convertGlobalPointToLocalPoint(Point(globalPoint))) }
-    public func convertLocalPointToGlobalPoint(localPoint: CGPoint) -> CGPoint { return CGPoint(layer.convertLocalPointToGlobalPoint(Point(localPoint))) }
+    public func containsGlobalPoint(point: PointJSExport) -> Bool { return layer.containsGlobalPoint((point as JSExport as PointBridge).point) }
+    public func convertGlobalPointToLocalPoint(globalPoint: PointJSExport) -> PointJSExport { return PointBridge(layer.convertGlobalPointToLocalPoint((globalPoint as JSExport as PointBridge).point)) }
+    public func convertLocalPointToGlobalPoint(localPoint: PointJSExport) -> PointJSExport { return PointBridge(layer.convertLocalPointToGlobalPoint((localPoint as JSExport as PointBridge).point)) }
     
     // MARK: Appearance
     
