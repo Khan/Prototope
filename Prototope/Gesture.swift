@@ -369,39 +369,39 @@ public func +<Seq: SampleSequenceType>(a: Seq, b: Seq) -> Seq {
 public struct SampleSequence<S: SampleType, I: Printable> : SampleSequenceType {
     typealias Sample = S
     typealias ID = I
-    
+
     /** Samples ordered by arrival time. */
-    public let samples: [S]
+    public let samples: [Sample]
     
     /** An identifier that can be used to distinguish this sequence from e.g. other
     sequences that might be proceeding simultaneously. You might think of it as
     a "finger identifier". */
-    public var id: I
+    public var id: ID
     
     /** The first sample. */
-    public var firstSample: S! {
+    public var firstSample: Sample! {
         return samples.first
     }
     
     /** The next-to-last sample (if one exists). */
-    public var previousSample: S? {
+    public var previousSample: Sample? {
         let index = samples.count - 2
         return index >= 0 ? samples[index] : nil
     }
     
     /** The most recent sample. */
-    public var currentSample: S! {
+    public var currentSample: Sample! {
         return samples.last
     }
     
-    public init(samples: [S], id: I) {
+    public init(samples: [Sample], id: ID) {
         precondition(samples.count >= 0)
         self.samples = samples
         self.id = id
     }
     
     /** Create a new sequence by adding a sample onto the end of the sample list. */
-    public func sampleSequenceByAppendingSample(sample: S) -> SampleSequence<S, I> {
+    public func sampleSequenceByAppendingSample(sample: Sample) -> SampleSequence<Sample, ID> {
         return SampleSequence(samples: samples + [sample], id: id)
     }
     
@@ -420,7 +420,7 @@ public struct TouchSequence<I: Printable> : SampleSequenceType {
     typealias ID = I
     
     /** Inner sequence */
-    private let sequence: SampleSequence<TouchSample, I>
+    private let sequence: SampleSequence<TouchSample, ID>
     
     /** Touch samples ordered by arrival time. */
     public var samples: [TouchSample] {
@@ -430,7 +430,7 @@ public struct TouchSequence<I: Printable> : SampleSequenceType {
     /** An identifier that can be used to distinguish this touch sequence from e.g. other
     touch sequences that might be proceeding simultaneously. You might think of it as
     a "finger identifier". */
-    public var id: I {
+    public var id: ID {
         return sequence.id
     }
     
@@ -449,7 +449,7 @@ public struct TouchSequence<I: Printable> : SampleSequenceType {
         return sequence.currentSample
     }
     
-    public init(samples: [TouchSample], id: I) {
+    public init(samples: [TouchSample], id: ID) {
         self.sequence = SampleSequence(samples: samples, id: id)
     }
     
@@ -479,7 +479,7 @@ public struct TouchSequence<I: Printable> : SampleSequenceType {
     }
     
     /** Create a new touch sequence by adding a sample onto the end of the sample list. */
-    public func sampleSequenceByAppendingSample(sample: TouchSample) -> TouchSequence<I> {
+    public func sampleSequenceByAppendingSample(sample: TouchSample) -> TouchSequence<ID> {
         return TouchSequence(samples: samples + [sample], id: id)
     }
     
