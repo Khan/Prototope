@@ -26,7 +26,7 @@ import JavaScriptCore
 		shadow = Shadow(
 			color: (args["color"] as ColorBridge?)?.color ?? Color.black,
 			alpha: (args["alpha"] as Double?) ?? 1.0,
-			offset: Size((args["offset"] as JSValue?)?.toSize() ?? CGSizeZero),
+			offset: (args["offset"] as SizeBridge?)?.size ?? Size.zero,
 			radius: (args["radius"] as Double?) ?? 3.0
 		)
 		super.init()

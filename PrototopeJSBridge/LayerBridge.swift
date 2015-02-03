@@ -33,7 +33,7 @@ import JavaScriptCore
     var position: PointJSExport { get set }
     var width: Double { get set }
     var height: Double { get set }
-    var size: CGSize { get set }
+    var size: SizeJSExport { get set }
     var frame: CGRect { get set }
     var bounds: CGRect { get set }
     var anchorPoint: PointJSExport { get set }
@@ -155,9 +155,9 @@ import JavaScriptCore
         set { layer.height = newValue }
     }
     
-    public var size: CGSize {
-        get { return CGSize(layer.size) }
-        set { layer.size = Size(newValue) }
+    public var size: SizeJSExport {
+        get { return SizeBridge(layer.size) }
+        set { layer.size = (newValue as JSExport as SizeBridge).size }
     }
     
     public var frame: CGRect {

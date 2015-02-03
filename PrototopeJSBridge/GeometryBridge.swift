@@ -14,7 +14,7 @@ import Prototope
 	// TODO make these writable, add observers to the bridges which vend them
 	var x: Double { get }
 	var y: Double { get }
-	class var zero: PointJSExport // exported manually
+	class var zero: PointJSExport { get } // exported manually
 	init(args: NSDictionary)
 	func distanceToPoint(point: PointJSExport) -> Double
 	var length: Double { get }
@@ -30,7 +30,7 @@ import Prototope
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "Point")
 		let pointBridge = context.objectForKeyedSubscript("Point")
-		pointBridge.setObject(self(args: ["x": 0, "y": 0]), forKeyedSubscript: "zero")
+		pointBridge.setObject(zero, forKeyedSubscript: "zero")
 	}
 
 	var point: Prototope.Point
@@ -49,6 +49,8 @@ import Prototope
 
 	public var x: Double { return point.x }
 	public var y: Double { return point.y }
+
+	public class var zero: PointJSExport { return PointBridge(Prototope.Point.zero) }
 
 	public func distanceToPoint(other: PointJSExport) -> Double {
 		return point.distanceToPoint((other as JSExport as PointBridge).point)
@@ -81,7 +83,7 @@ import Prototope
 @objc public protocol SizeJSExport: JSExport {
 	var width: Double { get }
 	var height: Double { get }
-	class var zero: SizeJSExport // exported manually
+	class var zero: SizeJSExport { get } // exported manually
 	init(args: NSDictionary)
 
 	func equals(other: SizeJSExport) -> Bool
@@ -93,19 +95,21 @@ import Prototope
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "Size")
 		let sizeBridge = context.objectForKeyedSubscript("Size")
-		sizeBridge.setObject(self(args: ["width": 0, "height": 0]), forKeyedSubscript: "zero")
+		sizeBridge.setObject(zero, forKeyedSubscript: "zero")
 	}
 
-	var size: Size
+	public class var zero: SizeJSExport { return SizeBridge(Prototope.Size.zero) }
+
+	var size: Prototope.Size
 	public required init(args: NSDictionary) {
-		size = Size(
+		size = Prototope.Size(
 			width: (args["width"] as Double?) ?? 0,
 			height: (args["height"] as Double?) ?? 0
 		)
 		super.init()
 	}
 
-	init(_ size: Size) {
+	init(_ size: Prototope.Size) {
 		self.size = size
 		super.init()
 	}
