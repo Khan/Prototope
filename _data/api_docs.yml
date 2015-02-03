@@ -1,9 +1,37 @@
+- title: Layer
+  docs:
+  - creating_id_section
+  - set_root
+  - init
+  - init_convenience
+  - init_calayer
+  - vars_core
+  - hierarchy_section
+  - vars_hierarchy
+  - ancestor_named
+  - sublayer_named
+  - descendent_named
+  - descendent_at_path
+  - remove_all_sublayers
+  - geometry_section
+  - vars_geometry
+  - animation_section
+  - animators
+  - contains_global_point
+  - convert_global_point_to_local_point
+  - convert_local_point_to_global_point
+  - appearance_section
+  - vars_appearance
+  - gestures_section
+  - vars_gesture
+  - vars_convenience
+
 - title: Animator
   docs:
   - stop
   - animatewithduration
   - animatewithduration_curve
-  - vars
+  - layer
   - animationcurve
 
 - title: AnimatorValueConvertible

@@ -1,13 +1,16 @@
+<li>
 {% if page.sublayout == 'convenience' %}
-<h2>Convenience methods</h2>
+<h3>Convenience methods</h3>
+{% elsif page.title %}
+<h3>{{page.title}}</h3>
 {% else %}
-<h2>Variables</h2>
+<h3>Variables</h3>
 {% endif %}
-
 {{ content}}
+</li>
 
 {% for var in page.variables %}
-<li class="{{page.doctype | join: " "}}">
+<li class="{% if var.type %}{{ var.type | join: " "}}{% else %}{{page.doctype | join: " "}}{% endif %}">
     <h4>{{ var.name | escape }}</h4>
 
     {% if var.desc != "" %}
@@ -15,3 +18,4 @@
     {% endif %}
 </li>
 {% endfor %}
+

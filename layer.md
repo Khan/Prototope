@@ -104,6 +104,9 @@ sled: Layer = Layer(nil, "dogesled")
     <p>Layers stack, in order in which they are added. A layer added last to some parent will appear to be the frontmost layer.
 </li>
 <li class="method">
+    <h4>public func ancestorNamed(name: String) -> Layer?</h4>
+</li>
+<li class="method">
     <h4>public func sublayerNamed(name: String) -> Layer?</h4>
 </li>
 <li class="method">
@@ -111,9 +114,6 @@ sled: Layer = Layer(nil, "dogesled")
 </li>
 <li class="method">
     <h4>public func descendentAtPath(pathElements: [String]) -> Layer?</h4>
-</li>
-<li class="method">
-    <h4>public func ancestorNamed(name: String) -> Layer?</h4>
 </li>
 </ul>
 

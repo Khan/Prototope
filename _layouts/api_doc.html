@@ -21,6 +21,7 @@ layout: default
             <h2>Method reference</h2>
             {% endif %}
 
+            <ul>
             {% for doc in section.docs %}
                 {% for m in site.methods %}
                     {% if doc == m.slug and m.relative_path contains slugpath %}
@@ -28,6 +29,7 @@ layout: default
                     {% endif %}
                 {% endfor %}
             {% endfor %}
+            </ul>
 
         {% endif %}
     {% endfor %}
