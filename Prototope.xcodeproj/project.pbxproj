@@ -48,6 +48,7 @@
 		EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D611A8007320075272A /* ShadowBridge.swift */; };
 		EBC43D641A8010770075272A /* ImageBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D631A8010770075272A /* ImageBridge.swift */; };
 		EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D661A8042740075272A /* GeometryBridge.swift */; };
+		EBC43D6F1A81916E0075272A /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D6E1A81916E0075272A /* Context.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -206,6 +207,7 @@
 		EBC43D611A8007320075272A /* ShadowBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowBridge.swift; sourceTree = "<group>"; };
 		EBC43D631A8010770075272A /* ImageBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBridge.swift; sourceTree = "<group>"; };
 		EBC43D661A8042740075272A /* GeometryBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryBridge.swift; sourceTree = "<group>"; };
+		EBC43D6E1A81916E0075272A /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -387,13 +389,9 @@
 		EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */ = {
 			isa = PBXGroup;
 			children = (
+				EBC43D6E1A81916E0075272A /* Context.swift */,
 				6175CE281A7F1B01001E63CE /* BridgeType.swift */,
-				EB453DB11A7AB116006F2A72 /* LayerBridge.swift */,
-				EBC43D661A8042740075272A /* GeometryBridge.swift */,
-				6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */,
-				EBC43D5C1A7FF8920075272A /* BorderBridge.swift */,
-				EBC43D611A8007320075272A /* ShadowBridge.swift */,
-				EBC43D631A8010770075272A /* ImageBridge.swift */,
+				EBC43D701A8191760075272A /* Bridged Types */,
 				EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */,
 				EB453D911A7AB0B2006F2A72 /* Supporting Files */,
 			);
@@ -431,6 +429,19 @@
 				EBB3505E1A166E690046AD07 /* Dictionary+Extensions.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		EBC43D701A8191760075272A /* Bridged Types */ = {
+			isa = PBXGroup;
+			children = (
+				EB453DB11A7AB116006F2A72 /* LayerBridge.swift */,
+				EBC43D661A8042740075272A /* GeometryBridge.swift */,
+				6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */,
+				EBC43D5C1A7FF8920075272A /* BorderBridge.swift */,
+				EBC43D611A8007320075272A /* ShadowBridge.swift */,
+				EBC43D631A8010770075272A /* ImageBridge.swift */,
+			);
+			name = "Bridged Types";
 			sourceTree = "<group>";
 		};
 		EBE3A75819DF79C400A77736 /* Supporting Files */ = {
@@ -719,6 +730,7 @@
 				6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */,
 				EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
+				EBC43D6F1A81916E0075272A /* Context.swift in Sources */,
 				EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */,
 				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
 			);
