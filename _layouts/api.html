@@ -1,6 +1,6 @@
 <li class="{{page.doctype | join: " "}}">
-<h4>{{ page.title }}</h4>
+<h4>{{ page.title | escape }}</h4>
 
-{{ content}}
+{{ content | markdownify }}
 
 </li>

@@ -24,16 +24,15 @@ Once you've tuned values in the UI, you can apply them back to the project by fo
 
     * If you're not attached to Xcode, email yourself from the share sheet.
     * If you're attached to Xcode, open up the console (`View > Debug Area > Activate Console`) and look for a log like this:
-
-        {% highlight json %}
-        [
-            {
-            "label" : "Test",
-            "key" : "Test",
-            "sliderMinValue" : 0,
-            "sliderMaxValue" : 1400,
-            "sliderValue" : 179.6053
-            }
-        ]
-        {% endhighlight %}
+{% highlight json %}
+[
+    {
+    "label" : "Test",
+    "key" : "Test",
+    "sliderMinValue" : 0,
+    "sliderMaxValue" : 1400,
+    "sliderValue" : 179.6053
+    }
+]
+{% endhighlight %}
 3. Copy and paste the contents into `TunableSpec.json` in your project (included with OhaiPrototope).

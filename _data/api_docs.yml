@@ -20,6 +20,20 @@
   - init_hsb
   - init_white
   - vars
+- title: Gesture
+  docs:
+  - continuous_gesture_phase
+- title: TapGesture
+  docs:
+  - init_convenience
+  - init
+  - vars
+
+- title: TapGesture
+  docs:
+  - init_convenience
+  - init
+  - vars
 
 - title: Heartbeat
   docs:
@@ -80,6 +94,20 @@
   docs:
   - convenience_methods
   - vars
+
+- title: TouchSample
+  docs:
+  - location_in_layer
+  - vars
+
+- title: TouchSequence
+  docs:
+  - init
+  - current_velocity_in_layer
+  - current_global_velocity
+  - touch_sequence_by_appending_sample
+  - vars
+  - convenience_methods
 
 - title: Tunable
   docs:

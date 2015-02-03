@@ -8,10 +8,10 @@
 
 {% for var in page.variables %}
 <li class="{{page.doctype | join: " "}}">
-    <h4>{{ var.name }}</h4>
+    <h4>{{ var.name | escape }}</h4>
 
     {% if var.desc != "" %}
-    <p> {{ var.desc }}
+    <p> {{ var.desc | markdownify }}
     {% endif %}
 </li>
 {% endfor %}
