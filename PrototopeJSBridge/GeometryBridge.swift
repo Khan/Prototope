@@ -10,6 +10,8 @@ import Foundation
 import JavaScriptCore
 import Prototope
 
+// MARK: Point
+
 @objc public protocol PointJSExport: JSExport {
 	// TODO make these writable, add observers to the bridges which vend them
 	var x: Double { get }
@@ -79,6 +81,7 @@ import Prototope
 	}
 }
 
+// MARK: Size
 
 @objc public protocol SizeJSExport: JSExport {
 	var width: Double { get }
@@ -128,4 +131,56 @@ import Prototope
 	public func multiply(scalar: Double) -> SizeJSExport {
 		return SizeBridge(size * scalar)
 	}
+}
+
+// MARK: Rect
+
+@objc public protocol RectJSExport: JSExport {
+	var origin: PointJSExport { get }
+	var size: SizeJSExport { get }
+	var minX: Double { get }
+	var midX: Double { get }
+	var maxX: Double { get }
+	var minY: Double { get }
+	var midY: Double { get }
+	var maxY: Double { get }
+	var center: PointJSExport { get }
+	class var zero: RectJSExport { get }
+	init(args: NSDictionary)
+}
+
+@objc public class RectBridge: NSObject, RectJSExport, BridgeType {
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "Rect")
+		let rectBridge = context.objectForKeyedSubscript("Rect")
+		rectBridge.setObject(zero, forKeyedSubscript: "zero")
+	}
+
+	public class var zero: RectJSExport { return RectBridge(Rect.zero) }
+
+	var rect: Prototope.Rect
+	public required init(args: NSDictionary) {
+		rect = Rect(
+			x: (args["x"] as Double?) ?? 0,
+			y: (args["y"] as Double?) ?? 0,
+			width: (args["width"] as Double?) ?? 0,
+			height: (args["height"] as Double?) ?? 0
+		)
+		super.init()
+	}
+
+	init(_ rect: Prototope.Rect) {
+		self.rect = rect
+		super.init()
+	}
+
+	public var origin: PointJSExport { return PointBridge(rect.origin) }
+	public var size: SizeJSExport { return SizeBridge(rect.size) }
+	public var minX: Double { return rect.minX }
+	public var midX: Double { return rect.midX }
+	public var maxX: Double { return rect.maxX }
+	public var minY: Double { return rect.minY }
+	public var midY: Double { return rect.midY }
+	public var maxY: Double { return rect.maxY }
+	public var center: PointJSExport { return PointBridge(rect.center) }
 }
