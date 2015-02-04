@@ -31,7 +31,6 @@
   - stop
   - animatewithduration
   - animatewithduration_curve
-  - layer
   - animationcurve
 
 - title: AnimatorValueConvertible
@@ -73,8 +72,8 @@
 
 - title: Image
   docs:
-    - init
     - init_name
+    - init_uiimage
     - vars
 
 - title: Layer
@@ -88,6 +87,12 @@
   - clip
   - interpolate
   - map
+
+- title: PanGesture
+  docs:
+    - init
+    - init_convenience
+    - vars
 
 - title: Point
   docs:

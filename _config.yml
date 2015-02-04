@@ -10,7 +10,14 @@ url: "http://khan.github.io" # the base hostname & protocol for your site
 ## Uncomment these lines if we ever want to be social
 twitter_username: khanacademy
 github_username:  khan
-exclude: [vendor]
+exclude:
+  - vendor
+  - dash
+  - dendoc.py
+  - readme.md
+  - requirements.txt
+  - env
+  - docset_feed.xml
 
 # Build settings
 markdown: kramdown

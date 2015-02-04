@@ -1,5 +1,7 @@
 _site
 .sass-cache
 vendor
+dash
 .bundle
+env
 Gemfile.lock
