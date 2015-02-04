@@ -14,3 +14,10 @@ extension JSContext {
 		setObject(unsafeBitCast(fn, AnyObject.self), forKeyedSubscript: key)
 	}
 }
+
+extension JSValue {
+	func setFunctionForKey<T>(key: String, fn: T) {
+		// Some grossness is needed to persuade Swift to treat closures as objects.
+		setObject(unsafeBitCast(fn, AnyObject.self), forKeyedSubscript: key)
+	}
+}
