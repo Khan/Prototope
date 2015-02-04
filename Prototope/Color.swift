@@ -11,6 +11,10 @@ import UIKit
 /** A simple representation of color. */
 public struct Color {
 	let uiColor: UIColor
+	
+	var CGColor: CGColorRef {
+		return self.uiColor.CGColor
+	}
 
 	/** Constructs a color from RGB and alpha values. Arguments range from 0.0 to 1.0. */
 	public init(red: Double, green: Double, blue: Double, alpha: Double = 1.0) {
