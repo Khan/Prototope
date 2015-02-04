@@ -447,11 +447,11 @@
 			children = (
 				EB453DB11A7AB116006F2A72 /* LayerBridge.swift */,
 				EBC43D661A8042740075272A /* GeometryBridge.swift */,
-				6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */,
 				EBC43D5C1A7FF8920075272A /* BorderBridge.swift */,
 				EBC43D611A8007320075272A /* ShadowBridge.swift */,
-				EBC43D631A8010770075272A /* ImageBridge.swift */,
 				EBC43D751A8198EA0075272A /* TunableBridge.swift */,
+				6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */,
+				EBC43D631A8010770075272A /* ImageBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
