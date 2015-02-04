@@ -149,6 +149,14 @@ public class Layer: Equatable, Hashable {
 		return nil
 	}
 
+    /** Sets the zPosition of the layer. Higher values go towards the screen as the
+        z axis increases towards your face. Measured in points and defaults to 0.
+        Animatable, but not yet with dynamic animators. */
+    public var zPosition: Double {
+		get { return Double(layer.zPosition) }
+		set { layer.zPosition = CGFloat(newValue) }
+	}
+
 	// MARK: Geometry
 
 	/** The x position of the layer's anchor point (by default the center), relative to
@@ -238,8 +246,13 @@ public class Layer: Equatable, Hashable {
 
 	/** The rotation of the layer specified in radians. May be used interchangeably with
 	rotationDegrees. Defaults to 0. */
-	public var rotationRadians: Double = 0 {
-		didSet { updateTransform() }
+	public var rotationRadians: Double {
+        get {
+            return layer.valueForKeyPath("transform.rotation.z") as Double
+        }
+		set {
+            layer.setValue(newValue, forKeyPath: "transform.rotation.z")
+        }
 	}
 
 	/** The scaling factor of the layer. Setting this value will set both scaleX and scaleY
@@ -253,13 +266,23 @@ public class Layer: Equatable, Hashable {
 	}
 
 	/** The scaling factor of the layer along the x dimension. Defaults to 1. */
-	public var scaleX: Double = 1 {
-		didSet { updateTransform() }
+	public var scaleX: Double {
+        get {
+            return layer.valueForKeyPath("transform.scale.x") as Double
+        }
+        set {
+            layer.setValue(newValue, forKeyPath: "transform.scale.x")
+        }
 	}
 
 	/** The scaling factor of the layer along the y dimension. Defaults to 1. */
-	public var scaleY: Double = 1 {
-		didSet { updateTransform() }
+	public var scaleY: Double {
+        get {
+            return layer.valueForKeyPath("transform.scale.y") as Double
+        }
+        set {
+            layer.setValue(newValue, forKeyPath: "transform.scale.y")
+        }
 	}
 
 	/** Returns the layer's position in the root layer's coordinate space. */
@@ -524,9 +547,7 @@ public class Layer: Equatable, Hashable {
 		return true
 	}
 
-	private func updateTransform() {
-		layer.transform = CATransform3DRotate(CATransform3DMakeScale(CGFloat(scaleX), CGFloat(scaleY), 1), CGFloat(rotationRadians), 0, 0, 1)
-	}
+	// MARK: - Internal interfaces
 
 	private func parentDidChange() {
 		parentView = parent?.view

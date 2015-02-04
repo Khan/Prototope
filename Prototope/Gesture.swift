@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Touches
 
 /** Represents the state of a touch at a particular time. */
-public struct TouchSample {
+public struct TouchSample: SampleType {
 	/** The location of the touch sample in the root layer's coordinate system. */
 	public let globalLocation: Point
 
@@ -28,78 +28,6 @@ extension TouchSample: Printable {
 	public var description: String {
 		return "<TouchSample: globalLocation: \(globalLocation), timestamp: \(timestamp)>"
 	}
-}
-
-/** Represents a series of touch samples over time. */
-public struct TouchSequence<ID: Printable>: Printable {
-	/** Touch samples ordered by arrival time. */
-	public let samples: [TouchSample]
-
-	/** An identifier that can be used to distinguish this touch sequence from e.g. other
-		touch sequences that might be proceeding simultaneously. You might think of it as
-		a "finger identifier". */
-	public var id: ID
-
-	/** The first touch sample. */
-	public var firstSample: TouchSample! {
-		return samples.first // Touch sequences, when exposed to API clients, always have at least one sample.
-	}
-
-	/** The next-to-last touch sample (if one exists). */
-	public var previousSample: TouchSample? {
-		let index = samples.count - 2
-		return index >= 0 ? samples[index] : nil
-	}
-
-	/** The most recent touch sample. */
-	public var currentSample: TouchSample! {
-		return samples.last // Touch sequences, when exposed to API clients, always have at least one sample.
-	}
-
-	/** The approximate current velocity of the touch sequence, specified in points per second
-		in the layer's coordinate space. */
-	public func currentVelocityInLayer(layer: Layer) -> Point {
-		if samples.count <= 1 {
-			return Point()
-		} else {
-			let velocitySmoothingFactor = 0.6
-			func velocitySampleFromSample(a: TouchSample, toSample b: TouchSample) -> Point {
-				return (b.locationInLayer(layer) - a.locationInLayer(layer)) / (b.timestamp - a.timestamp)
-			}
-
-			var velocity = velocitySampleFromSample(samples[0], toSample: samples[1])
-			for sampleIndex in 2..<samples.count {
-				velocity = velocity * velocitySmoothingFactor + velocitySampleFromSample(samples[sampleIndex - 1], toSample: samples[sampleIndex]) * (1 - velocitySmoothingFactor)
-			}
-			return velocity
-		}
-	}
-
-	/** The approximate current velocity of the touch sequence, specified in points per second
-		in the root layer's coordinate space. */
-	public func currentGlobalVelocity() -> Point {
-		return currentVelocityInLayer(Layer.root)
-	}
-
-	public init(samples: [TouchSample], id: ID) {
-		precondition(samples.count >= 0)
-		self.samples = samples
-		self.id = id
-	}
-
-	/** Create a new touch sequence by adding a sample onto the end of the sample list. */
-	public func touchSequenceByAppendingSample(sample: TouchSample) -> TouchSequence<ID> {
-		return TouchSequence(samples: samples + [sample], id: id)
-	}
-
-	public var description: String {
-		return "{id: \(id), samples: \(samples)}"
-	}
-}
-
-/** Creates a new touch sequence by adding the samples in the constituent sequences. */
-public func +<ID>(a: TouchSequence<ID>, b: TouchSequence<ID>) -> TouchSequence<ID> {
-	return TouchSequence(samples: a.samples + b.samples, id: a.id)
 }
 
 /** Only public because Swift requires it. Intended to be an opaque wrapper of UITouches. */
@@ -251,7 +179,7 @@ public class PanGesture: GestureType {
 				centroidSequence = TouchSequence(samples: [TouchSample(globalLocation: Point(centroidWindowLocation), timestamp: Timestamp.currentTimestamp)], id: IDState.nextCentroidSequenceID)
 				IDState.nextCentroidSequenceID++
 			case .Changed, .Ended, .Cancelled:
-				centroidSequence = centroidSequence!.touchSequenceByAppendingSample(TouchSample(globalLocation: Point(panGesture.translationInView(panGesture.view!.window!)), timestamp: Timestamp.currentTimestamp))
+				centroidSequence = centroidSequence!.sampleSequenceByAppendingSample(TouchSample(globalLocation: Point(panGesture.translationInView(panGesture.view!.window!)), timestamp: Timestamp.currentTimestamp))
 			case .Possible, .Failed:
 				fatalError("Unexpected gesture state")
 			}
@@ -266,6 +194,104 @@ public class PanGesture: GestureType {
 			}
 		}
 	}
+}
+
+/** A rotation sample represents the state of a rotation gesture at a single point in time */
+public struct RotationSample: SampleType {
+    public let rotationRadians: Double
+    public let velocityRadians: Double
+    
+    public var rotationDegrees: Double {
+        get {
+            return rotationRadians * 180 / M_PI
+        }
+    }
+    
+    public var velocityDegrees: Double {
+        get {
+            return velocityRadians * 180 / M_PI
+        }
+    }
+    
+    public let centroid: TouchSample
+
+    public var description: String {
+        return "<RotationSample: ⟳\(rotationDegrees)° ∂⟳\(velocityDegrees)°/s, \(rotationRadians)rad \(velocityRadians)rad/s, @\(centroid)>"
+    }
+}
+
+/** A rotation gesture recognizes a standard iOS rotation: it doesn't begin until the user's rotated by some number of degrees, then it tracks new touches coming and going over time as well as rotation relative to the beginning of the gesture and the current rotation velocity. It exposes simple access to the sequence of rotation samples representing the series of the gesture's state over time. */
+public class RotationGesture: GestureType {
+    /** The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation) and a sequence of rotation samples representing the series of the gesture's state over time. */
+    public convenience init(_ handler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<RotationSample, Int>) -> ()) {
+        self.init(handler: handler)
+    }
+    
+    /**
+    When cancelsTouchesInLayer is true, touches being handled via touchXXXHandlers will be cancelled
+    (and touch[es]CancelledHandler will be invoked) when the gesture recognizes.
+    
+    The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation) and a sequence of rotation samples representing the series of the gesture's state over time. */
+    public init(cancelsTouchesInLayer: Bool = true, handler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<RotationSample, Int>) -> ()) {
+        rotationGestureHandler = RotationGestureHandler(actionHandler: handler)
+        rotationGestureRecognizer = UIRotationGestureRecognizer(target: rotationGestureHandler, action: "handleGestureRecognizer:")
+        rotationGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
+    }
+    
+    private let rotationGestureRecognizer: UIRotationGestureRecognizer
+    private let rotationGestureHandler: RotationGestureHandler
+    
+    public weak var hostLayer: Layer? {
+        didSet { handleTransferOfGesture(rotationGestureRecognizer, oldValue, hostLayer) }
+    }
+    
+    deinit {
+        rotationGestureRecognizer.removeTarget(rotationGestureHandler, action: "handleGestureRecognizer:")
+    }
+    
+    @objc class RotationGestureHandler: NSObject {
+        private let actionHandler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<RotationSample, Int>) -> ()
+        private var sampleSequence: SampleSequence<RotationSample, Int>?
+        
+        init(actionHandler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<RotationSample, Int>) -> ()) {
+            self.actionHandler = actionHandler
+        }
+        
+        func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+            let rotationGesture = gestureRecognizer as UIRotationGestureRecognizer
+            
+            let rotation = Double(rotationGesture.rotation)
+            let velocity = Double(rotationGesture.velocity)
+            
+            let centroidPoint = rotationGesture.locationInView(nil)
+            let touchSample = TouchSample(globalLocation: Point(centroidPoint), timestamp: Timestamp.currentTimestamp)
+            let sample = RotationSample(rotationRadians: rotation, velocityRadians: velocity, centroid: touchSample)
+            
+            switch rotationGesture.state {
+            case .Began:
+                struct IDState { static var nextSequenceID = 0 }
+                sampleSequence = SampleSequence(samples: [sample], id: IDState.nextSequenceID)
+                IDState.nextSequenceID++
+                
+            case .Changed, .Ended, .Cancelled:
+                sampleSequence = sampleSequence!.sampleSequenceByAppendingSample(sample)
+                
+            case .Possible, .Failed:
+                fatalError("Unexpected gesture state")
+            }
+            
+            actionHandler(phase: ContinuousGesturePhase(rotationGesture.state)!, sampleSequence: sampleSequence!)
+            
+            switch rotationGesture.state {
+            case .Ended, .Cancelled:
+                sampleSequence = nil
+            case .Began, .Changed, .Possible, .Failed:
+                break
+            }
+        }
+    }
 }
 
 /** Continuous gestures are different from discrete gestures in that they pass through several phases.
@@ -308,6 +334,171 @@ private extension ContinuousGesturePhase {
 			self = .Cancelled
 		}
 	}
+}
+
+// MARK: - Samples and sequences
+
+public protocol SampleType: Printable {
+    
+}
+
+// MARK: SampleSequenceType
+public protocol SampleSequenceType : Printable {
+    typealias Sample
+    typealias ID : Printable
+    
+    var samples: [Sample] { get }
+    
+    var id: ID { get }
+    
+    var firstSample: Sample! { get }
+    
+    var previousSample: Sample? { get }
+    
+    var currentSample: Sample! { get }
+    
+    init(samples: [Sample], id: ID)
+    
+    func sampleSequenceByAppendingSample(sample: Sample) -> Self
+    
+    func +(a: Self, b: Sample) -> Self
+
+    func +(a: Self, b: Self) -> Self
+}
+
+public func +<Seq: SampleSequenceType, S where S == Seq.Sample>(a: Seq, b: S) -> Seq {
+    return a.sampleSequenceByAppendingSample(b)
+}
+
+public func +<Seq: SampleSequenceType>(a: Seq, b: Seq) -> Seq {
+    return Seq(samples:a.samples + b.samples, id:a.id)
+}
+
+// MARK: Concrete SampleSequence
+
+/** Represents a series of samples over time.
+    Provides convenience methods for accessing samples that might be relevant
+    when processing gestures. */
+public struct SampleSequence<S: SampleType, I: Printable> : SampleSequenceType {
+    typealias Sample = S
+    typealias ID = I
+
+    /** Samples ordered by arrival time. */
+    public let samples: [Sample]
+    
+    /** An identifier that can be used to distinguish this sequence from e.g. other
+    sequences that might be proceeding simultaneously. You might think of it as
+    a "finger identifier". */
+    public var id: ID
+    
+    /** The first sample. */
+    public var firstSample: Sample! {
+        return samples.first
+    }
+    
+    /** The next-to-last sample (if one exists). */
+    public var previousSample: Sample? {
+        let index = samples.count - 2
+        return index >= 0 ? samples[index] : nil
+    }
+    
+    /** The most recent sample. */
+    public var currentSample: Sample! {
+        return samples.last
+    }
+    
+    public init(samples: [Sample], id: ID) {
+        precondition(samples.count >= 0)
+        self.samples = samples
+        self.id = id
+    }
+    
+    /** Create a new sequence by adding a sample onto the end of the sample list. */
+    public func sampleSequenceByAppendingSample(sample: Sample) -> SampleSequence<Sample, ID> {
+        return SampleSequence(samples: samples + [sample], id: id)
+    }
+    
+    public var description: String {
+        return "{id: \(id), samples: \(samples)}"
+    }
+}
+
+// MARK: TouchSequence Decorator
+
+/** Represents a series of touch samples over time.
+This is a decorator on SampleSequence, specializing it to use touch samples
+and extending it with velocity calculation and smoothing methods */
+public struct TouchSequence<I: Printable> : SampleSequenceType {
+    typealias Sample = TouchSample
+    typealias ID = I
+    
+    /** Inner sequence */
+    private let sequence: SampleSequence<TouchSample, ID>
+    
+    /** Touch samples ordered by arrival time. */
+    public var samples: [TouchSample] {
+        return sequence.samples
+    }
+    
+    /** An identifier that can be used to distinguish this touch sequence from e.g. other
+    touch sequences that might be proceeding simultaneously. You might think of it as
+    a "finger identifier". */
+    public var id: ID {
+        return sequence.id
+    }
+    
+    /** The first touch sample. */
+    public var firstSample: TouchSample! {
+        return sequence.firstSample
+    }
+    
+    /** The next-to-last touch sample (if one exists). */
+    public var previousSample: TouchSample? {
+        return sequence.previousSample
+    }
+    
+    /** The most recent touch sample. */
+    public var currentSample: TouchSample! {
+        return sequence.currentSample
+    }
+    
+    public init(samples: [TouchSample], id: ID) {
+        self.sequence = SampleSequence(samples: samples, id: id)
+    }
+    
+    /** The approximate current velocity of the touch sequence, specified in points per second
+    in the layer's coordinate space. */
+    public func currentVelocityInLayer(layer: Layer) -> Point {
+        if samples.count <= 1 {
+            return Point()
+        } else {
+            let velocitySmoothingFactor = 0.6
+            func velocitySampleFromSample(a: TouchSample, toSample b: TouchSample) -> Point {
+                return (b.locationInLayer(layer) - a.locationInLayer(layer)) / (b.timestamp - a.timestamp)
+            }
+            
+            var velocity = velocitySampleFromSample(samples[0], toSample: samples[1])
+            for sampleIndex in 2..<samples.count {
+                velocity = velocity * velocitySmoothingFactor + velocitySampleFromSample(samples[sampleIndex - 1], toSample: samples[sampleIndex]) * (1 - velocitySmoothingFactor)
+            }
+            return velocity
+        }
+    }
+    
+    /** The approximate current velocity of the touch sequence, specified in points per second
+    in the root layer's coordinate space. */
+    public func currentGlobalVelocity() -> Point {
+        return currentVelocityInLayer(Layer.root)
+    }
+    
+    /** Create a new touch sequence by adding a sample onto the end of the sample list. */
+    public func sampleSequenceByAppendingSample(sample: TouchSample) -> TouchSequence<ID> {
+        return TouchSequence(samples: samples + [sample], id: id)
+    }
+    
+    public var description: String {
+        return sequence.description
+    }
 }
 
 // MARK: -
