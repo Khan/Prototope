@@ -55,6 +55,10 @@ import JavaScriptCore
     var border: BorderJSExport? { get set }
     var shadow: ShadowJSExport? { get set }
 
+	// MARK: Convenience utilities
+	var willBeRemovedSoon: Bool { get }
+	func removeAfterDuration(duration: Double)
+	func fadeOutAndRemoveAfterDuration(duration: Double)
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -260,5 +264,11 @@ import JavaScriptCore
 			}
 		}
 	}
+
+	// MARK: Convenience utilities
+
+	public var willBeRemovedSoon: Bool { return layer.willBeRemovedSoon }
+	public func removeAfterDuration(duration: Double) { layer.removeAfterDuration(duration) }
+	public func fadeOutAndRemoveAfterDuration(duration: Double) { layer.fadeOutAndRemoveAfterDuration(duration) }
 
 }
