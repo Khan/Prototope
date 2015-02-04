@@ -48,8 +48,8 @@ public class LayerAnimatorStore {
 	public var backgroundColor: Animator<Color>
 	public var alpha: Animator<Double>
 	public var rotationRadians: Animator<Double>
-    //kPOPScaleXY expects two values, not one!
-    public var scale: Animator<Point>
+	//kPOPScaleXY expects two values, not one!
+	public var scale: Animator<Point>
 
 /*	TODO:
 	width, height, anchorPoint, cornerRadius,
