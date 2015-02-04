@@ -294,6 +294,93 @@ public class RotationGesture: GestureType {
     }
 }
 
+/** A pinch sample represents the state of a pinch gesture at a single point in time */
+public struct PinchSample: SampleType {
+    public let scale: Double
+    public let velocity: Double
+    public let centroid: TouchSample
+    
+    public var description: String {
+        return "<PinchSample: scale: \(scale) velocity: \(velocity) @\(centroid)>"
+    }
+}
+
+/** A pinch gesture recognizes a standard iOS pinch: it doesn't begin until the user's pinched some number of points, then it tracks new touches coming and going over time as well as scale relative to the beginning of the gesture and the current scale velocity. It exposes simple access to the sequence of pinch samples representing the series of the gesture's state over time. */
+public class PinchGesture: GestureType {
+    /** The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation), scale relative to the state at the beginning
+    of the gesture, scale velocity in scale per second and also a touch sequence representing the center of all the touches involved in the pinch gesture. */
+    public convenience init(_ handler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<PinchSample, Int>) -> ()) {
+        self.init(handler: handler)
+    }
+    
+    /**
+    
+    When cancelsTouchesInLayer is true, touches being handled via touchXXXHandlers will be cancelled
+    (and touch[es]CancelledHandler will be invoked) when the gesture recognizes.
+    
+    The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
+    phase (see ContinuousGesturePhase documentation), scale relative to the state at the beginning
+    of the gesture, scale velocity in scale per second and also a touch sequence representing the center of all the touches involved in the pinch gesture. */
+    public init(cancelsTouchesInLayer: Bool = true, handler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<PinchSample, Int>) -> ()) {
+        pinchGestureHandler = PinchGestureHandler(actionHandler: handler)
+        pinchGestureRecognizer = UIPinchGestureRecognizer(target: pinchGestureHandler, action: "handleGestureRecognizer:")
+        pinchGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
+    }
+    
+    private let pinchGestureRecognizer: UIPinchGestureRecognizer
+    private let pinchGestureHandler: PinchGestureHandler
+    
+    public weak var hostLayer: Layer? {
+        didSet { handleTransferOfGesture(pinchGestureRecognizer, oldValue, hostLayer) }
+    }
+    
+    deinit {
+        pinchGestureRecognizer.removeTarget(pinchGestureHandler, action: "handleGestureRecognizer:")
+    }
+    
+    @objc class PinchGestureHandler: NSObject {
+        private let actionHandler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<PinchSample, Int>) -> ()
+        private var sampleSequence: SampleSequence<PinchSample, Int>?
+        
+        init(actionHandler: (phase: ContinuousGesturePhase, sampleSequence: SampleSequence<PinchSample, Int>) -> ()) {
+            self.actionHandler = actionHandler
+        }
+        
+        func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+            let scaleGesture = gestureRecognizer as UIPinchGestureRecognizer
+            
+            let scale = Double(scaleGesture.scale)
+            let velocity = Double(scaleGesture.velocity)
+            
+            let centroidPoint = scaleGesture.locationInView(nil)
+            let touchSample = TouchSample(globalLocation: Point(centroidPoint), timestamp: Timestamp.currentTimestamp)
+            let sample = PinchSample(scale: scale, velocity: velocity, centroid: touchSample)
+            
+            switch scaleGesture.state {
+            case .Began:
+                struct IDState { static var nextSequenceID = 0 }
+                sampleSequence = SampleSequence(samples: [sample], id: IDState.nextSequenceID)
+                IDState.nextSequenceID++
+                
+            case .Changed, .Ended, .Cancelled:
+                sampleSequence = sampleSequence!.sampleSequenceByAppendingSample(sample)
+                
+            case .Possible, .Failed:
+                fatalError("Unexpected gesture state")
+            }
+            
+            actionHandler(phase: ContinuousGesturePhase(scaleGesture.state)!, sampleSequence: sampleSequence!)
+            
+            switch scaleGesture.state {
+            case .Ended, .Cancelled:
+                sampleSequence = nil
+            case .Began, .Changed, .Possible, .Failed:
+                break
+            }
+        }    }
+}
+
 /** Continuous gestures are different from discrete gestures in that they pass through several phases.
 	A discrete gesture simply recognizes--then it's done. A continuous gesture begins, then may change
 	over the course of several events, then ends (or is cancelled). */
