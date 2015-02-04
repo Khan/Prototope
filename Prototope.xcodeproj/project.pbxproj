@@ -50,6 +50,9 @@
 		EBC43D6F1A81916E0075272A /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D6E1A81916E0075272A /* Context.swift */; };
 		EBC43D721A8195600075272A /* GeometryBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D711A8195600075272A /* GeometryBridgeTests.swift */; };
 		EBC43D741A81959B0075272A /* JSBridgeTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D731A81959B0075272A /* JSBridgeTestCase.swift */; };
+		EBC43D761A8198EA0075272A /* TunableBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D751A8198EA0075272A /* TunableBridge.swift */; };
+		EBC43D781A81999B0075272A /* JSContext+BridgingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D771A81999B0075272A /* JSContext+BridgingExtensions.swift */; };
+		EBC43D7A1A81AC020075272A /* TunableBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D791A81AC020075272A /* TunableBridgeTests.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -210,6 +213,9 @@
 		EBC43D6E1A81916E0075272A /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		EBC43D711A8195600075272A /* GeometryBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryBridgeTests.swift; sourceTree = "<group>"; };
 		EBC43D731A81959B0075272A /* JSBridgeTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBridgeTestCase.swift; sourceTree = "<group>"; };
+		EBC43D751A8198EA0075272A /* TunableBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunableBridge.swift; sourceTree = "<group>"; };
+		EBC43D771A81999B0075272A /* JSContext+BridgingExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSContext+BridgingExtensions.swift"; sourceTree = "<group>"; };
+		EBC43D791A81AC020075272A /* TunableBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunableBridgeTests.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -393,6 +399,7 @@
 			children = (
 				EBC43D6E1A81916E0075272A /* Context.swift */,
 				6175CE281A7F1B01001E63CE /* BridgeType.swift */,
+				EBC43D771A81999B0075272A /* JSContext+BridgingExtensions.swift */,
 				EBC43D701A8191760075272A /* Bridged Types */,
 				EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */,
 				EB453D911A7AB0B2006F2A72 /* Supporting Files */,
@@ -413,6 +420,7 @@
 			children = (
 				EBC43D731A81959B0075272A /* JSBridgeTestCase.swift */,
 				EBC43D711A8195600075272A /* GeometryBridgeTests.swift */,
+				EBC43D791A81AC020075272A /* TunableBridgeTests.swift */,
 				EB453DA01A7AB0B2006F2A72 /* Supporting Files */,
 			);
 			path = PrototopeJSBridgeTests;
@@ -443,6 +451,7 @@
 				EBC43D5C1A7FF8920075272A /* BorderBridge.swift */,
 				EBC43D611A8007320075272A /* ShadowBridge.swift */,
 				EBC43D631A8010770075272A /* ImageBridge.swift */,
+				EBC43D751A8198EA0075272A /* TunableBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -729,8 +738,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC43D5D1A7FF8920075272A /* BorderBridge.swift in Sources */,
+				EBC43D761A8198EA0075272A /* TunableBridge.swift in Sources */,
 				6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */,
 				6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */,
+				EBC43D781A81999B0075272A /* JSContext+BridgingExtensions.swift in Sources */,
 				EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
 				EBC43D6F1A81916E0075272A /* Context.swift in Sources */,
@@ -744,6 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC43D721A8195600075272A /* GeometryBridgeTests.swift in Sources */,
+				EBC43D7A1A81AC020075272A /* TunableBridgeTests.swift in Sources */,
 				EBC43D741A81959B0075272A /* JSBridgeTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
