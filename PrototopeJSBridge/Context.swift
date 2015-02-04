@@ -12,8 +12,9 @@ import JavaScriptCore
 public class Context {
 	public var exceptionHandler: (JSValue -> Void)? {
 		didSet {
-			context.exceptionHandler = { [exceptionHandler = self.exceptionHandler] _, value in
+			context.exceptionHandler = { [exceptionHandler = self.exceptionHandler] context, value in
 				exceptionHandler?(value)
+				context.exception = nil
 				return
 			}
 		}
@@ -32,6 +33,13 @@ public class Context {
 	}
 
 	private func addBridgedTypes() {
+		let console = JSValue(newObjectInContext: context)
+		let loggingTrampoline: @objc_block JSValue -> Void = { value in
+			println(JSContext.currentArguments())
+		}
+		console.setFunctionForKey("log", fn: loggingTrampoline)
+		context.setObject(console, forKeyedSubscript: "console")
+
 		LayerBridge.addToContext(context)
 		ColorBridge.addToContext(context)
 		BorderBridge.addToContext(context)
@@ -43,5 +51,6 @@ public class Context {
 		TunableBridge.addToContext(context)
 		TimingBridge.addToContext(context)
 		MathBridge.addToContext(context)
+		HeartbeatBridge.addToContext(context)
 	}
 }

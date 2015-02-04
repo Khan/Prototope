@@ -57,6 +57,8 @@
 		EBC43D7E1A81B0FB0075272A /* TimingBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D7D1A81B0FB0075272A /* TimingBridgeTests.swift */; };
 		EBC43D801A81B5EB0075272A /* MathBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D7F1A81B5EB0075272A /* MathBridge.swift */; };
 		EBC43D821A81B7040075272A /* MathBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D811A81B7040075272A /* MathBridgeTests.swift */; };
+		EBC43D841A81BA360075272A /* HeartbeatBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D831A81BA360075272A /* HeartbeatBridge.swift */; };
+		EBC43D861A81BBC30075272A /* HeartbeatBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -224,6 +226,8 @@
 		EBC43D7D1A81B0FB0075272A /* TimingBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimingBridgeTests.swift; sourceTree = "<group>"; };
 		EBC43D7F1A81B5EB0075272A /* MathBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathBridge.swift; sourceTree = "<group>"; };
 		EBC43D811A81B7040075272A /* MathBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathBridgeTests.swift; sourceTree = "<group>"; };
+		EBC43D831A81BA360075272A /* HeartbeatBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridge.swift; sourceTree = "<group>"; };
+		EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridgeTests.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -431,6 +435,7 @@
 				EBC43D791A81AC020075272A /* TunableBridgeTests.swift */,
 				EBC43D7D1A81B0FB0075272A /* TimingBridgeTests.swift */,
 				EBC43D811A81B7040075272A /* MathBridgeTests.swift */,
+				EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */,
 				EB453DA01A7AB0B2006F2A72 /* Supporting Files */,
 			);
 			path = PrototopeJSBridgeTests;
@@ -464,6 +469,7 @@
 				EBC43D7B1A81AF350075272A /* TimingBridge.swift */,
 				EBC43D631A8010770075272A /* ImageBridge.swift */,
 				EBC43D7F1A81B5EB0075272A /* MathBridge.swift */,
+				EBC43D831A81BA360075272A /* HeartbeatBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -758,6 +764,7 @@
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
 				EBC43D6F1A81916E0075272A /* Context.swift in Sources */,
 				EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */,
+				EBC43D841A81BA360075272A /* HeartbeatBridge.swift in Sources */,
 				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
 				EBC43D801A81B5EB0075272A /* MathBridge.swift in Sources */,
 				EBC43D7C1A81AF350075272A /* TimingBridge.swift in Sources */,
@@ -769,6 +776,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC43D721A8195600075272A /* GeometryBridgeTests.swift in Sources */,
+				EBC43D861A81BBC30075272A /* HeartbeatBridgeTests.swift in Sources */,
 				EBC43D7A1A81AC020075272A /* TunableBridgeTests.swift in Sources */,
 				EBC43D7E1A81B0FB0075272A /* TimingBridgeTests.swift in Sources */,
 				EBC43D741A81959B0075272A /* JSBridgeTestCase.swift in Sources */,
