@@ -42,5 +42,6 @@ public class Context {
 		RectBridge.addToContext(context)
 		TunableBridge.addToContext(context)
 		TimingBridge.addToContext(context)
+		MathBridge.addToContext(context)
 	}
 }
