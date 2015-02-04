@@ -301,7 +301,7 @@ public struct PinchSample: SampleType {
     public let centroid: TouchSample
     
     public var description: String {
-        return "{PinchSample: scale:\(scale) velocity\(velocity) @\(centroid)}"
+        return "<PinchSample: scale: \(scale) velocity: \(velocity) @\(centroid)>"
     }
 }
 
