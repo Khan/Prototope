@@ -52,5 +52,6 @@ public class Context {
 		TimingBridge.addToContext(context)
 		MathBridge.addToContext(context)
 		HeartbeatBridge.addToContext(context)
+		SoundBridge.addToContext(context)
 	}
 }

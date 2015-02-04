@@ -59,6 +59,7 @@
 		EBC43D821A81B7040075272A /* MathBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D811A81B7040075272A /* MathBridgeTests.swift */; };
 		EBC43D841A81BA360075272A /* HeartbeatBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D831A81BA360075272A /* HeartbeatBridge.swift */; };
 		EBC43D861A81BBC30075272A /* HeartbeatBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */; };
+		EBC43D881A81C47A0075272A /* SoundBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D871A81C47A0075272A /* SoundBridge.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -228,6 +229,7 @@
 		EBC43D811A81B7040075272A /* MathBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathBridgeTests.swift; sourceTree = "<group>"; };
 		EBC43D831A81BA360075272A /* HeartbeatBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridge.swift; sourceTree = "<group>"; };
 		EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridgeTests.swift; sourceTree = "<group>"; };
+		EBC43D871A81C47A0075272A /* SoundBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundBridge.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				EBC43D631A8010770075272A /* ImageBridge.swift */,
 				EBC43D7F1A81B5EB0075272A /* MathBridge.swift */,
 				EBC43D831A81BA360075272A /* HeartbeatBridge.swift */,
+				EBC43D871A81C47A0075272A /* SoundBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				EBC43D761A8198EA0075272A /* TunableBridge.swift in Sources */,
 				6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */,
 				6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */,
+				EBC43D881A81C47A0075272A /* SoundBridge.swift in Sources */,
 				EBC43D781A81999B0075272A /* JSContext+BridgingExtensions.swift in Sources */,
 				EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
