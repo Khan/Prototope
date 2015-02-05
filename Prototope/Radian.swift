@@ -10,3 +10,9 @@ import Foundation
 
 /** For when we're dealing with radians, this type makes it more explicit. */
 public typealias Radian = Double
+
+extension Radian {
+	
+	/** One full revolution in radians. */
+	static let circle = 2.0 * M_PI
+}
