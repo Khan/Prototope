@@ -67,6 +67,10 @@ import JavaScriptCore
     var touchesMovedHandler: JSValue? { get set }
     var touchesEndedHandler: JSValue? { get set }
     var touchesCancelledHandler: JSValue? { get set }
+    var touchBeganHandler: JSValue? { get set }
+    var touchMovedHandler: JSValue? { get set }
+    var touchEndedHandler: JSValue? { get set }
+    var touchCancelledHandler: JSValue? { get set }
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -288,13 +292,18 @@ import JavaScriptCore
 
     private class func bridgeTouchSequenceMapping(mapping: [UITouchID: TouchSequence<UITouchID>], context: JSContext) -> JSValue {
         let output = JSValue(newObjectInContext: context)
-        for (id, sequence) in mapping {
-			let bridgedID = JSValue(object: UITouchIDBridge(id), inContext: context)!
-            let jsValueIDedSequence = TouchSequence(samples: sequence.samples, id: bridgedID)
-            let bridge = TouchSequenceBridge(jsValueIDedSequence)
-            output.setObject(bridge, forKeyedSubscript: bridgedID)
+        for (_, sequence) in mapping {
+			let bridgedSequence = bridgeTouchSequence(sequence, context: context)
+            output.setObject(bridgedSequence, forKeyedSubscript: bridgedSequence.id)
         }
         return output
+    }
+
+	private class func bridgeTouchSequence(sequence: TouchSequence<UITouchID>, context: JSContext) -> TouchSequenceBridge {
+        let bridgedID = JSValue(object: UITouchIDBridge(sequence.id), inContext: context)!
+        let jsValueIDedSequence = TouchSequence(samples: sequence.samples, id: bridgedID)
+        let bridge = TouchSequenceBridge(jsValueIDedSequence)
+        return bridge
     }
 
     public var activeTouchSequences: JSValue {
@@ -376,6 +385,87 @@ import JavaScriptCore
             }
         }
     }
+
+    public var touchBeganHandler: JSValue? {
+        get {
+            if let handler = layer.touchBeganHandler {
+                return JSValue(object: unsafeBitCast(handler, AnyObject.self), inContext: JSContext.currentContext())
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let callable = newValue {
+                layer.touchBeganHandler = { [context = JSContext.currentContext()] sequence in
+                    callable.callWithArguments([LayerBridge.bridgeTouchSequence(sequence, context: context)])
+                    return
+                }
+            } else {
+                layer.touchBeganHandler = nil
+            }
+        }
+    }
+
+    public var touchMovedHandler: JSValue? {
+        get {
+            if let handler = layer.touchMovedHandler {
+                return JSValue(object: unsafeBitCast(handler, AnyObject.self), inContext: JSContext.currentContext())
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let callable = newValue {
+                layer.touchMovedHandler = { [context = JSContext.currentContext()] sequence in
+                    callable.callWithArguments([LayerBridge.bridgeTouchSequence(sequence, context: context)])
+                    return
+                }
+            } else {
+                layer.touchMovedHandler = nil
+            }
+        }
+    }
+
+    public var touchEndedHandler: JSValue? {
+        get {
+            if let handler = layer.touchEndedHandler {
+                return JSValue(object: unsafeBitCast(handler, AnyObject.self), inContext: JSContext.currentContext())
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let callable = newValue {
+                layer.touchEndedHandler = { [context = JSContext.currentContext()] sequence in
+                    callable.callWithArguments([LayerBridge.bridgeTouchSequence(sequence, context: context)])
+                    return
+                }
+            } else {
+                layer.touchEndedHandler = nil
+            }
+        }
+    }
+
+    public var touchCancelledHandler: JSValue? {
+        get {
+            if let handler = layer.touchCancelledHandler {
+                return JSValue(object: unsafeBitCast(handler, AnyObject.self), inContext: JSContext.currentContext())
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let callable = newValue {
+                layer.touchCancelledHandler = { [context = JSContext.currentContext()] sequence in
+                    callable.callWithArguments([LayerBridge.bridgeTouchSequence(sequence, context: context)])
+                    return
+                }
+            } else {
+                layer.touchCancelledHandler = nil
+            }
+        }
+    }
+
 
 
 }
