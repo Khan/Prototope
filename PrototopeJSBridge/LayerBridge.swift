@@ -59,6 +59,10 @@ import JavaScriptCore
 	var willBeRemovedSoon: Bool { get }
 	func removeAfterDuration(duration: Double)
 	func fadeOutAndRemoveAfterDuration(duration: Double)
+
+    // MARK: Touches and gestures
+    var userInteractionEnabled: Bool { get set }
+    var activeTouchSequences: JSValue { get }
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -271,4 +275,22 @@ import JavaScriptCore
 	public func removeAfterDuration(duration: Double) { layer.removeAfterDuration(duration) }
 	public func fadeOutAndRemoveAfterDuration(duration: Double) { layer.fadeOutAndRemoveAfterDuration(duration) }
 
+    // MARK: Touches and gestures
+
+    public var userInteractionEnabled: Bool {
+        get { return layer.userInteractionEnabled }
+        set { layer.userInteractionEnabled = newValue }
+    }
+
+    public var activeTouchSequences: JSValue {
+        let output = JSValue(newObjectInContext: JSContext.currentContext())
+		let originalSequences = layer.activeTouchSequences
+        for (id, sequence) in originalSequences {
+			// unsafe coercion abounds!
+			let jsValueIDedSequence = sequence as Any as TouchSequence<JSValue>
+			let bridge = TouchSequenceBridge(jsValueIDedSequence)
+            output.setObject(bridge, forKeyedSubscript: id as Any as JSValue)
+        }
+        return output
+    }
 }
