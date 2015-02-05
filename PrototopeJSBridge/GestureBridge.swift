@@ -207,6 +207,7 @@ func gestureBridgeForGesture(gesture: GestureType) -> GestureBridgeType {
 	switch gesture {
 	case is TapGesture: return TapGestureBridge(gesture as TapGesture)
 	case is PanGesture: return PanGestureBridge(gesture as PanGesture)
+	case is RotationGesture: return RotationGestureBridge(gesture as RotationGesture)
 	default: abort()
 	}
 }
@@ -215,6 +216,7 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 	switch gestureBridge {
 	case is TapGestureBridge: return (gestureBridge as TapGestureBridge).tapGesture
 	case is PanGestureBridge: return (gestureBridge as PanGestureBridge).panGesture
+	case is RotationGestureBridge: return (gestureBridge as RotationGestureBridge).rotationGesture
 	default: abort()
 	}
 }
@@ -316,7 +318,6 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "PanGesture")
-		// TODO: expose phase constants
 	}
 
 	public required init?(args: JSValue) {
@@ -385,4 +386,47 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 	public var rotationDegrees: Double { return rotationSample.rotationDegrees }
 	public var velocityDegrees: Double { return rotationSample.velocityDegrees }
 	public var centroid: TouchSampleJSExport { return TouchSampleBridge(rotationSample.centroid) }
+}
+
+@objc protocol RotationGestureJSExport: JSExport {
+	init?(args: JSValue)
+}
+
+@objc public class RotationGestureBridge: NSObject, RotationGestureJSExport, BridgeType, GestureBridgeType {
+	let rotationGesture: Prototope.RotationGesture!
+
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "RotationGesture")
+	}
+
+	public required init?(args: JSValue) {
+		let handler = args.valueForProperty("handler")
+		if !handler.isUndefined() {
+			let cancelsTouchesInLayerValue = args.valueForProperty("cancelsTouchesInLayer")
+			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined() ? true : cancelsTouchesInLayerValue.toBool()
+
+			rotationGesture = RotationGesture(
+				cancelsTouchesInLayer: cancelsTouchesInLayer,
+				handler: { [context = JSContext.currentContext()] (phase, sequence) in
+					let bridgedID = JSValue(int32: Int32(sequence.id), inContext: context)
+					let bridgedSamples = sequence.samples.map { JSValue(object: RotationSampleBridge($0), inContext: context)! }
+					let bridgedSequence = SampleSequenceBridge(SampleSequence(samples: bridgedSamples, id: bridgedID))
+					handler.callWithArguments([
+						ContinuousGesturePhaseBridge.encodePhase(phase, inContext: context),
+						bridgedSequence
+					])
+					return
+				}
+			)
+			super.init()
+		} else {
+			super.init()
+			return nil
+		}
+	}
+
+	public init(_ gesture: RotationGesture) {
+		self.rotationGesture = gesture
+		super.init()
+	}
 }
