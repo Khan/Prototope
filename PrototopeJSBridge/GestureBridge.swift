@@ -73,7 +73,56 @@ import JavaScriptCore
 	}
 }
 
-// MARK: - Touch Sequences
+// MARK: - Sample Sequences
+
+extension JSValue: SampleType {}
+
+@objc public protocol SampleSequenceJSExport: JSExport {
+	init?(args: JSValue)
+	var samples: NSArray { get }
+	var id: JSValue { get }
+	var firstSample: JSValue { get }
+	var previousSample: JSValue? { get }
+	var currentSample: JSValue { get }
+	func sampleSequenceByAppendingSample(sample: JSValue) -> SampleSequenceJSExport
+}
+
+@objc public class SampleSequenceBridge: NSObject, SampleSequenceJSExport, BridgeType {
+	var sampleSequence: Prototope.SampleSequence<JSValue, JSValue>!
+
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "SampleSequence")
+	}
+
+	public required init?(args: JSValue) {
+		let samplesValue = args.valueForProperty("samples")
+		let idValue = args.valueForProperty("id")
+
+		if !samplesValue.isUndefined() && !idValue.isUndefined() {
+			let sampleBridges = samplesValue.toArray().map { JSValue(object: $0, inContext: JSContext.currentContext())! }
+			sampleSequence = Prototope.SampleSequence(samples: sampleBridges, id: idValue)
+			super.init()
+		} else {
+			super.init()
+			return nil
+		}
+	}
+
+	init(_ sampleSequence: Prototope.SampleSequence<JSValue, JSValue>) {
+		self.sampleSequence = sampleSequence
+		super.init()
+	}
+
+	public var samples: NSArray { return sampleSequence.samples }
+	public var id: JSValue { return sampleSequence.id }
+	public var firstSample: JSValue { return sampleSequence.firstSample }
+	public var previousSample: JSValue? { return sampleSequence.previousSample }
+	public var currentSample: JSValue { return sampleSequence.currentSample }
+
+	public func sampleSequenceByAppendingSample(sample: JSValue) -> SampleSequenceJSExport {
+		return SampleSequenceBridge(sampleSequence.sampleSequenceByAppendingSample(sample))
+	}
+}
 
 @objc public protocol TouchSequenceJSExport: JSExport {
 	init?(args: JSValue)
@@ -86,6 +135,8 @@ import JavaScriptCore
 	func currentGlobalVelocity() -> PointJSExport
 	func sampleSequenceByAppendingSample(sample: TouchSampleJSExport) -> TouchSequenceJSExport
 }
+
+// MARK: - Touch Sequences
 
 @objc public class TouchSequenceBridge: NSObject, TouchSequenceJSExport, BridgeType {
 	var touchSequence: Prototope.TouchSequence<JSValue>!
