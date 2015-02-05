@@ -17,7 +17,6 @@ exclude:
   - readme.md
   - requirements.txt
   - env
-  - docset_feed.xml
 
 # Build settings
 markdown: kramdown
