@@ -63,6 +63,7 @@ import JavaScriptCore
     // MARK: Touches and gestures
     var userInteractionEnabled: Bool { get set }
     var activeTouchSequences: JSValue { get }
+    var touchesBeganHandler: JSValue? { get set }
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -282,15 +283,37 @@ import JavaScriptCore
         set { layer.userInteractionEnabled = newValue }
     }
 
-    public var activeTouchSequences: JSValue {
-        let output = JSValue(newObjectInContext: JSContext.currentContext())
-		let originalSequences = layer.activeTouchSequences
-        for (id, sequence) in originalSequences {
-			// unsafe coercion abounds!
-			let jsValueIDedSequence = sequence as Any as TouchSequence<JSValue>
-			let bridge = TouchSequenceBridge(jsValueIDedSequence)
-            output.setObject(bridge, forKeyedSubscript: id as Any as JSValue)
+    private class func bridgeTouchSequenceMapping(mapping: [UITouchID: TouchSequence<UITouchID>], context: JSContext) -> JSValue {
+        let output = JSValue(newObjectInContext: context)
+        for (id, sequence) in mapping {
+			let bridgedID = JSValue(object: UITouchIDBridge(id), inContext: context)!
+            let jsValueIDedSequence = TouchSequence(samples: sequence.samples, id: bridgedID)
+            let bridge = TouchSequenceBridge(jsValueIDedSequence)
+            output.setObject(bridge, forKeyedSubscript: bridgedID)
         }
         return output
+    }
+
+    public var activeTouchSequences: JSValue {
+        return LayerBridge.bridgeTouchSequenceMapping(layer.activeTouchSequences, context: JSContext.currentContext())
+    }
+
+    public var touchesBeganHandler: JSValue? {
+        get {
+            if let handler = layer.touchesBeganHandler {
+    			return JSValue(object: unsafeBitCast(handler, AnyObject.self), inContext: JSContext.currentContext())
+            } else {
+                return nil
+            }
+		}
+        set {
+            if let callable = newValue {
+                layer.touchesBeganHandler = { [context = JSContext.currentContext()] sequenceMapping in
+                    return callable.callWithArguments([LayerBridge.bridgeTouchSequenceMapping(sequenceMapping, context: context)]).toBool()
+                }
+            } else {
+                layer.touchesBeganHandler = nil
+            }
+        }
     }
 }

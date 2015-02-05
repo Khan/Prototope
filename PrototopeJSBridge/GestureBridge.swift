@@ -54,6 +54,25 @@ import JavaScriptCore
 	}
 }
 
+@objc public protocol UITouchIDJSExport: JSExport {
+	func equals(other: UITouchIDBridge) -> Bool
+}
+
+@objc public class UITouchIDBridge: NSObject, UITouchIDJSExport, BridgeType {
+	var uiTouchID: UITouchID
+
+	public class func addToContext(context: JSContext) {}
+
+	init(_ uiTouchID: UITouchID) {
+		self.uiTouchID = uiTouchID
+		super.init()
+	}
+
+	public func equals(other: UITouchIDBridge) -> Bool {
+		return uiTouchID == (other as JSExport as UITouchIDBridge).uiTouchID
+	}
+}
+
 // MARK: - Touch Sequences
 
 @objc public protocol TouchSequenceJSExport: JSExport {
