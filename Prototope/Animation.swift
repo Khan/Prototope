@@ -48,6 +48,8 @@ public class LayerAnimatorStore {
 	public var backgroundColor: Animator<Color>
 	public var alpha: Animator<Double>
 	public var rotationRadians: Animator<Double>
+	//kPOPScaleXY expects two values, not one!
+	public var scale: Animator<Point>
 
 /*	TODO:
 	width, height, anchorPoint, cornerRadius,
@@ -68,6 +70,7 @@ public class LayerAnimatorStore {
 		backgroundColor = Animator(layer: layer, propertyName: kPOPViewBackgroundColor)
 		alpha = Animator(layer: layer, propertyName: kPOPViewAlpha)
 		rotationRadians = Animator(layer: layer, propertyName: kPOPLayerRotation, shouldAnimateLayer: true)
+        scale = Animator(layer: layer, propertyName: kPOPLayerScaleXY, shouldAnimateLayer: true)
 	}
 }
 
