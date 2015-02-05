@@ -151,13 +151,30 @@ import JavaScriptCore
 
 // MARK: Gestures
 
+// Yuuuuuck. There should be a better way to use generics or protocols to accomplish this, but swiftc is getting really crashy when I try.
+func gestureBridgeForGesture(gesture: GestureType) -> GestureBridgeType {
+	switch gesture {
+	case is TapGesture: return TapGestureBridge(gesture as TapGesture)
+	default: abort()
+	}
+}
+
+func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
+	switch gestureBridge {
+	case is TapGestureBridge: return (gestureBridge as TapGestureBridge).tapGesture
+	default: abort()
+	}
+}
+
+@objc public protocol GestureBridgeType {}
+
 @objc protocol TapGestureJSExport: JSExport {
 	init?(args: JSValue)
 	var numberOfTouchesRequired: Int { get }
 	var numberOfTapsRequired: Int { get }
 }
 
-@objc public class TapGestureBridge: NSObject, TapGestureJSExport, BridgeType {
+@objc public class TapGestureBridge: NSObject, TapGestureJSExport, BridgeType, GestureBridgeType {
 	let tapGesture: Prototope.TapGesture!
 
 	public class func addToContext(context: JSContext) {
@@ -192,8 +209,8 @@ import JavaScriptCore
 		}
 	}
 
-	init(_ tapGesture: TapGesture) {
-		self.tapGesture = tapGesture
+	public init(_ gesture: TapGesture) {
+		self.tapGesture = gesture
 		super.init()
 	}
 
