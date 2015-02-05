@@ -26,7 +26,7 @@ public struct Particle {
 		
 		self.velocity = 100
 		
-		self.emissionRangeInRadians = M_PI * 2.0
+		self.emissionRange = M_PI * 2.0
 		
 		self.color = Color(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
 		
@@ -70,7 +70,7 @@ public struct Particle {
 	/** The emission range, in radians. Particles are uniformly distributed in this range.
 		
 		Set to a full circle (2π) for a full circular range. */
-	public var emissionRangeInRadians: Double {
+	public var emissionRange: Radian {
 		get { return Double(self.emitterCell.emissionRange) }
 		set { self.emitterCell.emissionRange = CGFloat(newValue) }
 	}
