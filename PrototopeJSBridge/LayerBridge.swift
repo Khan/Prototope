@@ -63,6 +63,7 @@ import JavaScriptCore
     // MARK: Touches and gestures
     var userInteractionEnabled: Bool { get set }
     var activeTouchSequences: JSValue { get }
+    var gestures: NSArray { get set }
     var touchesBeganHandler: JSValue? { get set }
     var touchesMovedHandler: JSValue? { get set }
     var touchesEndedHandler: JSValue? { get set }
@@ -309,6 +310,19 @@ import JavaScriptCore
 
     public var activeTouchSequences: JSValue {
         return LayerBridge.bridgeTouchSequenceMapping(layer.activeTouchSequences, context: JSContext.currentContext())
+    }
+
+    public var gestures: NSArray {
+        get {
+            return layer.gestures.map { gesture in
+                TapGestureBridge(gesture as TapGesture)
+            }
+        }
+        set {
+            layer.gestures = map(newValue) { gestureBridge in
+                (gestureBridge as TapGestureBridge).tapGesture
+            }
+        }
     }
 
     public var touchesBeganHandler: JSValue? {

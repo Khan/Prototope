@@ -55,5 +55,6 @@ public class Context {
 		SoundBridge.addToContext(context)
 		TouchSampleBridge.addToContext(context)
 		TouchSequenceBridge.addToContext(context)
+		TapGestureBridge.addToContext(context)
 	}
 }
