@@ -272,27 +272,37 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 
 }
 
+public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
+	enum RawPhase: Int {
+		case Began = 0
+		case Changed
+		case Ended
+		case Cancelled
+	}
+
+	public class func addToContext(context: JSContext) {
+		let continuousGesturePhaseObject = JSValue(newObjectInContext: context)
+		continuousGesturePhaseObject.setObject(RawPhase.Began.rawValue, forKeyedSubscript: "Began")
+		continuousGesturePhaseObject.setObject(RawPhase.Changed.rawValue, forKeyedSubscript: "Changed")
+		continuousGesturePhaseObject.setObject(RawPhase.Ended.rawValue, forKeyedSubscript: "Ended")
+		continuousGesturePhaseObject.setObject(RawPhase.Cancelled.rawValue, forKeyedSubscript: "Cancelled")
+		context.setObject(continuousGesturePhaseObject, forKeyedSubscript: "ContinuousGesturePhase")
+	}
+
+	public class func encodePhase(phase: ContinuousGesturePhase, inContext context: JSContext) -> JSValue {
+		var rawPhase: RawPhase
+		switch phase {
+		case .Began: rawPhase = .Began
+		case .Changed: rawPhase = .Changed
+		case .Ended: rawPhase = .Ended
+		case .Cancelled: rawPhase = .Cancelled
+		}
+		return JSValue(int32: Int32(rawPhase.rawValue), inContext: context)
+	}
+}
+
 @objc protocol PanGestureJSExport: JSExport {
 	init?(args: JSValue)
-}
-
-func encodeContinuousGesturePhase(phase: ContinuousGesturePhase) -> Int {
-	switch phase {
-	case .Began: return 0
-	case .Changed: return 1
-	case .Ended: return 2
-	case .Cancelled: return 3
-	}
-}
-
-func decodeContinuousGesturePhase(encodedPhase: Int) -> ContinuousGesturePhase? {
-	switch encodedPhase {
-	case 0: return .Began
-	case 1: return .Changed
-	case 2: return .Ended
-	case 3: return .Cancelled
-	default: return nil
-	}
 }
 
 @objc public class PanGestureBridge: NSObject, PanGestureJSExport, BridgeType, GestureBridgeType {
@@ -323,7 +333,7 @@ func decodeContinuousGesturePhase(encodedPhase: Int) -> ContinuousGesturePhase? 
 					let bridgedID = JSValue(int32: Int32(sequence.id), inContext: context)
 					let bridgedSequence = TouchSequenceBridge(TouchSequence(samples: sequence.samples, id: bridgedID))
 					handler.callWithArguments([
-						JSValue(int32: Int32(encodeContinuousGesturePhase(phase)), inContext: context),
+						ContinuousGesturePhaseBridge.encodePhase(phase, inContext: context),
 						bridgedSequence
 					])
 					return
@@ -341,3 +351,4 @@ func decodeContinuousGesturePhase(encodedPhase: Int) -> ContinuousGesturePhase? 
 		super.init()
 	}
 }
+
