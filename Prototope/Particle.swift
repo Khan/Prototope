@@ -117,7 +117,6 @@ extension Layer {
 		emitter.emitterCells = [particle.emitterCell]
 		emitter.renderMode = kCAEmitterLayerAdditive
 		emitter.bounds = self.view.layer.bounds
-		emitter.backgroundColor = UIColor.blackColor().CGColor
 		
 		self.view.layer.addSublayer(emitter)
 		self.view.clipsToBounds = false
