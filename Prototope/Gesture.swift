@@ -506,7 +506,7 @@ public struct TouchSequence<I: Printable> : SampleSequenceType {
     }
 }
 
-// MARK: -
+// MARK: - Internal interfaces
 
 public protocol GestureType: _GestureType {}
 

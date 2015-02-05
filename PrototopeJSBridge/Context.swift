@@ -54,5 +54,6 @@ public class Context {
 		HeartbeatBridge.addToContext(context)
 		SoundBridge.addToContext(context)
 		TouchSampleBridge.addToContext(context)
+		TouchSequenceBridge.addToContext(context)
 	}
 }

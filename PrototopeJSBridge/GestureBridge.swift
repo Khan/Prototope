@@ -42,9 +42,90 @@ import JavaScriptCore
 		}
 	}
 
+	init(_ touchSample: TouchSample) {
+		self.touchSample = touchSample
+		super.init()
+	}
+
 	public var globalLocation: PointJSExport { return PointBridge(touchSample.globalLocation) }
 	public var timestamp: Double { return touchSample.timestamp.nsTimeInterval }
 	public func locationInLayer(layer: LayerJSExport) -> PointJSExport {
 		return PointBridge(touchSample.locationInLayer((layer as JSExport as LayerBridge).layer))
+	}
+}
+
+// MARK: - Touch Sequences
+
+@objc public protocol TouchSequenceJSExport: JSExport {
+	init?(args: JSValue)
+	var samples: NSArray { get }
+	var id: JSValue { get }
+	var firstSample: TouchSampleJSExport { get }
+	var previousSample: TouchSampleJSExport? { get }
+	var currentSample: TouchSampleJSExport { get }
+	func currentVelocityInLayer(layer: LayerJSExport) -> PointJSExport
+	func currentGlobalVelocity() -> PointJSExport
+	func sampleSequenceByAppendingSample(sample: TouchSampleJSExport) -> TouchSequenceJSExport
+}
+
+@objc public class TouchSequenceBridge: NSObject, TouchSequenceJSExport, BridgeType {
+	var touchSequence: Prototope.TouchSequence<JSValue>!
+
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "TouchSequence")
+	}
+
+	public required init?(args: JSValue) {
+		super.init()
+
+		let samplesValue = args.valueForProperty("samples")
+		let idValue = args.valueForProperty("id")
+
+		if !samplesValue.isUndefined() && !idValue.isUndefined() {
+			let sampleBridges = samplesValue.toArray() as [TouchSampleBridge]
+			touchSequence = Prototope.TouchSequence(
+				samples: sampleBridges.map { $0.touchSample },
+				id: idValue
+			)
+		} else {
+			return nil
+		}
+	}
+
+	init(_ touchSequence: Prototope.TouchSequence<JSValue>) {
+		self.touchSequence = touchSequence
+		super.init()
+	}
+
+	public var samples: NSArray {
+		return touchSequence.samples.map { TouchSampleBridge($0) }
+	}
+
+	public var id: JSValue { return touchSequence.id }
+
+	public var firstSample: TouchSampleJSExport { return TouchSampleBridge(touchSequence.firstSample) }
+
+	public var previousSample: TouchSampleJSExport? {
+		if let previousSample = touchSequence.previousSample {
+			return TouchSampleBridge(previousSample)
+		} else {
+			return nil
+		}
+	}
+	
+	public var currentSample: TouchSampleJSExport { return TouchSampleBridge(touchSequence.currentSample) }
+
+	public func currentVelocityInLayer(layer: LayerJSExport) -> PointJSExport {
+		let velocity = touchSequence.currentVelocityInLayer((layer as JSExport as LayerBridge).layer)
+		return PointBridge(velocity)
+	}
+
+	public func currentGlobalVelocity() -> PointJSExport {
+		return PointBridge(touchSequence.currentGlobalVelocity())
+	}
+
+	public func sampleSequenceByAppendingSample(sampleBridge: TouchSampleJSExport) -> TouchSequenceJSExport {
+		let sample = (sampleBridge as JSExport as TouchSampleBridge).touchSample
+		return TouchSequenceBridge(touchSequence.sampleSequenceByAppendingSample(sample))
 	}
 }
