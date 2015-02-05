@@ -200,7 +200,7 @@ extension JSValue: SampleType {}
 	}
 }
 
-// MARK: Gestures
+// MARK: - Gestures
 
 // Yuuuuuck. There should be a better way to use generics or protocols to accomplish this, but swiftc is getting really crashy when I try.
 func gestureBridgeForGesture(gesture: GestureType) -> GestureBridgeType {
@@ -220,6 +220,8 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 }
 
 @objc public protocol GestureBridgeType {}
+
+// MARK: TapGesture
 
 @objc protocol TapGestureJSExport: JSExport {
 	init?(args: JSValue)
@@ -272,6 +274,8 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 
 }
 
+// MARK: ContinuousGesturePhase
+
 public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 	enum RawPhase: Int {
 		case Began = 0
@@ -300,6 +304,8 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 		return JSValue(int32: Int32(rawPhase.rawValue), inContext: context)
 	}
 }
+
+// MARK: PanGesture
 
 @objc protocol PanGestureJSExport: JSExport {
 	init?(args: JSValue)
@@ -352,3 +358,31 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 	}
 }
 
+// MARK: RotationGesture
+
+@objc public protocol RotationSampleJSExport: JSExport {
+	var rotationRadians: Double { get }
+	var velocityRadians: Double { get }
+	var rotationDegrees: Double { get }
+	var velocityDegrees: Double { get }
+	var centroid: TouchSampleJSExport { get }
+}
+
+@objc public class RotationSampleBridge: NSObject, RotationSampleJSExport, BridgeType {
+	var rotationSample: Prototope.RotationSample!
+
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "RotationSample")
+	}
+
+	init(_ rotationSample: RotationSample) {
+		self.rotationSample = rotationSample
+		super.init()
+	}
+
+	public var rotationRadians: Double { return rotationSample.rotationRadians }
+	public var velocityRadians: Double { return rotationSample.velocityRadians }
+	public var rotationDegrees: Double { return rotationSample.rotationDegrees }
+	public var velocityDegrees: Double { return rotationSample.velocityDegrees }
+	public var centroid: TouchSampleJSExport { return TouchSampleBridge(rotationSample.centroid) }
+}

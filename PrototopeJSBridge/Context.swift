@@ -59,5 +59,6 @@ public class Context {
 		PanGestureBridge.addToContext(context)
 		SampleSequenceBridge.addToContext(context)
 		ContinuousGesturePhaseBridge.addToContext(context)
+		RotationSampleBridge.addToContext(context)
 	}
 }
