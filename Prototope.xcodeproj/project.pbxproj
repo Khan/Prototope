@@ -35,6 +35,7 @@
 		EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB453DB11A7AB116006F2A72 /* LayerBridge.swift */; };
 		EB453DB31A7AB17B006F2A72 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EB50FA1219F04A07007A3C32 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB50FA1119F04A07007A3C32 /* Image.swift */; };
+		EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */; };
 		EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
 		EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8371B1A1DB51000D23C9D /* Sound.swift */; };
@@ -207,6 +208,7 @@
 		EB453DA11A7AB0B2006F2A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB453DB11A7AB116006F2A72 /* LayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerBridge.swift; sourceTree = "<group>"; };
 		EB50FA1119F04A07007A3C32 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationBridge.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		EBA8371B1A1DB51000D23C9D /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				EBC43D751A8198EA0075272A /* TunableBridge.swift */,
 				6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */,
 				EBC43D7B1A81AF350075272A /* TimingBridge.swift */,
+				EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */,
 				EBC43D631A8010770075272A /* ImageBridge.swift */,
 				EBC43D7F1A81B5EB0075272A /* MathBridge.swift */,
 				EB2A88531A82FD5900E3987F /* GestureBridge.swift */,
@@ -777,6 +780,7 @@
 				EBC43D841A81BA360075272A /* HeartbeatBridge.swift in Sources */,
 				EB2A88541A82FD5900E3987F /* GestureBridge.swift in Sources */,
 				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
+				EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */,
 				EBC43D801A81B5EB0075272A /* MathBridge.swift in Sources */,
 				EBC43D7C1A81AF350075272A /* TimingBridge.swift in Sources */,
 			);

@@ -79,7 +79,9 @@ import JavaScriptCore
     
     public class func addToContext(context: JSContext) {
         context.setObject(LayerBridge.self, forKeyedSubscript: "Layer")
-        context.objectForKeyedSubscript("Layer").setObject(LayerBridge.root, forKeyedSubscript: "root")
+        let layerBridge = context.objectForKeyedSubscript("Layer")
+        layerBridge.setObject(LayerBridge.root, forKeyedSubscript: "root")
+        layerBridge.setFunctionForKey("animate", fn: animateWithDurationBridgingTrampoline)
     }
     
     public var layer: Layer!
