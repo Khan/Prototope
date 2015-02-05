@@ -208,6 +208,7 @@ func gestureBridgeForGesture(gesture: GestureType) -> GestureBridgeType {
 	case is TapGesture: return TapGestureBridge(gesture as TapGesture)
 	case is PanGesture: return PanGestureBridge(gesture as PanGesture)
 	case is RotationGesture: return RotationGestureBridge(gesture as RotationGesture)
+	case is PinchGesture: return PinchGestureBridge(gesture as PinchGesture)
 	default: abort()
 	}
 }
@@ -217,6 +218,7 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 	case is TapGestureBridge: return (gestureBridge as TapGestureBridge).tapGesture
 	case is PanGestureBridge: return (gestureBridge as PanGestureBridge).panGesture
 	case is RotationGestureBridge: return (gestureBridge as RotationGestureBridge).rotationGesture
+	case is PinchGestureBridge: return (gestureBridge as PinchGestureBridge).pinchGesture
 	default: abort()
 	}
 }
@@ -427,6 +429,74 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 	public init(_ gesture: RotationGesture) {
 		self.rotationGesture = gesture
+		super.init()
+	}
+}
+
+// MARK: PinchGesture
+
+@objc public protocol PinchSampleJSExport: JSExport {
+	var scale: Double { get }
+	var velocity: Double { get }
+	var centroid: TouchSampleJSExport { get }
+}
+
+@objc public class PinchSampleBridge: NSObject, PinchSampleJSExport, BridgeType {
+	var pinchSample: Prototope.PinchSample!
+
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "PinchSample")
+	}
+
+	init(_ pinchSample: PinchSample) {
+		self.pinchSample = pinchSample
+		super.init()
+	}
+
+	public var scale: Double { return pinchSample.scale }
+	public var velocity: Double { return pinchSample.velocity }
+	public var centroid: TouchSampleJSExport { return TouchSampleBridge(pinchSample.centroid) }
+}
+
+@objc protocol PinchGestureJSExport: JSExport {
+	init?(args: JSValue)
+}
+
+@objc public class PinchGestureBridge: NSObject, PinchGestureJSExport, BridgeType, GestureBridgeType {
+	let pinchGesture: Prototope.PinchGesture!
+
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "PinchGesture")
+	}
+
+	public required init?(args: JSValue) {
+		let handler = args.valueForProperty("handler")
+		if !handler.isUndefined() {
+			let cancelsTouchesInLayerValue = args.valueForProperty("cancelsTouchesInLayer")
+			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined() ? true : cancelsTouchesInLayerValue.toBool()
+
+			pinchGesture = PinchGesture(
+				cancelsTouchesInLayer: cancelsTouchesInLayer,
+				handler: { [context = JSContext.currentContext()] (phase, sequence) in
+					let bridgedID = JSValue(int32: Int32(sequence.id), inContext: context)
+					let bridgedSamples = sequence.samples.map { JSValue(object: PinchSampleBridge($0), inContext: context)! }
+					let bridgedSequence = SampleSequenceBridge(SampleSequence(samples: bridgedSamples, id: bridgedID))
+					handler.callWithArguments([
+						ContinuousGesturePhaseBridge.encodePhase(phase, inContext: context),
+						bridgedSequence
+					])
+					return
+				}
+			)
+			super.init()
+		} else {
+			super.init()
+			return nil
+		}
+	}
+
+	public init(_ gesture: PinchGesture) {
+		self.pinchGesture = gesture
 		super.init()
 	}
 }

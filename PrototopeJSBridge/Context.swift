@@ -61,5 +61,7 @@ public class Context {
 		ContinuousGesturePhaseBridge.addToContext(context)
 		RotationSampleBridge.addToContext(context)
 		RotationGestureBridge.addToContext(context)
+		PinchSampleBridge.addToContext(context)
+		PinchGestureBridge.addToContext(context)
 	}
 }
