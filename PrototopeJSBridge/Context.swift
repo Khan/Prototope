@@ -56,5 +56,6 @@ public class Context {
 		TouchSampleBridge.addToContext(context)
 		TouchSequenceBridge.addToContext(context)
 		TapGestureBridge.addToContext(context)
+		PanGestureBridge.addToContext(context)
 	}
 }

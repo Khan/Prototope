@@ -155,6 +155,7 @@ import JavaScriptCore
 func gestureBridgeForGesture(gesture: GestureType) -> GestureBridgeType {
 	switch gesture {
 	case is TapGesture: return TapGestureBridge(gesture as TapGesture)
+	case is PanGesture: return PanGestureBridge(gesture as PanGesture)
 	default: abort()
 	}
 }
@@ -162,6 +163,7 @@ func gestureBridgeForGesture(gesture: GestureType) -> GestureBridgeType {
 func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 	switch gestureBridge {
 	case is TapGestureBridge: return (gestureBridge as TapGestureBridge).tapGesture
+	case is PanGestureBridge: return (gestureBridge as PanGestureBridge).panGesture
 	default: abort()
 	}
 }
@@ -217,4 +219,74 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 	public var numberOfTouchesRequired: Int { return tapGesture.numberOfTouchesRequired }
 	public var numberOfTapsRequired: Int { return tapGesture.numberOfTapsRequired }
 
+}
+
+@objc protocol PanGestureJSExport: JSExport {
+	init?(args: JSValue)
+}
+
+func encodeContinuousGesturePhase(phase: ContinuousGesturePhase) -> Int {
+	switch phase {
+	case .Began: return 0
+	case .Changed: return 1
+	case .Ended: return 2
+	case .Cancelled: return 3
+	}
+}
+
+func decodeContinuousGesturePhase(encodedPhase: Int) -> ContinuousGesturePhase? {
+	switch encodedPhase {
+	case 0: return .Began
+	case 1: return .Changed
+	case 2: return .Ended
+	case 3: return .Cancelled
+	default: return nil
+	}
+}
+
+@objc public class PanGestureBridge: NSObject, PanGestureJSExport, BridgeType, GestureBridgeType {
+	let panGesture: Prototope.PanGesture!
+
+	public class func addToContext(context: JSContext) {
+		context.setObject(self, forKeyedSubscript: "PanGesture")
+		// TODO: expose phase constants
+	}
+
+	public required init?(args: JSValue) {
+		let handler = args.valueForProperty("handler")
+		if !handler.isUndefined() {
+			let cancelsTouchesInLayerValue = args.valueForProperty("cancelsTouchesInLayer")
+			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined() ? true : cancelsTouchesInLayerValue.toBool()
+
+			let minimumNumberOfTouchesValue = args.valueForProperty("minimumNumberOfTouches")
+			let minimumNumberOfTouches = minimumNumberOfTouchesValue.isUndefined() ? 1 : Int(minimumNumberOfTouchesValue.toInt32())
+
+			let maximumNumberOfTouchesValue = args.valueForProperty("maximumNumberOfTouches")
+			let maximumNumberOfTouches = maximumNumberOfTouchesValue.isUndefined() ? Int.max : Int(maximumNumberOfTouchesValue.toInt32())
+
+			panGesture = PanGesture(
+				minimumNumberOfTouches: minimumNumberOfTouches,
+				maximumNumberOfTouches: maximumNumberOfTouches,
+				cancelsTouchesInLayer: cancelsTouchesInLayer,
+				handler: { [context = JSContext.currentContext()] (phase, sequence) in
+					let bridgedID = JSValue(int32: Int32(sequence.id), inContext: context)
+					let bridgedSequence = TouchSequenceBridge(TouchSequence(samples: sequence.samples, id: bridgedID))
+					handler.callWithArguments([
+						JSValue(int32: Int32(encodeContinuousGesturePhase(phase)), inContext: context),
+						bridgedSequence
+					])
+					return
+				}
+			)
+			super.init()
+		} else {
+			super.init()
+			return nil
+		}
+	}
+
+	public init(_ gesture: PanGesture) {
+		self.panGesture = gesture
+		super.init()
+	}
 }
