@@ -375,6 +375,32 @@ public class Layer: Equatable, Hashable {
 		get { return view.userInteractionEnabled }
 		set { view.userInteractionEnabled = newValue }
 	}
+	
+	
+	// MARK: Particles
+	
+	/** An array of the layer's particle emitters. */
+	private var particleEmitters: [ParticleEmitter] = []
+	
+	
+	/** Adds the particle emitter to the layer. */
+	public func addParticleEmitter(particleEmitter: ParticleEmitter) {
+		self.particleEmitters.append(particleEmitter)
+		self.view.layer.addSublayer(particleEmitter.emitterLayer)
+		
+		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
+		self.view.layer.masksToBounds = false
+	}
+	
+	
+	/** Removes the given particle emitter from the layer. */
+	public func removeParticleEmitter(particleEmitter: ParticleEmitter) {
+		particleEmitter.emitterLayer.removeFromSuperlayer()
+		self.particleEmitters = self.particleEmitters.filter {
+			(emitter: ParticleEmitter) -> Bool in
+			return emitter !== particleEmitter
+		}
+	}
 
 	// MARK: Touches and gestures
 

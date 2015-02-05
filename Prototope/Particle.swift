@@ -55,7 +55,7 @@ public enum ParticlePreset {
 public struct Particle {
 	
 	let image: Image
-	private let emitterCell: CAEmitterCell
+	let emitterCell: CAEmitterCell
 	
 	
 	public init(image: Image, preset: ParticlePreset) {
@@ -183,21 +183,3 @@ public struct Particle {
 	
 }
 
-
-extension Layer {
-	
-	public func emitParticle(particle: Particle) {
-		let emitter = CAEmitterLayer()
-		emitter.birthRate = 1
-		emitter.emitterCells = [particle.emitterCell]
-		emitter.renderMode = kCAEmitterLayerAdditive
-		emitter.frame = self.view.layer.bounds
-		emitter.emitterShape = kCAEmitterLayerLine
-
-		self.view.layer.addSublayer(emitter)
-		self.view.clipsToBounds = false
-		
-		emitter.emitterPosition = emitter.position
-		emitter.emitterSize = emitter.bounds.size
-	}
-}
