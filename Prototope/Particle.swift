@@ -8,32 +8,63 @@
 
 import UIKit
 
+
+public enum ParticlePreset {
+	case Explode
+	case Rain
+	
+	func configureParticle(var particle: Particle) {
+		switch self {
+		case Explode:
+			particle.lifetime = 3
+			particle.lifetimeRange = 3
+			
+			particle.birthRate = 80
+			
+			particle.velocity = 100
+			
+			particle.emissionRange = M_PI * 2.0
+			
+			particle.color = Color(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+			
+			particle.redRange = 1.0
+			particle.blueRange = 1.0
+			particle.greenRange = 1.0
+			particle.alphaRange = 1.0
+			
+		case Rain:
+			particle.lifetime = 4
+			particle.lifetimeRange = 5
+			particle.birthRate = 25
+			particle.velocity = 70
+			particle.velocityRange = 160
+			particle.yAcceleration = 1000
+			particle.emissionRange = Radian.circle
+			
+			particle.color = Color(red: 0, green: 0, blue: 1, alpha: 0.3)
+			particle.redRange = 0
+			particle.greenRange = 0
+			particle.blueRange = 1.0
+			particle.alphaRange = 0.55
+			
+			particle.scale = 0.4
+		}
+	}
+}
+
 public struct Particle {
 	
 	let image: Image
 	private let emitterCell: CAEmitterCell
 	
-	public init(image: Image) {
+	
+	public init(image: Image, preset: ParticlePreset) {
 		self.image = image
 		
 		self.emitterCell = CAEmitterCell()
 		self.emitterCell.contents = self.image.uiImage.CGImage
 		
-		self.lifetime = 3
-		self.lifetimeRange = 3
-		
-		self.birthRate = 80
-		
-		self.velocity = 100
-		
-		self.emissionRange = M_PI * 2.0
-		
-		self.color = Color(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
-		
-		self.redRange = 1.0
-		self.blueRange = 1.0
-		self.greenRange = 1.0
-		self.alphaRange = 1.0
+		preset.configureParticle(self)
 	}
 	
 	
@@ -60,10 +91,31 @@ public struct Particle {
 	}
 	
 	
+	/** The scale of the particles. */
+	public var scale: Double {
+		get { return Double(self.emitterCell.scale) }
+		set { self.emitterCell.scale = CGFloat(newValue) }
+	}
+	
+	
+	/** The range of particle scale. */
+	public var scaleRange: Double {
+		get { return Double(self.emitterCell.scaleRange) }
+		set { self.emitterCell.scaleRange = CGFloat(newValue) }
+	}
+	
+	
 	/** The velocity of particles. */
 	public var velocity: Double {
 		get { return Double(self.emitterCell.velocity) }
 		set { self.emitterCell.velocity = CGFloat(newValue) }
+	}
+	
+	
+	/** The velocity range of particles. */
+	public var velocityRange: Double {
+		get { return Double(self.emitterCell.velocityRange) }
+		set { self.emitterCell.velocityRange = CGFloat(newValue) }
 	}
 	
 	
@@ -106,6 +158,29 @@ public struct Particle {
 		get { return Double(self.emitterCell.alphaRange) }
 		set { self.emitterCell.alphaRange = Float(newValue) }
 	}
+	
+	
+	/** The x acceleration of particles. */
+	public var xAcceleration: Double {
+		get { return Double(self.emitterCell.xAcceleration) }
+		set { self.emitterCell.xAcceleration = CGFloat(newValue)}
+	}
+	
+	
+	/** The y acceleration of particles. */
+	public var yAcceleration: Double {
+		get { return Double(self.emitterCell.yAcceleration) }
+		set { self.emitterCell.yAcceleration = CGFloat(newValue)}
+	}
+	
+	
+	/** The z acceleration of particles. */
+	public var zAcceleration: Double {
+		get { return Double(self.emitterCell.zAcceleration) }
+		set { self.emitterCell.zAcceleration = CGFloat(newValue)}
+	}
+	
+	
 }
 
 
@@ -116,9 +191,13 @@ extension Layer {
 		emitter.birthRate = 1
 		emitter.emitterCells = [particle.emitterCell]
 		emitter.renderMode = kCAEmitterLayerAdditive
-		emitter.bounds = self.view.layer.bounds
-		
+		emitter.frame = self.view.layer.bounds
+		emitter.emitterShape = kCAEmitterLayerLine
+
 		self.view.layer.addSublayer(emitter)
 		self.view.clipsToBounds = false
+		
+		emitter.emitterPosition = emitter.position
+		emitter.emitterSize = emitter.bounds.size
 	}
 }
