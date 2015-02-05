@@ -53,5 +53,6 @@ public class Context {
 		MathBridge.addToContext(context)
 		HeartbeatBridge.addToContext(context)
 		SoundBridge.addToContext(context)
+		TouchSampleBridge.addToContext(context)
 	}
 }

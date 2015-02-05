@@ -22,6 +22,11 @@ public struct TouchSample: SampleType {
 	public func locationInLayer(layer: Layer) -> Point {
 		return layer.convertGlobalPointToLocalPoint(globalLocation)
 	}
+
+	public init(globalLocation: Point, timestamp: Timestamp) {
+		self.globalLocation = globalLocation
+		self.timestamp = timestamp
+	}
 }
 
 extension TouchSample: Printable {

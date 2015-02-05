@@ -6,24 +6,18 @@
 //  Copyright (c) 2015 Khan Academy. All rights reserved.
 //
 
+
 import Foundation
+import Prototope
 import PrototopeJSBridge
 import XCTest
 
-class HeartbeatBridgeTests: JSBridgeTestCase {
-	func testHeartbeatBridging() {
-		var expectation = expectationWithDescription("heartbeat")
-		var heartbeatCount: Int = 0
-		context.exceptionHandler = { heartbeatValue in
-			heartbeatCount++
-			if heartbeatCount >= 5 {
-				heartbeatValue.invokeMethod("stop", withArguments: [])
-				expectation.fulfill()
-			}
-		}
-		context.evaluateScript("var h = new Heartbeat({handler: function(heartbeat) { throw heartbeat } })")
+class MathBridgeTests: JSBridgeTestCase {
+	func testMathBridging() {
+		XCTAssertEqual(context.evaluateScript("interpolate({from: 5, to: 10, at: 0.4})").toDouble(), interpolate(from: 5, to: 10, at: 0.4))
+		XCTAssertEqual(context.evaluateScript("map({value: 0.3, fromInterval: [0, 1], toInterval: [0, 10]})").toDouble(), map(0.3, fromInterval: (0, 1), toInterval: (0, 10)))
 
-		waitForExpectationsWithTimeout(0.5, handler: nil)
-
+		let clipResult: Double = clip(5, min: 1, max: 3)
+		XCTAssertEqual(context.evaluateScript("clip({value: 5, min: 1, max: 3})").toDouble(), clipResult)
 	}
 }

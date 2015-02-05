@@ -19,7 +19,7 @@ public struct Timestamp: Comparable, Hashable {
 		return Timestamp(CACurrentMediaTime())
 	}
 
-	init(_ nsTimeInterval: NSTimeInterval) {
+	public init(_ nsTimeInterval: NSTimeInterval) {
 		self.nsTimeInterval = nsTimeInterval
 	}
 
