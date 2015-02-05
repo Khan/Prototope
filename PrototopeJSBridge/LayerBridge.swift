@@ -71,6 +71,7 @@ import JavaScriptCore
     var touchMovedHandler: JSValue? { get set }
     var touchEndedHandler: JSValue? { get set }
     var touchCancelledHandler: JSValue? { get set }
+    var touchedDescendents: [LayerJSExport] { get }
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -83,10 +84,10 @@ import JavaScriptCore
     public var layer: Layer!
     
     public class var root: LayerJSExport {
-        return LayerBridge(wrappingLayer: Layer.root)!
+        return LayerBridge(Layer.root)!
     }
     
-    private init?(wrappingLayer: Layer?) {
+    private init?(_ wrappingLayer: Layer?) {
         super.init()
         if let wrappingLayer = wrappingLayer {
             layer = wrappingLayer
@@ -118,7 +119,7 @@ import JavaScriptCore
     // MARK: Layer hierarchy access and manipulation
     
     public var parent: LayerJSExport! {
-        get { return layer.parent != nil ? LayerBridge(wrappingLayer: layer.parent!) : nil }
+        get { return layer.parent != nil ? LayerBridge(layer.parent!) : nil }
         set {
             if let newParent = newValue {
                 layer.parent = (newParent as JSExport as LayerBridge).layer
@@ -129,20 +130,20 @@ import JavaScriptCore
     }
     
     public var sublayers: [LayerJSExport] {
-        return layer.sublayers.map { LayerBridge(wrappingLayer: $0)! }
+        return layer.sublayers.map { LayerBridge($0)! }
     }
     
     public func removeAllSublayers() { layer.removeAllSublayers() }
     
-    public var sublayerAtFront: LayerJSExport? { return LayerBridge(wrappingLayer: layer.sublayerAtFront) }
+    public var sublayerAtFront: LayerJSExport? { return LayerBridge(layer.sublayerAtFront) }
     
-    public func sublayerNamed(name: String) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.sublayerNamed(name)) }
+    public func sublayerNamed(name: String) -> LayerJSExport? { return LayerBridge(layer.sublayerNamed(name)) }
     
-    public func descendentNamed(name: String) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.descendentNamed(name)) }
+    public func descendentNamed(name: String) -> LayerJSExport? { return LayerBridge(layer.descendentNamed(name)) }
     
-    public func descendentAtPath(pathElements: [String]) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.descendentAtPath(pathElements)) }
+    public func descendentAtPath(pathElements: [String]) -> LayerJSExport? { return LayerBridge(layer.descendentAtPath(pathElements)) }
     
-    public func ancestorNamed(name: String) -> LayerJSExport? { return LayerBridge(wrappingLayer: layer.ancestorNamed(name)) }
+    public func ancestorNamed(name: String) -> LayerJSExport? { return LayerBridge(layer.ancestorNamed(name)) }
     
     // MARK: Geometry
     
@@ -466,6 +467,8 @@ import JavaScriptCore
         }
     }
 
-
+    public var touchedDescendents: [LayerJSExport] {
+        return layer.touchedDescendents.map { LayerBridge($0)! }
+    }
 
 }
