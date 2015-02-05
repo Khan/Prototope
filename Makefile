@@ -10,7 +10,7 @@ clean_output: output_dir
 
 copy_plist: clean_output
 	cp info.plist dash/prototope.docset/Contents
-	cp favicon.png dash/prototope.docset/
+	cp favicon.png dash/prototope.docset/icon.png
 
 get_docs: copy_plist
 	wget -r -p -nH --cut-dirs=1 -k http://localhost:4000/Prototope/ -P dash/prototope.docset/Contents/Resources/Documents/
