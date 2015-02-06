@@ -12,7 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	let server = ProtoscopeServer()
+	let server = ProtoscopeServer(messageHandler: {
+		println("MESSAGE: \($0)")
+	})
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
