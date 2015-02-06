@@ -397,9 +397,9 @@ public class Layer: Equatable, Hashable {
 		self.view.layer.masksToBounds = false
 		
 		if let duration = duration {
-			afterDuration(duration, { () -> Void in
+			afterDuration(duration) {
 				self.removeParticleEmitter(particleEmitter)
-			})
+			}
 		}
 	}
 	
