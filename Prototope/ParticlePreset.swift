@@ -27,7 +27,7 @@ public enum ParticlePreset {
 	/** Sets nothing on the particle. We trust you to do the right thing. */
 	case IKnowWhatImDoing
 	
-	func configureParticle(var particle: Particle) {
+	internal func configureParticle(var particle: Particle) {
 		switch self {
 		case Explode:
 			particle.lifetime = 3

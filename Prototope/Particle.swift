@@ -9,6 +9,7 @@
 import UIKit
 
 
+/** Particles represent little pieces of some kind of animation, like confetti or rain drops or sparkles or flames, etc. */
 public struct Particle {
 	
 	let image: Image
@@ -176,7 +177,5 @@ public struct Particle {
 		get { return Double(self.emitterCell.zAcceleration) }
 		set { self.emitterCell.zAcceleration = CGFloat(newValue)}
 	}
-	
-	
 }
 

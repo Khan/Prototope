@@ -12,6 +12,7 @@ import UIKit
 public struct Color {
 	let uiColor: UIColor
 	
+	/** The underlying CGColor of this colour. */
 	var CGColor: CGColorRef {
 		return self.uiColor.CGColor
 	}

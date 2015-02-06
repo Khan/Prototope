@@ -8,11 +8,13 @@
 
 import Foundation
 
+/** A particle emitter shows one or more kinds of Particles, and can show them in different formations. */
 public class ParticleEmitter {
 	let particles: [Particle]
 	
 	let emitterLayer = CAEmitterLayer()
 	
+	/** Creates a particle emitter with an array of particles. */
 	public init(particles: [Particle]) {
 		self.particles = particles
 		self.emitterLayer.emitterCells = self.particles.map {
@@ -21,6 +23,14 @@ public class ParticleEmitter {
 		}
 	}
 	
+	
+	/** Creates a particle emitter with one kind of particle. */
+	public convenience init(particle: Particle) {
+		self.init(particles: [particle])
+	}
+	
+	
+	/** How often new baby particles are born. */
 	public var birthRate: Double {
 		get { return Double(self.emitterLayer.birthRate) }
 		set { self.emitterLayer.birthRate = Float(newValue) }
@@ -52,34 +62,18 @@ public class ParticleEmitter {
 		get { return Point(self.emitterLayer.emitterPosition) }
 		set { self.emitterLayer.emitterPosition = CGPoint(newValue) }
 	}
-
+	
+	
+	/** The x position of the emitter. This is a shortcut for `position`. */
 	public var x: Double {
 		get { return self.position.x }
 		set { self.position = Point(x: newValue, y: self.y) }
 	}
 	
 	
+	/** The y position of the emitter. This is a shortcut for `position`. */
 	public var y: Double {
 		get { return self.position.y }
 		set { self.position = Point(x: self.x, y: newValue) }
 	}
 }
-
-
-//extension Layer {
-//	
-//	public func emitParticle(particle: Particle) {
-//		let emitter = CAEmitterLayer()
-//		
-//		emitter.emitterCells = [particle.emitterCell]
-//		emitter.renderMode = kCAEmitterLayerAdditive
-//		emitter.frame = self.view.layer.bounds
-//		emitter.emitterShape = kCAEmitterLayerLine
-//		
-//		self.view.layer.addSublayer(emitter)
-//		self.view.clipsToBounds = false
-//		
-//		emitter.emitterPosition = emitter.position
-//		emitter.emitterSize = emitter.bounds.size
-//	}
-//}
