@@ -1,10 +1,15 @@
 # Prototope
 
-There are a whole lot of things you don't want to have to deal with when you're prototyping: UIKit's idiosyncracies, certain production-level safety concepts, casting of `Double` to `CGFloat`, certain Swift conceptual overhead, etc. By contrast, there are many things you do a lot when prototyping: quickly getting an image on the screen, moving stuff around, etc.
+Prototope is a lightweight, high-performance prototyping framework. Its goals are:
+ * making simple things very easy
+ * making complex things possible
+ * enabling rapid iteration
+ * high performance execution
+ * concepts easily mapped onto production implementation
 
-This is an attempt to make a lightweight library with interfaces well-suited for rapidly prototyping.
+Interfaces to the API are presently available in Swift and JavaScript. iOS is presently the only execution target. Tooling for rapid iteration and collaboration via the JavaScript API is forthcoming.
 
-The APIs are bridged to JavaScript to enable lighter-weight prototyping. Tooling around rapid iteration there is forthcoming.
+Documentation is available [here](http://khan.github.io/Prototope/).
 
 ## Bootstrapping with prototope
 
