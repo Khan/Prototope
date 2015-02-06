@@ -76,6 +76,9 @@ public func -=(inout a: Point, b: Point) {
 public func *(a: Point, scalar: Double) -> Point {
 	return Point(x: a.x * scalar, y: a.y * scalar)
 }
+public func *(scalar: Double, a: Point) -> Point {
+    return a * scalar
+}
 
 /** Multiplies both point dimensions by scalar. */
 public func *=(inout a: Point, scalar: Double) {

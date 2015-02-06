@@ -13,13 +13,13 @@ public typealias TimeInterval = NSTimeInterval
 
 /** Represents an instant in time. */
 public struct Timestamp: Comparable, Hashable {
-	private let nsTimeInterval: NSTimeInterval
+	public let nsTimeInterval: NSTimeInterval
 
 	public static var currentTimestamp: Timestamp {
 		return Timestamp(CACurrentMediaTime())
 	}
 
-	init(_ nsTimeInterval: NSTimeInterval) {
+	public init(_ nsTimeInterval: NSTimeInterval) {
 		self.nsTimeInterval = nsTimeInterval
 	}
 

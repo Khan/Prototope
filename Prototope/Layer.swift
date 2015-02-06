@@ -369,6 +369,8 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+    // MARK: Touches and gestures
+    
 	/** When false, touches that hit this layer or its sublayers are discarded. Defaults
 		to true. */
 	public var userInteractionEnabled: Bool {
@@ -410,8 +412,6 @@ public class Layer: Equatable, Hashable {
 			return emitter !== particleEmitter
 		}
 	}
-
-	// MARK: Touches and gestures
 
 	/** An array of the layer's gestures. Append a gesture to this list to add it to the layer.
 
@@ -551,6 +551,8 @@ public class Layer: Equatable, Hashable {
 				self.parent = nil
 		})
 	}
+
+	// MARK: - Internal interfaces
 
 	private func _shouldMaskToBounds() -> Bool {
 		if let image = image {

@@ -34,6 +34,20 @@
                ReferencedContainer = "container:Prototope.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EB453D981A7AB0B2006F2A72"
+               BuildableName = "PrototopeJSBridgeTests.xctest"
+               BlueprintName = "PrototopeJSBridgeTests"
+               ReferencedContainer = "container:Prototope.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,6 +63,16 @@
                BlueprintIdentifier = "EB1C2A6B19E4D19B000DC2C1"
                BuildableName = "PrototopeTests.xctest"
                BlueprintName = "PrototopeTests"
+               ReferencedContainer = "container:Prototope.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EB453D981A7AB0B2006F2A72"
+               BuildableName = "PrototopeJSBridgeTests.xctest"
+               BlueprintName = "PrototopeJSBridgeTests"
                ReferencedContainer = "container:Prototope.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -19,6 +19,8 @@ class ViewController: UIViewController {
 		for i in 0..<5 {
 			let layer = makeRedLayer("Layer \(i)", Double(i) * 250)
 		}
+
+		makeJSLayer()
 	}
 
 }
@@ -30,7 +32,6 @@ func makeRedLayer(name: String, y: Double) -> Layer {
 	redLayer.backgroundColor = Color.red
 	redLayer.cornerRadius = 10
 	redLayer.border = Border(color: Color.black, width: 4)
-	redLayer.shadow = Shadow(color: Color.black, alpha: 0.75, offset: Size(), radius: 10)
 
 	redLayer.gestures.append(PanGesture{ phase, centroidSequence in
 		if phase == .Began {
