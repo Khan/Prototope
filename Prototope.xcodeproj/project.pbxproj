@@ -67,6 +67,8 @@
 		EBB565DD19F0774F00D93DE3 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DC19F0774F00D93DE3 /* MathTests.swift */; };
 		EBB565DF19F07A2900D93DE3 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */; };
 		EBBA431719F45186000B81BE /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA431619F45186000B81BE /* Gesture.swift */; };
+		EBC00D8D1A8588ED008D4FF5 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
+		EBC00D941A8588F1008D4FF5 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EBC43D5D1A7FF8920075272A /* BorderBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D5C1A7FF8920075272A /* BorderBridge.swift */; };
 		EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D611A8007320075272A /* ShadowBridge.swift */; };
 		EBC43D641A8010770075272A /* ImageBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D631A8010770075272A /* ImageBridge.swift */; };
@@ -377,6 +379,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC00D941A8588F1008D4FF5 /* Prototope.framework in Frameworks */,
+				EBC00D8D1A8588ED008D4FF5 /* PrototopeJSBridge.framework in Frameworks */,
 				EB6BFBE01A858332002B4E6A /* libDTBonjour_iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

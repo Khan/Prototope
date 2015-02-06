@@ -29,7 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 	}
 
 	func connectionDidOpen(connection: DTBonjourDataConnection!) {
-		connection.sendObject("hey listen", error: nil)
+		let testFileData = NSData(contentsOfFile: "/Users/andymatuschak/Desktop/test.js")
+		connection.sendObject(testFileData, error: nil)
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
