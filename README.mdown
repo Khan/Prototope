@@ -4,6 +4,8 @@ There are a whole lot of things you don't want to have to deal with when you're 
 
 This is an attempt to make a lightweight library with interfaces well-suited for rapidly prototyping.
 
+The APIs are bridged to JavaScript to enable lighter-weight prototyping. Tooling around rapid iteration there is forthcoming.
+
 ## Bootstrapping with prototope
 
 You can clone the [OhaiPrototope project](https://github.com/khan/ohaiprototope). If you do, you'll need to run
