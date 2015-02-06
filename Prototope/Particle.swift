@@ -9,74 +9,15 @@
 import UIKit
 
 
-public enum ParticlePreset {
-	case Explode
-	case Rain
-	case Sparkle
-	
-	func configureParticle(var particle: Particle) {
-		switch self {
-		case Explode:
-			particle.lifetime = 3
-			particle.lifetimeRange = 3
-			
-			particle.birthRate = 80
-			
-			particle.velocity = 100
-			
-			particle.emissionRange = M_PI * 2.0
-			
-			particle.color = Color(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
-			
-			particle.redRange = 1.0
-			particle.blueRange = 1.0
-			particle.greenRange = 1.0
-			particle.alphaRange = 1.0
-			
-		case Rain:
-			particle.lifetime = 4
-			particle.lifetimeRange = 5
-			particle.birthRate = 25
-			particle.velocity = 70
-			particle.velocityRange = 160
-			particle.yAcceleration = 1000
-			particle.emissionRange = Radian.circle
-			
-			particle.color = Color(red: 0, green: 0, blue: 1, alpha: 0.3)
-			particle.redRange = 0
-			particle.greenRange = 0
-			particle.blueRange = 1.0
-			particle.alphaRange = 0.55
-			
-			particle.scale = 0.4
-			
-		case Sparkle:
-			particle.lifetime = 0.71
-			particle.lifetimeRange = 0.5
-			particle.birthRate = 20
-			
-			particle.velocity = 6.5
-			particle.yAcceleration = -300
-			
-			particle.spin = Radian(degrees: -200)
-			particle.spinRange = Radian(degrees: 490)
-			
-			particle.color = Color(red: 1, green: 0.95, blue: 0.27, alpha: 0.65)
-			
-			particle.scale = 0.70
-			particle.scaleRange = 0.30
-		}
-	}
-}
-
 public struct Particle {
 	
 	let image: Image
 	let emitterCell: CAEmitterCell
 	
 	
-	public init(image: Image, preset: ParticlePreset) {
-		self.image = image
+	/** Create a new particle with the given image name and optional preset. */
+	public init(imageName: String, preset: ParticlePreset = .IKnowWhatImDoing) {
+		self.image = Image(name: imageName)
 		
 		self.emitterCell = CAEmitterCell()
 		self.emitterCell.contents = self.image.uiImage.CGImage
