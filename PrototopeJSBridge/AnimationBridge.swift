@@ -12,21 +12,33 @@ import Prototope
 
 let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args in
 	let durationValue = args.valueForProperty("duration")
+	let curveValue = args.valueForProperty("curve")
 	let animationsHandler = args.valueForProperty("animations")
 	let completionHandler = args.valueForProperty("completionHandler")
 
 	if !durationValue.isUndefined() && !animationsHandler.isUndefined() {
-		Prototope.Layer.animateWithDuration(
-			durationValue.toDouble(),
-			animations: {
-				animationsHandler.callWithArguments([])
-				return
-			},
-			completionHandler: completionHandler.isUndefined() ? nil : {
-				completionHandler.callWithArguments([])
-				return
-			}
-		)
+		let animationsHandler: () -> Void = {
+			animationsHandler.callWithArguments([])
+			return
+		}
+		let completionHandler: (() -> Void)? = completionHandler.isUndefined() ? nil : {
+			completionHandler.callWithArguments([])
+			return
+		}
+		if curveValue.isUndefined() {
+			Prototope.Layer.animateWithDuration(
+				durationValue.toDouble(),
+				animations: animationsHandler,
+				completionHandler: completionHandler
+			)
+		} else {
+			Prototope.Layer.animateWithDuration(
+				durationValue.toDouble(),
+				curve: AnimationCurveBridge.decodeCurve(curveValue)!,
+				animations: animationsHandler,
+				completionHandler: completionHandler
+			)
+		}
 	}
 }
 
@@ -276,6 +288,38 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 			} else {
 				animator.completionHandler = nil
 			}
+		}
+	}
+}
+
+
+public class AnimationCurveBridge: NSObject, BridgeType {
+	private enum RawCurve: Int {
+		case Linear = 0
+		case EaseIn
+		case EaseOut
+		case EaseInOut
+	}
+
+	public class func addToContext(context: JSContext) {
+		let animationCurveBridge = JSValue(newObjectInContext: context)
+		animationCurveBridge.setObject(RawCurve.Linear.rawValue, forKeyedSubscript: "Linear")
+		animationCurveBridge.setObject(RawCurve.EaseIn.rawValue, forKeyedSubscript: "EaseIn")
+		animationCurveBridge.setObject(RawCurve.EaseOut.rawValue, forKeyedSubscript: "EaseOut")
+		animationCurveBridge.setObject(RawCurve.EaseInOut.rawValue, forKeyedSubscript: "EaseInOut")
+		context.setObject(animationCurveBridge, forKeyedSubscript: "AnimationCurve")
+	}
+
+	public class func decodeCurve(bridgedCurve: JSValue) -> Prototope.Layer.AnimationCurve? {
+		if let rawCurve = RawCurve(rawValue: Int(bridgedCurve.toInt32())) {
+			switch rawCurve {
+			case .Linear: return .Linear
+			case .EaseIn: return .EaseIn
+			case .EaseOut: return .EaseOut
+			case .EaseInOut: return .EaseInOut
+			}
+		} else {
+			return nil
 		}
 	}
 }

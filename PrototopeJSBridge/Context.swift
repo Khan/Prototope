@@ -63,5 +63,6 @@ public class Context {
 		RotationGestureBridge.addToContext(context)
 		PinchSampleBridge.addToContext(context)
 		PinchGestureBridge.addToContext(context)
+		AnimationCurveBridge.addToContext(context)
 	}
 }
