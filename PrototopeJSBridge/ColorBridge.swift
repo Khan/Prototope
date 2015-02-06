@@ -11,7 +11,7 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol ColorJSExport: JSExport {
-	init(args: NSDictionary)
+	init?(args: NSDictionary)
 }
 
 @objc public class ColorBridge: NSObject, ColorJSExport, BridgeType {
@@ -36,16 +36,33 @@ import JavaScriptCore
 		colorBridge.setObject(ColorBridge(Color.clear), forKeyedSubscript: "clear")
     }
     
-    let color: Color
+    let color: Color!
     
-    required public init(args: NSDictionary) {
-        color = Color(
-			red: (args["red"] as Double?) ?? 0,
-			green: (args["green"] as Double?) ?? 0,
-			blue: (args["blue"] as Double?) ?? 0,
-			alpha: (args["alpha"] as Double?) ?? 1
-		)
-        super.init()
+    required public init?(args: NSDictionary) {
+    	super.init()
+    	let alpha = (args["alpha"] as Double?) ?? 1
+    	if let hue = args["hue"] as Double? {
+    		if let saturation = args["saturation"] as Double? {
+    			if let brightness = args["brightness"] as Double? {
+    				color = Color(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+    			} else { return nil }
+    		} else { return nil }
+    	} else if let white = args["white"] as Double? {
+    		color = Color(white: white, alpha: alpha)
+    	} else if let hexString = args["hex"] as String? {
+    		let scanner = NSScanner(string: hexString)
+			var hex: UInt32 = 0
+			if scanner.scanHexInt(&hex) {
+				color = Color(hex: hex, alpha: alpha)
+			} else { return nil }
+    	} else {
+	        color = Color(
+				red: (args["red"] as Double?) ?? 0,
+				green: (args["green"] as Double?) ?? 0,
+				blue: (args["blue"] as Double?) ?? 0,
+				alpha: (args["alpha"] as Double?) ?? 1
+			)
+	    }
     }
     
     init(_ color: Color) {

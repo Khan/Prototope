@@ -30,7 +30,7 @@ public struct Color {
 	/** Construct a color from a hex value and with alpha from 0.0 - 1.0.
 		i.e. Color(hex: 0x336699, alpha: 0.2)
 	 */
-	public init(hex: UInt32, alpha: Float) {
+	public init(hex: UInt32, alpha: Double) {
 	    var r = CGFloat((hex >> 16) & 0xff) / 255.0
 	    var g = CGFloat((hex >> 8) & 0xff) / 255.0
 	    var b = CGFloat(hex & 0xff) / 255.0
