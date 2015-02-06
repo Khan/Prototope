@@ -44,6 +44,8 @@
 		EB6BFB891A857326002B4E6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB6BFB881A857326002B4E6A /* Images.xcassets */; };
 		EB6BFB8C1A857326002B4E6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB6BFB8A1A857326002B4E6A /* Main.storyboard */; };
 		EB6BFB981A857326002B4E6A /* ProtocasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFB971A857326002B4E6A /* ProtocasterTests.swift */; };
+		EB6BFBAA1A857486002B4E6A /* libDTBonjour_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6BFBA81A85746E002B4E6A /* libDTBonjour_Mac.a */; };
+		EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */; };
 		EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */; };
 		EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
@@ -151,6 +153,20 @@
 			remoteGlobalIDString = EB6BFB7F1A857326002B4E6A;
 			remoteInfo = Protocaster;
 		};
+		EB6BFBA51A85746E002B4E6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A719021916A7F5E300C1EC52;
+			remoteInfo = "DTBonjour (iOS)";
+		};
+		EB6BFBA71A85746E002B4E6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A719028B16A7F93000C1EC52;
+			remoteInfo = "DTBonjour (OS X)";
+		};
 		EBE3A76819DF79C400A77736 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -237,6 +253,9 @@
 		EB6BFB911A857326002B4E6A /* ProtocasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProtocasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6BFB961A857326002B4E6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB6BFB971A857326002B4E6A /* ProtocasterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocasterTests.swift; sourceTree = "<group>"; };
+		EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTBonjour.xcodeproj; path = ThirdParty/DTBonjour/DTBonjour.xcodeproj; sourceTree = "<group>"; };
+		EB6BFBAB1A8574C8002B4E6A /* Protocaster-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Protocaster-Bridging-Header.h"; sourceTree = "<group>"; };
+		EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtoscopeScanner.swift; sourceTree = "<group>"; };
 		EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationBridge.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
@@ -313,6 +332,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6BFBAA1A857486002B4E6A /* libDTBonjour_Mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +414,7 @@
 				EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */,
 				EB6BFB811A857326002B4E6A /* Protocaster */,
 				EB306C0A19DF77CC00113FA3 /* Products */,
+				EB6BFBA91A857479002B4E6A /* ThirdParty */,
 			);
 			sourceTree = "<group>";
 		};
@@ -511,6 +532,7 @@
 		EB6BFB811A857326002B4E6A /* Protocaster */ = {
 			isa = PBXGroup;
 			children = (
+				EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */,
 				EB6BFB841A857326002B4E6A /* AppDelegate.swift */,
 				EB6BFB861A857326002B4E6A /* ViewController.swift */,
 				EB6BFB881A857326002B4E6A /* Images.xcassets */,
@@ -524,6 +546,7 @@
 		EB6BFB821A857326002B4E6A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EB6BFBAB1A8574C8002B4E6A /* Protocaster-Bridging-Header.h */,
 				EB6BFB831A857326002B4E6A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -545,6 +568,23 @@
 				EB6BFB961A857326002B4E6A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB6BFBA01A85746E002B4E6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB6BFBA61A85746E002B4E6A /* libDTBonjour_iOS.a */,
+				EB6BFBA81A85746E002B4E6A /* libDTBonjour_Mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB6BFBA91A857479002B4E6A /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */,
+			);
+			name = ThirdParty;
 			sourceTree = "<group>";
 		};
 		EBB3505D1A166E5E0046AD07 /* Utilities */ = {
@@ -787,6 +827,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = EB6BFBA01A85746E002B4E6A /* Products */;
+					ProjectRef = EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */;
+				},
+				{
 					ProductGroup = EB12A83C1A19A6AC0018C229 /* Products */;
 					ProjectRef = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
 				},
@@ -831,6 +875,20 @@
 			fileType = wrapper.cfbundle;
 			path = "pop-tests-osx.octest";
 			remoteRef = EB12A8481A19A6AC0018C229 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB6BFBA61A85746E002B4E6A /* libDTBonjour_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTBonjour_iOS.a;
+			remoteRef = EB6BFBA51A85746E002B4E6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB6BFBA81A85746E002B4E6A /* libDTBonjour_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTBonjour_Mac.a;
+			remoteRef = EB6BFBA71A85746E002B4E6A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -955,6 +1013,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */,
 				EB6BFB871A857326002B4E6A /* ViewController.swift in Sources */,
 				EB6BFB851A857326002B4E6A /* AppDelegate.swift in Sources */,
 			);
@@ -1320,6 +1379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1329,8 +1389,15 @@
 				INFOPLIST_FILE = Protocaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Protocaster/Protocaster-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "ThirdParty/**";
 			};
 			name = Debug;
 		};
@@ -1338,14 +1405,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = Protocaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Protocaster/Protocaster-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "ThirdParty/**";
 			};
 			name = Release;
 		};
