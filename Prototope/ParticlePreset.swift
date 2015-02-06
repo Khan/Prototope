@@ -74,7 +74,8 @@ public enum ParticlePreset {
 			particle.spin = Radian(degrees: -200)
 			particle.spinRange = Radian(degrees: 490)
 			
-			particle.color = Color(red: 1, green: 0.95, blue: 0.27, alpha: 0.65)
+			particle.color = Color(red: 1, green: 0.95, blue: 0.27, alpha: 0)
+			particle.alphaSpeed = 3
 			
 			particle.scale = 0.70
 			particle.scaleRange = 0.30

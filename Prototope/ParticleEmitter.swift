@@ -21,6 +21,10 @@ public class ParticleEmitter {
 		}
 	}
 	
+	public var birthRate: Double {
+		get { return Double(self.emitterLayer.birthRate) }
+		set { self.emitterLayer.birthRate = Float(newValue) }
+	}
 	
 	/** The render mode of the emitter. */
 	public var renderMode: String {

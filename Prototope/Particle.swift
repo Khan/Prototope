@@ -132,6 +132,31 @@ public struct Particle {
 	}
 	
 	
+	/** The speed of red in the particle. */
+	public var redSpeed: Double {
+		get { return Double(self.emitterCell.redSpeed) }
+		set { self.emitterCell.redSpeed = Float(newValue) }
+	}
+	
+	/** The speed of blue in the particle. */
+	public var blueSpeed: Double {
+		get { return Double(self.emitterCell.blueSpeed) }
+		set { self.emitterCell.blueSpeed = Float(newValue) }
+	}
+	
+	/** The speed of green in the particle. */
+	public var greenSpeed: Double {
+		get { return Double(self.emitterCell.greenSpeed) }
+		set { self.emitterCell.greenSpeed = Float(newValue) }
+	}
+	
+	/** The speed of alpha in the particle. */
+	public var alphaSpeed: Double {
+		get { return Double(self.emitterCell.alphaSpeed) }
+		set { self.emitterCell.alphaSpeed = Float(newValue) }
+	}
+	
+	
 	/** The x acceleration of particles. */
 	public var xAcceleration: Double {
 		get { return Double(self.emitterCell.xAcceleration) }
