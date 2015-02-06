@@ -73,6 +73,9 @@ import JavaScriptCore
     var touchEndedHandler: JSValue? { get set }
     var touchCancelledHandler: JSValue? { get set }
     var touchedDescendents: [LayerJSExport] { get }
+
+    // MARK: Animations
+    var animators: LayerAnimatorStoreJSExport { get }
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -485,6 +488,12 @@ import JavaScriptCore
 
     public var touchedDescendents: [LayerJSExport] {
         return layer.touchedDescendents.map { LayerBridge($0)! }
+    }
+
+    // MARK: Animations
+
+    public var animators: LayerAnimatorStoreJSExport {
+        return LayerAnimatorStoreBridge(layer.animators)
     }
 
 }

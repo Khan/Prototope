@@ -16,5 +16,5 @@ func makeJSLayer() {
 		let lineNumber = value.objectForKeyedSubscript("line")
 		println("Exception on line \(lineNumber): \(value)")
 	}
-	println(context.evaluateScript("var layer = new Layer({parent: Layer.root, imageName: 'paint'}); Layer.animate({duration: 1, animations: function() { layer.x = 300 }}); layer.gestures = [new PinchGesture({handler: function(phase, sequence) {console.log(sequence.currentSample.scale)}})]; layer.backgroundColor = new Color({red: 0.5, green: 0.7, blue: 0.1, alpha: 0.7}); layer.frame = new Rect({x: 75, y: 80, width: 400, height: 400}); layer.border = new Border({color: Color.black, width: 2}); layer.shadow = new Shadow({alpha: 1.0}); (new Sound({name: 'Glass'})).play()"))
+	println(context.evaluateScript("var layer = new Layer({parent: Layer.root}); layer.animators.backgroundColor.target = Color.yellow; layer.gestures = [new PinchGesture({handler: function(phase, sequence) {console.log(sequence.currentSample.scale)}})]; layer.backgroundColor = new Color({red: 0.5, green: 0.7, blue: 0.1, alpha: 0.7}); layer.frame = new Rect({x: 75, y: 80, width: 400, height: 400}); layer.border = new Border({color: Color.black, width: 2}); layer.shadow = new Shadow({alpha: 1.0}); (new Sound({name: 'Glass'})).play()"))
 }
