@@ -87,6 +87,7 @@ public class TapGesture: GestureType {
 		tapGestureRecognizer.numberOfTapsRequired = numberOfTapsRequired
 		tapGestureRecognizer.numberOfTouchesRequired = numberOfTouchesRequired
         shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
+        tapGestureDelegate = GestureRecognizerBridge(self)
 	}
 
 	deinit {
@@ -107,6 +108,7 @@ public class TapGesture: GestureType {
 
 	private let tapGestureRecognizer: UITapGestureRecognizer
 	private let tapGestureHandler: TapGestureHandler
+    private let tapGestureDelegate: UIGestureRecognizerDelegate!
     
     public var underlyingGestureRecognizer: UIGestureRecognizer {
         return tapGestureRecognizer
@@ -115,7 +117,7 @@ public class TapGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
 
 	public weak var hostLayer: Layer? {
-		didSet { handleTransferOfGesture(tapGestureRecognizer, oldValue, hostLayer) }
+		didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
 	}
 
 	@objc class TapGestureHandler: NSObject {
@@ -160,10 +162,12 @@ public class PanGesture: GestureType {
 		panGestureRecognizer.maximumNumberOfTouches = maximumNumberOfTouches
         
         shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
+        panGestureDelegate = GestureRecognizerBridge(self)
 	}
 
 	private let panGestureRecognizer: UIPanGestureRecognizer
 	private let panGestureHandler: PanGestureHandler
+    private let panGestureDelegate: UIGestureRecognizerDelegate!
     
     public var underlyingGestureRecognizer: UIGestureRecognizer {
         return panGestureRecognizer
@@ -172,7 +176,7 @@ public class PanGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
 
 	public weak var hostLayer: Layer? {
-		didSet { handleTransferOfGesture(panGestureRecognizer, oldValue, hostLayer) }
+		didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
 	}
 
 	deinit {
@@ -259,11 +263,13 @@ public class RotationGesture: GestureType {
         rotationGestureRecognizer = UIRotationGestureRecognizer(target: rotationGestureHandler, action: "handleGestureRecognizer:")
         rotationGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
         
-        shouldRecognizeSimultaneouslyWithGesture = { _ in return true }
+        shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
+        rotationGestureDelegate = GestureRecognizerBridge(self)
     }
     
     private let rotationGestureRecognizer: UIRotationGestureRecognizer
     private let rotationGestureHandler: RotationGestureHandler
+    private let rotationGestureDelegate: UIGestureRecognizerDelegate!
     
     public var underlyingGestureRecognizer: UIGestureRecognizer {
         return rotationGestureRecognizer
@@ -272,7 +278,7 @@ public class RotationGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
     
     public weak var hostLayer: Layer? {
-        didSet { handleTransferOfGesture(rotationGestureRecognizer, oldValue, hostLayer) }
+        didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
     }
     
     deinit {
@@ -333,27 +339,6 @@ public struct PinchSample: SampleType {
     }
 }
 
-func gestureForGestureRecognizer(gestureRecognizer: UIGestureRecognizer) -> GestureType? {
-    return nil
-}
-
-@objc class GestureRecognizerBridge: NSObject, UIGestureRecognizerDelegate {
-    let gesture: GestureType
-    
-    init(gesture: GestureType) {
-        self.gesture = gesture
-        super.init()
-        gesture.underlyingGestureRecognizer.delegate = self
-    }
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let otherGesture = gestureForGestureRecognizer(otherGestureRecognizer) {
-            return gesture.shouldRecognizeSimultaneouslyWithGesture(otherGesture)
-        }
-        return false
-    }
-}
-
 /** A pinch gesture recognizes a standard iOS pinch: it doesn't begin until the user's pinched some number of points, then it tracks new touches coming and going over time as well as scale relative to the beginning of the gesture and the current scale velocity. It exposes simple access to the sequence of pinch samples representing the series of the gesture's state over time. */
 public class PinchGesture: GestureType {
     /** The handler will be invoked as the gesture recognizes and updates; it's passed the gesture's current
@@ -377,7 +362,7 @@ public class PinchGesture: GestureType {
         pinchGestureRecognizer.cancelsTouchesInView = cancelsTouchesInLayer
         shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
         
-        pinchGestureDelegate = GestureRecognizerBridge(gesture: self)
+        pinchGestureDelegate = GestureRecognizerBridge(self)
     }
     
     internal let pinchGestureRecognizer: UIPinchGestureRecognizer
@@ -391,7 +376,7 @@ public class PinchGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
     
     public weak var hostLayer: Layer? {
-        didSet { handleTransferOfGesture(pinchGestureRecognizer, oldValue, hostLayer) }
+        didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
     }
     
     deinit {
@@ -648,22 +633,63 @@ public struct TouchSequence<I: Printable> : SampleSequenceType {
     }
 }
 
+// MARK: Gesture-to-gesture interaction
+
+//Need to have a way to map Gestures to UIGestureRecognizers
+var gestureMap = [UIGestureRecognizer:GestureType]()
+
+func gestureForGestureRecognizer(gestureRecognizer: UIGestureRecognizer) -> GestureType? {
+    return gestureMap[gestureRecognizer]
+}
+
+@objc class GestureRecognizerBridge: NSObject, UIGestureRecognizerDelegate {
+    let gesture: GestureType
+    
+    init(_ gesture: GestureType) {
+        self.gesture = gesture
+        super.init()
+        gesture.underlyingGestureRecognizer.delegate = self
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let otherGesture = gestureForGestureRecognizer(otherGestureRecognizer) {
+            return gesture.shouldRecognizeSimultaneouslyWithGesture(otherGesture)
+        }
+        return false
+    }
+}
+
 // MARK: - Internal interfaces
 
 public protocol GestureType: _GestureType {
     var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool { get set }
 }
 
-private func handleTransferOfGesture(gesture: UIGestureRecognizer, fromLayer: Layer?, toLayer: Layer?) {
+private func handleTransferOfGesture(gesture:GestureType, fromLayer: Layer?, toLayer: Layer?) {
+    let recognizer = gesture.underlyingGestureRecognizer
+    
+    switch (fromLayer, toLayer) {
+    case (.None, .Some):
+        gestureMap[recognizer] = gesture
+    case (.Some, .None):
+        gestureMap.removeValueForKey(recognizer)
+    default:
+        ()
+    }
+    
 	if fromLayer !== toLayer {
-		fromLayer?.view.removeGestureRecognizer(gesture)
-		toLayer?.view.addGestureRecognizer(gesture)
+		fromLayer?.view.removeGestureRecognizer(recognizer)
+		toLayer?.view.addGestureRecognizer(recognizer)
 	}
 }
 
 public protocol _GestureType {
 	weak var hostLayer: Layer? { get nonmutating set }
     var underlyingGestureRecognizer: UIGestureRecognizer { get }
+}
+
+public func ==(lhs: _GestureType,rhs: _GestureType) -> Bool {
+    return lhs.underlyingGestureRecognizer == rhs.underlyingGestureRecognizer
 }
 
 extension TouchSample {
