@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
+		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
+		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
+		CD3F93A01A852AF500B964FC /* ParticlePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F939F1A852AF500B964FC /* ParticlePreset.swift */; };
 		6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE281A7F1B01001E63CE /* BridgeType.swift */; };
 		6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */; };
 		EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -177,6 +181,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
+		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
+		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
+		CD3F939F1A852AF500B964FC /* ParticlePreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlePreset.swift; sourceTree = "<group>"; };
 		6175CE281A7F1B01001E63CE /* BridgeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeType.swift; sourceTree = "<group>"; };
 		6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBridge.swift; sourceTree = "<group>"; };
 		EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFTunableSpec.h; path = ThirdParty/TunableSpec/KFTunableSpec.h; sourceTree = "<group>"; };
@@ -406,6 +414,9 @@
 				EBBA431619F45186000B81BE /* Gesture.swift */,
 				EBA837161A1DADDF00D23C9D /* Heartbeat.swift */,
 				EBA8371B1A1DB51000D23C9D /* Sound.swift */,
+				CD11D82A1A815AD3004F1197 /* Particle.swift */,
+				CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */,
+				CD3F939F1A852AF500B964FC /* ParticlePreset.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
@@ -462,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				EBB3505E1A166E690046AD07 /* Dictionary+Extensions.swift */,
+				CD26ECC51A83CE1000E8EC3B /* Radian.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -805,6 +817,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBE3A77519DF79E900A77736 /* Layer.swift in Sources */,
+				CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */,
+				CD3F93A01A852AF500B964FC /* ParticlePreset.swift in Sources */,
+				CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */,
 				EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */,
 				EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */,
 				EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */,
@@ -813,6 +828,7 @@
 				EBB3505F1A166E690046AD07 /* Dictionary+Extensions.swift in Sources */,
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
+				CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */,
 				EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */,
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
 				EBF59A941A2E2B5000AB8C67 /* Shadow.swift in Sources */,
