@@ -387,6 +387,9 @@ public class Layer: Equatable, Hashable {
 	public func addParticleEmitter(particleEmitter: ParticleEmitter) {
 		self.particleEmitters.append(particleEmitter)
 		self.view.layer.addSublayer(particleEmitter.emitterLayer)
+		particleEmitter.emitterLayer.frame = self.view.layer.bounds
+		particleEmitter.size = self.size
+		particleEmitter.position = Point(particleEmitter.emitterLayer.position)
 		
 		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
 		self.view.layer.masksToBounds = false

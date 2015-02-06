@@ -12,6 +12,7 @@ import UIKit
 public enum ParticlePreset {
 	case Explode
 	case Rain
+	case Sparkle
 	
 	func configureParticle(var particle: Particle) {
 		switch self {
@@ -48,6 +49,22 @@ public enum ParticlePreset {
 			particle.alphaRange = 0.55
 			
 			particle.scale = 0.4
+			
+		case Sparkle:
+			particle.lifetime = 0.71
+			particle.lifetimeRange = 0.5
+			particle.birthRate = 20
+			
+			particle.velocity = 6.5
+			particle.yAcceleration = -300
+			
+			particle.spin = Radian(degrees: -200)
+			particle.spinRange = Radian(degrees: 490)
+			
+			particle.color = Color(red: 1, green: 0.95, blue: 0.27, alpha: 0.65)
+			
+			particle.scale = 0.70
+			particle.scaleRange = 0.30
 		}
 	}
 }
@@ -102,6 +119,20 @@ public struct Particle {
 	public var scaleRange: Double {
 		get { return Double(self.emitterCell.scaleRange) }
 		set { self.emitterCell.scaleRange = CGFloat(newValue) }
+	}
+	
+	
+	/** The spin of particles. Positive values spin clockwise, negative values spin counter-clockwise. */
+	public var spin: Radian {
+		get { return Radian(self.emitterCell.spin) }
+		set { self.emitterCell.spin = CGFloat(newValue) }
+	}
+	
+	
+	/** The spin range of particles. Positive values spin clockwise, negative values spin counter-clockwise. */
+	public var spinRange: Radian {
+		get { return Radian(self.emitterCell.spinRange) }
+		set { self.emitterCell.spinRange = CGFloat(newValue) }
 	}
 	
 	

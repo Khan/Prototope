@@ -30,7 +30,7 @@ public class ParticleEmitter {
 	
 	
 	/** The shape of the emitter. c.f., CAEmitterLayer for valid strings. */
-	public var emitterShape: String {
+	public var shape: String {
 		get { return self.emitterLayer.emitterShape }
 		set { self.emitterLayer.emitterShape = newValue }
 	}
