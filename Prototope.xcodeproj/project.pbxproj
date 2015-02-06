@@ -46,6 +46,16 @@
 		EB6BFB981A857326002B4E6A /* ProtocasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFB971A857326002B4E6A /* ProtocasterTests.swift */; };
 		EB6BFBAA1A857486002B4E6A /* libDTBonjour_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6BFBA81A85746E002B4E6A /* libDTBonjour_Mac.a */; };
 		EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */; };
+		EB6BFBBA1A857921002B4E6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBB91A857921002B4E6A /* AppDelegate.swift */; };
+		EB6BFBBC1A857921002B4E6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBBB1A857921002B4E6A /* ViewController.swift */; };
+		EB6BFBBF1A857921002B4E6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB6BFBBD1A857921002B4E6A /* Main.storyboard */; };
+		EB6BFBC11A857921002B4E6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB6BFBC01A857921002B4E6A /* Images.xcassets */; };
+		EB6BFBC41A857921002B4E6A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6BFBC21A857921002B4E6A /* LaunchScreen.xib */; };
+		EB6BFBD01A857921002B4E6A /* ProtoscopeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBCF1A857921002B4E6A /* ProtoscopeTests.swift */; };
+		EB6BFBD81A858153002B4E6A /* ProtoscopeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBD71A858153002B4E6A /* ProtoscopeServer.swift */; };
+		EB6BFBDE1A8581E6002B4E6A /* Protorope.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */; };
+		EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */; };
+		EB6BFBE01A858332002B4E6A /* libDTBonjour_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6BFBA61A85746E002B4E6A /* libDTBonjour_iOS.a */; };
 		EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */; };
 		EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
@@ -167,6 +177,13 @@
 			remoteGlobalIDString = A719028B16A7F93000C1EC52;
 			remoteInfo = "DTBonjour (OS X)";
 		};
+		EB6BFBCA1A857921002B4E6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB6BFBB41A857920002B4E6A;
+			remoteInfo = Protoscope;
+		};
 		EBE3A76819DF79C400A77736 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -256,6 +273,19 @@
 		EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTBonjour.xcodeproj; path = ThirdParty/DTBonjour/DTBonjour.xcodeproj; sourceTree = "<group>"; };
 		EB6BFBAB1A8574C8002B4E6A /* Protocaster-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Protocaster-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtoscopeScanner.swift; sourceTree = "<group>"; };
+		EB6BFBB51A857920002B4E6A /* Protoscope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protoscope.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB6BFBB81A857921002B4E6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB6BFBB91A857921002B4E6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EB6BFBBB1A857921002B4E6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EB6BFBBE1A857921002B4E6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EB6BFBC01A857921002B4E6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EB6BFBC31A857921002B4E6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EB6BFBC91A857921002B4E6A /* ProtoscopeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProtoscopeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB6BFBCE1A857921002B4E6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB6BFBCF1A857921002B4E6A /* ProtoscopeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtoscopeTests.swift; sourceTree = "<group>"; };
+		EB6BFBD71A858153002B4E6A /* ProtoscopeServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtoscopeServer.swift; sourceTree = "<group>"; };
+		EB6BFBD91A858172002B4E6A /* Protoscope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Protoscope-Bridging-Header.h"; sourceTree = "<group>"; };
+		EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protorope.swift; path = Protorope/Protorope.swift; sourceTree = "<group>"; };
 		EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationBridge.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
@@ -343,6 +373,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB6BFBB21A857920002B4E6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB6BFBE01A858332002B4E6A /* libDTBonjour_iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB6BFBC61A857921002B4E6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBE3A75219DF79C400A77736 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -409,10 +454,12 @@
 		EB306C0019DF77CC00113FA3 = {
 			isa = PBXGroup;
 			children = (
+				EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */,
 				EB306C3319DF78A900113FA3 /* Prototope */,
 				EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */,
 				EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */,
 				EB6BFB811A857326002B4E6A /* Protocaster */,
+				EB6BFBB61A857921002B4E6A /* Protoscope */,
 				EB306C0A19DF77CC00113FA3 /* Products */,
 				EB6BFBA91A857479002B4E6A /* ThirdParty */,
 			);
@@ -428,6 +475,8 @@
 				EB453D991A7AB0B2006F2A72 /* PrototopeJSBridgeTests.xctest */,
 				EB6BFB801A857326002B4E6A /* Protocaster.app */,
 				EB6BFB911A857326002B4E6A /* ProtocasterTests.xctest */,
+				EB6BFBB51A857920002B4E6A /* Protoscope.app */,
+				EB6BFBC91A857921002B4E6A /* ProtoscopeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -585,6 +634,48 @@
 				EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */,
 			);
 			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		EB6BFBB61A857921002B4E6A /* Protoscope */ = {
+			isa = PBXGroup;
+			children = (
+				EB6BFBD71A858153002B4E6A /* ProtoscopeServer.swift */,
+				EB6BFBB91A857921002B4E6A /* AppDelegate.swift */,
+				EB6BFBBB1A857921002B4E6A /* ViewController.swift */,
+				EB6BFBBD1A857921002B4E6A /* Main.storyboard */,
+				EB6BFBC01A857921002B4E6A /* Images.xcassets */,
+				EB6BFBC21A857921002B4E6A /* LaunchScreen.xib */,
+				EB6BFBB71A857921002B4E6A /* Supporting Files */,
+				EB6BFBCC1A857921002B4E6A /* Tests */,
+			);
+			path = Protoscope;
+			sourceTree = "<group>";
+		};
+		EB6BFBB71A857921002B4E6A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB6BFBD91A858172002B4E6A /* Protoscope-Bridging-Header.h */,
+				EB6BFBB81A857921002B4E6A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB6BFBCC1A857921002B4E6A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EB6BFBCF1A857921002B4E6A /* ProtoscopeTests.swift */,
+				EB6BFBCD1A857921002B4E6A /* Supporting Files */,
+			);
+			name = Tests;
+			path = ProtoscopeTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		EB6BFBCD1A857921002B4E6A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB6BFBCE1A857921002B4E6A /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		EBB3505D1A166E5E0046AD07 /* Utilities */ = {
@@ -759,6 +850,41 @@
 			productReference = EB6BFB911A857326002B4E6A /* ProtocasterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EB6BFBB41A857920002B4E6A /* Protoscope */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB6BFBD11A857921002B4E6A /* Build configuration list for PBXNativeTarget "Protoscope" */;
+			buildPhases = (
+				EB6BFBB11A857920002B4E6A /* Sources */,
+				EB6BFBB21A857920002B4E6A /* Frameworks */,
+				EB6BFBB31A857920002B4E6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Protoscope;
+			productName = Protoscope;
+			productReference = EB6BFBB51A857920002B4E6A /* Protoscope.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB6BFBC81A857921002B4E6A /* ProtoscopeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB6BFBD41A857921002B4E6A /* Build configuration list for PBXNativeTarget "ProtoscopeTests" */;
+			buildPhases = (
+				EB6BFBC51A857921002B4E6A /* Sources */,
+				EB6BFBC61A857921002B4E6A /* Frameworks */,
+				EB6BFBC71A857921002B4E6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB6BFBCB1A857921002B4E6A /* PBXTargetDependency */,
+			);
+			name = ProtoscopeTests;
+			productName = ProtoscopeTests;
+			productReference = EB6BFBC91A857921002B4E6A /* ProtoscopeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EBE3A75519DF79C400A77736 /* Prototope */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBE3A76E19DF79C400A77736 /* Build configuration list for PBXNativeTarget "Prototope" */;
@@ -809,6 +935,13 @@
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = EB6BFB7F1A857326002B4E6A;
 					};
+					EB6BFBB41A857920002B4E6A = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					EB6BFBC81A857921002B4E6A = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = EB6BFBB41A857920002B4E6A;
+					};
 					EBE3A75519DF79C400A77736 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -844,6 +977,8 @@
 				EB453D981A7AB0B2006F2A72 /* PrototopeJSBridgeTests */,
 				EB6BFB7F1A857326002B4E6A /* Protocaster */,
 				EB6BFB901A857326002B4E6A /* ProtocasterTests */,
+				EB6BFBB41A857920002B4E6A /* Protoscope */,
+				EB6BFBC81A857921002B4E6A /* ProtoscopeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -942,6 +1077,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB6BFBB31A857920002B4E6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB6BFBBF1A857921002B4E6A /* Main.storyboard in Resources */,
+				EB6BFBC41A857921002B4E6A /* LaunchScreen.xib in Resources */,
+				EB6BFBC11A857921002B4E6A /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB6BFBC71A857921002B4E6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBE3A75419DF79C400A77736 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1013,6 +1165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6BFBDE1A8581E6002B4E6A /* Protorope.swift in Sources */,
 				EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */,
 				EB6BFB871A857326002B4E6A /* ViewController.swift in Sources */,
 				EB6BFB851A857326002B4E6A /* AppDelegate.swift in Sources */,
@@ -1024,6 +1177,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6BFB981A857326002B4E6A /* ProtocasterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB6BFBB11A857920002B4E6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */,
+				EB6BFBD81A858153002B4E6A /* ProtoscopeServer.swift in Sources */,
+				EB6BFBBC1A857921002B4E6A /* ViewController.swift in Sources */,
+				EB6BFBBA1A857921002B4E6A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB6BFBC51A857921002B4E6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB6BFBD01A857921002B4E6A /* ProtoscopeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1259,11 @@
 			target = EB6BFB7F1A857326002B4E6A /* Protocaster */;
 			targetProxy = EB6BFB921A857326002B4E6A /* PBXContainerItemProxy */;
 		};
+		EB6BFBCB1A857921002B4E6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB6BFBB41A857920002B4E6A /* Protoscope */;
+			targetProxy = EB6BFBCA1A857921002B4E6A /* PBXContainerItemProxy */;
+		};
 		EBE3A76919DF79C400A77736 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EBE3A75519DF79C400A77736 /* Prototope */;
@@ -1122,6 +1299,22 @@
 				EB6BFB8B1A857326002B4E6A /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EB6BFBBD1A857921002B4E6A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB6BFBBE1A857921002B4E6A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EB6BFBC21A857921002B4E6A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB6BFBC31A857921002B4E6A /* Base */,
+			);
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1464,6 +1657,85 @@
 			};
 			name = Release;
 		};
+		EB6BFBD21A857921002B4E6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Protoscope/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Protoscope/Protoscope-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "ThirdParty/**";
+			};
+			name = Debug;
+		};
+		EB6BFBD31A857921002B4E6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Protoscope/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Protoscope/Protoscope-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "ThirdParty/**";
+			};
+			name = Release;
+		};
+		EB6BFBD51A857921002B4E6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ProtoscopeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Protoscope.app/Protoscope";
+			};
+			name = Debug;
+		};
+		EB6BFBD61A857921002B4E6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ProtoscopeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Protoscope.app/Protoscope";
+			};
+			name = Release;
+		};
 		EBE3A76F19DF79C400A77736 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1571,6 +1843,7 @@
 				EB6BFB9B1A857326002B4E6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB6BFB9C1A857326002B4E6A /* Build configuration list for PBXNativeTarget "ProtocasterTests" */ = {
 			isa = XCConfigurationList;
@@ -1579,6 +1852,25 @@
 				EB6BFB9E1A857326002B4E6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB6BFBD11A857921002B4E6A /* Build configuration list for PBXNativeTarget "Protoscope" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB6BFBD21A857921002B4E6A /* Debug */,
+				EB6BFBD31A857921002B4E6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB6BFBD41A857921002B4E6A /* Build configuration list for PBXNativeTarget "ProtoscopeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB6BFBD51A857921002B4E6A /* Debug */,
+				EB6BFBD61A857921002B4E6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBE3A76E19DF79C400A77736 /* Build configuration list for PBXNativeTarget "Prototope" */ = {
 			isa = XCConfigurationList;

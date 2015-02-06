@@ -25,7 +25,7 @@ class ProtoscopeScanner {
 			}
 		)
 		browser.delegate = browserDelegate
-		browser.searchForServicesOfType("_protoscope._tcp.", inDomain: "")
+		browser.searchForServicesOfType(ProtoropeReceiverServiceType, inDomain: "")
 	}
 
 	func stop() {
