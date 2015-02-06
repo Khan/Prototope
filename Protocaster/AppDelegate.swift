@@ -11,10 +11,17 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
+	var scanner: ProtoscopeScanner!
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		// Insert code here to initialize your application
+		scanner = ProtoscopeScanner(
+			serviceDidAppearHandler: { service in
+				println(service.name)
+			},
+			serviceDidDisappearHandler: { service in
+				println(service.name)
+			}
+		)
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {

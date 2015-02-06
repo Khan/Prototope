@@ -10,7 +10,7 @@ import Foundation
 
 class ProtoscopeServer {
 	private let bonjourServer: DTBonjourServer
-	init(name: String) {
+	init() {
 		bonjourServer = DTBonjourServer(bonjourType: ProtoropeReceiverServiceType)
 		bonjourServer.start()
 	}
