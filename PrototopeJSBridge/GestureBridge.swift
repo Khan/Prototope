@@ -231,6 +231,7 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 	init?(args: JSValue)
 	var numberOfTouchesRequired: Int { get }
 	var numberOfTapsRequired: Int { get }
+    var shouldRecognizeSimultaneouslyWithGesture: JSValue? { get set }
 }
 
 @objc public class TapGestureBridge: NSObject, TapGestureJSExport, BridgeType, GestureBridgeType {
@@ -239,6 +240,20 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "TapGesture")
 	}
+    
+    public var shouldRecognizeSimultaneouslyWithGesture: JSValue? {
+        didSet {
+            if let f = shouldRecognizeSimultaneouslyWithGesture {
+                tapGesture.shouldRecognizeSimultaneouslyWithGesture = { gesture in
+                    let bridgedGesture = gestureBridgeForGesture(gesture)
+                    let result = f.callWithArguments([bridgedGesture])
+                    return result.toBool()
+                }
+            } else {
+                tapGesture.shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
+            }
+        }
+    }
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
@@ -313,10 +328,25 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 @objc protocol PanGestureJSExport: JSExport {
 	init?(args: JSValue)
+    var shouldRecognizeSimultaneouslyWithGesture: JSValue? { get set }
 }
 
 @objc public class PanGestureBridge: NSObject, PanGestureJSExport, BridgeType, GestureBridgeType {
 	let panGesture: Prototope.PanGesture!
+    
+    public var shouldRecognizeSimultaneouslyWithGesture: JSValue? {
+        didSet {
+            if let f = shouldRecognizeSimultaneouslyWithGesture {
+                panGesture.shouldRecognizeSimultaneouslyWithGesture = { gesture in
+                    let bridgedGesture = gestureBridgeForGesture(gesture)
+                    let result = f.callWithArguments([bridgedGesture])
+                    return result.toBool()
+                }
+            } else {
+                panGesture.shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
+            }
+        }
+    }
 
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "PanGesture")
@@ -392,6 +422,7 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 @objc protocol RotationGestureJSExport: JSExport {
 	init?(args: JSValue)
+    var shouldRecognizeSimultaneouslyWithGesture: JSValue? { get set }
 }
 
 @objc public class RotationGestureBridge: NSObject, RotationGestureJSExport, BridgeType, GestureBridgeType {
@@ -400,6 +431,20 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "RotationGesture")
 	}
+    
+    public var shouldRecognizeSimultaneouslyWithGesture: JSValue? {
+        didSet {
+            if let f = shouldRecognizeSimultaneouslyWithGesture {
+                rotationGesture.shouldRecognizeSimultaneouslyWithGesture = { gesture in
+                    let bridgedGesture = gestureBridgeForGesture(gesture)
+                    let result = f.callWithArguments([bridgedGesture])
+                    return result.toBool()
+                }
+            } else {
+                rotationGesture.shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
+            }
+        }
+    }
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
@@ -460,6 +505,7 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 @objc protocol PinchGestureJSExport: JSExport {
 	init?(args: JSValue)
+    var shouldRecognizeSimultaneouslyWithGesture: JSValue? { get set }
 }
 
 @objc public class PinchGestureBridge: NSObject, PinchGestureJSExport, BridgeType, GestureBridgeType {
@@ -468,6 +514,20 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "PinchGesture")
 	}
+
+    public var shouldRecognizeSimultaneouslyWithGesture: JSValue? {
+        didSet {
+            if let f = shouldRecognizeSimultaneouslyWithGesture {
+                pinchGesture.shouldRecognizeSimultaneouslyWithGesture = { gesture in
+                    let bridgedGesture = gestureBridgeForGesture(gesture)
+                    let result = f.callWithArguments([bridgedGesture])
+                    return result.toBool()
+                }
+            } else {
+                pinchGesture.shouldRecognizeSimultaneouslyWithGesture = { _ in return false }
+            }
+        }
+    }
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
