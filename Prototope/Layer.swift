@@ -384,7 +384,7 @@ public class Layer: Equatable, Hashable {
 	
 	
 	/** Adds the particle emitter to the layer. */
-	public func addParticleEmitter(particleEmitter: ParticleEmitter) {
+	public func addParticleEmitter(particleEmitter: ParticleEmitter, forDuration duration: TimeInterval? = nil) {
 		self.particleEmitters.append(particleEmitter)
 		self.view.layer.addSublayer(particleEmitter.emitterLayer)
 		particleEmitter.emitterLayer.frame = self.view.layer.bounds
@@ -393,6 +393,12 @@ public class Layer: Equatable, Hashable {
 		
 		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
 		self.view.layer.masksToBounds = false
+		
+		if let duration = duration {
+			afterDuration(duration, { () -> Void in
+				self.removeParticleEmitter(particleEmitter)
+			})
+		}
 	}
 	
 	
