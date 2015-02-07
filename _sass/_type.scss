@@ -1,6 +1,11 @@
+.page-heading {
+  margin-top: 3em;
+}
+
 li.method,
 li.variable,
 li.typealias,
+li.convenience,
 li.enum,
 li.struct,
 li.function {
@@ -47,5 +52,28 @@ li:hover .permalink {
     &.header {
       color: #aaa;
     }
+  }
+}
+
+.responsive.video {
+  display: inline-block;
+  position: relative;
+  width:100%;
+  margin:1em 0 !important;
+  padding:0 !important;
+
+  &:after {
+    padding-top: 100%;
+    display: block;
+    content: '';
+  }
+
+  div {
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 0;
+  }
+
+  &.screen-13-in:after {
+    padding-top: 62.5%;
   }
 }

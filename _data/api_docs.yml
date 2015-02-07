@@ -58,12 +58,6 @@
   - init
   - vars
 
-- title: TapGesture
-  docs:
-  - init_convenience
-  - init
-  - vars
-
 - title: Heartbeat
   docs:
   - init
