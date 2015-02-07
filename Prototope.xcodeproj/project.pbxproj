@@ -773,6 +773,7 @@
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
 				EB1C2A6D19E4D19B000DC2C1 /* Tests */,
+				7530F6BE1A86158C00E2A6DF /* Collisions.swift */,
 			);
 			name = "📚 Prototope";
 			path = Prototope;
@@ -1617,6 +1618,7 @@
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
 				CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */,
+				7530F6BF1A86158C00E2A6DF /* Collisions.swift in Sources */,
 				EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */,
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
 				EBF59A941A2E2B5000AB8C67 /* Shadow.swift in Sources */,
