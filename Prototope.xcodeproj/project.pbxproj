@@ -47,7 +47,6 @@
 		EB6BFBAA1A857486002B4E6A /* libDTBonjour_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6BFBA81A85746E002B4E6A /* libDTBonjour_Mac.a */; };
 		EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */; };
 		EB6BFBBA1A857921002B4E6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBB91A857921002B4E6A /* AppDelegate.swift */; };
-		EB6BFBBC1A857921002B4E6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBBB1A857921002B4E6A /* ViewController.swift */; };
 		EB6BFBC11A857921002B4E6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB6BFBC01A857921002B4E6A /* Images.xcassets */; };
 		EB6BFBC41A857921002B4E6A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6BFBC21A857921002B4E6A /* LaunchScreen.xib */; };
 		EB6BFBD01A857921002B4E6A /* ProtoscopeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBCF1A857921002B4E6A /* ProtoscopeTests.swift */; };
@@ -56,6 +55,10 @@
 		EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */; };
 		EB6BFBE01A858332002B4E6A /* libDTBonjour_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6BFBA61A85746E002B4E6A /* libDTBonjour_iOS.a */; };
 		EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */; };
+		EB75AE3C1A86F1B400742127 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3B1A86F1B400742127 /* Style.swift */; };
+		EB75AE3E1A86F1FD00742127 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3D1A86F1FD00742127 /* StatusView.swift */; };
+		EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3F1A86F5A200742127 /* RootViewController.swift */; };
+		EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE411A86F62300742127 /* StatusViewController.swift */; };
 		EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
 		EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8371B1A1DB51000D23C9D /* Sound.swift */; };
@@ -278,7 +281,6 @@
 		EB6BFBB51A857920002B4E6A /* Protoscope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protoscope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6BFBB81A857921002B4E6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB6BFBB91A857921002B4E6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EB6BFBBB1A857921002B4E6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EB6BFBC01A857921002B4E6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EB6BFBC31A857921002B4E6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EB6BFBC91A857921002B4E6A /* ProtoscopeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProtoscopeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,10 @@
 		EB6BFBD91A858172002B4E6A /* Protoscope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Protoscope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protorope.swift; path = Protorope/Protorope.swift; sourceTree = "<group>"; };
 		EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationBridge.swift; sourceTree = "<group>"; };
+		EB75AE3B1A86F1B400742127 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		EB75AE3D1A86F1FD00742127 /* StatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		EB75AE3F1A86F5A200742127 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		EB75AE411A86F62300742127 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		EBA8371B1A1DB51000D23C9D /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
@@ -644,9 +650,9 @@
 		EB6BFBB61A857921002B4E6A /* Protoscope */ = {
 			isa = PBXGroup;
 			children = (
+				EB75AE431A86F7F600742127 /* UI */,
 				EB6BFBD71A858153002B4E6A /* ProtoscopeServer.swift */,
 				EB6BFBB91A857921002B4E6A /* AppDelegate.swift */,
-				EB6BFBBB1A857921002B4E6A /* ViewController.swift */,
 				EB6BFBC01A857921002B4E6A /* Images.xcassets */,
 				EB6BFBC21A857921002B4E6A /* LaunchScreen.xib */,
 				EB6BFBB71A857921002B4E6A /* Supporting Files */,
@@ -680,6 +686,17 @@
 				EB6BFBCE1A857921002B4E6A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB75AE431A86F7F600742127 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EB75AE3B1A86F1B400742127 /* Style.swift */,
+				EB75AE3F1A86F5A200742127 /* RootViewController.swift */,
+				EB75AE411A86F62300742127 /* StatusViewController.swift */,
+				EB75AE3D1A86F1FD00742127 /* StatusView.swift */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		EBB3505D1A166E5E0046AD07 /* Utilities */ = {
@@ -1188,10 +1205,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */,
 				EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */,
 				EB6BFBD81A858153002B4E6A /* ProtoscopeServer.swift in Sources */,
-				EB6BFBBC1A857921002B4E6A /* ViewController.swift in Sources */,
+				EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */,
+				EB75AE3E1A86F1FD00742127 /* StatusView.swift in Sources */,
 				EB6BFBBA1A857921002B4E6A /* AppDelegate.swift in Sources */,
+				EB75AE3C1A86F1B400742127 /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

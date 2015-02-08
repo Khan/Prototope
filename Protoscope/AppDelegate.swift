@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
 		window.makeKeyAndVisible()
-		window.backgroundColor = UIColor.whiteColor()
+		window.rootViewController = RootViewController()
 
 		Prototope.Layer.setRoot(fromView: self.window!)
 
@@ -37,4 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		})
 		return true
 	}
+
+
 }
