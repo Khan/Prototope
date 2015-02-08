@@ -754,6 +754,7 @@
 				EB8BC1C91A2CE7B5005E799C /* Border.swift */,
 				EBF59A931A2E2B5000AB8C67 /* Shadow.swift */,
 				EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */,
+				7530F6BE1A86158C00E2A6DF /* Collisions.swift */,
 				EB1C2A6419E4B534000DC2C1 /* Color.swift */,
 				EBE17A0519E65D1B00C308E5 /* Timing.swift */,
 				EBE17A0719E65E5500C308E5 /* Animation.swift */,
