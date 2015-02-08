@@ -42,10 +42,5 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 		connection?.sendObject(testFileData, error: nil)
 	}
 
-	func applicationWillTerminate(aNotification: NSNotification) {
-		// Insert code here to tear down your application
-	}
-
-
 }
 

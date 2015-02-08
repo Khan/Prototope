@@ -12,16 +12,22 @@ import PrototopeJSBridge
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-	var window: UIWindow?
+	var window: UIWindow!
 	var server: ProtoscopeServer!
 	var context: Context!
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		window = UIWindow(frame: UIScreen.mainScreen().bounds)
+		window.makeKeyAndVisible()
+		window.backgroundColor = UIColor.whiteColor()
+
+		Prototope.Layer.setRoot(fromView: self.window!)
+
 		server = ProtoscopeServer(messageHandler: {
 			let script = NSString(data: $0 as NSData, encoding: NSUTF8StringEncoding)
 			println(script)
 			Prototope.Layer.root?.removeAllSublayers()
-			Prototope.Layer.setRoot(fromView: self.window!)
+
 			self.context = PrototopeJSBridge.Context()
 			self.context.exceptionHandler = { value in
 				let lineNumber = value.objectForKeyedSubscript("line")
