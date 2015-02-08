@@ -433,12 +433,12 @@
 			name = TunableSpec;
 			sourceTree = "<group>";
 		};
-		EB05D29B1A87F0F800F4CFD4 /* Protorope */ = {
+		EB05D29B1A87F0F800F4CFD4 /* 🎼 Protorope */ = {
 			isa = PBXGroup;
 			children = (
 				EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */,
 			);
-			name = Protorope;
+			name = "🎼 Protorope";
 			sourceTree = "<group>";
 		};
 		EB12A83C1A19A6AC0018C229 /* Products */ = {
@@ -476,18 +476,18 @@
 		EB306C0019DF77CC00113FA3 = {
 			isa = PBXGroup;
 			children = (
-				EB306C3319DF78A900113FA3 /* Prototope */,
-				EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */,
-				EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */,
-				EB05D29B1A87F0F800F4CFD4 /* Protorope */,
-				EB6BFB811A857326002B4E6A /* Protocaster */,
-				EB6BFBB61A857921002B4E6A /* Protoscope */,
-				EB306C0A19DF77CC00113FA3 /* Products */,
-				EB6BFBA91A857479002B4E6A /* ThirdParty */,
+				EB306C3319DF78A900113FA3 /* 📚 Prototope */,
+				EB306C0B19DF77CC00113FA3 /* 🚦 PrototopeTestApp */,
+				EB453D901A7AB0B2006F2A72 /* 🚡 PrototopeJSBridge */,
+				EB05D29B1A87F0F800F4CFD4 /* 🎼 Protorope */,
+				EB6BFB811A857326002B4E6A /* 📡 Protocaster */,
+				EB6BFBB61A857921002B4E6A /* 🔭 Protoscope */,
+				EB306C0A19DF77CC00113FA3 /* 🎁 Products */,
+				EB6BFBA91A857479002B4E6A /* 👽 ThirdParty */,
 			);
 			sourceTree = "<group>";
 		};
-		EB306C0A19DF77CC00113FA3 /* Products */ = {
+		EB306C0A19DF77CC00113FA3 /* 🎁 Products */ = {
 			isa = PBXGroup;
 			children = (
 				EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */,
@@ -500,10 +500,10 @@
 				EB6BFBB51A857920002B4E6A /* Protoscope.app */,
 				EB6BFBC91A857921002B4E6A /* ProtoscopeTests.xctest */,
 			);
-			name = Products;
+			name = "🎁 Products";
 			sourceTree = "<group>";
 		};
-		EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */ = {
+		EB306C0B19DF77CC00113FA3 /* 🚦 PrototopeTestApp */ = {
 			isa = PBXGroup;
 			children = (
 				EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */,
@@ -516,6 +516,7 @@
 				EBA8371D1A1DB6E300D23C9D /* Glass.aiff */,
 				EB306C0C19DF77CC00113FA3 /* Supporting Files */,
 			);
+			name = "🚦 PrototopeTestApp";
 			path = PrototopeTestApp;
 			sourceTree = "<group>";
 		};
@@ -527,7 +528,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		EB306C3319DF78A900113FA3 /* Prototope */ = {
+		EB306C3319DF78A900113FA3 /* 📚 Prototope */ = {
 			isa = PBXGroup;
 			children = (
 				EBE3A74E19DF78D500A77736 /* Layer.swift */,
@@ -551,10 +552,11 @@
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
 				EB1C2A6D19E4D19B000DC2C1 /* Tests */,
 			);
+			name = "📚 Prototope";
 			path = Prototope;
 			sourceTree = "<group>";
 		};
-		EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */ = {
+		EB453D901A7AB0B2006F2A72 /* 🚡 PrototopeJSBridge */ = {
 			isa = PBXGroup;
 			children = (
 				EBC43D6E1A81916E0075272A /* Context.swift */,
@@ -565,6 +567,7 @@
 				EB453D911A7AB0B2006F2A72 /* Supporting Files */,
 				EB453D9F1A7AB0B2006F2A72 /* Tests */,
 			);
+			name = "🚡 PrototopeJSBridge";
 			path = PrototopeJSBridge;
 			sourceTree = "<group>";
 		};
@@ -601,7 +604,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		EB6BFB811A857326002B4E6A /* Protocaster */ = {
+		EB6BFB811A857326002B4E6A /* 📡 Protocaster */ = {
 			isa = PBXGroup;
 			children = (
 				EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */,
@@ -613,6 +616,7 @@
 				EB6BFB821A857326002B4E6A /* Supporting Files */,
 				EB6BFB941A857326002B4E6A /* Tests */,
 			);
+			name = "📡 Protocaster";
 			path = Protocaster;
 			sourceTree = "<group>";
 		};
@@ -652,15 +656,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EB6BFBA91A857479002B4E6A /* ThirdParty */ = {
+		EB6BFBA91A857479002B4E6A /* 👽 ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
 				EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */,
 			);
-			name = ThirdParty;
+			name = "👽 ThirdParty";
 			sourceTree = "<group>";
 		};
-		EB6BFBB61A857921002B4E6A /* Protoscope */ = {
+		EB6BFBB61A857921002B4E6A /* 🔭 Protoscope */ = {
 			isa = PBXGroup;
 			children = (
 				EB75AE431A86F7F600742127 /* UI */,
@@ -671,6 +675,7 @@
 				EB6BFBB71A857921002B4E6A /* Supporting Files */,
 				EB6BFBCC1A857921002B4E6A /* Tests */,
 			);
+			name = "🔭 Protoscope";
 			path = Protoscope;
 			sourceTree = "<group>";
 		};
@@ -991,7 +996,7 @@
 				Base,
 			);
 			mainGroup = EB306C0019DF77CC00113FA3;
-			productRefGroup = EB306C0A19DF77CC00113FA3 /* Products */;
+			productRefGroup = EB306C0A19DF77CC00113FA3 /* 🎁 Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
