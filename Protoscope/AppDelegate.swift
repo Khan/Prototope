@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var context: Context!
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		UIApplication.sharedApplication().idleTimerDisabled = true
+
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
 		window.makeKeyAndVisible()
 		window.rootViewController = RootViewController()

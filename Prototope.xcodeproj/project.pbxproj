@@ -59,6 +59,7 @@
 		EB75AE3E1A86F1FD00742127 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3D1A86F1FD00742127 /* StatusView.swift */; };
 		EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3F1A86F5A200742127 /* RootViewController.swift */; };
 		EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE411A86F62300742127 /* StatusViewController.swift */; };
+		EB75AE451A86FA5100742127 /* SceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE441A86FA5100742127 /* SceneViewController.swift */; };
 		EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
 		EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8371B1A1DB51000D23C9D /* Sound.swift */; };
@@ -294,6 +295,7 @@
 		EB75AE3D1A86F1FD00742127 /* StatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		EB75AE3F1A86F5A200742127 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		EB75AE411A86F62300742127 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		EB75AE441A86FA5100742127 /* SceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneViewController.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		EBA8371B1A1DB51000D23C9D /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
@@ -695,6 +697,7 @@
 				EB75AE3F1A86F5A200742127 /* RootViewController.swift */,
 				EB75AE411A86F62300742127 /* StatusViewController.swift */,
 				EB75AE3D1A86F1FD00742127 /* StatusView.swift */,
+				EB75AE441A86FA5100742127 /* SceneViewController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1206,6 +1209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */,
+				EB75AE451A86FA5100742127 /* SceneViewController.swift in Sources */,
 				EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */,
 				EB6BFBD81A858153002B4E6A /* ProtoscopeServer.swift in Sources */,
 				EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */,
