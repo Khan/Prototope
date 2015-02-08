@@ -19,6 +19,7 @@
 		EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */; };
 		EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */; };
 		EB05D2A81A87F67100F4CFD4 /* SessionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2A21A87F36D00F4CFD4 /* SessionInteractor.swift */; };
+		EB05D2AA1A8823F200F4CFD4 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2A91A8823F200F4CFD4 /* Environment.swift */; };
 		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
@@ -260,6 +261,7 @@
 		EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TunableSpec.swift; path = ThirdParty/TunableSpec/TunableSpec.swift; sourceTree = "<group>"; };
 		EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tunable.swift; sourceTree = "<group>"; };
 		EB05D2A21A87F36D00F4CFD4 /* SessionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionInteractor.swift; sourceTree = "<group>"; };
+		EB05D2A91A8823F200F4CFD4 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = ThirdParty/pop/pop.xcodeproj; sourceTree = "<group>"; };
 		EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				CD11D82A1A815AD3004F1197 /* Particle.swift */,
 				CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */,
 				CD3F939F1A852AF500B964FC /* ParticlePreset.swift */,
+				EB05D2A91A8823F200F4CFD4 /* Environment.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
@@ -1278,6 +1281,7 @@
 				EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */,
 				EB50FA1219F04A07007A3C32 /* Image.swift in Sources */,
 				EBB3505F1A166E690046AD07 /* Dictionary+Extensions.swift in Sources */,
+				EB05D2AA1A8823F200F4CFD4 /* Environment.swift in Sources */,
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
 				CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */,

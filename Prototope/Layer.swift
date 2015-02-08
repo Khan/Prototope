@@ -24,19 +24,10 @@ import UIKit
 */
 public class Layer: Equatable, Hashable {
 
-	// MARK: Accessing the root layer
-
-	/** This method establishes the view specified as the root layer of the scene.
-		You'd normally call this during initialization of the scene. */
-	public class func setRoot(fromView view: UIView) {
-		_rootLayer = Layer(wrappingView: view, name: "Root")
-		view.addGestureRecognizer(defaultSpec.twoFingerTripleTapGestureRecognizer())
-	}
+	// MARK: Creating and identifying layers
 
 	/** The root layer of the scene. Defines the global coordinate system. */
-	public class var root: Layer! { return _rootLayer }
-
-	// MARK: Creating and identifying layers
+	public class var root: Layer! { return Environment.currentEnvironment?.rootLayer }
 
 	/** Creates a layer with an optional parent and name. **/
 	public init(parent: Layer? = nil, name: String? = nil) {
@@ -597,7 +588,7 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
-	private init(wrappingView: UIView, name: String? = nil) {
+	init(wrappingView: UIView, name: String? = nil) {
 		view = wrappingView
 		self.name = name
 	}
@@ -759,5 +750,3 @@ private func incorporateTouches(touches: NSSet, intoTouchSequenceMappings mappin
 	let updatedTouchSequences = incorporateTouchSequences(touchSequencesFromTouchSet(touches), intoTouchSequenceMappings: mappings)
 	return touchSequenceMappingsFromTouchSequences(updatedTouchSequences)
 }
-
-private var _rootLayer: Layer!
