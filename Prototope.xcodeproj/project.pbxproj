@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE281A7F1B01001E63CE /* BridgeType.swift */; };
 		6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */; };
+		753E20E81A84A12100E30460 /* JSTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 753E20E71A84A12100E30460 /* JSTest.js */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
 		CD3F93A01A852AF500B964FC /* ParticlePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F939F1A852AF500B964FC /* ParticlePreset.swift */; };
-		753E20E81A84A12100E30460 /* JSTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 753E20E71A84A12100E30460 /* JSTest.js */; };
 		EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */; };
 		EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */; };
@@ -235,11 +235,11 @@
 /* Begin PBXFileReference section */
 		6175CE281A7F1B01001E63CE /* BridgeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeType.swift; sourceTree = "<group>"; };
 		6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBridge.swift; sourceTree = "<group>"; };
+		753E20E71A84A12100E30460 /* JSTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTest.js; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
 		CD3F939F1A852AF500B964FC /* ParticlePreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlePreset.swift; sourceTree = "<group>"; };
-		753E20E71A84A12100E30460 /* JSTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTest.js; sourceTree = "<group>"; };
 		EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFTunableSpec.h; path = ThirdParty/TunableSpec/KFTunableSpec.h; sourceTree = "<group>"; };
 		EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KFTunableSpec.m; path = ThirdParty/TunableSpec/KFTunableSpec.m; sourceTree = "<group>"; };
 		EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TunableSpec.swift; path = ThirdParty/TunableSpec/TunableSpec.swift; sourceTree = "<group>"; };
@@ -433,6 +433,14 @@
 			name = TunableSpec;
 			sourceTree = "<group>";
 		};
+		EB05D29B1A87F0F800F4CFD4 /* Protorope */ = {
+			isa = PBXGroup;
+			children = (
+				EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */,
+			);
+			name = Protorope;
+			sourceTree = "<group>";
+		};
 		EB12A83C1A19A6AC0018C229 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,10 +476,10 @@
 		EB306C0019DF77CC00113FA3 = {
 			isa = PBXGroup;
 			children = (
-				EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */,
 				EB306C3319DF78A900113FA3 /* Prototope */,
 				EB306C0B19DF77CC00113FA3 /* PrototopeTestApp */,
 				EB453D901A7AB0B2006F2A72 /* PrototopeJSBridge */,
+				EB05D29B1A87F0F800F4CFD4 /* Protorope */,
 				EB6BFB811A857326002B4E6A /* Protocaster */,
 				EB6BFBB61A857921002B4E6A /* Protoscope */,
 				EB306C0A19DF77CC00113FA3 /* Products */,
