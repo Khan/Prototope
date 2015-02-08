@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		server = ProtoscopeServer(messageHandler: {
 			let script = NSString(data: $0 as NSData, encoding: NSUTF8StringEncoding)
 			println(script)
+			Prototope.Layer.root?.removeAllSublayers()
 			Prototope.Layer.setRoot(fromView: self.window!)
 			self.context = PrototopeJSBridge.Context()
 			self.context.exceptionHandler = { value in

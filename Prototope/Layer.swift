@@ -34,7 +34,7 @@ public class Layer: Equatable, Hashable {
 	}
 
 	/** The root layer of the scene. Defines the global coordinate system. */
-	public class var root: Layer { return _rootLayer }
+	public class var root: Layer! { return _rootLayer }
 
 	// MARK: Creating and identifying layers
 
