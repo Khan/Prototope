@@ -11,6 +11,7 @@ import UIKit
 class RootViewController: UIViewController {
 	var protoscopeNavigationController: UINavigationController!
 	var statusViewController: UIViewController!
+	var sceneViewController: SceneViewController?
 
 	override init() {
 		super.init(nibName: nil, bundle: nil)
@@ -18,6 +19,16 @@ class RootViewController: UIViewController {
 
 	required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has intentionally not been implemented")
+	}
+
+	/// Returns scene display host view
+	func transitionToSceneDisplay() -> UIView {
+		// TODO: Replace with value-based state
+		if protoscopeNavigationController.topViewController !== sceneViewController {
+			sceneViewController = SceneViewController()
+			protoscopeNavigationController.pushViewController(sceneViewController!, animated: true)
+		}
+		return sceneViewController!.view
 	}
 
 	override func viewDidLoad() {

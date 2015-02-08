@@ -10,17 +10,19 @@ import Foundation
 
 class ProtoscopeServer {
 	private let bonjourServer: DTBonjourServer
-	private let serverDelegate: ServerDelegate
+	private var serverDelegate: ServerDelegate?
 
 	init(messageHandler: AnyObject -> ()) {
 		serverDelegate = ServerDelegate(messageHandler: messageHandler)
 		bonjourServer = DTBonjourServer(bonjourType: ProtoropeReceiverServiceType)
-		bonjourServer.delegate = serverDelegate
+		bonjourServer.delegate = serverDelegate!
 		bonjourServer.start()
 	}
 
 	func stop() {
+		bonjourServer.delegate = nil
 		bonjourServer.stop()
+		serverDelegate = nil
 	}
 
 	deinit {

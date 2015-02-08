@@ -13,30 +13,27 @@ import PrototopeJSBridge
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow!
+
+	var rootViewController: RootViewController!
 	var server: ProtoscopeServer!
-	var context: Context!
+	var sessionInteractor: SessionInteractor!
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		UIApplication.sharedApplication().idleTimerDisabled = true
 
+		rootViewController = RootViewController()
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
+		window.rootViewController = rootViewController
 		window.makeKeyAndVisible()
-		window.rootViewController = RootViewController()
 
-		Prototope.Layer.setRoot(fromView: self.window!)
+		self.sessionInteractor = SessionInteractor()
 
 		server = ProtoscopeServer(messageHandler: {
-			let script = NSString(data: $0 as NSData, encoding: NSUTF8StringEncoding)
-			println(script)
-			Prototope.Layer.root?.removeAllSublayers()
-
-			self.context = PrototopeJSBridge.Context()
-			self.context.exceptionHandler = { value in
-				let lineNumber = value.objectForKeyedSubscript("line")
-				println("Exception on line \(lineNumber): \(value)")
-			}
-			self.context.evaluateScript(script)
+			let script = NSString(data: $0 as NSData, encoding: NSUTF8StringEncoding)!
+			let sceneDisplayHostView = self.rootViewController.transitionToSceneDisplay()
+			self.sessionInteractor.displayScene(script, rootView: sceneDisplayHostView)
 		})
+		
 		return true
 	}
 

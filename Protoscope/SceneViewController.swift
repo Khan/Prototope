@@ -9,11 +9,16 @@
 import UIKit
 
 class SceneViewController: UIViewController {
-	init() {
+	override init() {
 		super.init(nibName: nil, bundle: nil)
 	}
 
 	required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has intentionally not been implemented")
+	}
+
+	override func loadView() {
+		super.loadView()
+		view.backgroundColor = UIColor.whiteColor()
 	}
 }

@@ -18,6 +18,7 @@
 		EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */; };
 		EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */; };
 		EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */; };
+		EB05D2A81A87F67100F4CFD4 /* SessionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2A21A87F36D00F4CFD4 /* SessionInteractor.swift */; };
 		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
@@ -100,6 +101,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EB05D2A41A87F65E00F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EBE3A75519DF79C400A77736;
+			remoteInfo = Prototope;
+		};
+		EB05D2A61A87F65E00F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB453D8E1A7AB0B2006F2A72;
+			remoteInfo = PrototopeJSBridge;
+		};
 		EB12A8421A19A6AC0018C229 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
@@ -244,6 +259,7 @@
 		EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KFTunableSpec.m; path = ThirdParty/TunableSpec/KFTunableSpec.m; sourceTree = "<group>"; };
 		EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TunableSpec.swift; path = ThirdParty/TunableSpec/TunableSpec.swift; sourceTree = "<group>"; };
 		EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tunable.swift; sourceTree = "<group>"; };
+		EB05D2A21A87F36D00F4CFD4 /* SessionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionInteractor.swift; sourceTree = "<group>"; };
 		EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = ThirdParty/pop/pop.xcodeproj; sourceTree = "<group>"; };
 		EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -668,6 +684,7 @@
 			isa = PBXGroup;
 			children = (
 				EB75AE431A86F7F600742127 /* UI */,
+				EB05D2A21A87F36D00F4CFD4 /* SessionInteractor.swift */,
 				EB6BFBD71A858153002B4E6A /* ProtoscopeServer.swift */,
 				EB6BFBB91A857921002B4E6A /* AppDelegate.swift */,
 				EB6BFBC01A857921002B4E6A /* Images.xcassets */,
@@ -901,6 +918,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				EB05D2A51A87F65E00F4CFD4 /* PBXTargetDependency */,
+				EB05D2A71A87F65E00F4CFD4 /* PBXTargetDependency */,
 			);
 			name = Protoscope;
 			productName = Protoscope;
@@ -1228,6 +1247,7 @@
 				EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */,
 				EB75AE451A86FA5100742127 /* SceneViewController.swift in Sources */,
 				EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */,
+				EB05D2A81A87F67100F4CFD4 /* SessionInteractor.swift in Sources */,
 				EB6BFBD81A858153002B4E6A /* ProtoscopeServer.swift in Sources */,
 				EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */,
 				EB75AE3E1A86F1FD00742127 /* StatusView.swift in Sources */,
@@ -1274,6 +1294,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EB05D2A51A87F65E00F4CFD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EBE3A75519DF79C400A77736 /* Prototope */;
+			targetProxy = EB05D2A41A87F65E00F4CFD4 /* PBXContainerItemProxy */;
+		};
+		EB05D2A71A87F65E00F4CFD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */;
+			targetProxy = EB05D2A61A87F65E00F4CFD4 /* PBXContainerItemProxy */;
+		};
 		EB12A84B1A19A6BC0018C229 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = pop;
