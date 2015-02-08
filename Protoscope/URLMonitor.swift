@@ -1,5 +1,5 @@
 //
-//  FolderMonitor.swift
+//  URLMonitor.swift
 //  Prototope
 //
 //  Created by Andy Matuschak on 2/7/15.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class FolderMonitor {
+class URLMonitor {
+	let URL: NSURL
 	private let presenter: Presenter
 
 	var everythingDidChangeHandler: () -> Void {
@@ -16,8 +17,9 @@ class FolderMonitor {
 		set { presenter.everythingDidChangeHandler = newValue }
 	}
 
-	init(folderPath: NSURL) {
-		presenter = Presenter(url: folderPath)
+	init(URL: NSURL) {
+		self.URL = URL
+		presenter = Presenter(url: URL)
 		NSFileCoordinator.addFilePresenter(presenter)
 	}
 

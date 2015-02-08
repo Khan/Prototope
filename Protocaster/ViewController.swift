@@ -8,20 +8,50 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, DTBonjourDataConnectionDelegate {
 
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	var scanner: ProtoscopeScanner!
+	var connection: DTBonjourDataConnection?
+	var monitor: URLMonitor?
 
-		// Do any additional setup after loading the view.
-	}
+	@IBAction func pathControlDidChange(sender: NSPathControl) {
+		if let URL = sender.URL {
+			monitor = URLMonitor(URL: URL)
+			monitor!.everythingDidChangeHandler = {
+				self.sendTestData()
+			}
 
-	override var representedObject: AnyObject? {
-		didSet {
-		// Update the view, if already loaded.
+			sendTestData()
+		} else {
+			monitor = nil
 		}
 	}
 
+	override func viewDidLoad() {
+
+		scanner = ProtoscopeScanner(
+			serviceDidAppearHandler: { service in
+				println(service.name)
+				self.connection = DTBonjourDataConnection(service: service)
+				self.connection!.open()
+				self.connection!.delegate = self
+			},
+			serviceDidDisappearHandler: { service in
+				println(service.name)
+			}
+		)
+	}
+
+	func connectionDidOpen(connection: DTBonjourDataConnection!) {
+		sendTestData()
+	}
+
+	func sendTestData() {
+		if let selectedURL = monitor?.URL {
+			let testFileData = NSData(contentsOfURL: selectedURL)
+			connection?.sendObject(testFileData, error: nil)
+		}
+	}
 
 }
 

@@ -74,7 +74,7 @@
 		EBBA431719F45186000B81BE /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA431619F45186000B81BE /* Gesture.swift */; };
 		EBC00D8D1A8588ED008D4FF5 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
 		EBC00D941A8588F1008D4FF5 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
-		EBC00DA11A86C720008D4FF5 /* FolderMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC00D9F1A86C718008D4FF5 /* FolderMonitor.swift */; };
+		EBC00DA11A86C720008D4FF5 /* URLMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC00D9F1A86C718008D4FF5 /* URLMonitor.swift */; };
 		EBC43D5D1A7FF8920075272A /* BorderBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D5C1A7FF8920075272A /* BorderBridge.swift */; };
 		EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D611A8007320075272A /* ShadowBridge.swift */; };
 		EBC43D641A8010770075272A /* ImageBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D631A8010770075272A /* ImageBridge.swift */; };
@@ -324,7 +324,7 @@
 		EBB565DC19F0774F00D93DE3 /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
 		EBBA431619F45186000B81BE /* Gesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
-		EBC00D9F1A86C718008D4FF5 /* FolderMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FolderMonitor.swift; path = ../Protoscope/FolderMonitor.swift; sourceTree = "<group>"; };
+		EBC00D9F1A86C718008D4FF5 /* URLMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLMonitor.swift; path = ../Protoscope/URLMonitor.swift; sourceTree = "<group>"; };
 		EBC43D5C1A7FF8920075272A /* BorderBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderBridge.swift; sourceTree = "<group>"; };
 		EBC43D611A8007320075272A /* ShadowBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowBridge.swift; sourceTree = "<group>"; };
 		EBC43D631A8010770075272A /* ImageBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBridge.swift; sourceTree = "<group>"; };
@@ -624,7 +624,7 @@
 			isa = PBXGroup;
 			children = (
 				EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */,
-				EBC00D9F1A86C718008D4FF5 /* FolderMonitor.swift */,
+				EBC00D9F1A86C718008D4FF5 /* URLMonitor.swift */,
 				EB6BFB841A857326002B4E6A /* AppDelegate.swift */,
 				EB6BFB861A857326002B4E6A /* ViewController.swift */,
 				EB6BFB881A857326002B4E6A /* Images.xcassets */,
@@ -1225,7 +1225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6BFBDE1A8581E6002B4E6A /* Protorope.swift in Sources */,
-				EBC00DA11A86C720008D4FF5 /* FolderMonitor.swift in Sources */,
+				EBC00DA11A86C720008D4FF5 /* URLMonitor.swift in Sources */,
 				EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */,
 				EB6BFB871A857326002B4E6A /* ViewController.swift in Sources */,
 				EB6BFB851A857326002B4E6A /* AppDelegate.swift in Sources */,
