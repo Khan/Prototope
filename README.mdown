@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Khan/Prototope.svg?branch=master)](https://travis-ci.org/Khan/Prototope)
+
 # Prototope
 
 Prototope is a lightweight, high-performance prototyping framework. Its goals are:
