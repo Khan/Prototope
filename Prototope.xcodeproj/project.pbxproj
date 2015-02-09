@@ -24,6 +24,10 @@
 		EB05D2B11A8946AA00F4CFD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2AF1A8946AA00F4CFD4 /* Message.swift */; };
 		EB05D2C41A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
 		EB05D2C51A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
+		EB05D2D61A894C4000F4CFD4 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2CE1A894C2A00F4CFD4 /* swiftz.framework */; };
+		EB05D2D71A894C4700F4CFD4 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2CE1A894C2A00F4CFD4 /* swiftz.framework */; };
+		EB05D2F71A894E5200F4CFD4 /* swiftz_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */; };
+		EB05D2FC1A894E5D00F4CFD4 /* swiftz_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */; };
 		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
@@ -119,6 +123,90 @@
 			proxyType = 1;
 			remoteGlobalIDString = EB453D8E1A7AB0B2006F2A72;
 			remoteInfo = PrototopeJSBridge;
+		};
+		EB05D2CD1A894C2A00F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 59F35AE0193D3A0A006F1341;
+			remoteInfo = swiftz;
+		};
+		EB05D2CF1A894C2A00F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 59F35AEB193D3A0A006F1341;
+			remoteInfo = swiftzTests;
+		};
+		EB05D2D11A894C2A00F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 59853A001967F99500A3158C;
+			remoteInfo = swiftz_ios;
+		};
+		EB05D2D31A894C2A00F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 59853A0A1967F99600A3158C;
+			remoteInfo = swiftz_iosTests;
+		};
+		EB05D2D81A894DF800F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 598539FF1967F99500A3158C;
+			remoteInfo = swiftz_ios;
+		};
+		EB05D2ED1A894E3500F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 59BB97DC195EFAF2002C0FA1;
+			remoteInfo = swiftz_core;
+		};
+		EB05D2EF1A894E3500F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 59BB97E7195EFAF2002C0FA1;
+			remoteInfo = swiftz_coreTests;
+		};
+		EB05D2F11A894E3500F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 598539DE1967F95B00A3158C;
+			remoteInfo = swiftz_core_ios;
+		};
+		EB05D2F31A894E3500F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 598539E81967F95B00A3158C;
+			remoteInfo = swiftz_core_iosTests;
+		};
+		EB05D2F51A894E4D00F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 598539DD1967F95B00A3158C;
+			remoteInfo = swiftz_core_ios;
+		};
+		EB05D2F81A894E5900F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 59F35ADF193D3A09006F1341;
+			remoteInfo = swiftz;
+		};
+		EB05D2FA1A894E5900F4CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 59BB97DB195EFAF2002C0FA1;
+			remoteInfo = swiftz_core;
 		};
 		EB12A8421A19A6AC0018C229 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -268,6 +356,8 @@
 		EB05D2A91A8823F200F4CFD4 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		EB05D2AF1A8946AA00F4CFD4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Protorope/Message.swift; sourceTree = "<group>"; };
 		EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prototype.swift; sourceTree = "<group>"; };
+		EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = swiftz.xcodeproj; path = ThirdParty/swiftz/swiftz.xcodeproj; sourceTree = "<group>"; };
+		EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = swiftz_core.xcodeproj; path = ThirdParty/swiftz/swiftz_core/swiftz_core.xcodeproj; sourceTree = "<group>"; };
 		EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = ThirdParty/pop/pop.xcodeproj; sourceTree = "<group>"; };
 		EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -398,6 +488,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB05D2FC1A894E5D00F4CFD4 /* swiftz_core.framework in Frameworks */,
+				EB05D2D61A894C4000F4CFD4 /* swiftz.framework in Frameworks */,
 				EB6BFBAA1A857486002B4E6A /* libDTBonjour_Mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +505,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB05D2F71A894E5200F4CFD4 /* swiftz_core.framework in Frameworks */,
+				EB05D2D71A894C4700F4CFD4 /* swiftz.framework in Frameworks */,
 				EBC00D941A8588F1008D4FF5 /* Prototope.framework in Frameworks */,
 				EBC00D8D1A8588ED008D4FF5 /* PrototopeJSBridge.framework in Frameworks */,
 				EB6BFBE01A858332002B4E6A /* libDTBonjour_iOS.a in Frameworks */,
@@ -465,6 +559,28 @@
 				EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */,
 			);
 			name = "🎼 Protorope";
+			sourceTree = "<group>";
+		};
+		EB05D2C71A894C2A00F4CFD4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB05D2CE1A894C2A00F4CFD4 /* swiftz.framework */,
+				EB05D2D01A894C2A00F4CFD4 /* swiftzTests.xctest */,
+				EB05D2D21A894C2A00F4CFD4 /* swiftz.framework */,
+				EB05D2D41A894C2A00F4CFD4 /* swiftz_iosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB05D2DE1A894E3500F4CFD4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */,
+				EB05D2F01A894E3500F4CFD4 /* swiftz_coreTests.xctest */,
+				EB05D2F21A894E3500F4CFD4 /* swiftz_core.framework */,
+				EB05D2F41A894E3500F4CFD4 /* swiftz_core_iosTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EB12A83C1A19A6AC0018C229 /* Products */ = {
@@ -687,6 +803,8 @@
 			isa = PBXGroup;
 			children = (
 				EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */,
+				EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */,
+				EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */,
 			);
 			name = "👽 ThirdParty";
 			sourceTree = "<group>";
@@ -894,6 +1012,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				EB05D2F91A894E5900F4CFD4 /* PBXTargetDependency */,
+				EB05D2FB1A894E5900F4CFD4 /* PBXTargetDependency */,
 			);
 			name = Protocaster;
 			productName = Protocaster;
@@ -929,6 +1049,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				EB05D2F61A894E4D00F4CFD4 /* PBXTargetDependency */,
+				EB05D2D91A894DF800F4CFD4 /* PBXTargetDependency */,
 				EB05D2A51A87F65E00F4CFD4 /* PBXTargetDependency */,
 				EB05D2A71A87F65E00F4CFD4 /* PBXTargetDependency */,
 			);
@@ -1037,6 +1159,14 @@
 					ProductGroup = EB12A83C1A19A6AC0018C229 /* Products */;
 					ProjectRef = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
 				},
+				{
+					ProductGroup = EB05D2C71A894C2A00F4CFD4 /* Products */;
+					ProjectRef = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
+				},
+				{
+					ProductGroup = EB05D2DE1A894E3500F4CFD4 /* Products */;
+					ProjectRef = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1054,6 +1184,62 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		EB05D2CE1A894C2A00F4CFD4 /* swiftz.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = swiftz.framework;
+			remoteRef = EB05D2CD1A894C2A00F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB05D2D01A894C2A00F4CFD4 /* swiftzTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = swiftzTests.xctest;
+			remoteRef = EB05D2CF1A894C2A00F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB05D2D21A894C2A00F4CFD4 /* swiftz.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = swiftz.framework;
+			remoteRef = EB05D2D11A894C2A00F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB05D2D41A894C2A00F4CFD4 /* swiftz_iosTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = swiftz_iosTests.xctest;
+			remoteRef = EB05D2D31A894C2A00F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = swiftz_core.framework;
+			remoteRef = EB05D2ED1A894E3500F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB05D2F01A894E3500F4CFD4 /* swiftz_coreTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = swiftz_coreTests.xctest;
+			remoteRef = EB05D2EF1A894E3500F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB05D2F21A894E3500F4CFD4 /* swiftz_core.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = swiftz_core.framework;
+			remoteRef = EB05D2F11A894E3500F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB05D2F41A894E3500F4CFD4 /* swiftz_core_iosTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = swiftz_core_iosTests.xctest;
+			remoteRef = EB05D2F31A894E3500F4CFD4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EB12A8431A19A6AC0018C229 /* libpop.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1319,6 +1505,26 @@
 			isa = PBXTargetDependency;
 			target = EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */;
 			targetProxy = EB05D2A61A87F65E00F4CFD4 /* PBXContainerItemProxy */;
+		};
+		EB05D2D91A894DF800F4CFD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = swiftz_ios;
+			targetProxy = EB05D2D81A894DF800F4CFD4 /* PBXContainerItemProxy */;
+		};
+		EB05D2F61A894E4D00F4CFD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = swiftz_core_ios;
+			targetProxy = EB05D2F51A894E4D00F4CFD4 /* PBXContainerItemProxy */;
+		};
+		EB05D2F91A894E5900F4CFD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = swiftz;
+			targetProxy = EB05D2F81A894E5900F4CFD4 /* PBXContainerItemProxy */;
+		};
+		EB05D2FB1A894E5900F4CFD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = swiftz_core;
+			targetProxy = EB05D2FA1A894E5900F4CFD4 /* PBXContainerItemProxy */;
 		};
 		EB12A84B1A19A6BC0018C229 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
