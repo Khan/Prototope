@@ -1,3 +1,14 @@
+# getting setup
+
+in this folder:
+
+    bundle install --path vendor/bundle
+    bundle exec jekyll serve
+
+it will take a few minutes to install the `github-pages` bundle and subsequently, it should take ~10 seconds to build the documentation the first time. Each time you save a file, it will take likely 6 seconds to regenerate the documentation as long as you leave jekyll running in the background.
+
+Afterwards, you can visit the documentation by going to [http://localhost:4000/Prototope/](http://localhost:4000/Prototope/)
+
 # adding documentation
 
 here's the idea: each method gets its own markdown file, these live `_methods/<class/stuct slug>/<method slug>.md`
@@ -94,3 +105,26 @@ In an ideal world, this document is more detailed than all the other method docs
 there's probably a reason why generating a page takes five seconds, but i don't know better jekyll fu than this.
 
 hugs!
+
+## Generating Dash Docs
+
+It's really easy to generate docs for Dash!!!
+
+the process requires using python. Here's what you do, from this directory:
+
+    brew install wget  # maybe you already had it installed?
+    bundle install
+    bundle exec jekyll serve
+
+    # then open a new tab in the same folder
+    make deps  # you only need to do this once
+    make docs
+    make bundle # ugh, talk about overloading that word
+    vi Prototope.xml # bump the version here
+    git commit -am "zomg new docs!"
+    git push
+
+two notes:
+
+1. `make docs` depends on jekyll running and serving at localhost:4000, this is because the `make docs` stage uses wget (lol) to pull down a site-local version of the docs. I'm certain there's a way to do this that doesn't involve jekyll's webrick running, but the solution is too small to fit in this margin.
+2. you need to increment the version in `Prototope.xml` in order for people to see your changes. I'll let *you* decide what counts as a minor vs patch release!
