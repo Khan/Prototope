@@ -38,7 +38,7 @@ import Foundation
 /** Returns the tunable value stored in TunableValues.json under `name`. If none is present, returns `defaultValue`. */
 public func tunable(defaultValue: Double, #name: String, min: Double? = nil, max: Double? = nil) -> Double {
 	if let specItem = defaultSpec._KFSpecItemForKey(name) {
-		return (specItem.objectValue as NSNumber).doubleValue
+		return (specItem.objectValue as! NSNumber).doubleValue
 	} else {
         let minValue = min ?? 0
         let maxValue = max ?? 2 * defaultValue
@@ -56,7 +56,7 @@ public func tunable(defaultValue: Double, #name: String, min: Double? = nil, max
 /** Returns the tunable value stored in TunableValues.json under `name`. If none is present, returns `defaultValue`. */
 public func tunable(defaultValue: Bool, #name: String) -> Bool {
 	if let specItem = defaultSpec._KFSpecItemForKey(name) {
-		return (specItem.objectValue as NSNumber).boolValue
+		return (specItem.objectValue as! NSNumber).boolValue
 	} else {
 		defaultSpec.addBoolSpecItemForKey(name, defaultValue: defaultValue)
 		return defaultValue
@@ -83,4 +83,4 @@ public func tunable(defaultValue: Point, #name: String, #maintain: Point -> Void
 	tunable(defaultValue.y, name: "\(name).y", maintain: { y in maintain(Point(x: tunable(defaultValue.x, name: "\(name).x"), y: y)) })
 }
 
-let defaultSpec = KFTunableSpec.specNamed("TunableValues") as KFTunableSpec
+let defaultSpec = KFTunableSpec.specNamed("TunableValues") as! KFTunableSpec

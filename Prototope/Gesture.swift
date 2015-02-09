@@ -192,7 +192,7 @@ public class PanGesture: GestureType {
 		}
 
 		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-			let panGesture = gestureRecognizer as UIPanGestureRecognizer
+			let panGesture = gestureRecognizer as! UIPanGestureRecognizer
 			switch panGesture.state {
 			case .Began:
 				// Reset the gesture to record translation relative to the starting centroid; we'll interpret subsequent translations as centroid positions.
@@ -294,7 +294,7 @@ public class RotationGesture: GestureType {
         }
         
         func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-            let rotationGesture = gestureRecognizer as UIRotationGestureRecognizer
+            let rotationGesture = gestureRecognizer as! UIRotationGestureRecognizer
             
             let rotation = Double(rotationGesture.rotation)
             let velocity = Double(rotationGesture.velocity)
@@ -392,7 +392,7 @@ public class PinchGesture: GestureType {
         }
         
         func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-            let scaleGesture = gestureRecognizer as UIPinchGestureRecognizer
+            let scaleGesture = gestureRecognizer as! UIPinchGestureRecognizer
             
             let scale = Double(scaleGesture.scale)
             let velocity = Double(scaleGesture.velocity)
