@@ -604,7 +604,7 @@ public struct TouchSequence<I: Printable> : SampleSequenceType {
         if samples.count <= 1 {
             return Point()
         } else {
-            let velocitySmoothingFactor = 0.6
+            let velocitySmoothingFactor = 0.1
             func velocitySampleFromSample(a: TouchSample, toSample b: TouchSample) -> Point {
                 return (b.locationInLayer(layer) - a.locationInLayer(layer)) / (b.timestamp - a.timestamp)
             }
