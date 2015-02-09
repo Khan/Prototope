@@ -7,3 +7,6 @@
 [submodule "ThirdParty/DTBonjour"]
 	path = ThirdParty/DTBonjour
 	url = https://github.com/Khan/DTBonjour.git
+[submodule "ThirdParty/swiftz"]
+	path = ThirdParty/swiftz
+	url = https://github.com/Khan/swiftz.git
