@@ -88,6 +88,19 @@
     - init_convenience
     - vars
 
+- title: Particle
+  docs:
+  - init
+  - vars
+
+- title: ParticleEmitter
+  docs:
+    - init
+    - init_convenience
+    - vars
+
+- title: ParticlePreset
+
 - title: Point
   docs:
   - init
