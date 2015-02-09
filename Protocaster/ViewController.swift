@@ -48,8 +48,11 @@ class ViewController: NSViewController, DTBonjourDataConnectionDelegate {
 
 	func sendTestData() {
 		if let selectedURL = monitor?.URL {
-			let testFileData = NSData(contentsOfURL: selectedURL)
-			connection?.sendObject(testFileData, error: nil)
+			if let prototype = Prototype(url: selectedURL) {
+				let message = Message.ReplacePrototype(prototype)
+				let messageJSON = Message.toJSON(message)
+				connection?.sendObject(messageJSON.encode()!, error: nil)
+			}
 		}
 	}
 

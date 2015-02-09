@@ -29,9 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.sessionInteractor = SessionInteractor()
 
 		server = ProtoscopeServer(messageHandler: {
-			let script = NSString(data: $0 as NSData, encoding: NSUTF8StringEncoding)!
-			let sceneDisplayHostView = self.rootViewController.transitionToSceneDisplay()
-			self.sessionInteractor.displayScene(script, rootView: sceneDisplayHostView)
+			switch $0 {
+			case let .ReplacePrototype(prototype):
+				let script = NSString(data: prototype.mainScript, encoding: NSUTF8StringEncoding)!
+				let sceneDisplayHostView = self.rootViewController.transitionToSceneDisplay()
+				self.sessionInteractor.displayScene(script, rootView: sceneDisplayHostView)
+			}
 		})
 		
 		return true

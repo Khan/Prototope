@@ -29,10 +29,30 @@ extension Message: JSONDecode {
 		}
 	}
 
+	static func toJSON(message: Message) -> JSONValue {
+		return .JSONObject([
+			"type": MessageTypeEncoding.toJSON(message.typeEncoding),
+			"payload": encodeMessagePayload(message)
+		])
+	}
+
+	private var typeEncoding: MessageTypeEncoding {
+		switch self {
+		case .ReplacePrototype(_): return .ReplacePrototype
+		}
+	}
+
 	private static func decodeMessageType(type: MessageTypeEncoding)(payload: JSONValue) -> Message? {
 		switch type {
 		case .ReplacePrototype:
 			return Prototype.fromJSON(payload) >>- { .ReplacePrototype($0) }
+		}
+	}
+
+	private static func encodeMessagePayload(message: Message) -> JSONValue {
+		switch message {
+		case let .ReplacePrototype(prototype):
+			return Prototype.toJSON(prototype)
 		}
 	}
 

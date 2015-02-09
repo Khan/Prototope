@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import swiftz
+import swiftz_core
 
 class ProtoscopeServer {
 	private let bonjourServer: DTBonjourServer
 	private var serverDelegate: ServerDelegate?
 
-	init(messageHandler: AnyObject -> ()) {
+	init(messageHandler: Message -> ()) {
 		serverDelegate = ServerDelegate(messageHandler: messageHandler)
 		bonjourServer = DTBonjourServer(bonjourType: ProtoropeReceiverServiceType)
 		bonjourServer.delegate = serverDelegate!
@@ -30,14 +32,20 @@ class ProtoscopeServer {
 	}
 
 	@objc private class ServerDelegate: NSObject, DTBonjourServerDelegate {
-		let messageHandler: AnyObject -> ()
+		let messageHandler: Message -> ()
 
-		init(messageHandler: AnyObject -> ()) {
+		init(messageHandler: Message -> ()) {
 			self.messageHandler = messageHandler
 		}
 
 		func bonjourServer(server: DTBonjourServer!, didReceiveObject object: AnyObject!, onConnection connection: DTBonjourDataConnection!) {
-			messageHandler(object)
+			if let data = object as? NSData {
+				if let message = JSONValue.decode(data) >>- Message.fromJSON {
+					messageHandler(message)
+				} else {
+					println("Received unknown message: \(NSString(data: data, encoding: NSUTF8StringEncoding))")
+				}
+			}
 		}
 	}
 }

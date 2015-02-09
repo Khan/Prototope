@@ -15,6 +15,55 @@ struct Prototype {
 	var images: [String: NSData]
 }
 
+extension Prototype {
+	init?(url: NSURL) {
+		// TODO: return a Result, kill printlns
+		if !url.fileURL { return nil }
+
+		var error: NSError? = nil
+		let path = url.filePathURL!.path!
+
+		var isDirectory: ObjCBool = ObjCBool(false)
+		let exists = NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDirectory)
+		if !exists {
+			println("File does not exist: \(path)")
+			return nil
+		}
+
+		var mainScriptPath: String
+		if isDirectory.boolValue {
+			var error: NSError? = nil
+			let contents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(path, error: &error) as [String]?
+			if contents == nil {
+				println("Couldn't read directory \(path): \(error)")
+				return nil
+			}
+
+			let javaScriptFiles = contents!.filter { $0.pathExtension == "js" }
+			switch javaScriptFiles.count {
+			case 0:
+				println("No JavaScript files found in \(path)")
+				return nil
+			case 1:
+				mainScriptPath = path.stringByAppendingPathComponent(javaScriptFiles.first!)
+			default:
+				println("Multiple JavaScript files found in \(path): \(javaScriptFiles)")
+				return nil
+			}
+		} else {
+			mainScriptPath = path
+		}
+
+		if let mainScriptData = NSData(contentsOfFile: mainScriptPath, options: nil, error: &error) {
+			self.mainScript = mainScriptData
+			self.images = [:]
+		} else {
+			println("Failed to read main script: \(mainScriptPath): \(error)")
+			return nil
+		}
+	}
+}
+
 extension Prototype: JSON {
 	private static func create(mainScript: NSData)(images: [String: NSData]) -> Prototype { return Prototype(mainScript: mainScript, images: images) }
 
