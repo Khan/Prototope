@@ -38,11 +38,17 @@ public class Layer: Equatable, Hashable {
 
 	// MARK: Creating and identifying layers
 
-	/** Creates a layer with an optional parent and name. **/
-	public init(parent: Layer? = nil, name: String? = nil) {
+	/** Creates a layer with an optional parent and name. */
+	convenience public init(parent: Layer? = nil, name: String? = nil) {
+		self.init(parent: parent, name: name, viewClass: TouchForwardingImageView.self)
+	}
+	
+	
+	/** Internal initializer to customize the underlying view class. */
+	init(parent: Layer? = nil, name: String? = nil, viewClass: UIView.Type) {
 		self.parent = parent
 		self.name = name
-		self.view = TouchForwardingImageView() // TODO: dynamically switch the view type depending on whether we're using an image or not
+		self.view = viewClass() // TODO: dynamically switch the view type depending on whether we're using an image or not
 		self.view.multipleTouchEnabled = true
 		self.view.userInteractionEnabled = true
 
