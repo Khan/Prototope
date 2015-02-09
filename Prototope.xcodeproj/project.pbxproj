@@ -20,6 +20,10 @@
 		EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */; };
 		EB05D2A81A87F67100F4CFD4 /* SessionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2A21A87F36D00F4CFD4 /* SessionInteractor.swift */; };
 		EB05D2AA1A8823F200F4CFD4 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2A91A8823F200F4CFD4 /* Environment.swift */; };
+		EB05D2B01A8946AA00F4CFD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2AF1A8946AA00F4CFD4 /* Message.swift */; };
+		EB05D2B11A8946AA00F4CFD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2AF1A8946AA00F4CFD4 /* Message.swift */; };
+		EB05D2C41A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
+		EB05D2C51A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
 		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
@@ -262,6 +266,8 @@
 		EB04E5D11A6606DE00FD1EE3 /* Tunable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tunable.swift; sourceTree = "<group>"; };
 		EB05D2A21A87F36D00F4CFD4 /* SessionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionInteractor.swift; sourceTree = "<group>"; };
 		EB05D2A91A8823F200F4CFD4 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		EB05D2AF1A8946AA00F4CFD4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Protorope/Message.swift; sourceTree = "<group>"; };
+		EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prototype.swift; sourceTree = "<group>"; };
 		EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = ThirdParty/pop/pop.xcodeproj; sourceTree = "<group>"; };
 		EB12A84D1A19A71E0018C229 /* Prototope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB1C2A6419E4B534000DC2C1 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -455,6 +461,8 @@
 			isa = PBXGroup;
 			children = (
 				EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */,
+				EB05D2AF1A8946AA00F4CFD4 /* Message.swift */,
+				EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */,
 			);
 			name = "🎼 Protorope";
 			sourceTree = "<group>";
@@ -1229,7 +1237,9 @@
 			files = (
 				EB6BFBDE1A8581E6002B4E6A /* Protorope.swift in Sources */,
 				EBC00DA11A86C720008D4FF5 /* URLMonitor.swift in Sources */,
+				EB05D2C51A894A9200F4CFD4 /* Prototype.swift in Sources */,
 				EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */,
+				EB05D2B01A8946AA00F4CFD4 /* Message.swift in Sources */,
 				EB6BFB871A857326002B4E6A /* ViewController.swift in Sources */,
 				EB6BFB851A857326002B4E6A /* AppDelegate.swift in Sources */,
 			);
@@ -1248,12 +1258,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */,
+				EB05D2C41A894A9200F4CFD4 /* Prototype.swift in Sources */,
 				EB75AE451A86FA5100742127 /* SceneViewController.swift in Sources */,
 				EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */,
 				EB05D2A81A87F67100F4CFD4 /* SessionInteractor.swift in Sources */,
 				EB6BFBD81A858153002B4E6A /* ProtoscopeServer.swift in Sources */,
 				EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */,
 				EB75AE3E1A86F1FD00742127 /* StatusView.swift in Sources */,
+				EB05D2B11A8946AA00F4CFD4 /* Message.swift in Sources */,
 				EB6BFBBA1A857921002B4E6A /* AppDelegate.swift in Sources */,
 				EB75AE3C1A86F1B400742127 /* Style.swift in Sources */,
 			);

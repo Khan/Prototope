@@ -44,12 +44,39 @@ class URLMonitor {
 		}
 
 		var presentedItemOperationQueue: NSOperationQueue {
-			// do something less ridiculous
+			// TODO: something less ridiculous
 			return NSOperationQueue.mainQueue()
 		}
 
 		private func presentedItemDidChange() {
 			everythingDidChangeHandler()
+		}
+
+		private func presentedSubitemDidAppearAtURL(url: NSURL) {
+			println("Subitem appared: \(url)")
+			everythingDidChangeHandler()
+		}
+
+		private func presentedSubitemDidChangeAtURL(url: NSURL) {
+			println("Subitem changed: \(url)")
+			everythingDidChangeHandler()
+		}
+
+		private func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL) {
+			println("Subitem moved: \(oldURL) -> \(newURL)")
+			everythingDidChangeHandler()
+		}
+
+		private func accommodatePresentedSubitemDeletionAtURL(url: NSURL, completionHandler: (NSError!) -> Void) {
+			println("Subitem deleted: \(url)")
+			everythingDidChangeHandler()
+			completionHandler(nil)
+		}
+
+		private func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError!) -> Void) {
+			println("Item disappeared")
+			fatalError("Unimplemented")
+			completionHandler(nil)
 		}
 	}
 }

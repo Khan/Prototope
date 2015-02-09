@@ -686,6 +686,7 @@
                                     <font key="font" metaFont="smallSystem"/>
                                     <allowedTypes>
                                         <string>js</string>
+                                        <string>public.folder</string>
                                     </allowedTypes>
                                 </pathCell>
                                 <connections>
