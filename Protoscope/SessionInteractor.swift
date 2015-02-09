@@ -18,7 +18,10 @@ class SessionInteractor {
 	// TODO: Make scene model.
 	func displayScene(script: String, rootView: UIView) {
 		Prototope.Layer.root?.removeAllSublayers()
-		Prototope.Environment.currentEnvironment = Environment(rootView: rootView, fileProvider: { _ in nil })
+		Prototope.Environment.currentEnvironment = Environment(
+			rootView: rootView,
+			imageProvider: { _ in fatalError("Unimplemented"); return nil }
+		)
 
 		context = SessionInteractor.createContext()
 		context?.evaluateScript(script)

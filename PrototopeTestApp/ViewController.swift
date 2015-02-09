@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		Environment.currentEnvironment = Environment(rootView: view, fileProvider: { _ in nil })
+		Environment.currentEnvironment = Environment.defaultEnvironmentWithRootView(view)
 
 		for i in 0..<5 {
 			let layer = makeRedLayer("Layer \(i)", Double(i) * 250)

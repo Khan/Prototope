@@ -21,7 +21,7 @@ public struct Image {
 
 	/** Loads a named image from the assets built into the app. */
 	public init!(name: String) {
-		if let image = UIImage(named: name) {
+		if let image = Environment.currentEnvironment!.imageProvider(name) {
 			uiImage = image
 			self.name = name
 		} else {
