@@ -9,12 +9,10 @@
 import UIKit
 
 class StatusView: UIView {
-	private let prototopeP: UILabel = {
-		let label = UILabel()
-		label.font = UIFont(name: "Futura", size: 120)
-		label.text = "P"
-		label.textColor = UIColor.whiteColor()
-		return label
+	private let prototopeP: UIImageView = {
+		let icon = UIImage(named: "PrototopeP")
+		let iconView = UIImageView(image: icon)
+		return iconView
 	}()
 
 	private let statusLabel: UILabel = {
@@ -36,7 +34,7 @@ class StatusView: UIView {
 	override func layoutSubviews() {
 		prototopeP.sizeToFit()
 		prototopeP.center.x = bounds.midX
-		prototopeP.center.y = bounds.midY - 60
+		prototopeP.center.y = bounds.midY - 90
 
 		statusLabel.sizeToFit()
 		statusLabel.center.x = bounds.midX
