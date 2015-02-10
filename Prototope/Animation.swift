@@ -128,13 +128,13 @@ public class Animator<Target: AnimatorValueConvertible> {
 	}
 
 	convenience init(layer: Layer, propertyName: String, shouldAnimateLayer: Bool) {
-		let property = POPAnimatableProperty.propertyWithName(propertyName) as POPAnimatableProperty
+		let property = POPAnimatableProperty.propertyWithName(propertyName) as! POPAnimatableProperty
 		self.init(layer: layer, property: property)
 		self.shouldAnimateLayer = shouldAnimateLayer
 	}
 
 	convenience init(layer: Layer, propertyName: String) {
-		let property = POPAnimatableProperty.propertyWithName(propertyName) as POPAnimatableProperty
+		let property = POPAnimatableProperty.propertyWithName(propertyName) as! POPAnimatableProperty
 		self.init(layer: layer, property: property)
 	}
 
@@ -149,7 +149,7 @@ public class Animator<Target: AnimatorValueConvertible> {
 	}
 
 	private func updateAnimationCreatingIfNecessary(createIfNecessary: Bool) {
-		var animation = animatable()?.pop_animationForKey(property.name) as POPSpringAnimation?
+		var animation = animatable()?.pop_animationForKey(property.name) as! POPSpringAnimation?
 		if animation == nil && createIfNecessary {
 			animation = POPSpringAnimation()
 			animation!.delegate = animationDelegate

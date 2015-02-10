@@ -11,7 +11,7 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol LayerJSExport: JSExport {
-	class var root: LayerJSExport { get } // Not automatically imported via JSExport.
+	static var root: LayerJSExport { get } // Not automatically imported via JSExport.
     
     // MARK: Creating and identifying layers
 	init(args: NSDictionary)
@@ -109,11 +109,11 @@ import JavaScriptCore
     // MARK: Creating and identifying layers
 
     required public init(args: NSDictionary) {
-		let parentLayer = (args["parent"] as LayerBridge?)?.layer
-		if let imageName = args["imageName"] as String? {
+		let parentLayer = (args["parent"] as! LayerBridge?)?.layer
+		if let imageName = args["imageName"] as! String? {
 			layer = Layer(parent: parentLayer, imageName: imageName)
 		} else {
-			layer = Layer(parent: parentLayer, name: (args["name"] as String?))
+			layer = Layer(parent: parentLayer, name: (args["name"] as! String?))
 		}
         super.init()
     }
@@ -128,7 +128,7 @@ import JavaScriptCore
         get { return layer.parent != nil ? LayerBridge(layer.parent!) : nil }
         set {
             if let newParent = newValue {
-                layer.parent = (newParent as JSExport as LayerBridge).layer
+                layer.parent = (newParent as JSExport as! LayerBridge).layer
             } else {
                 layer.parent = nil
             }
@@ -165,7 +165,7 @@ import JavaScriptCore
     
     public var position: PointJSExport {
         get { return PointBridge(layer.position) }
-        set { layer.position = (newValue as JSExport as PointBridge).point }
+        set { layer.position = (newValue as JSExport as! PointBridge).point }
     }
     
     public var width: Double {
@@ -180,22 +180,22 @@ import JavaScriptCore
     
     public var size: SizeJSExport {
         get { return SizeBridge(layer.size) }
-        set { layer.size = (newValue as JSExport as SizeBridge).size }
+        set { layer.size = (newValue as JSExport as! SizeBridge).size }
     }
     
     public var frame: RectJSExport {
         get { return RectBridge(layer.frame) }
-        set { layer.frame = (newValue as JSExport as RectBridge).rect }
+        set { layer.frame = (newValue as JSExport as! RectBridge).rect }
     }
     
     public var bounds: RectJSExport {
         get { return RectBridge(layer.bounds) }
-        set { layer.bounds = (newValue as JSExport as RectBridge).rect }
+        set { layer.bounds = (newValue as JSExport as! RectBridge).rect }
     }
     
     public var anchorPoint: PointJSExport {
         get { return PointBridge(layer.anchorPoint) }
-        set { layer.anchorPoint = (newValue as JSExport as PointBridge).point }
+        set { layer.anchorPoint = (newValue as JSExport as! PointBridge).point }
     }
     
     public var rotationDegrees: Double {
@@ -225,18 +225,18 @@ import JavaScriptCore
     
     public var globalPosition: PointJSExport {
         get { return PointBridge(layer.globalPosition) }
-        set { layer.globalPosition = (newValue as JSExport as PointBridge).point }
+        set { layer.globalPosition = (newValue as JSExport as! PointBridge).point }
     }
     
-    public func containsGlobalPoint(point: PointJSExport) -> Bool { return layer.containsGlobalPoint((point as JSExport as PointBridge).point) }
-    public func convertGlobalPointToLocalPoint(globalPoint: PointJSExport) -> PointJSExport { return PointBridge(layer.convertGlobalPointToLocalPoint((globalPoint as JSExport as PointBridge).point)) }
-    public func convertLocalPointToGlobalPoint(localPoint: PointJSExport) -> PointJSExport { return PointBridge(layer.convertLocalPointToGlobalPoint((localPoint as JSExport as PointBridge).point)) }
+    public func containsGlobalPoint(point: PointJSExport) -> Bool { return layer.containsGlobalPoint((point as JSExport as! PointBridge).point) }
+    public func convertGlobalPointToLocalPoint(globalPoint: PointJSExport) -> PointJSExport { return PointBridge(layer.convertGlobalPointToLocalPoint((globalPoint as JSExport as! PointBridge).point)) }
+    public func convertLocalPointToGlobalPoint(localPoint: PointJSExport) -> PointJSExport { return PointBridge(layer.convertLocalPointToGlobalPoint((localPoint as JSExport as! PointBridge).point)) }
     
     // MARK: Appearance
     
     public var backgroundColor: ColorJSExport? {
         get { return layer.backgroundColor != nil ? ColorBridge(layer.backgroundColor!) : nil }
-        set { layer.backgroundColor = (newValue as ColorBridge).color }
+        set { layer.backgroundColor = (newValue as! ColorBridge).color }
     }
     
     public var alpha: Double {
@@ -254,7 +254,7 @@ import JavaScriptCore
 			return layer.image != nil ? ImageBridge(layer.image!) : nil
 		}
 		set {
-			layer.image = (newValue as JSExport as ImageBridge).image
+			layer.image = (newValue as! JSExport as! ImageBridge).image
 		}
 	}
 
@@ -264,7 +264,7 @@ import JavaScriptCore
 		}
 		set {
 			if let border = border {
-				layer.border = (newValue as JSExport as BorderBridge).border
+				layer.border = (newValue as! JSExport as! BorderBridge).border
 			} else {
 				layer.border = Border(color: Color.clear, width: 0)
 			}
@@ -277,7 +277,7 @@ import JavaScriptCore
 		}
 		set {
 			if let shadow = shadow {
-				layer.shadow = (newValue as JSExport as ShadowBridge).shadow
+				layer.shadow = (newValue as! JSExport as! ShadowBridge).shadow
 			} else {
 				layer.shadow = Shadow(color: Color.clear, alpha: 0, offset: Size(width: 0, height: 0), radius: 0)
 			}

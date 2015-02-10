@@ -30,7 +30,10 @@ public class Layer: Equatable, Hashable {
 		You'd normally call this during initialization of the scene. */
 	public class func setRoot(fromView view: UIView) {
 		_rootLayer = Layer(wrappingView: view, name: "Root")
-		view.addGestureRecognizer(defaultSpec.twoFingerTripleTapGestureRecognizer())
+		let gesture = defaultSpec.twoFingerTripleTapGestureRecognizer()
+		gesture.cancelsTouchesInView = false
+		gesture.delaysTouchesEnded = false
+		view.addGestureRecognizer(gesture)
 	}
 
 	/** The root layer of the scene. Defines the global coordinate system. */
@@ -254,7 +257,7 @@ public class Layer: Equatable, Hashable {
 	rotationDegrees. Defaults to 0. */
 	public var rotationRadians: Double {
         get {
-            return layer.valueForKeyPath("transform.rotation.z") as Double
+            return layer.valueForKeyPath("transform.rotation.z") as! Double
         }
 		set {
             layer.setValue(newValue, forKeyPath: "transform.rotation.z")
@@ -274,7 +277,7 @@ public class Layer: Equatable, Hashable {
 	/** The scaling factor of the layer along the x dimension. Defaults to 1. */
 	public var scaleX: Double {
         get {
-            return layer.valueForKeyPath("transform.scale.x") as Double
+            return layer.valueForKeyPath("transform.scale.x") as! Double
         }
         set {
             layer.setValue(newValue, forKeyPath: "transform.scale.x")
@@ -284,7 +287,7 @@ public class Layer: Equatable, Hashable {
 	/** The scaling factor of the layer along the y dimension. Defaults to 1. */
 	public var scaleY: Double {
         get {
-            return layer.valueForKeyPath("transform.scale.y") as Double
+            return layer.valueForKeyPath("transform.scale.y") as! Double
         }
         set {
             layer.setValue(newValue, forKeyPath: "transform.scale.y")
@@ -351,7 +354,7 @@ public class Layer: Equatable, Hashable {
 		a 0 width. */
 	public var border: Border {
 		get {
-			return Border(color: Color(UIColor(CGColor: layer.borderColor)), width: Double(layer.borderWidth))
+			return Border(color: Color(UIColor(CGColor: layer.borderColor)!), width: Double(layer.borderWidth))
 		}
 		set {
 			layer.borderColor = newValue.color.uiColor.CGColor
@@ -364,7 +367,7 @@ public class Layer: Equatable, Hashable {
 		generate a shadow. */
 	public var shadow: Shadow {
 		get {
-			return Shadow(color: Color(UIColor(CGColor: layer.shadowColor)), alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
+			return Shadow(color: Color(UIColor(CGColor: layer.shadowColor)!), alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
 		}
 		set {
 			layer.shadowColor = newValue.color.uiColor.CGColor
@@ -376,21 +379,21 @@ public class Layer: Equatable, Hashable {
 	}
 
     // MARK: Touches and gestures
-    
+
 	/** When false, touches that hit this layer or its sublayers are discarded. Defaults
 		to true. */
 	public var userInteractionEnabled: Bool {
 		get { return view.userInteractionEnabled }
 		set { view.userInteractionEnabled = newValue }
 	}
-	
-	
+
+
 	// MARK: Particles
-	
+
 	/** An array of the layer's particle emitters. */
 	private var particleEmitters: [ParticleEmitter] = []
-	
-	
+
+
 	/** Adds the particle emitter to the layer. */
 	public func addParticleEmitter(particleEmitter: ParticleEmitter, forDuration duration: TimeInterval? = nil) {
 		self.particleEmitters.append(particleEmitter)
@@ -398,18 +401,18 @@ public class Layer: Equatable, Hashable {
 		particleEmitter.emitterLayer.frame = self.view.layer.bounds
 		particleEmitter.size = self.size
 		particleEmitter.position = Point(particleEmitter.emitterLayer.position)
-		
+
 		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
 		self.view.layer.masksToBounds = false
-		
+
 		if let duration = duration {
 			afterDuration(duration) {
 				self.removeParticleEmitter(particleEmitter)
 			}
 		}
 	}
-	
-	
+
+
 	/** Removes the given particle emitter from the layer. */
 	public func removeParticleEmitter(particleEmitter: ParticleEmitter) {
 		particleEmitter.emitterLayer.removeFromSuperlayer()
@@ -570,7 +573,6 @@ public class Layer: Equatable, Hashable {
 				// in this case unless you have a complex hierarchy,
 				// you should probably use a rounded image.
 				fatalError("⚠️ \(prefix) can't have images, shadows and corner radii set all at the same time. 😣")
-				return false
 			}
 
 			// don't set masksToBounds unless you have an image and a corner radius
@@ -669,33 +671,33 @@ public class Layer: Equatable, Hashable {
 
 		var touchesBeganHandler: TouchesHandler?
 		var touchBeganHandler: TouchHandler?
-		override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+		override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) -> Void {
 			if !handleTouches(touches, event: event, touchesHandler: touchesBeganHandler, touchHandler: touchBeganHandler, touchSequenceMappingMergeFunction: +) {
-				super.touchesBegan(touches, withEvent: event)
+				super.touchesBegan(touches as Set<NSObject>, withEvent: event)
 			}
 		}
 
 		var touchesMovedHandler: TouchesHandler?
 		var touchMovedHandler: TouchHandler?
-		override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+		override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
 			if !handleTouches(touches, event: event, touchesHandler: touchesMovedHandler, touchHandler: touchMovedHandler, touchSequenceMappingMergeFunction: +) {
-				super.touchesMoved(touches, withEvent: event)
+				super.touchesMoved(touches as Set<NSObject>, withEvent: event)
 			}
 		}
 
 		var touchesEndedHandler: TouchesHandler?
 		var touchEndedHandler: TouchHandler?
-		override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+		override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
 			if !handleTouches(touches, event: event, touchesHandler: touchesEndedHandler, touchHandler: touchEndedHandler, touchSequenceMappingMergeFunction: -) {
-				super.touchesEnded(touches, withEvent: event)
+				super.touchesEnded(touches as Set<NSObject>, withEvent: event)
 			}
 		}
 
 		var touchesCancelledHandler: TouchesHandler?
 		var touchCancelledHandler: TouchHandler?
-		override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
+		override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
 			if !handleTouches(touches, event: event, touchesHandler: touchesCancelledHandler, touchHandler: touchCancelledHandler, touchSequenceMappingMergeFunction: -) {
-				super.touchesCancelled(touches, withEvent: event)
+				super.touchesCancelled(touches as Set<NSObject>, withEvent: event)
 			}
 		}
 	}
@@ -748,7 +750,7 @@ private typealias UITouchSequence = TouchSequence<UITouchID>
 
 private func touchSequencesFromTouchSet(touches: NSSet) -> [UITouchSequence] {
 	return map(touches) {
-		let touch = $0 as UITouch
+		let touch = $0 as! UITouch
 		return TouchSequence(samples: [TouchSample(touch)], id: UITouchID(touch))
 	}
 }

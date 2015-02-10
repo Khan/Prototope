@@ -33,7 +33,7 @@ func makeRedLayer(name: String, y: Double) -> Layer {
 	redLayer.cornerRadius = 10
 	redLayer.border = Border(color: Color.black, width: 4)
 
-	redLayer.gestures.append(PanGesture{ phase, centroidSequence in
+	redLayer.gestures.append(PanGesture(handler: { phase, centroidSequence in
 		if phase == .Began {
 			redLayer.animators.position.stop()
     	} else if let previousSample = centroidSequence.previousSample {
@@ -43,13 +43,13 @@ func makeRedLayer(name: String, y: Double) -> Layer {
 			redLayer.animators.position.target = Point(x: 100, y: 100)
 			redLayer.animators.position.velocity = centroidSequence.currentVelocityInLayer(Layer.root)
 		}
-	})
-	redLayer.gestures.append(TapGesture { location in
+	}))
+	redLayer.gestures.append(TapGesture(handler: { location in
 		if tunable(true, name: "shrinks when tapped") {
 			Sound(name: "Glass").play()
 			redLayer.animators.frame.target = Rect(x: 30, y: 30, width: 50, height: 50)
 			redLayer.animators.frame.completionHandler = { println("Converged") }
 		}
-	})
+	}))
 	return redLayer
 }

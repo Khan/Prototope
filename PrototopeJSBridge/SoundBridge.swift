@@ -23,7 +23,7 @@ import JavaScriptCore
 	}
 
 	required public init?(args: NSDictionary) {
-		if let soundName = args["name"] as String? {
+		if let soundName = args["name"] as! String? {
 			sound = Sound(name: soundName)
 			super.init()
 		} else {

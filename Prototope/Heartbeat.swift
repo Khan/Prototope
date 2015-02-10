@@ -35,13 +35,13 @@ public class Heartbeat {
 		displayLink.invalidate()
 	}
 
-	// MARK: Private interfaces
-
-	private let handler: Heartbeat -> ()
-	private let displayLink: CADisplayLink!
-
-	@objc private func handleDisplayLink(sender: CADisplayLink) {
-		precondition(displayLink === sender)
-		handler(self)
-	}
+    // MARK: Private interfaces
+    
+    private let handler: Heartbeat -> ()
+    private var displayLink: CADisplayLink!
+    
+    @objc private func handleDisplayLink(sender: CADisplayLink) {
+        precondition(displayLink === sender)
+        handler(self)
+    }
 }

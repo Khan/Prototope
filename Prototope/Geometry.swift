@@ -207,6 +207,13 @@ public struct Rect: Equatable {
 		origin = Point(rect.origin)
 		size = Size(rect.size)
 	}
+    
+    /** Determines whether this rectangle contains the specified point. */
+    public func contains(point: Point) -> Bool {
+        let r = CGRect(self)
+        let p = CGPoint(point)
+        return r.contains(p)
+    }
 }
 
 public func ==(a: Rect, b: Rect) -> Bool {

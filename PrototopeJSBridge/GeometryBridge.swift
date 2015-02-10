@@ -16,7 +16,7 @@ import Prototope
 	// TODO make these writable, add observers to the bridges which vend them
 	var x: Double { get }
 	var y: Double { get }
-	class var zero: PointJSExport { get } // exported manually
+	static var zero: PointJSExport { get } // exported manually
 	init(args: NSDictionary)
 	func distanceToPoint(point: PointJSExport) -> Double
 	var length: Double { get }
@@ -38,8 +38,8 @@ import Prototope
 	var point: Prototope.Point
 	public required init(args: NSDictionary) {
 		point = Point(
-			x: (args["x"] as Double?) ?? 0,
-			y: (args["y"] as Double?) ?? 0
+			x: (args["x"] as! Double?) ?? 0,
+			y: (args["y"] as! Double?) ?? 0
 		)
 		super.init()
 	}
@@ -55,21 +55,21 @@ import Prototope
 	public class var zero: PointJSExport { return PointBridge(Prototope.Point.zero) }
 
 	public func distanceToPoint(other: PointJSExport) -> Double {
-		return point.distanceToPoint((other as JSExport as PointBridge).point)
+		return point.distanceToPoint((other as JSExport as! PointBridge).point)
 	}
 
 	public var length: Double { return point.length }
 
 	public func equals(other: PointJSExport) -> Bool {
-		return point == (other as JSExport as PointBridge).point
+		return point == (other as JSExport as! PointBridge).point
 	}
 
 	public func add(other: PointJSExport) -> PointJSExport {
-		return PointBridge(point + (other as JSExport as PointBridge).point)
+		return PointBridge(point + (other as JSExport as! PointBridge).point)
 	}
 
 	public func subtract(other: PointJSExport) -> PointJSExport {
-		return PointBridge(point - (other as JSExport as PointBridge).point)
+		return PointBridge(point - (other as JSExport as! PointBridge).point)
 	}
 
 	public func multiply(scalar: Double) -> PointJSExport {
@@ -86,7 +86,7 @@ import Prototope
 @objc public protocol SizeJSExport: JSExport {
 	var width: Double { get }
 	var height: Double { get }
-	class var zero: SizeJSExport { get } // exported manually
+	static var zero: SizeJSExport { get } // exported manually
 	init(args: NSDictionary)
 
 	func equals(other: SizeJSExport) -> Bool
@@ -106,8 +106,8 @@ import Prototope
 	var size: Prototope.Size
 	public required init(args: NSDictionary) {
 		size = Prototope.Size(
-			width: (args["width"] as Double?) ?? 0,
-			height: (args["height"] as Double?) ?? 0
+			width: (args["width"] as! Double?) ?? 0,
+			height: (args["height"] as! Double?) ?? 0
 		)
 		super.init()
 	}
@@ -121,11 +121,11 @@ import Prototope
 	public var height: Double { return size.height }
 
 	public func equals(other: SizeJSExport) -> Bool {
-		return size == (other as JSExport as SizeBridge).size
+		return size == (other as JSExport as! SizeBridge).size
 	}
 
 	public func add(other: SizeJSExport) -> SizeJSExport {
-		return SizeBridge(size + (other as JSExport as SizeBridge).size)
+		return SizeBridge(size + (other as JSExport as! SizeBridge).size)
 	}
 
 	public func multiply(scalar: Double) -> SizeJSExport {
@@ -145,7 +145,7 @@ import Prototope
 	var midY: Double { get }
 	var maxY: Double { get }
 	var center: PointJSExport { get }
-	class var zero: RectJSExport { get }
+	static var zero: RectJSExport { get }
 	init(args: NSDictionary)
 }
 
@@ -161,10 +161,10 @@ import Prototope
 	var rect: Prototope.Rect
 	public required init(args: NSDictionary) {
 		rect = Rect(
-			x: (args["x"] as Double?) ?? 0,
-			y: (args["y"] as Double?) ?? 0,
-			width: (args["width"] as Double?) ?? 0,
-			height: (args["height"] as Double?) ?? 0
+			x: (args["x"] as! Double?) ?? 0,
+			y: (args["y"] as! Double?) ?? 0,
+			width: (args["width"] as! Double?) ?? 0,
+			height: (args["height"] as! Double?) ?? 0
 		)
 		super.init()
 	}

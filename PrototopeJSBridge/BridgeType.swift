@@ -9,5 +9,5 @@
 import JavaScriptCore
 
 public protocol BridgeType {
-    class func addToContext(context: JSContext)
+    static func addToContext(context: JSContext)
 }

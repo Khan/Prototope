@@ -134,7 +134,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var target: JSValue? {
 		get { return animator.target != nil ? JSValue(object: PointBridge(animator.target!), inContext: JSContext.currentContext()) : nil }
-		set { animator.target = (newValue?.toObject() as PointBridge?)?.point }
+		set { animator.target = (newValue?.toObject() as! PointBridge?)?.point }
 	}
 
 	public var springSpeed: Double {
@@ -149,7 +149,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var velocity: JSValue? {
 		get { return animator.velocity != nil ? JSValue(object: PointBridge(animator.velocity!), inContext: JSContext.currentContext()) : nil }
-		set { animator.velocity = (newValue?.toObject() as PointBridge?)?.point }
+		set { animator.velocity = (newValue?.toObject() as! PointBridge?)?.point }
 	}
 
 	public var completionHandler: JSValue? {
@@ -176,7 +176,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var target: JSValue? {
 		get { return animator.target != nil ? JSValue(object: SizeBridge(animator.target!), inContext: JSContext.currentContext()) : nil }
-		set { animator.target = (newValue?.toObject() as SizeBridge?)?.size }
+		set { animator.target = (newValue?.toObject() as! SizeBridge?)?.size }
 	}
 
 	public var springSpeed: Double {
@@ -191,7 +191,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var velocity: JSValue? {
 		get { return animator.velocity != nil ? JSValue(object: SizeBridge(animator.velocity!), inContext: JSContext.currentContext()) : nil }
-		set { animator.velocity = (newValue?.toObject() as SizeBridge?)?.size }
+		set { animator.velocity = (newValue?.toObject() as! SizeBridge?)?.size }
 	}
 
 	public var completionHandler: JSValue? {
@@ -218,7 +218,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var target: JSValue? {
 		get { return animator.target != nil ? JSValue(object: RectBridge(animator.target!), inContext: JSContext.currentContext()) : nil }
-		set { animator.target = (newValue?.toObject() as RectBridge?)?.rect }
+		set { animator.target = (newValue?.toObject() as! RectBridge?)?.rect }
 	}
 
 	public var springSpeed: Double {
@@ -233,7 +233,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var velocity: JSValue? {
 		get { return animator.velocity != nil ? JSValue(object: RectBridge(animator.velocity!), inContext: JSContext.currentContext()) : nil }
-		set { animator.velocity = (newValue?.toObject() as RectBridge?)?.rect }
+		set { animator.velocity = (newValue?.toObject() as! RectBridge?)?.rect }
 	}
 
 	public var completionHandler: JSValue? {
@@ -260,7 +260,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var target: JSValue? {
 		get { return animator.target != nil ? JSValue(object: ColorBridge(animator.target!), inContext: JSContext.currentContext()) : nil }
-		set { animator.target = (newValue?.toObject() as ColorBridge?)?.color }
+		set { animator.target = (newValue?.toObject() as! ColorBridge?)?.color }
 	}
 
 	public var springSpeed: Double {
@@ -275,7 +275,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var velocity: JSValue? {
 		get { return animator.velocity != nil ? JSValue(object: ColorBridge(animator.velocity!), inContext: JSContext.currentContext()) : nil }
-		set { animator.velocity = (newValue?.toObject() as ColorBridge?)?.color }
+		set { animator.velocity = (newValue?.toObject() as! ColorBridge?)?.color }
 	}
 
 	public var completionHandler: JSValue? {
