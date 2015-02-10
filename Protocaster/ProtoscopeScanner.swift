@@ -10,7 +10,7 @@ import Foundation
 
 class ProtoscopeScanner {
 	private let browser = NSNetServiceBrowser()
-	private let browserDelegate: BrowserDelegate!
+	private var browserDelegate: BrowserDelegate!
 	private(set) var services: [NSNetService] = []
 
 	init(serviceDidAppearHandler: NSNetService -> () = {_ in return}, serviceDidDisappearHandler: NSNetService -> () = {_ in return}) {

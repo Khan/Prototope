@@ -39,11 +39,11 @@ class URLMonitor {
 			self.url = url
 		}
 
-		var presentedItemURL: NSURL? {
+		@objc var presentedItemURL: NSURL? {
 			return url
 		}
 
-		var presentedItemOperationQueue: NSOperationQueue {
+		@objc var presentedItemOperationQueue: NSOperationQueue {
 			// TODO: something less ridiculous
 			return NSOperationQueue.mainQueue()
 		}
@@ -76,7 +76,6 @@ class URLMonitor {
 		private func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError!) -> Void) {
 			println("Item disappeared")
 			fatalError("Unimplemented")
-			completionHandler(nil)
 		}
 	}
 }
