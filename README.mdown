@@ -15,6 +15,8 @@ Documentation is available [here](http://khan.github.io/Prototope/).
 
 ## Bootstrapping with prototope
 
+**You'll need Xcode 6.3 to use Prototope!**
+
 You can clone the [OhaiPrototope project](https://github.com/khan/ohaiprototope). If you do, you'll need to run
 ```
     $ git submodule update --init --recursive
