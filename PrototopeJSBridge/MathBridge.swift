@@ -14,18 +14,18 @@ public struct MathBridge: BridgeType {
 	public static func addToContext(context: JSContext) {
 		let interpolateTrampoline: @objc_block NSDictionary -> Double = { args in
 			Prototope.interpolate(
-				from: (args["from"] as Double?) ?? 0,
-				to: (args["to"] as Double?) ?? 0,
-				at: (args["at"] as Double?) ?? 0
+				from: (args["from"] as! Double?) ?? 0,
+				to: (args["to"] as! Double?) ?? 0,
+				at: (args["at"] as! Double?) ?? 0
 			)
 		}
 		context.setFunctionForKey("interpolate", fn: interpolateTrampoline)
 
 		let mapTrampoline: @objc_block NSDictionary -> Double = { args in
-			let fromInterval = (args["fromInterval"] as [Double]?) ?? [0, 0]
-			let toInterval = (args["toInterval"] as [Double]?) ?? [0, 0]
+			let fromInterval = (args["fromInterval"] as! [Double]?) ?? [0, 0]
+			let toInterval = (args["toInterval"] as! [Double]?) ?? [0, 0]
 			return Prototope.map(
-				(args["value"] as Double?) ?? 0,
+				(args["value"] as! Double?) ?? 0,
 				fromInterval: (fromInterval[0], fromInterval[1]),
 				toInterval: (toInterval[0], toInterval[1])
 			)
@@ -34,9 +34,9 @@ public struct MathBridge: BridgeType {
 
 		let clipTrampoline: @objc_block NSDictionary -> Double = { args in
 			Prototope.clip(
-				(args["value"] as Double?) ?? 0,
-				min: (args["min"] as Double?) ?? 0,
-				max: (args["max"] as Double?) ?? 0
+				(args["value"] as! Double?) ?? 0,
+				min: (args["min"] as! Double?) ?? 0,
+				max: (args["max"] as! Double?) ?? 0
 			)
 		}
 		context.setFunctionForKey("clip", fn: clipTrampoline)
