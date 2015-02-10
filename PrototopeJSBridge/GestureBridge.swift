@@ -34,7 +34,7 @@ import JavaScriptCore
 
 		if !globalLocationValue.isUndefined() && !timestampValue.isUndefined() {
 			touchSample = Prototope.TouchSample(
-				globalLocation: (globalLocationValue.toObject() as JSExport as PointBridge).point,
+				globalLocation: (globalLocationValue.toObject() as! JSExport as! PointBridge).point,
 				timestamp: Prototope.Timestamp(timestampValue.toDouble())
 			)
 		} else {
@@ -50,7 +50,7 @@ import JavaScriptCore
 	public var globalLocation: PointJSExport { return PointBridge(touchSample.globalLocation) }
 	public var timestamp: Double { return touchSample.timestamp.nsTimeInterval }
 	public func locationInLayer(layer: LayerJSExport) -> PointJSExport {
-		return PointBridge(touchSample.locationInLayer((layer as JSExport as LayerBridge).layer))
+		return PointBridge(touchSample.locationInLayer((layer as JSExport as! LayerBridge).layer))
 	}
 }
 
@@ -69,7 +69,7 @@ import JavaScriptCore
 	}
 
 	public func equals(other: UITouchIDBridge) -> Bool {
-		return uiTouchID == (other as JSExport as UITouchIDBridge).uiTouchID
+		return uiTouchID == (other as JSExport as! UITouchIDBridge).uiTouchID
 	}
 }
 
@@ -152,7 +152,7 @@ extension JSValue: SampleType {}
 		let idValue = args.valueForProperty("id")
 
 		if !samplesValue.isUndefined() && !idValue.isUndefined() {
-			let sampleBridges = samplesValue.toArray() as [TouchSampleBridge]
+			let sampleBridges = samplesValue.toArray() as! [TouchSampleBridge]
 			touchSequence = Prototope.TouchSequence(
 				samples: sampleBridges.map { $0.touchSample },
 				id: idValue
@@ -186,7 +186,7 @@ extension JSValue: SampleType {}
 	public var currentSample: TouchSampleJSExport { return TouchSampleBridge(touchSequence.currentSample) }
 
 	public func currentVelocityInLayer(layer: LayerJSExport) -> PointJSExport {
-		let velocity = touchSequence.currentVelocityInLayer((layer as JSExport as LayerBridge).layer)
+		let velocity = touchSequence.currentVelocityInLayer((layer as JSExport as! LayerBridge).layer)
 		return PointBridge(velocity)
 	}
 
@@ -195,7 +195,7 @@ extension JSValue: SampleType {}
 	}
 
 	public func sampleSequenceByAppendingSample(sampleBridge: TouchSampleJSExport) -> TouchSequenceJSExport {
-		let sample = (sampleBridge as JSExport as TouchSampleBridge).touchSample
+		let sample = (sampleBridge as JSExport as! TouchSampleBridge).touchSample
 		return TouchSequenceBridge(touchSequence.sampleSequenceByAppendingSample(sample))
 	}
 }
@@ -205,20 +205,20 @@ extension JSValue: SampleType {}
 // Yuuuuuck. There should be a better way to use generics or protocols to accomplish this, but swiftc is getting really crashy when I try.
 func gestureBridgeForGesture(gesture: GestureType) -> GestureBridgeType {
 	switch gesture {
-	case is TapGesture: return TapGestureBridge(gesture as TapGesture)
-	case is PanGesture: return PanGestureBridge(gesture as PanGesture)
-	case is RotationGesture: return RotationGestureBridge(gesture as RotationGesture)
-	case is PinchGesture: return PinchGestureBridge(gesture as PinchGesture)
+	case is TapGesture: return TapGestureBridge(gesture as! TapGesture)
+	case is PanGesture: return PanGestureBridge(gesture as! PanGesture)
+	case is RotationGesture: return RotationGestureBridge(gesture as! RotationGesture)
+	case is PinchGesture: return PinchGestureBridge(gesture as! PinchGesture)
 	default: abort()
 	}
 }
 
 func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 	switch gestureBridge {
-	case is TapGestureBridge: return (gestureBridge as TapGestureBridge).tapGesture
-	case is PanGestureBridge: return (gestureBridge as PanGestureBridge).panGesture
-	case is RotationGestureBridge: return (gestureBridge as RotationGestureBridge).rotationGesture
-	case is PinchGestureBridge: return (gestureBridge as PinchGestureBridge).pinchGesture
+	case is TapGestureBridge: return (gestureBridge as! TapGestureBridge).tapGesture
+	case is PanGestureBridge: return (gestureBridge as! PanGestureBridge).panGesture
+	case is RotationGestureBridge: return (gestureBridge as! RotationGestureBridge).rotationGesture
+	case is PinchGestureBridge: return (gestureBridge as! PinchGestureBridge).pinchGesture
 	default: abort()
 	}
 }
@@ -278,6 +278,7 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 			)
 			super.init()
 		} else {
+			tapGesture = nil
 			super.init()
 			return nil
 		}
@@ -380,6 +381,7 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 			)
 			super.init()
 		} else {
+			panGesture = nil
 			super.init()
 			return nil
 		}
@@ -467,6 +469,7 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 			)
 			super.init()
 		} else {
+			rotationGesture = nil
 			super.init()
 			return nil
 		}
@@ -550,6 +553,7 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 			)
 			super.init()
 		} else {
+			pinchGesture = nil
 			super.init()
 			return nil
 		}

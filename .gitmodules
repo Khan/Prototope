@@ -1,6 +1,6 @@
 [submodule "ThirdParty/pop"]
 	path = ThirdParty/pop
-	url = https://github.com/facebook/pop.git
+	url = https://github.com/khan/pop.git
 [submodule "ThirdParty/TunableSpec"]
 	path = ThirdParty/TunableSpec
 	url = https://github.com/Khan/TunableSpec.git

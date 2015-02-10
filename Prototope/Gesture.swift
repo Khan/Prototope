@@ -108,7 +108,7 @@ public class TapGesture: GestureType {
 
 	private let tapGestureRecognizer: UITapGestureRecognizer
 	private let tapGestureHandler: TapGestureHandler
-    private let tapGestureDelegate: UIGestureRecognizerDelegate!
+    private var tapGestureDelegate: UIGestureRecognizerDelegate!
     
     public var underlyingGestureRecognizer: UIGestureRecognizer {
         return tapGestureRecognizer
@@ -167,7 +167,7 @@ public class PanGesture: GestureType {
 
 	private let panGestureRecognizer: UIPanGestureRecognizer
 	private let panGestureHandler: PanGestureHandler
-    private let panGestureDelegate: UIGestureRecognizerDelegate!
+    private var panGestureDelegate: UIGestureRecognizerDelegate!
     
     public var underlyingGestureRecognizer: UIGestureRecognizer {
         return panGestureRecognizer
@@ -192,7 +192,7 @@ public class PanGesture: GestureType {
 		}
 
 		func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-			let panGesture = gestureRecognizer as UIPanGestureRecognizer
+			let panGesture = gestureRecognizer as! UIPanGestureRecognizer
 			switch panGesture.state {
 			case .Began:
 				// Reset the gesture to record translation relative to the starting centroid; we'll interpret subsequent translations as centroid positions.
@@ -269,7 +269,7 @@ public class RotationGesture: GestureType {
     
     private let rotationGestureRecognizer: UIRotationGestureRecognizer
     private let rotationGestureHandler: RotationGestureHandler
-    private let rotationGestureDelegate: UIGestureRecognizerDelegate!
+    private var rotationGestureDelegate: UIGestureRecognizerDelegate!
     
     public var underlyingGestureRecognizer: UIGestureRecognizer {
         return rotationGestureRecognizer
@@ -294,7 +294,7 @@ public class RotationGesture: GestureType {
         }
         
         func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-            let rotationGesture = gestureRecognizer as UIRotationGestureRecognizer
+            let rotationGesture = gestureRecognizer as! UIRotationGestureRecognizer
             
             let rotation = Double(rotationGesture.rotation)
             let velocity = Double(rotationGesture.velocity)
@@ -367,7 +367,7 @@ public class PinchGesture: GestureType {
     
     internal let pinchGestureRecognizer: UIPinchGestureRecognizer
     private let pinchGestureHandler: PinchGestureHandler
-    private let pinchGestureDelegate: UIGestureRecognizerDelegate!
+    private var pinchGestureDelegate: UIGestureRecognizerDelegate!
     
     public var underlyingGestureRecognizer: UIGestureRecognizer {
         return pinchGestureRecognizer
@@ -392,7 +392,7 @@ public class PinchGesture: GestureType {
         }
         
         func handleGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-            let scaleGesture = gestureRecognizer as UIPinchGestureRecognizer
+            let scaleGesture = gestureRecognizer as! UIPinchGestureRecognizer
             
             let scale = Double(scaleGesture.scale)
             let velocity = Double(scaleGesture.velocity)

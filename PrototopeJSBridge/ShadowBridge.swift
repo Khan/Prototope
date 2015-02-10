@@ -24,10 +24,10 @@ import JavaScriptCore
 
 	required public init(args: NSDictionary) {
 		shadow = Shadow(
-			color: (args["color"] as ColorBridge?)?.color ?? Color.black,
-			alpha: (args["alpha"] as Double?) ?? 1.0,
-			offset: (args["offset"] as SizeBridge?)?.size ?? Size.zero,
-			radius: (args["radius"] as Double?) ?? 3.0
+			color: (args["color"] as! ColorBridge?)?.color ?? Color.black,
+			alpha: (args["alpha"] as! Double?) ?? 1.0,
+			offset: (args["offset"] as! SizeBridge?)?.size ?? Size.zero,
+			radius: (args["radius"] as! Double?) ?? 3.0
 		)
 		super.init()
 	}

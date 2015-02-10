@@ -17,6 +17,6 @@ func makeJSLayer() {
 		println("Exception on line \(lineNumber): \(value)")
 	}
     
-    let script = NSString(contentsOfURL: NSBundle.mainBundle().URLForResource("JSTest", withExtension: "js")!, encoding: NSUTF8StringEncoding, error: nil)
-	println(context.evaluateScript(script))
+    let script = NSString(contentsOfURL: NSBundle.mainBundle().URLForResource("JSTest", withExtension: "js")!, encoding: NSUTF8StringEncoding, error: nil)!
+	println(context.evaluateScript(script as String))
 }

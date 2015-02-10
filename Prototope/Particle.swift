@@ -103,7 +103,7 @@ public struct Particle {
 	
 	/** The colour of the particle. */
 	public var color: Color {
-		get { return Color(UIColor(CGColor: self.emitterCell.color)) }
+		get { return Color(UIColor(CGColor: self.emitterCell.color)!) }
 		set { self.emitterCell.color = newValue.CGColor }
 	}
 	

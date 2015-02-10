@@ -22,7 +22,7 @@ import JavaScriptCore
 	}
 
 	required public init?(args: NSDictionary) {
-		if let imageName = args["name"] as String? {
+		if let imageName = args["name"] as! String? {
 			image = Image(name: imageName)
 			super.init()
 		} else {

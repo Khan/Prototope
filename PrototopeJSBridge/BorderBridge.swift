@@ -26,8 +26,8 @@ import JavaScriptCore
 
 	required public init(args: NSDictionary) {
 		border = Border(
-			color: (args["color"] as ColorBridge?)?.color ?? Color.black,
-			width: (args["width"] as Double?) ?? 0.0
+			color: (args["color"] as! ColorBridge?)?.color ?? Color.black,
+			width: (args["width"] as! Double?) ?? 0.0
 		)
 		super.init()
 	}
