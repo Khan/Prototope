@@ -712,6 +712,12 @@ public class Layer: Equatable, Hashable {
 			wrappedLayer.frame = bounds
 		}
 	}
+    
+    public var behaviors: [BehaviorType] = [] {
+        didSet {
+            globalBehaviorStore.updateWithLayer(self, behaviors:behaviors)
+        }
+    }
 }
 
 extension Layer: Hashable {

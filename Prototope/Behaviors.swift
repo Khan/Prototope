@@ -1,0 +1,194 @@
+//
+//  Collisions.swift
+//  Prototope
+//
+//  Created by Saniul Ahmed on 07/02/2015.
+//  Copyright (c) 2015 Khan Academy. All rights reserved.
+//
+
+import Foundation
+
+//MARK: Public Behavior Types
+
+// Protocol for types describing the "configuration" of a behavior.
+public protocol BehaviorType {}
+
+// Value type describing the configuration of a collision behavior, specifying
+// the kind of the interaction (the collision conditions which should trigger the handler)
+// the layer with which the host layer is supposed to be colliding and a handler function
+public struct CollisionBehavior: BehaviorType {
+    public enum Kind {
+        case Entering
+        case Leaving
+    }
+    
+    let kind: Kind
+    let otherLayer: Layer
+    let handler: () -> Void
+    
+    public init(on kind: Kind, _ otherLayer: Layer, handler: ()->Void) {
+        self.kind = kind
+        self.otherLayer = otherLayer
+        self.handler = handler
+    }
+}
+
+//MARK: Behavior Bindings
+
+// Abstract. Describes a relationship between a layer and a single instance of a behavior.
+// Subclasses should encapsulate the state necessary to handle the behavior correctly.
+class BehaviorBinding: Equatable, Hashable {
+    let id: Int
+    let hostLayer: Layer
+    
+    static var behaviorCounter = 0
+    
+    init(hostLayer: Layer) {
+        self.id = BehaviorBinding.behaviorCounter++
+        self.hostLayer = hostLayer
+    }
+    
+    func update() {
+        fatalError("BehaviorBinding.update must be overridden")
+    }
+    
+    var hashValue: Int {
+        return id
+    }
+}
+
+func ==(b1: BehaviorBinding, b2: BehaviorBinding) -> Bool {
+    return b1.id == b2.id
+}
+
+// Possible collision states for a pair of layers
+enum CollisionState {
+    case NonOverlapping
+    case PartiallyIntersects
+    case ContainedIn
+    case Contains
+    
+    static func stateForLayer(layer1: Layer, andLayer layer2: Layer) -> CollisionState {
+        let rect1 = CGRect(layer1.frame)
+        let rect2 = CGRect(layer2.frame)
+        
+        if !CGRectIntersectsRect(rect1, rect2) {
+            return .NonOverlapping
+        }
+        
+        if CGRectContainsRect(rect1, rect2) {
+            return .Contains
+        } else if CGRectContainsRect(rect2, rect1) {
+            return .ContainedIn
+        }
+        
+        return .PartiallyIntersects
+    }
+}
+
+// Concrete class encapsulating the necessary state for CollisionBehaviors
+class CollisionBehaviorBinding : BehaviorBinding {
+    var previousState: CollisionState
+    let config: CollisionBehavior
+    
+    init(hostLayer: Layer, config: CollisionBehavior) {
+        self.config = config
+        self.previousState = CollisionState.stateForLayer(hostLayer, andLayer: self.config.otherLayer)
+        
+        super.init(hostLayer: hostLayer)
+    }
+
+    override func update() {
+        self.updateWithState(CollisionState.stateForLayer(self.hostLayer, andLayer: self.config.otherLayer))
+    }
+    
+    func updateWithState(state: CollisionState) {
+        let old = previousState
+        switch (self.config.kind, old, state) {
+            
+        case (.Entering,.NonOverlapping,.PartiallyIntersects):
+            fallthrough
+        case (.Entering,.NonOverlapping,.ContainedIn):
+            fallthrough
+        case (.Entering,.NonOverlapping,.Contains):
+            fire()
+            
+        case (.Leaving,.PartiallyIntersects,.NonOverlapping):
+            fallthrough
+        case (.Leaving,.ContainedIn,.NonOverlapping):
+            fallthrough
+        case (.Leaving,.Contains,.NonOverlapping):
+            fire()
+            
+        default:
+            ()
+        }
+        
+        self.previousState = state
+    }
+    
+    func fire() {
+        self.config.handler()
+    }
+}
+
+//MARK: Global Behavior Store
+
+// Global bag of layer behavior state
+class BehaviorStore {
+    var heartbeat: Heartbeat!
+    
+    var registeredBindings: Set<BehaviorBinding> {
+        didSet {
+            self.heartbeat.paused = self.registeredBindings.count == 0
+        }
+    }
+    
+    init() {
+        self.registeredBindings = Set<BehaviorBinding>()
+        
+        self.heartbeat = Heartbeat { [unowned self] _ in
+            self.tick()
+        }
+    }
+    
+    deinit {
+        self.heartbeat.stop()
+    }
+    
+    func tick() {
+        for b in self.registeredBindings {
+            b.update()
+        }
+    }
+    
+    func updateWithLayer(layer: Layer, behaviors: [BehaviorType]) {
+        var knownBehaviors = lazy(self.registeredBindings).filter { $0.hostLayer == layer }
+        for b in knownBehaviors {
+            self.unregisterBinding(b)
+        }
+        
+        for b in behaviors {
+            self.createBindingForLayer(layer, behavior: b)
+                .map(self.registerBinding)
+        }
+    }
+    
+    func registerBinding(binding: BehaviorBinding) {
+        self.registeredBindings.insert(binding)
+    }
+    
+    func unregisterBinding(binding: BehaviorBinding) {
+        self.registeredBindings.remove(binding)
+    }
+    
+    func createBindingForLayer(layer: Layer, behavior: BehaviorType) -> BehaviorBinding? {
+        if let collisionBehavior = behavior as? CollisionBehavior {
+            return CollisionBehaviorBinding(hostLayer: layer, config: collisionBehavior)
+        }
+        
+        return nil
+    }
+}
+
+var globalBehaviorStore = BehaviorStore()
