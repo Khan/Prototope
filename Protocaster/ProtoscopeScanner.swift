@@ -46,11 +46,11 @@ class ProtoscopeScanner {
 			self.serviceDidDisappearHandler = serviceDidDisappearHandler
 		}
 
-		private func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
+		@objc private func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
 			serviceDidAppearHandler(aNetService)
 		}
 
-		private func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didRemoveService aNetService: NSNetService, moreComing: Bool) {
+		@objc private func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didRemoveService aNetService: NSNetService, moreComing: Bool) {
 			serviceDidDisappearHandler(aNetService)
 		}
 	}

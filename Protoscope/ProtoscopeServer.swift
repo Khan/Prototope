@@ -37,7 +37,7 @@ class ProtoscopeServer {
 			self.messageHandler = messageHandler
 		}
 
-		func bonjourServer(server: DTBonjourServer!, didReceiveObject object: AnyObject!, onConnection connection: DTBonjourDataConnection!) {
+		@objc private func bonjourServer(server: DTBonjourServer!, didReceiveObject object: AnyObject!, onConnection connection: DTBonjourDataConnection!) {
 			if let data = object as? NSData {
 				if let message = JSONValue.decode(data) >>- Message.fromJSON {
 					messageHandler(message)

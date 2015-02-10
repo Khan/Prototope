@@ -24,7 +24,6 @@
 		EB05D2B11A8946AA00F4CFD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2AF1A8946AA00F4CFD4 /* Message.swift */; };
 		EB05D2C41A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
 		EB05D2C51A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
-		EB05D2FC1A894E5D00F4CFD4 /* swiftz_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */; };
 		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		EB1C2A7719E4D1AC000DC2C1 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */; };
@@ -40,6 +39,8 @@
 		EB306C1419DF77CD00113FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1219DF77CD00113FA3 /* Main.storyboard */; };
 		EB306C1619DF77CD00113FA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1519DF77CD00113FA3 /* Images.xcassets */; };
 		EB306C1919DF77CD00113FA3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB306C1719DF77CD00113FA3 /* LaunchScreen.xib */; };
+		EB367CB21A8A90B80063EB86 /* swiftz_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */; };
+		EB367CB31A8A90B80063EB86 /* swiftz_core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB453D941A7AB0B2006F2A72 /* PrototopeJSBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = EB453D931A7AB0B2006F2A72 /* PrototopeJSBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB453D9A1A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
 		EB453DA61A7AB0B2006F2A72 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
@@ -198,13 +199,6 @@
 			remoteGlobalIDString = 598539DD1967F95B00A3158C;
 			remoteInfo = swiftz_core_ios;
 		};
-		EB05D2FA1A894E5900F4CFD4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 59BB97DB195EFAF2002C0FA1;
-			remoteInfo = swiftz_core;
-		};
 		EB12A8421A19A6AC0018C229 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
@@ -246,6 +240,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = EBE3A75519DF79C400A77736;
 			remoteInfo = Prototope;
+		};
+		EB367CA41A8A90B00063EB86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 59BB97DB195EFAF2002C0FA1;
+			remoteInfo = swiftz_core;
+		};
+		EB367CB41A8A90B80063EB86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 59BB97DB195EFAF2002C0FA1;
+			remoteInfo = swiftz_core;
 		};
 		EB453D9B1A7AB0B2006F2A72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -335,6 +343,17 @@
 			files = (
 				EB1C2A7C19E4D2B8000DC2C1 /* Prototope.framework in CopyFiles */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB367CB61A8A90B80063EB86 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB367CB31A8A90B80063EB86 /* swiftz_core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EB7526D41A8A81DD00D5D187 /* Embed Frameworks */ = {
@@ -517,7 +536,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB05D2FC1A894E5D00F4CFD4 /* swiftz_core.framework in Frameworks */,
+				EB367CB21A8A90B80063EB86 /* swiftz_core.framework in Frameworks */,
 				EB6BFBAA1A857486002B4E6A /* libDTBonjour_Mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1049,11 +1068,13 @@
 				EB6BFB7C1A857326002B4E6A /* Sources */,
 				EB6BFB7D1A857326002B4E6A /* Frameworks */,
 				EB6BFB7E1A857326002B4E6A /* Resources */,
+				EB367CB61A8A90B80063EB86 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				EB05D2FB1A894E5900F4CFD4 /* PBXTargetDependency */,
+				EB367CA51A8A90B00063EB86 /* PBXTargetDependency */,
+				EB367CB51A8A90B80063EB86 /* PBXTargetDependency */,
 			);
 			name = Protocaster;
 			productName = Protocaster;
@@ -1568,11 +1589,6 @@
 			name = swiftz_core_ios;
 			targetProxy = EB05D2F51A894E4D00F4CFD4 /* PBXContainerItemProxy */;
 		};
-		EB05D2FB1A894E5900F4CFD4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = swiftz_core;
-			targetProxy = EB05D2FA1A894E5900F4CFD4 /* PBXContainerItemProxy */;
-		};
 		EB12A84B1A19A6BC0018C229 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = pop;
@@ -1582,6 +1598,16 @@
 			isa = PBXTargetDependency;
 			target = EBE3A75519DF79C400A77736 /* Prototope */;
 			targetProxy = EB1C2A7919E4D1D2000DC2C1 /* PBXContainerItemProxy */;
+		};
+		EB367CA51A8A90B00063EB86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = swiftz_core;
+			targetProxy = EB367CA41A8A90B00063EB86 /* PBXContainerItemProxy */;
+		};
+		EB367CB51A8A90B80063EB86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = swiftz_core;
+			targetProxy = EB367CB41A8A90B80063EB86 /* PBXContainerItemProxy */;
 		};
 		EB453D9C1A7AB0B2006F2A72 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1918,6 +1944,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1945,6 +1972,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Protocaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
