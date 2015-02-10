@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var sessionInteractor: SessionInteractor!
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		UIApplication.sharedApplication().idleTimerDisabled = true
+		application.idleTimerDisabled = true
 
 		rootViewController = RootViewController()
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
