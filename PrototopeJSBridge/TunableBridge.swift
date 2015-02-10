@@ -18,10 +18,10 @@ public struct TunableBridge: BridgeType {
 
 	private static func tunable(args: JSValue) -> NSNumber {
 		let nameValue = args.objectForKeyedSubscript("name")
-		let defaultValueValue = args.objectForKeyedSubscript("defaultValue")
+		let defaultValueValue = args.objectForKeyedSubscript("default")
 		let minValue = args.objectForKeyedSubscript("min")
 		let maxValue = args.objectForKeyedSubscript("max")
-		let maintainValue = args.objectForKeyedSubscript("maintain")
+		let maintainValue = args.objectForKeyedSubscript("changeHandler")
 
 		let name = nameValue.isUndefined() ? nil : nameValue.toString()
 		let defaultValue = defaultValueValue.isUndefined() ? nil : defaultValueValue.toNumber()
@@ -35,7 +35,7 @@ public struct TunableBridge: BridgeType {
 				if String.fromCString(defaultValue.objCType) == String.fromCString(someDouble.objCType) {
 						if let maintainCallable = maintain {
 						var result: Double = 0
-						Prototope.tunable(defaultValue.doubleValue, name: name, min: min, max: max, maintain: { value in
+						Prototope.tunable(defaultValue.doubleValue, name: name, min: min, max: max, changeHandler: { value in
 							result = value
 							maintainCallable.callWithArguments([value])
 						})
@@ -46,7 +46,7 @@ public struct TunableBridge: BridgeType {
 				} else {
 					if let maintainCallable = maintain {
 						var result = false
-						Prototope.tunable(defaultValue.boolValue, name: name, maintain: { value in
+						Prototope.tunable(defaultValue.boolValue, name: name, changeHandler: { value in
 							result = value
 							maintainCallable.callWithArguments([value])
 						})

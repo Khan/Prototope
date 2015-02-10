@@ -47,10 +47,10 @@ public func tunable(defaultValue: Double, #name: String, min: Double? = nil, max
 	}
 }
 
-/** Whenever the named tunable value changes, runs `maintain` with the new value. Runs `maintain` once initially with the existing or default value. */
-public func tunable(defaultValue: Double, #name: String, min: Double? = nil, max: Double? = nil, #maintain: Double -> Void) {
+/** Whenever the named tunable value changes, runs `changeHandler` with the new value. Runs `changeHandler` once initially with the existing or default value. */
+public func tunable(defaultValue: Double, #name: String, min: Double? = nil, max: Double? = nil, #changeHandler: Double -> Void) {
     tunable(defaultValue, name: name, min: min, max: max) // Make sure it exists
-	defaultSpec.withDoubleForKey(name, owner: UIApplication.sharedApplication(), maintain: { owner, value in maintain(value) })
+	defaultSpec.withDoubleForKey(name, owner: UIApplication.sharedApplication(), maintain: { owner, value in changeHandler(value) })
 }
 
 /** Returns the tunable value stored in TunableValues.json under `name`. If none is present, returns `defaultValue`. */
@@ -63,10 +63,10 @@ public func tunable(defaultValue: Bool, #name: String) -> Bool {
 	}
 }
 
-/** Whenever the named tunable value changes, runs `maintain` with the new value. Runs `maintain` once initially with the existing or default value. */
-public func tunable(defaultValue: Bool, #name: String, #maintain: Bool -> Void) {
+/** Whenever the named tunable value changes, runs `changeHandler` with the new value. Runs `changeHandler` once initially with the existing or default value. */
+public func tunable(defaultValue: Bool, #name: String, #changeHandler: Bool -> Void) {
 	tunable(defaultValue, name: name) // Make sure it exists
-	defaultSpec.withBoolForKey(name, owner: UIApplication.sharedApplication(), maintain: { owner, value in maintain(value) })
+	defaultSpec.withBoolForKey(name, owner: UIApplication.sharedApplication(), maintain: { owner, value in changeHandler(value) })
 }
 
 /** Returns the tunable value stored in TunableValues.json under `name`. If none is present, returns `defaultValue`. */
@@ -77,10 +77,10 @@ public func tunable(defaultValue: Point, #name: String) -> Point {
 	)
 }
 
-/** Whenever the named tunable value changes, runs `maintain` with the new value. Runs `maintain` once initially with the existing or default value. */
-public func tunable(defaultValue: Point, #name: String, #maintain: Point -> Void) {
-	tunable(defaultValue.x, name: "\(name).x", maintain: { x in maintain(Point(x: x, y: tunable(defaultValue.y, name: "\(name).y"))) })
-	tunable(defaultValue.y, name: "\(name).y", maintain: { y in maintain(Point(x: tunable(defaultValue.x, name: "\(name).x"), y: y)) })
+/** Whenever the named tunable value changes, runs `changeHandler` with the new value. Runs `changeHandler` once initially with the existing or default value. */
+public func tunable(defaultValue: Point, #name: String, #changeHandler: Point -> Void) {
+	tunable(defaultValue.x, name: "\(name).x", changeHandler: { x in changeHandler(Point(x: x, y: tunable(defaultValue.y, name: "\(name).y"))) })
+	tunable(defaultValue.y, name: "\(name).y", changeHandler: { y in changeHandler(Point(x: tunable(defaultValue.x, name: "\(name).x"), y: y)) })
 }
 
 let defaultSpec = KFTunableSpec.specNamed("TunableValues") as! KFTunableSpec
