@@ -27,10 +27,13 @@ public class VideoLayer: Layer {
 	}
 	
 	/** Creates a video layer with the given video. */
-	public init(parent: Layer? = nil, video: Video) {
+	public init(parent: Layer? = nil, video: Video?) {
 		self.video = video
-		super.init(parent: parent, name: video.name, viewClass: VideoView.self)
-		self.playerLayer.player = video.player
+		
+		super.init(parent: parent, name: video?.name, viewClass: VideoView.self)
+		if let video = video {
+			self.playerLayer.player = video.player
+		}
 	}
 	
 	

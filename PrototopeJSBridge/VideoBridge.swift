@@ -12,8 +12,6 @@ import JavaScriptCore
 
 @objc public protocol VideoJSExport: JSExport {
 	init?(args: NSDictionary)
-	func play()
-	func pause()
 }
 
 @objc public class VideoBridge: NSObject, VideoJSExport, BridgeType {
@@ -31,13 +29,5 @@ import JavaScriptCore
 			super.init()
 			return nil
 		}
-	}
-	
-	public func play() {
-		video.play()
-	}
-	
-	public func pause() {
-		video.pause()
 	}
 }
