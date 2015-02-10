@@ -163,15 +163,15 @@ class BehaviorStore {
     }
     
     func updateWithLayer(layer: Layer, behaviors: [BehaviorType]) {
-        var knownBehaviors = lazy(self.registeredBindings).filter { $0.hostLayer == layer }
-        for b in knownBehaviors {
-            self.unregisterBinding(b)
+        var knownBindings = lazy(self.registeredBindings).filter { $0.hostLayer == layer }
+        
+        let otherBindings = self.registeredBindings.subtract(knownBindings)
+        
+        let newBindings = behaviors.map { b -> BehaviorBinding in
+            return self.createBindingForLayer(layer, behavior: b)!
         }
         
-        for b in behaviors {
-            self.createBindingForLayer(layer, behavior: b)
-                .map(self.registerBinding)
-        }
+        self.registeredBindings = otherBindings.union(newBindings)
     }
     
     func registerBinding(binding: BehaviorBinding) {
