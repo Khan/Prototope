@@ -30,7 +30,10 @@ public class Layer: Equatable, Hashable {
 		You'd normally call this during initialization of the scene. */
 	public class func setRoot(fromView view: UIView) {
 		_rootLayer = Layer(wrappingView: view, name: "Root")
-		view.addGestureRecognizer(defaultSpec.twoFingerTripleTapGestureRecognizer())
+		let gesture = defaultSpec.twoFingerTripleTapGestureRecognizer()
+		gesture.cancelsTouchesInView = false
+		gesture.delaysTouchesEnded = false
+		view.addGestureRecognizer(gesture)
 	}
 
 	/** The root layer of the scene. Defines the global coordinate system. */
