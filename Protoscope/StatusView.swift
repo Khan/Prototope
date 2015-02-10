@@ -22,11 +22,20 @@ class StatusView: UIView {
 		return label
 	}()
 
+	func breatheLogo() {
+		// make the logo pulse, as if it were breathing, while it waits to connect to something
+		UIView.animateKeyframesWithDuration(4.42, delay: 1.67, options: .Repeat | .Autoreverse | .CalculationModeCubicPaced, animations: {
+			UIView.addKeyframeWithRelativeStartTime(0.15, relativeDuration: 0.15, animations: { self.prototopeP.alpha = 0})
+			UIView.addKeyframeWithRelativeStartTime(0.85, relativeDuration: 0.15, animations: { self.prototopeP.alpha = 1})
+			}, completion: nil)
+	}
+
 	override init() {
 		super.init(frame: CGRect())
 		backgroundColor = Style.cyan
 		addSubview(prototopeP)
 		addSubview(statusLabel)
+		breatheLogo()
 
 		statusLabel.text = "Waiting for protorope…"
 	}
