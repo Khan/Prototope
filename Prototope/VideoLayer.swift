@@ -23,7 +23,7 @@ public class VideoLayer: Layer {
 	
 	
 	private var playerLayer: AVPlayerLayer {
-		return (self.view as VideoView).layer as AVPlayerLayer
+		return (self.view as! VideoView).layer as! AVPlayerLayer
 	}
 	
 	/** Creates a video layer with the given video. */
