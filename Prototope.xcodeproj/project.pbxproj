@@ -12,6 +12,7 @@
 		753E20E81A84A12100E30460 /* JSTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 753E20E71A84A12100E30460 /* JSTest.js */; };
 		969933191A8950490036684E /* VideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969933181A8950490036684E /* VideoLayer.swift */; };
 		9699331E1A89597F0036684E /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699331D1A89597F0036684E /* Video.swift */; };
+		96A9E9BF1A8A961B006A7754 /* VideoBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9E9BE1A8A961B006A7754 /* VideoBridge.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -79,6 +80,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		96A9E9C41A8A961C006A7754 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0B6BE74819FFD3B900762101;
+			remoteInfo = "pop-embedded";
+		};
 		EB12A8421A19A6AC0018C229 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
@@ -189,6 +197,7 @@
 		753E20E71A84A12100E30460 /* JSTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTest.js; sourceTree = "<group>"; };
 		969933181A8950490036684E /* VideoLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLayer.swift; sourceTree = "<group>"; };
 		9699331D1A89597F0036684E /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		96A9E9BE1A8A961B006A7754 /* VideoBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBridge.swift; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -330,6 +339,7 @@
 			children = (
 				EB12A8431A19A6AC0018C229 /* libpop.a */,
 				EB12A8451A19A6AC0018C229 /* pop.framework */,
+				96A9E9C51A8A961C006A7754 /* pop.framework */,
 				EB12A8471A19A6AC0018C229 /* pop-tests.octest */,
 				EB12A8491A19A6AC0018C229 /* pop-tests-osx.octest */,
 			);
@@ -504,6 +514,7 @@
 				EB2A88531A82FD5900E3987F /* GestureBridge.swift */,
 				EBC43D831A81BA360075272A /* HeartbeatBridge.swift */,
 				EBC43D871A81C47A0075272A /* SoundBridge.swift */,
+				96A9E9BE1A8A961B006A7754 /* VideoBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -693,6 +704,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		96A9E9C51A8A961C006A7754 /* pop.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = pop.framework;
+			remoteRef = 96A9E9C41A8A961C006A7754 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EB12A8431A19A6AC0018C229 /* libpop.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -710,14 +728,14 @@
 		EB12A8471A19A6AC0018C229 /* pop-tests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "pop-tests.octest";
+			path = "pop-tests.xctest";
 			remoteRef = EB12A8461A19A6AC0018C229 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		EB12A8491A19A6AC0018C229 /* pop-tests-osx.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "pop-tests-osx.octest";
+			path = "pop-tests-osx.xctest";
 			remoteRef = EB12A8481A19A6AC0018C229 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -806,6 +824,7 @@
 				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
 				EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */,
 				EBC43D801A81B5EB0075272A /* MathBridge.swift in Sources */,
+				96A9E9BF1A8A961B006A7754 /* VideoBridge.swift in Sources */,
 				EBC43D7C1A81AF350075272A /* TimingBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
