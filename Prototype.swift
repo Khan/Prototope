@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import swiftz
 import swiftz_core
 
 struct Prototype {
@@ -34,7 +33,7 @@ extension Prototype {
 		self.images = [:]
 		if isDirectory.boolValue {
 			var error: NSError? = nil
-			let contents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(path, error: &error) as [String]?
+			let contents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(path, error: &error) as! [String]?
 			if contents == nil {
 				println("Couldn't read directory \(path): \(error)")
 				return nil

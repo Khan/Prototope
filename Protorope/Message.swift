@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import swiftz
 import swiftz_core
 
 enum Message {

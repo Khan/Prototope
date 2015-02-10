@@ -33,9 +33,9 @@ class SessionInteractor {
 			}
 		)
 
-		let script = NSString(data: prototype.mainScript, encoding: NSUTF8StringEncoding)
+		let script = NSString(data: prototype.mainScript, encoding: NSUTF8StringEncoding)!
 		context = SessionInteractor.createContext()
-		context?.evaluateScript(script)
+		context?.evaluateScript(script as String)
 	}
 
 	private class func createContext() -> PrototopeJSBridge.Context {

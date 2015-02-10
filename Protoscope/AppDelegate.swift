@@ -12,7 +12,7 @@ import PrototopeJSBridge
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-	var window: UIWindow!
+	var window: UIWindow?
 
 	var rootViewController: RootViewController!
 	var server: ProtoscopeServer!
@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		rootViewController = RootViewController()
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
-		window.rootViewController = rootViewController
-		window.makeKeyAndVisible()
+		window!.rootViewController = rootViewController
+		window!.makeKeyAndVisible()
 
 		self.sessionInteractor = SessionInteractor()
 

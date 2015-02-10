@@ -24,9 +24,6 @@
 		EB05D2B11A8946AA00F4CFD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2AF1A8946AA00F4CFD4 /* Message.swift */; };
 		EB05D2C41A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
 		EB05D2C51A894A9200F4CFD4 /* Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05D2BC1A894A2F00F4CFD4 /* Prototype.swift */; };
-		EB05D2D61A894C4000F4CFD4 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2CE1A894C2A00F4CFD4 /* swiftz.framework */; };
-		EB05D2D71A894C4700F4CFD4 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2CE1A894C2A00F4CFD4 /* swiftz.framework */; };
-		EB05D2F71A894E5200F4CFD4 /* swiftz_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */; };
 		EB05D2FC1A894E5D00F4CFD4 /* swiftz_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2EE1A894E3500F4CFD4 /* swiftz_core.framework */; };
 		EB12A84C1A19A6C20018C229 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB12A8431A19A6AC0018C229 /* libpop.a */; };
 		EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
@@ -66,6 +63,22 @@
 		EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */; };
 		EB6BFBE01A858332002B4E6A /* libDTBonjour_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6BFBA61A85746E002B4E6A /* libDTBonjour_iOS.a */; };
 		EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */; };
+		EB7526BC1A8A7FF300D5D187 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526BB1A8A7FF300D5D187 /* JSON.swift */; };
+		EB7526BD1A8A7FF300D5D187 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526BB1A8A7FF300D5D187 /* JSON.swift */; };
+		EB7526BF1A8A803400D5D187 /* DictionaryExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526BE1A8A803400D5D187 /* DictionaryExt.swift */; };
+		EB7526C01A8A803400D5D187 /* DictionaryExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526BE1A8A803400D5D187 /* DictionaryExt.swift */; };
+		EB7526C21A8A804000D5D187 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526C11A8A804000D5D187 /* ArrayExt.swift */; };
+		EB7526C31A8A804100D5D187 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526C11A8A804000D5D187 /* ArrayExt.swift */; };
+		EB7526C51A8A804A00D5D187 /* NSDictionaryExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526C41A8A804A00D5D187 /* NSDictionaryExt.swift */; };
+		EB7526C61A8A804A00D5D187 /* NSDictionaryExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526C41A8A804A00D5D187 /* NSDictionaryExt.swift */; };
+		EB7526C81A8A804F00D5D187 /* NSArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526C71A8A804F00D5D187 /* NSArrayExt.swift */; };
+		EB7526C91A8A804F00D5D187 /* NSArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7526C71A8A804F00D5D187 /* NSArrayExt.swift */; };
+		EB7526D01A8A81DD00D5D187 /* swiftz_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2F21A894E3500F4CFD4 /* swiftz_core.framework */; };
+		EB7526D11A8A81DD00D5D187 /* swiftz_core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB05D2F21A894E3500F4CFD4 /* swiftz_core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB7526D51A8A81E800D5D187 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
+		EB7526D61A8A81E800D5D187 /* Prototope.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB7526D71A8A81E800D5D187 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
+		EB7526D81A8A81E800D5D187 /* PrototopeJSBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB75AE3C1A86F1B400742127 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3B1A86F1B400742127 /* Style.swift */; };
 		EB75AE3E1A86F1FD00742127 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3D1A86F1FD00742127 /* StatusView.swift */; };
 		EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE3F1A86F5A200742127 /* RootViewController.swift */; };
@@ -81,8 +94,6 @@
 		EBB565DD19F0774F00D93DE3 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DC19F0774F00D93DE3 /* MathTests.swift */; };
 		EBB565DF19F07A2900D93DE3 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DE19F07A2900D93DE3 /* GeometryTests.swift */; };
 		EBBA431719F45186000B81BE /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA431619F45186000B81BE /* Gesture.swift */; };
-		EBC00D8D1A8588ED008D4FF5 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
-		EBC00D941A8588F1008D4FF5 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EBC00DA11A86C720008D4FF5 /* URLMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC00D9F1A86C718008D4FF5 /* URLMonitor.swift */; };
 		EBC43D5D1A7FF8920075272A /* BorderBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D5C1A7FF8920075272A /* BorderBridge.swift */; };
 		EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D611A8007320075272A /* ShadowBridge.swift */; };
@@ -152,13 +163,6 @@
 			remoteGlobalIDString = 59853A0A1967F99600A3158C;
 			remoteInfo = swiftz_iosTests;
 		};
-		EB05D2D81A894DF800F4CFD4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 598539FF1967F99500A3158C;
-			remoteInfo = swiftz_ios;
-		};
 		EB05D2ED1A894E3500F4CFD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
@@ -193,13 +197,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 598539DD1967F95B00A3158C;
 			remoteInfo = swiftz_core_ios;
-		};
-		EB05D2F81A894E5900F4CFD4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 59F35ADF193D3A09006F1341;
-			remoteInfo = swiftz;
 		};
 		EB05D2FA1A894E5900F4CFD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -299,6 +296,20 @@
 			remoteGlobalIDString = EB6BFBB41A857920002B4E6A;
 			remoteInfo = Protoscope;
 		};
+		EB7526B51A8A7FDF00D5D187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0B6BE74819FFD3B900762101;
+			remoteInfo = "pop-embedded";
+		};
+		EB7526D21A8A81DD00D5D187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 598539DD1967F95B00A3158C;
+			remoteInfo = swiftz_core_ios;
+		};
 		EBE3A76819DF79C400A77736 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -324,6 +335,19 @@
 			files = (
 				EB1C2A7C19E4D2B8000DC2C1 /* Prototope.framework in CopyFiles */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB7526D41A8A81DD00D5D187 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB7526D11A8A81DD00D5D187 /* swiftz_core.framework in Embed Frameworks */,
+				EB7526D61A8A81E800D5D187 /* Prototope.framework in Embed Frameworks */,
+				EB7526D81A8A81E800D5D187 /* PrototopeJSBridge.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EBE3A77119DF79C400A77736 /* Embed Frameworks */ = {
@@ -407,6 +431,11 @@
 		EB6BFBD91A858172002B4E6A /* Protoscope-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Protoscope-Bridging-Header.h"; sourceTree = "<group>"; };
 		EB6BFBDD1A8581E6002B4E6A /* Protorope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protorope.swift; path = Protorope/Protorope.swift; sourceTree = "<group>"; };
 		EB6EA8561A83DEA2006839EF /* AnimationBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationBridge.swift; sourceTree = "<group>"; };
+		EB7526BB1A8A7FF300D5D187 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = ThirdParty/swiftz/swiftz/JSON.swift; sourceTree = "<group>"; };
+		EB7526BE1A8A803400D5D187 /* DictionaryExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExt.swift; path = ThirdParty/swiftz/swiftz/DictionaryExt.swift; sourceTree = "<group>"; };
+		EB7526C11A8A804000D5D187 /* ArrayExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayExt.swift; path = ThirdParty/swiftz/swiftz/ArrayExt.swift; sourceTree = "<group>"; };
+		EB7526C41A8A804A00D5D187 /* NSDictionaryExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDictionaryExt.swift; path = ThirdParty/swiftz/swiftz/NSDictionaryExt.swift; sourceTree = "<group>"; };
+		EB7526C71A8A804F00D5D187 /* NSArrayExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSArrayExt.swift; path = ThirdParty/swiftz/swiftz/NSArrayExt.swift; sourceTree = "<group>"; };
 		EB75AE3B1A86F1B400742127 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		EB75AE3D1A86F1FD00742127 /* StatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		EB75AE3F1A86F5A200742127 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -489,7 +518,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB05D2FC1A894E5D00F4CFD4 /* swiftz_core.framework in Frameworks */,
-				EB05D2D61A894C4000F4CFD4 /* swiftz.framework in Frameworks */,
 				EB6BFBAA1A857486002B4E6A /* libDTBonjour_Mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,11 +533,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB05D2F71A894E5200F4CFD4 /* swiftz_core.framework in Frameworks */,
-				EB05D2D71A894C4700F4CFD4 /* swiftz.framework in Frameworks */,
-				EBC00D941A8588F1008D4FF5 /* Prototope.framework in Frameworks */,
-				EBC00D8D1A8588ED008D4FF5 /* PrototopeJSBridge.framework in Frameworks */,
+				EB7526D01A8A81DD00D5D187 /* swiftz_core.framework in Frameworks */,
+				EB7526D71A8A81E800D5D187 /* PrototopeJSBridge.framework in Frameworks */,
 				EB6BFBE01A858332002B4E6A /* libDTBonjour_iOS.a in Frameworks */,
+				EB7526D51A8A81E800D5D187 /* Prototope.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,8 +615,9 @@
 			children = (
 				EB12A8431A19A6AC0018C229 /* libpop.a */,
 				EB12A8451A19A6AC0018C229 /* pop.framework */,
-				EB12A8471A19A6AC0018C229 /* pop-tests.octest */,
-				EB12A8491A19A6AC0018C229 /* pop-tests-osx.octest */,
+				EB7526B61A8A7FDF00D5D187 /* pop.framework */,
+				EB12A8471A19A6AC0018C229 /* pop-tests.xctest */,
+				EB12A8491A19A6AC0018C229 /* pop-tests-osx.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -802,6 +830,7 @@
 		EB6BFBA91A857479002B4E6A /* 👽 ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				EB7526CA1A8A805B00D5D187 /* swiftz Extractions (can't yet build the whole framework in 6.3) */,
 				EB6BFB9F1A85746E002B4E6A /* DTBonjour.xcodeproj */,
 				EB05D2C61A894C2A00F4CFD4 /* swiftz.xcodeproj */,
 				EB05D2DD1A894E3500F4CFD4 /* swiftz_core.xcodeproj */,
@@ -850,6 +879,18 @@
 				EB6BFBCE1A857921002B4E6A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB7526CA1A8A805B00D5D187 /* swiftz Extractions (can't yet build the whole framework in 6.3) */ = {
+			isa = PBXGroup;
+			children = (
+				EB7526BB1A8A7FF300D5D187 /* JSON.swift */,
+				EB7526BE1A8A803400D5D187 /* DictionaryExt.swift */,
+				EB7526C11A8A804000D5D187 /* ArrayExt.swift */,
+				EB7526C41A8A804A00D5D187 /* NSDictionaryExt.swift */,
+				EB7526C71A8A804F00D5D187 /* NSArrayExt.swift */,
+			);
+			name = "swiftz Extractions (can't yet build the whole framework in 6.3)";
 			sourceTree = "<group>";
 		};
 		EB75AE431A86F7F600742127 /* UI */ = {
@@ -1012,7 +1053,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				EB05D2F91A894E5900F4CFD4 /* PBXTargetDependency */,
 				EB05D2FB1A894E5900F4CFD4 /* PBXTargetDependency */,
 			);
 			name = Protocaster;
@@ -1045,14 +1085,15 @@
 				EB6BFBB11A857920002B4E6A /* Sources */,
 				EB6BFBB21A857920002B4E6A /* Frameworks */,
 				EB6BFBB31A857920002B4E6A /* Resources */,
+				EB7526D41A8A81DD00D5D187 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				EB05D2F61A894E4D00F4CFD4 /* PBXTargetDependency */,
-				EB05D2D91A894DF800F4CFD4 /* PBXTargetDependency */,
 				EB05D2A51A87F65E00F4CFD4 /* PBXTargetDependency */,
 				EB05D2A71A87F65E00F4CFD4 /* PBXTargetDependency */,
+				EB7526D31A8A81DD00D5D187 /* PBXTargetDependency */,
 			);
 			name = Protoscope;
 			productName = Protoscope;
@@ -1114,7 +1155,6 @@
 					};
 					EB453D8E1A7AB0B2006F2A72 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = K5T4H4978B;
 					};
 					EB453D981A7AB0B2006F2A72 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1254,17 +1294,17 @@
 			remoteRef = EB12A8441A19A6AC0018C229 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EB12A8471A19A6AC0018C229 /* pop-tests.octest */ = {
+		EB12A8471A19A6AC0018C229 /* pop-tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "pop-tests.octest";
+			path = "pop-tests.xctest";
 			remoteRef = EB12A8461A19A6AC0018C229 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EB12A8491A19A6AC0018C229 /* pop-tests-osx.octest */ = {
+		EB12A8491A19A6AC0018C229 /* pop-tests-osx.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "pop-tests-osx.octest";
+			path = "pop-tests-osx.xctest";
 			remoteRef = EB12A8481A19A6AC0018C229 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1280,6 +1320,13 @@
 			fileType = archive.ar;
 			path = libDTBonjour_Mac.a;
 			remoteRef = EB6BFBA71A85746E002B4E6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB7526B61A8A7FDF00D5D187 /* pop.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = pop.framework;
+			remoteRef = EB7526B51A8A7FDF00D5D187 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1422,12 +1469,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6BFBDE1A8581E6002B4E6A /* Protorope.swift in Sources */,
+				EB7526C21A8A804000D5D187 /* ArrayExt.swift in Sources */,
 				EBC00DA11A86C720008D4FF5 /* URLMonitor.swift in Sources */,
+				EB7526BF1A8A803400D5D187 /* DictionaryExt.swift in Sources */,
+				EB7526C81A8A804F00D5D187 /* NSArrayExt.swift in Sources */,
 				EB05D2C51A894A9200F4CFD4 /* Prototype.swift in Sources */,
+				EB7526C51A8A804A00D5D187 /* NSDictionaryExt.swift in Sources */,
 				EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */,
 				EB05D2B01A8946AA00F4CFD4 /* Message.swift in Sources */,
 				EB6BFB871A857326002B4E6A /* ViewController.swift in Sources */,
 				EB6BFB851A857326002B4E6A /* AppDelegate.swift in Sources */,
+				EB7526BC1A8A7FF300D5D187 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1446,11 +1498,16 @@
 				EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */,
 				EB05D2C41A894A9200F4CFD4 /* Prototype.swift in Sources */,
 				EB75AE451A86FA5100742127 /* SceneViewController.swift in Sources */,
+				EB7526BD1A8A7FF300D5D187 /* JSON.swift in Sources */,
 				EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */,
+				EB7526C61A8A804A00D5D187 /* NSDictionaryExt.swift in Sources */,
+				EB7526C31A8A804100D5D187 /* ArrayExt.swift in Sources */,
 				EB05D2A81A87F67100F4CFD4 /* SessionInteractor.swift in Sources */,
 				EB6BFBD81A858153002B4E6A /* ProtoscopeServer.swift in Sources */,
 				EB75AE401A86F5A200742127 /* RootViewController.swift in Sources */,
+				EB7526C01A8A803400D5D187 /* DictionaryExt.swift in Sources */,
 				EB75AE3E1A86F1FD00742127 /* StatusView.swift in Sources */,
+				EB7526C91A8A804F00D5D187 /* NSArrayExt.swift in Sources */,
 				EB05D2B11A8946AA00F4CFD4 /* Message.swift in Sources */,
 				EB6BFBBA1A857921002B4E6A /* AppDelegate.swift in Sources */,
 				EB75AE3C1A86F1B400742127 /* Style.swift in Sources */,
@@ -1506,20 +1563,10 @@
 			target = EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */;
 			targetProxy = EB05D2A61A87F65E00F4CFD4 /* PBXContainerItemProxy */;
 		};
-		EB05D2D91A894DF800F4CFD4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = swiftz_ios;
-			targetProxy = EB05D2D81A894DF800F4CFD4 /* PBXContainerItemProxy */;
-		};
 		EB05D2F61A894E4D00F4CFD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = swiftz_core_ios;
 			targetProxy = EB05D2F51A894E4D00F4CFD4 /* PBXContainerItemProxy */;
-		};
-		EB05D2F91A894E5900F4CFD4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = swiftz;
-			targetProxy = EB05D2F81A894E5900F4CFD4 /* PBXContainerItemProxy */;
 		};
 		EB05D2FB1A894E5900F4CFD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1560,6 +1607,11 @@
 			isa = PBXTargetDependency;
 			target = EB6BFBB41A857920002B4E6A /* Protoscope */;
 			targetProxy = EB6BFBCA1A857921002B4E6A /* PBXContainerItemProxy */;
+		};
+		EB7526D31A8A81DD00D5D187 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = swiftz_core_ios;
+			targetProxy = EB7526D21A8A81DD00D5D187 /* PBXContainerItemProxy */;
 		};
 		EBE3A76919DF79C400A77736 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1953,12 +2005,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Protoscope/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1977,8 +2032,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Protoscope/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
