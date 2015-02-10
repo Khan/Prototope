@@ -15,10 +15,13 @@ public struct Video {
 	let player: AVPlayer
 	
 	/** Initialize the video with a filename. The name must include the file extension. */
-	public init(name: String) {
+	public init?(name: String) {
 		self.name = name
 		
-		let URL = NSBundle.mainBundle().URLForResource(name, withExtension: nil)
-		self.player = AVPlayer(URL: URL)
+		if let URL = NSBundle.mainBundle().URLForResource(name, withExtension: nil) {
+			self.player = AVPlayer(URL: URL)
+		} else {
+			return nil
+		}
 	}
 }
