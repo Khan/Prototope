@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14C81f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7515.2"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -681,9 +681,9 @@
                                 </textFieldCell>
                             </textField>
                             <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bvu-vC-F6c">
-                                <rect key="frame" x="140" y="130" width="200" height="22"/>
-                                <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="Y8C-bM-rL9">
-                                    <font key="font" metaFont="smallSystem"/>
+                                <rect key="frame" x="143" y="130" width="200" height="26"/>
+                                <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="Y8C-bM-rL9">
+                                    <font key="font" metaFont="system"/>
                                     <allowedTypes>
                                         <string>js</string>
                                         <string>public.folder</string>
@@ -693,10 +693,61 @@
                                     <action selector="pathControlDidChange:" target="XfG-lQ-9wD" id="Ls8-zo-S0E"/>
                                 </connections>
                             </pathControl>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZD2-1A-Qee">
+                                <rect key="frame" x="69" y="134" width="71" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Broadcast:" id="mFa-QZ-50P">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5t-mp-8PD">
+                                <rect key="frame" x="144" y="102" width="199" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Hy-yP-Bac" id="Pgs-iI-cxE">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="ALu-Y3-Cb8">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="4Hy-yP-Bac"/>
+                                            <menuItem title="Item 2" id="vbr-SX-MGv"/>
+                                            <menuItem title="Item 3" id="h7i-hi-Soi"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="deviceSelectionDidChange:" target="XfG-lQ-9wD" id="Yu0-0A-PyY"/>
+                                    <binding destination="zaA-yr-IQA" name="content" keyPath="arrangedObjects" id="9dO-1Y-idk">
+                                        <dictionary key="options">
+                                            <bool key="NSInsertsNullPlaceholder" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="zaA-yr-IQA" name="contentValues" keyPath="arrangedObjects.name" previousBinding="9dO-1Y-idk" id="niB-Ew-cjO">
+                                        <dictionary key="options">
+                                            <bool key="NSInsertsNullPlaceholder" value="YES"/>
+                                            <string key="NSNoSelectionPlaceholder">No selection</string>
+                                            <string key="NSNullPlaceholder">(nowhere)</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="XfG-lQ-9wD" name="selectedObject" keyPath="self.selectedDeviceSession" previousBinding="niB-Ew-cjO" id="3p2-23-V5Y"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iIY-jn-0he">
+                                <rect key="frame" x="119" y="108" width="21" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="to:" id="yZw-uk-sjH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="deviceChooserButton" destination="D5t-mp-8PD" id="BO8-4X-h7N"/>
+                        <outlet property="deviceListController" destination="zaA-yr-IQA" id="sD7-5T-UxZ"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController id="zaA-yr-IQA"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>

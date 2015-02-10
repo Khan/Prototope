@@ -48,32 +48,32 @@ class URLMonitor {
 			return NSOperationQueue.mainQueue()
 		}
 
-		private func presentedItemDidChange() {
+		@objc private func presentedItemDidChange() {
 			everythingDidChangeHandler()
 		}
 
-		private func presentedSubitemDidAppearAtURL(url: NSURL) {
+		@objc private func presentedSubitemDidAppearAtURL(url: NSURL) {
 			println("Subitem appared: \(url)")
 			everythingDidChangeHandler()
 		}
 
-		private func presentedSubitemDidChangeAtURL(url: NSURL) {
+		@objc private func presentedSubitemDidChangeAtURL(url: NSURL) {
 			println("Subitem changed: \(url)")
 			everythingDidChangeHandler()
 		}
 
-		private func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL) {
+		@objc private func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL) {
 			println("Subitem moved: \(oldURL) -> \(newURL)")
 			everythingDidChangeHandler()
 		}
 
-		private func accommodatePresentedSubitemDeletionAtURL(url: NSURL, completionHandler: (NSError!) -> Void) {
+		@objc private func accommodatePresentedSubitemDeletionAtURL(url: NSURL, completionHandler: (NSError!) -> Void) {
 			println("Subitem deleted: \(url)")
 			everythingDidChangeHandler()
 			completionHandler(nil)
 		}
 
-		private func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError!) -> Void) {
+		@objc private func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError!) -> Void) {
 			println("Item disappeared")
 			fatalError("Unimplemented")
 		}

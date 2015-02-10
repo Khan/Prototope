@@ -11,42 +11,56 @@ import Cocoa
 class ViewController: NSViewController, DTBonjourDataConnectionDelegate {
 
 	var scanner: ProtoscopeScanner!
-	var connection: DTBonjourDataConnection?
 	var monitor: URLMonitor?
+
+	var connection: DTBonjourDataConnection?
+	var selectedDeviceSession: NSNetService?
+
+	@IBOutlet var deviceListController: NSArrayController!
+	@IBOutlet weak var deviceChooserButton: NSPopUpButton!
 
 	@IBAction func pathControlDidChange(sender: NSPathControl) {
 		if let URL = sender.URL {
 			monitor = URLMonitor(URL: URL)
 			monitor!.everythingDidChangeHandler = {
-				self.sendTestData()
+				self.sendPrototypeData()
 			}
 
-			sendTestData()
+			sendPrototypeData()
 		} else {
 			monitor = nil
 		}
 	}
 
-	override func viewDidLoad() {
+	@IBAction func deviceSelectionDidChange(sender: NSPopUpButton) {
+		self.connection?.close()
+		self.connection?.delegate = nil
+		if selectedDeviceSession != nil {
+			self.connection = DTBonjourDataConnection(service: selectedDeviceSession)
+			self.connection!.open()
+			self.connection!.delegate = self
+		}
+	}
 
+	override func viewDidLoad() {
 		scanner = ProtoscopeScanner(
 			serviceDidAppearHandler: { service in
-				println(service.name)
-				self.connection = DTBonjourDataConnection(service: service)
-				self.connection!.open()
-				self.connection!.delegate = self
+				self.deviceListController.addObject(service)
 			},
 			serviceDidDisappearHandler: { service in
-				println(service.name)
+				if .Some(service) == self.selectedDeviceSession {
+					self.selectedDeviceSession = nil
+				}
+				self.deviceListController.removeObject(service)
 			}
 		)
 	}
 
 	func connectionDidOpen(connection: DTBonjourDataConnection!) {
-		sendTestData()
+		sendPrototypeData()
 	}
 
-	func sendTestData() {
+	func sendPrototypeData() {
 		if let selectedURL = monitor?.URL {
 			if let prototype = Prototype(url: selectedURL) {
 				let message = Message.ReplacePrototype(prototype)
