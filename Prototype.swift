@@ -31,6 +31,7 @@ extension Prototype {
 		}
 
 		var mainScriptPath: String
+		self.images = [:]
 		if isDirectory.boolValue {
 			var error: NSError? = nil
 			let contents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(path, error: &error) as [String]?
@@ -50,13 +51,20 @@ extension Prototype {
 				println("Multiple JavaScript files found in \(path): \(javaScriptFiles)")
 				return nil
 			}
+
+			for imageName in contents!.filter({ $0.pathExtension == "png" }) {
+				let imagePath = path.stringByAppendingPathComponent(imageName)
+				if let imageData = NSData(contentsOfFile: imagePath, options: nil, error: &error) {
+					self.images[imageName] = imageData
+				}
+			}
+
 		} else {
 			mainScriptPath = path
 		}
 
 		if let mainScriptData = NSData(contentsOfFile: mainScriptPath, options: nil, error: &error) {
 			self.mainScript = mainScriptData
-			self.images = [:]
 		} else {
 			println("Failed to read main script: \(mainScriptPath): \(error)")
 			return nil

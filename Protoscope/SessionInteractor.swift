@@ -9,20 +9,31 @@
 import Foundation
 import Prototope
 import PrototopeJSBridge
+import swiftz_core
 
 class SessionInteractor {
 	private var context: PrototopeJSBridge.Context?
 
 	init() {}
 
-	// TODO: Make scene model.
-	func displayScene(script: String, rootView: UIView) {
+	func displayPrototype(prototype: Prototype, rootView: UIView) {
 		Prototope.Layer.root?.removeAllSublayers()
 		Prototope.Environment.currentEnvironment = Environment(
 			rootView: rootView,
-			imageProvider: { _ in fatalError("Unimplemented"); return nil }
+			imageProvider: { name in
+				let scale = UIScreen.mainScreen().scale
+				let filenameWithScale = name.stringByAppendingString("@\(Int(scale))x").stringByAppendingPathExtension("png")!
+				let filename = name.stringByAppendingPathExtension("png")!
+
+				let loadImage: (String, CGFloat) -> UIImage? = { filename, scale in
+					return prototype.images[filename] >>- { UIImage(data: $0, scale: scale) }
+				}
+
+				return loadImage(filenameWithScale, scale) ?? loadImage(filename, 1)
+			}
 		)
 
+		let script = NSString(data: prototype.mainScript, encoding: NSUTF8StringEncoding)
 		context = SessionInteractor.createContext()
 		context?.evaluateScript(script)
 	}
