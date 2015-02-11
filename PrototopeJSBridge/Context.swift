@@ -67,5 +67,9 @@ public class Context {
 		PinchSampleBridge.addToContext(context)
 		PinchGestureBridge.addToContext(context)
 		AnimationCurveBridge.addToContext(context)
+		VideoBridge.addToContext(context)
+		VideoLayerBridge.addToContext(context)
+		ParticleBridge.addToContext(context)
+		ParticleEmitterBridge.addToContext(context)
 	}
 }

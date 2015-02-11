@@ -29,11 +29,16 @@ public class Layer: Equatable, Hashable {
 	/** The root layer of the scene. Defines the global coordinate system. */
 	public class var root: Layer! { return Environment.currentEnvironment?.rootLayer }
 
-	/** Creates a layer with an optional parent and name. **/
-	public init(parent: Layer? = nil, name: String? = nil) {
+	/** Creates a layer with an optional parent and name. */
+	public init(parent: Layer? = nil, name: String? = nil, viewClass: UIView.Type? = nil) {
 		self.parent = parent
 		self.name = name
-		self.view = TouchForwardingImageView() // TODO: dynamically switch the view type depending on whether we're using an image or not
+		
+		if let viewClass = viewClass {
+			self.view = viewClass()
+		} else {
+			self.view = TouchForwardingImageView() // TODO: dynamically switch the view type depending on whether we're using an image or not
+		}
 		self.view.multipleTouchEnabled = true
 		self.view.userInteractionEnabled = true
 

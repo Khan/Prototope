@@ -15,6 +15,6 @@ class GeometryBridgeTests: JSBridgeTestCase {
 		XCTAssertEqual(context.evaluateScript("(new Point({x: 5, y: 10})).y").toDouble(), 10)
 		XCTAssertEqual(context.evaluateScript("Point.zero.x").toDouble(), 0)
 		XCTAssertEqual(context.evaluateScript("(new Point({x: 2, y: 3})).add(new Point({x: 5})).x").toDouble(), 7)
-		XCTAssertEqual(context.evaluateScript("tunable({name: 'foo', defaultValue: 1.0})").toDouble(), 1)
+		XCTAssertEqual(context.evaluateScript("tunable({name: 'foo', default: 1.0})").toDouble(), 1)
 	}
 }

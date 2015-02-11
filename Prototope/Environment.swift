@@ -8,6 +8,7 @@
 
 import Foundation
 
+/** Establishes an environment in which Prototope can execute. */
 public struct Environment {
 	public var rootLayer: Layer
 	public var imageProvider: String -> UIImage?
