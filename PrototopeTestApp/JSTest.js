@@ -21,3 +21,12 @@ layer.shadow = new Shadow({alpha: 1.0});
 var video = new Video({name: "countdown.mp4"});
 var videoLayer = new VideoLayer({parent: Layer.root, video: video });
 videoLayer.play();
+
+var particle = new Particle({imageName: "paint"})
+particle.spin = 2;
+
+var emitter = new ParticleEmitter({particle: particle});
+layer.addParticleEmitter(emitter);
+layer.removeParticleEmitter(emitter);
+
+"Done JSTest.js"
