@@ -35,13 +35,14 @@ class RootViewController: UIViewController {
 			let sceneViewController = SceneViewController()
 			protoscopeNavigationController.pushViewController(sceneViewController, animated: true)
 			state = .DisplayingScene(sceneViewController)
-			return sceneViewController.view
+			return sceneViewController.sceneView
 		case let .DisplayingScene(sceneViewController):
-			return sceneViewController.view
+			sceneViewController.appendConsoleMessage("HI THERE")
+			return sceneViewController.sceneView
 		case let .Exception(sceneViewController, _):
 			dismissViewControllerAnimated(false, completion: nil)
 			state = .DisplayingScene(sceneViewController)
-			return sceneViewController.view
+			return sceneViewController.sceneView
 		}
 	}
 

@@ -29,7 +29,7 @@ class ExceptionView: UIView {
 		textView.textColor = UIColor.whiteColor()
 		textView.backgroundColor = UIColor.clearColor()
 		textView.textContainerInset = UIEdgeInsets()
-		textView.textContainer.lineFragmentPadding = 0;
+		textView.textContainer.lineFragmentPadding = 0
 		return textView
 	}()
 

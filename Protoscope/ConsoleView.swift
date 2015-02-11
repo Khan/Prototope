@@ -9,8 +9,44 @@
 import UIKit
 
 class ConsoleView: UIView {
+	private let vibrancyEffectView: UIVisualEffectView
+	private let visualEffectView: UIVisualEffectView
+	private let textView: UITextView = {
+		let textView = UITextView(frame: CGRect())
+		textView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+		textView.textColor = UIColor.whiteColor()
+		textView.backgroundColor = UIColor.clearColor()
+		textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+		textView.textContainer.lineFragmentPadding = 0
+		textView.editable = false
+
+		return textView
+	}()
+
+	func appendConsoleMessage(message: String) {
+		textView.textStorage.appendAttributedString(
+			NSAttributedString(string: "\(message)\n", attributes: [NSFontAttributeName: UIFont(name: "Menlo", size: 16)!])
+		)
+	}
+
+	func reset() {
+		textView.textStorage.deleteCharactersInRange(NSMakeRange(0, textView.textStorage.length))
+	}
+
 	override init() {
+		let blurEffect = UIBlurEffect(style: .Dark)
+		visualEffectView = UIVisualEffectView(effect: blurEffect)
+		visualEffectView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+
+		vibrancyEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))
+		vibrancyEffectView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+		visualEffectView.contentView.addSubview(vibrancyEffectView)
+
+		vibrancyEffectView.contentView.addSubview(textView)
+
 		super.init(frame: CGRect())
+
+		addSubview(visualEffectView)
 	}
 
 	required init(coder aDecoder: NSCoder) {
