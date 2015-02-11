@@ -87,6 +87,8 @@
 		EB75AE451A86FA5100742127 /* SceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75AE441A86FA5100742127 /* SceneViewController.swift */; };
 		EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
 		EBA049B11A8AFC87008BC4AD /* ExceptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA049B01A8AFC87008BC4AD /* ExceptionView.swift */; };
+		EBA049C01A8BCB32008BC4AD /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA049BF1A8BCB32008BC4AD /* ConsoleView.swift */; };
+		EBA049C21A8BCCB0008BC4AD /* ExceptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA049C11A8BCCB0008BC4AD /* ExceptionViewController.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
 		EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8371B1A1DB51000D23C9D /* Sound.swift */; };
 		EBA8371E1A1DB6E300D23C9D /* Glass.aiff in Resources */ = {isa = PBXBuildFile; fileRef = EBA8371D1A1DB6E300D23C9D /* Glass.aiff */; };
@@ -463,6 +465,8 @@
 		EB75AE441A86FA5100742127 /* SceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneViewController.swift; sourceTree = "<group>"; };
 		EB8BC1C91A2CE7B5005E799C /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		EBA049B01A8AFC87008BC4AD /* ExceptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionView.swift; sourceTree = "<group>"; };
+		EBA049BF1A8BCB32008BC4AD /* ConsoleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
+		EBA049C11A8BCCB0008BC4AD /* ExceptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionViewController.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		EBA8371B1A1DB51000D23C9D /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		EBA8371D1A1DB6E300D23C9D /* Glass.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Glass.aiff; sourceTree = "<group>"; };
@@ -922,7 +926,9 @@
 				EB75AE411A86F62300742127 /* StatusViewController.swift */,
 				EB75AE3D1A86F1FD00742127 /* StatusView.swift */,
 				EB75AE441A86FA5100742127 /* SceneViewController.swift */,
+				EBA049C11A8BCCB0008BC4AD /* ExceptionViewController.swift */,
 				EBA049B01A8AFC87008BC4AD /* ExceptionView.swift */,
+				EBA049BF1A8BCB32008BC4AD /* ConsoleView.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1521,8 +1527,10 @@
 			files = (
 				EBA049B11A8AFC87008BC4AD /* ExceptionView.swift in Sources */,
 				EB75AE421A86F62300742127 /* StatusViewController.swift in Sources */,
+				EBA049C21A8BCCB0008BC4AD /* ExceptionViewController.swift in Sources */,
 				EB05D2C41A894A9200F4CFD4 /* Prototype.swift in Sources */,
 				EB75AE451A86FA5100742127 /* SceneViewController.swift in Sources */,
+				EBA049C01A8BCB32008BC4AD /* ConsoleView.swift in Sources */,
 				EB7526BD1A8A7FF300D5D187 /* JSON.swift in Sources */,
 				EB6BFBDF1A8581E6002B4E6A /* Protorope.swift in Sources */,
 				EB7526C61A8A804A00D5D187 /* NSDictionaryExt.swift in Sources */,

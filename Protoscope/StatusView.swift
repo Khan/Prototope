@@ -37,7 +37,7 @@ class StatusView: UIView {
 		addSubview(statusLabel)
 		breatheLogo()
 
-		statusLabel.text = "Waiting for protorope…"
+		statusLabel.text = "waiting for protorope…"
 	}
 
 	override func layoutSubviews() {

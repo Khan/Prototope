@@ -12,7 +12,7 @@ class RootViewController: UIViewController {
 	private enum State {
 		case WaitingForConnection
 		case DisplayingScene(SceneViewController)
-		case Exception(SceneViewController, ExceptionView)
+		case Exception(SceneViewController, ExceptionViewController)
 	}
 
 	private var state: State = .WaitingForConnection
@@ -50,17 +50,13 @@ class RootViewController: UIViewController {
 		case .WaitingForConnection:
 			fatalError("Didn't expect to receive an exception while waiting for a connection.")
 		case let .DisplayingScene(sceneViewController):
-			let exceptionView = ExceptionView()
-			exceptionView.exception = exception
-
-			let exceptionViewController = UIViewController()
-			exceptionViewController.view = exceptionView
-
+			let exceptionViewController = ExceptionViewController()
+			exceptionViewController.exception = exception
 			presentViewController(exceptionViewController, animated: false, completion: nil)
 
-			state = .Exception(sceneViewController, exceptionView)
-		case let .Exception(_, exceptionView):
-			exceptionView.exception = exception
+			state = .Exception(sceneViewController, exceptionViewController)
+		case let .Exception(_, exceptionViewController):
+			exceptionViewController.exception = exception
 		}
 	}
 
