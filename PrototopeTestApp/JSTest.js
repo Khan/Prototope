@@ -28,3 +28,5 @@ particle.spin = 2;
 var emitter = new ParticleEmitter({particle: particle});
 layer.addParticleEmitter(emitter);
 layer.removeParticleEmitter(emitter);
+
+"Done JSTest.js"

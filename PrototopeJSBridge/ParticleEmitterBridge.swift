@@ -21,6 +21,7 @@ import JavaScriptCore
 	var position: PointBridge { get set }
 	var x: Double { get set }
 	var y: Double { get set }
+	var emitterBridge: ParticleEmitterBridge { get }
 }
 
 @objc public class ParticleEmitterBridge: NSObject, ParticleEmitterJSExport, BridgeType {
@@ -89,5 +90,10 @@ import JavaScriptCore
 	public var y: Double {
 		get { return self.position.y }
 		set { self.position = PointBridge(Point(x: self.x, y: newValue)) }
+	}
+	
+	
+	public var emitterBridge: ParticleEmitterBridge {
+		return self
 	}
 }
