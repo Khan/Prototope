@@ -76,6 +76,10 @@ import JavaScriptCore
 
     // MARK: Animations
     var animators: LayerAnimatorStoreJSExport { get }
+	
+	// MARK: Particle emitters
+	func addParticleEmitter(emitterBridge: ParticleEmitterBridge)
+	func removeParticleEmitter(emitterBridge: ParticleEmitterBridge)
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -495,5 +499,17 @@ import JavaScriptCore
     public var animators: LayerAnimatorStoreJSExport {
         return LayerAnimatorStoreBridge(layer.animators)
     }
+	
+	
+	// MARK: Particle emitters
+	// TODO(jb): The JS bridge doesn't seem to recognize these..why?
+	public func addParticleEmitter(emitterBridge: ParticleEmitterBridge) {
+		layer.addParticleEmitter(emitterBridge.emitter)
+	}
+	
+	
+	public func removeParticleEmitter(emitterBridge: ParticleEmitterBridge) {
+		layer.removeParticleEmitter(emitterBridge.emitter)
+	}
 
 }

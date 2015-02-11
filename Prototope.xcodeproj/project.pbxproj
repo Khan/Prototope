@@ -16,6 +16,7 @@
 		96A9E9C71A8A9728006A7754 /* VideoLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9E9C61A8A9728006A7754 /* VideoLayerBridge.swift */; };
 		96A9E9C91A8AA6DD006A7754 /* countdown.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 96A9E9C81A8AA6DD006A7754 /* countdown.mp4 */; };
 		96A9E9CB1A8AB58E006A7754 /* ParticleBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9E9CA1A8AB58E006A7754 /* ParticleBridge.swift */; };
+		96D781B31A8BB5F900881501 /* ParticleEmitterBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D781B21A8BB5F900881501 /* ParticleEmitterBridge.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -204,6 +205,7 @@
 		96A9E9C61A8A9728006A7754 /* VideoLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLayerBridge.swift; sourceTree = "<group>"; };
 		96A9E9C81A8AA6DD006A7754 /* countdown.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = countdown.mp4; sourceTree = "<group>"; };
 		96A9E9CA1A8AB58E006A7754 /* ParticleBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleBridge.swift; sourceTree = "<group>"; };
+		96D781B21A8BB5F900881501 /* ParticleEmitterBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitterBridge.swift; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				96A9E9BE1A8A961B006A7754 /* VideoBridge.swift */,
 				96A9E9C61A8A9728006A7754 /* VideoLayerBridge.swift */,
 				96A9E9CA1A8AB58E006A7754 /* ParticleBridge.swift */,
+				96D781B21A8BB5F900881501 /* ParticleEmitterBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -828,6 +831,7 @@
 				EBC43D781A81999B0075272A /* JSContext+BridgingExtensions.swift in Sources */,
 				96A9E9CB1A8AB58E006A7754 /* ParticleBridge.swift in Sources */,
 				EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */,
+				96D781B31A8BB5F900881501 /* ParticleEmitterBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
 				EBC43D6F1A81916E0075272A /* Context.swift in Sources */,
 				EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */,
