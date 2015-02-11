@@ -26,7 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window!.rootViewController = rootViewController
 		window!.makeKeyAndVisible()
 
-		self.sessionInteractor = SessionInteractor()
+		self.sessionInteractor = SessionInteractor(
+			exceptionHandler: { exception in
+				self.rootViewController.displayException(exception)
+			}
+		)
 
 		server = ProtoscopeServer(messageHandler: {
 			switch $0 {

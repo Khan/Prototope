@@ -13,8 +13,11 @@ import swiftz_core
 
 class SessionInteractor {
 	private var context: PrototopeJSBridge.Context?
+	private let exceptionHandler: String -> ()
 
-	init() {}
+	init(exceptionHandler: String -> ()) {
+		self.exceptionHandler = exceptionHandler
+	}
 
 	func displayPrototype(prototype: Prototype, rootView: UIView) {
 		Prototope.Layer.root?.removeAllSublayers()
@@ -34,15 +37,16 @@ class SessionInteractor {
 		)
 
 		let script = NSString(data: prototype.mainScript, encoding: NSUTF8StringEncoding)!
-		context = SessionInteractor.createContext()
+		context = createContext()
 		context?.evaluateScript(script as String)
 	}
 
-	private class func createContext() -> PrototopeJSBridge.Context {
+	private func createContext() -> PrototopeJSBridge.Context {
 		let context = PrototopeJSBridge.Context()
-		context.exceptionHandler = { value in
+		context.exceptionHandler = { [weak self] value in
 			let lineNumber = value.objectForKeyedSubscript("line")
-			println("Exception on line \(lineNumber): \(value)")
+			let exception = ("Exception on line \(lineNumber): \(value)")
+			self?.exceptionHandler(exception)
 		}
 		return context
 	}

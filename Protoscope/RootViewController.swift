@@ -9,9 +9,16 @@
 import UIKit
 
 class RootViewController: UIViewController {
+	private enum State {
+		case WaitingForConnection
+		case DisplayingScene(SceneViewController)
+		case Exception(SceneViewController, ExceptionView)
+	}
+
+	private var state: State = .WaitingForConnection
+
 	var protoscopeNavigationController: UINavigationController!
 	var statusViewController: UIViewController!
-	var sceneViewController: SceneViewController?
 
 	override init() {
 		super.init(nibName: nil, bundle: nil)
@@ -23,12 +30,38 @@ class RootViewController: UIViewController {
 
 	/// Returns scene display host view
 	func transitionToSceneDisplay() -> UIView {
-		// TODO: Replace with value-based state
-		if protoscopeNavigationController.topViewController !== sceneViewController {
-			sceneViewController = SceneViewController()
-			protoscopeNavigationController.pushViewController(sceneViewController!, animated: true)
+		switch state {
+		case .WaitingForConnection:
+			let sceneViewController = SceneViewController()
+			protoscopeNavigationController.pushViewController(sceneViewController, animated: true)
+			state = .DisplayingScene(sceneViewController)
+			return sceneViewController.view
+		case let .DisplayingScene(sceneViewController):
+			return sceneViewController.view
+		case let .Exception(sceneViewController, _):
+			dismissViewControllerAnimated(false, completion: nil)
+			state = .DisplayingScene(sceneViewController)
+			return sceneViewController.view
 		}
-		return sceneViewController!.view
+	}
+
+	func displayException(exception: String) {
+		switch state {
+		case .WaitingForConnection:
+			fatalError("Didn't expect to receive an exception while waiting for a connection.")
+		case let .DisplayingScene(sceneViewController):
+			let exceptionView = ExceptionView()
+			exceptionView.exception = exception
+
+			let exceptionViewController = UIViewController()
+			exceptionViewController.view = exceptionView
+
+			presentViewController(exceptionViewController, animated: false, completion: nil)
+
+			state = .Exception(sceneViewController, exceptionView)
+		case let .Exception(_, exceptionView):
+			exceptionView.exception = exception
+		}
 	}
 
 	override func viewDidLoad() {
