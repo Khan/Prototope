@@ -37,6 +37,8 @@ class SceneViewController: UIViewController {
 	}
 
 	private func setConsoleViewVisible(visible: Bool, animated: Bool) {
+		if visible == consoleViewVisible { return }
+
 		consoleView.frame = view.bounds
 		consoleView.frame.size.height = 300
 		consoleView.frame.origin.y = visible ? -consoleView.frame.size.height : 0
@@ -65,6 +67,9 @@ class SceneViewController: UIViewController {
 		}
 
 		consoleViewVisible = visible
+		if visible {
+			consoleView.scrollToBottomAnimated(false)
+		}
 	}
 
 	override init() {

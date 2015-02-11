@@ -27,6 +27,13 @@ class ConsoleView: UIView {
 		textView.textStorage.appendAttributedString(
 			NSAttributedString(string: "\(message)\n", attributes: [NSFontAttributeName: UIFont(name: "Menlo", size: 16)!])
 		)
+		scrollToBottomAnimated(true)
+	}
+
+	func scrollToBottomAnimated(animated: Bool) {
+		var newContentOffset = textView.contentOffset
+		newContentOffset.y = max(0, textView.contentSize.height - textView.bounds.size.height)
+		textView.setContentOffset(newContentOffset, animated: animated)
 	}
 
 	func reset() {

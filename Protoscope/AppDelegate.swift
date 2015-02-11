@@ -27,8 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window!.makeKeyAndVisible()
 
 		self.sessionInteractor = SessionInteractor(
-			exceptionHandler: { exception in
-				self.rootViewController.displayException(exception)
+			exceptionHandler: { [weak self] exception in
+				self?.rootViewController.displayException(exception)
+				return
+			},
+			consoleLogHandler: { [weak self] message in
+				self?.rootViewController.appendConsoleMessage(message)
+				return
 			}
 		)
 

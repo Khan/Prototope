@@ -20,6 +20,8 @@ public class Context {
 		}
 	}
 
+	public var consoleLogHandler: (String -> Void)?
+
 	private let vm = JSVirtualMachine()
 	private let context: JSContext
 
@@ -34,8 +36,9 @@ public class Context {
 
 	private func addBridgedTypes() {
 		let console = JSValue(newObjectInContext: context)
-		let loggingTrampoline: @objc_block JSValue -> Void = { value in
-			println(JSContext.currentArguments())
+		let loggingTrampoline: @objc_block JSValue -> Void = { [weak self] value in
+			self?.consoleLogHandler?(value.toString())
+			return
 		}
 		console.setFunctionForKey("log", fn: loggingTrampoline)
 		context.setObject(console, forKeyedSubscript: "console")

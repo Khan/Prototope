@@ -37,11 +37,12 @@ class RootViewController: UIViewController {
 			state = .DisplayingScene(sceneViewController)
 			return sceneViewController.sceneView
 		case let .DisplayingScene(sceneViewController):
-			sceneViewController.appendConsoleMessage("HI THERE")
+			sceneViewController.resetSceneView()
 			return sceneViewController.sceneView
 		case let .Exception(sceneViewController, _):
 			dismissViewControllerAnimated(false, completion: nil)
 			state = .DisplayingScene(sceneViewController)
+			sceneViewController.resetSceneView()
 			return sceneViewController.sceneView
 		}
 	}
@@ -58,6 +59,17 @@ class RootViewController: UIViewController {
 			state = .Exception(sceneViewController, exceptionViewController)
 		case let .Exception(_, exceptionViewController):
 			exceptionViewController.exception = exception
+		}
+	}
+
+	func appendConsoleMessage(message: String) {
+		switch state {
+		case .WaitingForConnection:
+			fatalError("Didn't expect to receive a console message while waiting for a connection.")
+		case let .DisplayingScene(sceneViewController):
+			sceneViewController.appendConsoleMessage(message)
+		case let .Exception(sceneViewController, _):
+			sceneViewController.appendConsoleMessage(message)
 		}
 	}
 
