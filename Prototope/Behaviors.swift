@@ -163,7 +163,7 @@ class BehaviorDriver {
     }
     
     func updateWithLayer(layer: Layer, behaviors: [BehaviorType]) {
-        var knownBindings = lazy(self.registeredBindings).filter { $0.hostLayer == layer }
+        let knownBindings = lazy(self.registeredBindings).filter { $0.hostLayer == layer }
         
         let otherBindings = self.registeredBindings.subtract(knownBindings)
         
