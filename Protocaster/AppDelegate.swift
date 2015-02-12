@@ -11,7 +11,7 @@ import swiftz_core
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDelegate {
-	private var mainWindowController: ViewController!
+	private var mainViewController: ViewController! // TODO: rename, make window controller
 	private var logWindowController: LogWindowController!
 
 	private var scanner: ProtoscopeScanner!
@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 
 	private var selectedDeviceSession: NSNetService? {
 		didSet {
-			mainWindowController.selectedDeviceSession = selectedDeviceSession
+			mainViewController.selectedDeviceSession = selectedDeviceSession
 
 			connection?.close()
 			connection?.delegate = nil
@@ -35,12 +35,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 
 	private func selectedPathDidChange(newURL: NSURL?) {
 		if let URL = newURL {
-			monitor = URLMonitor(URL: URL)
-			monitor!.everythingDidChangeHandler = {
-				self.sendPrototypeData()
-			}
+			if .Some(URL) != monitor?.URL {
+				monitor = URLMonitor(URL: URL)
+				monitor!.everythingDidChangeHandler = {
+					self.logWindowController.appendReloadMessage()
+					self.sendPrototypeData()
+				}
 
-			sendPrototypeData()
+				sendPrototypeData()
+
+				self.logWindowController.appendPrototypeChangedMessage(URL)
+			}
 		} else {
 			monitor = nil
 		}
@@ -58,21 +63,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 		mainWindow.makeKeyWindow()
 		logWindowController.window!.orderFrontRegardless()
 
-		mainWindowController = mainWindow.contentViewController! as! ViewController
-		mainWindowController.selectedPathDidChange = { [weak self] in
+		mainViewController = mainWindow.contentViewController! as! ViewController
+		mainViewController.selectedPathDidChange = { [weak self] in
 			self?.selectedPathDidChange($0)
 			return
 		}
-		mainWindowController.selectedDeviceDidChange = { [weak self] in
+		mainViewController.selectedDeviceDidChange = { [weak self] in
 			self?.selectedDeviceSession = $0
 			return
 		}
 
-		logWindowController.appendConsoleMessage("HIIIII")
-
 		scanner = ProtoscopeScanner(
 			serviceDidAppearHandler: { [weak self] service in
-				self?.mainWindowController.addService(service)
+				self?.mainViewController.addService(service)
 				return
 			},
 			serviceDidDisappearHandler: { [weak self] service in
@@ -80,7 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 					if .Some(service) == strongSelf.selectedDeviceSession {
 						strongSelf.selectedDeviceSession = nil
 					}
-					strongSelf.mainWindowController.removeService(service)
+					strongSelf.mainViewController.removeService(service)
 				}
 			}
 		)
@@ -93,9 +96,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 	func connection(connection: DTBonjourDataConnection!, didReceiveObject object: AnyObject!) {
 		switch JSONValue.decode(object as! NSData) >>- Message.fromJSON {
 		case let .Some(.PrototypeHitException(exception)):
-			println("Exception: \(exception)")
+			logWindowController.appendException(exception)
 		case let .Some(.PrototypeConsoleLog(message)):
-			println("Console log: \(message)")
+			logWindowController.appendConsoleMessage(message)
 		default:
 			println("Unknown message: \(object)")
 		}

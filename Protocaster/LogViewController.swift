@@ -11,7 +11,45 @@ import AppKit
 class LogViewController: NSViewController {
 
 	func appendConsoleMessage(message: String) {
-		logTextView.textStorage!.appendAttributedString(NSAttributedString(string: message))
+		appendMessage(message, attributes: [:])
+	}
+
+	func appendException(exception: String) {
+		appendMessage(
+			exception,
+			attributes: [
+				NSForegroundColorAttributeName: NSColor.whiteColor(),
+				NSBackgroundColorAttributeName: NSColor(red: 233.0/255.0, green: 151.0/255.0, blue:17.0/255.0, alpha: 1.0)
+			]
+		)
+	}
+
+	func appendReloadMessage() {
+		appendMessage(
+			"(prototype reloaded)",
+			attributes: [
+				NSForegroundColorAttributeName: NSColor.lightGrayColor(),
+			]
+		)
+	}
+
+	func appendPrototypeChangedMessage(url: NSURL) {
+		appendMessage(
+			"(switching prototype to \(url.filePathURL!.path!))",
+			attributes: [
+				NSForegroundColorAttributeName: NSColor.lightGrayColor(),
+			]
+		)
+	}
+
+	private func appendMessage(message: String, var attributes: [String: AnyObject]) {
+		attributes[NSFontAttributeName] = LogViewController.font
+		logTextView.textStorage!.appendAttributedString(NSAttributedString(
+			string: "\(message)\n",
+			attributes: attributes
+		))
+
+		logTextView.moveToEndOfDocument(nil)
 	}
 
 	@IBAction func clear(sender: AnyObject) {
@@ -20,4 +58,5 @@ class LogViewController: NSViewController {
 
 	@IBOutlet var logTextView: NSTextView!
 
+	private static var font = NSFont(name: "Menlo", size: 14)!
 }

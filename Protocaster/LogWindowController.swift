@@ -16,4 +16,16 @@ class LogWindowController: NSWindowController {
 	func appendConsoleMessage(message: String) {
 		logViewController.appendConsoleMessage(message)
 	}
+
+	func appendException(exception: String) {
+		logViewController.appendException(exception)
+	}
+
+	func appendReloadMessage() {
+		logViewController.appendReloadMessage()
+	}
+
+	func appendPrototypeChangedMessage(url: NSURL) {
+		logViewController.appendPrototypeChangedMessage(url)
+	}
 }

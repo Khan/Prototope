@@ -59,7 +59,9 @@ class URLMonitor {
 
 		@objc private func presentedSubitemDidChangeAtURL(url: NSURL) {
 			println("Subitem changed: \(url)")
-			everythingDidChangeHandler()
+			if !url.lastPathComponent!.hasPrefix(".") {
+				everythingDidChangeHandler()
+			}
 		}
 
 		@objc private func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL) {
