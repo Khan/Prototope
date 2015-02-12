@@ -9,78 +9,31 @@
 import Cocoa
 import swiftz_core
 
-class ViewController: NSViewController, DTBonjourDataConnectionDelegate {
+class ViewController: NSViewController {
 
-	var scanner: ProtoscopeScanner!
-	var monitor: URLMonitor?
+	var selectedPathDidChange: (NSURL? -> ())?
+	var selectedDeviceDidChange: (NSNetService? -> ())?
 
-	var connection: DTBonjourDataConnection?
 	var selectedDeviceSession: NSNetService?
 
 	@IBOutlet var deviceListController: NSArrayController!
 	@IBOutlet weak var deviceChooserButton: NSPopUpButton!
 
 	@IBAction func pathControlDidChange(sender: NSPathControl) {
-		if let URL = sender.URL {
-			monitor = URLMonitor(URL: URL)
-			monitor!.everythingDidChangeHandler = {
-				self.sendPrototypeData()
-			}
-
-			sendPrototypeData()
-		} else {
-			monitor = nil
-		}
+		selectedPathDidChange?(sender.URL)
 	}
 
 	@IBAction func deviceSelectionDidChange(sender: NSPopUpButton) {
-		self.connection?.close()
-		self.connection?.delegate = nil
-		if selectedDeviceSession != nil {
-			self.connection = DTBonjourDataConnection(service: selectedDeviceSession)
-			self.connection!.open()
-			self.connection!.delegate = self
-		}
+		selectedDeviceDidChange?(sender.selectedItem?.representedObject as! NSNetService?)
 	}
 
-	override func viewDidLoad() {
-		scanner = ProtoscopeScanner(
-			serviceDidAppearHandler: { service in
-				self.deviceListController.addObject(service)
-			},
-			serviceDidDisappearHandler: { service in
-				if .Some(service) == self.selectedDeviceSession {
-					self.selectedDeviceSession = nil
-				}
-				self.deviceListController.removeObject(service)
-			}
-		)
+	func addService(service: NSNetService) {
+		deviceListController.addObject(service)
 	}
 
-	func connectionDidOpen(connection: DTBonjourDataConnection!) {
-		sendPrototypeData()
+	func removeService(service: NSNetService) {
+		deviceListController.removeObject(service)
 	}
-
-	func connection(connection: DTBonjourDataConnection!, didReceiveObject object: AnyObject!) {
-		switch JSONValue.decode(object as! NSData) >>- Message.fromJSON {
-		case let .Some(.PrototypeHitException(exception)):
-			println("Exception: \(exception)")
-		case let .Some(.PrototypeConsoleLog(message)):
-			println("Console log: \(message)")
-		default:
-			println("Unknown message: \(object)")
-		}
-	}
-
-	func sendPrototypeData() {
-		if let selectedURL = monitor?.URL {
-			if let prototype = Prototype(url: selectedURL) {
-				let message = Message.ReplacePrototype(prototype)
-				let messageJSON = Message.toJSON(message)
-				connection?.sendObject(messageJSON.encode()!, error: nil)
-			}
-		}
-	}
-
+	
 }
 
