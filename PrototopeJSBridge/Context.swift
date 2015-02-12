@@ -71,5 +71,6 @@ public class Context {
 		VideoLayerBridge.addToContext(context)
 		ParticleBridge.addToContext(context)
 		ParticleEmitterBridge.addToContext(context)
+		ScrollLayerBridge.addToContext(context)
 	}
 }

@@ -29,4 +29,7 @@ var emitter = new ParticleEmitter({particle: particle});
 layer.addParticleEmitter(emitter);
 layer.removeParticleEmitter(emitter);
 
+var scrollLayer = new ScrollLayer({parent: layer, name: "yo"});
+scrollLayer.updateScrollableSizeToFitSublayers();
+
 "Done JSTest.js"
