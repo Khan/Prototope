@@ -10,12 +10,12 @@ import Foundation
 
 //MARK: Public Behavior Types
 
-// Protocol for types describing the "configuration" of a behavior.
+/** Protocol for types describing the "configuration" of a behavior. */
 public protocol BehaviorType {}
 
-// Value type describing the configuration of a collision behavior, specifying
-// the kind of the interaction (the collision conditions which should trigger the handler)
-// the layer with which the host layer is supposed to be colliding and a handler function
+/** Value type describing the configuration of a collision behavior, specifying
+ the kind of the interaction (the collision conditions which should trigger the handler)
+ the layer with which the host layer is supposed to be colliding and a handler function */
 public struct CollisionBehavior: BehaviorType {
     public enum Kind {
         case Entering
@@ -35,8 +35,8 @@ public struct CollisionBehavior: BehaviorType {
 
 //MARK: Behavior Bindings
 
-// Abstract. Describes a relationship between a layer and a single instance of a behavior.
-// Subclasses should encapsulate the state necessary to handle the behavior correctly.
+/** Abstract. Describes a relationship between a layer and a single instance of a behavior.
+ Subclasses should encapsulate the state necessary to handle the behavior correctly. */
 class BehaviorBinding: Equatable, Hashable {
     let id: Int
     let hostLayer: Layer
@@ -61,7 +61,7 @@ func ==(b1: BehaviorBinding, b2: BehaviorBinding) -> Bool {
     return b1.id == b2.id
 }
 
-// Possible collision states for a pair of layers
+/** Possible collision states for a pair of layers */
 enum CollisionState {
     case NonOverlapping
     case PartiallyIntersects
@@ -86,7 +86,7 @@ enum CollisionState {
     }
 }
 
-// Concrete class encapsulating the necessary state for CollisionBehaviors
+/** Concrete class encapsulating the necessary state for CollisionBehaviors */
 class CollisionBehaviorBinding : BehaviorBinding {
     var previousState: CollisionState
     let config: CollisionBehavior
@@ -134,8 +134,8 @@ class CollisionBehaviorBinding : BehaviorBinding {
 
 //MARK: Global Behavior Store
 
-// Global bag of layer behavior state
 class BehaviorStore {
+/** Manages all the behaviors in a given Environment */
     var heartbeat: Heartbeat!
     
     var registeredBindings: Set<BehaviorBinding> {
