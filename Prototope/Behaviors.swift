@@ -132,10 +132,10 @@ class CollisionBehaviorBinding : BehaviorBinding {
     }
 }
 
-//MARK: Global Behavior Store
+//MARK: Behavior Driver
 
-class BehaviorStore {
 /** Manages all the behaviors in a given Environment */
+class BehaviorDriver {
     var heartbeat: Heartbeat!
     
     var registeredBindings: Set<BehaviorBinding> {
@@ -190,5 +190,3 @@ class BehaviorStore {
         return nil
     }
 }
-
-var globalBehaviorStore = BehaviorStore()

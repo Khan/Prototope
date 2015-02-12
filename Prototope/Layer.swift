@@ -715,7 +715,7 @@ public class Layer: Equatable, Hashable {
     
     public var behaviors: [BehaviorType] = [] {
         didSet {
-            globalBehaviorStore.updateWithLayer(self, behaviors: behaviors)
+            Environment.currentEnvironment?.behaviorDriver.updateWithLayer(self, behaviors: behaviors)
         }
     }
 }

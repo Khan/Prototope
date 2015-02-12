@@ -12,6 +12,7 @@ import Foundation
 public struct Environment {
 	public var rootLayer: Layer
 	public var imageProvider: String -> UIImage?
+    var behaviorDriver: BehaviorDriver
 
 	public static var currentEnvironment: Environment?
 
@@ -23,6 +24,7 @@ public struct Environment {
 		gesture.cancelsTouchesInView = false
 		gesture.delaysTouchesEnded = false
 		self.imageProvider = imageProvider
+        self.behaviorDriver = BehaviorDriver()
 	}
 
 	public static func runWithEnvironment(environment: Environment, action: () -> Void) {
