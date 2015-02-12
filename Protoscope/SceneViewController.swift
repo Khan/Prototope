@@ -40,7 +40,7 @@ class SceneViewController: UIViewController {
 		if visible == consoleViewVisible { return }
 
 		consoleView.frame = view.bounds
-		consoleView.frame.size.height = 300
+		consoleView.frame.size.height = 50
 		consoleView.frame.origin.y = visible ? -consoleView.frame.size.height : 0
 
 		let finalOrigin = visible ? 0 : -consoleView.frame.size.height
