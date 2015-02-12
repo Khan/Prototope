@@ -18,8 +18,10 @@ public struct Environment {
 	public init(rootView: UIView, imageProvider: String -> UIImage?) {
 		self.rootLayer = Layer(wrappingView: rootView, name: "Root")
 		// TODO: move defaultSpec into Environment.
-		rootView.addGestureRecognizer(defaultSpec.twoFingerTripleTapGestureRecognizer())
-
+		let gesture = defaultSpec.twoFingerTripleTapGestureRecognizer()
+		rootView.addGestureRecognizer(gesture)
+		gesture.cancelsTouchesInView = false
+		gesture.delaysTouchesEnded = false
 		self.imageProvider = imageProvider
 	}
 
