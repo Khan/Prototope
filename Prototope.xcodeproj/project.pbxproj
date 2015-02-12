@@ -128,6 +128,8 @@
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
 		EBE3A76B19DF79C400A77736 /* Prototope.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EBE3A77519DF79E900A77736 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A74E19DF78D500A77736 /* Layer.swift */; };
+		EBE675F61A8C379B001BFA95 /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE675F51A8C379B001BFA95 /* LogWindowController.swift */; };
+		EBE676051A8C3817001BFA95 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE676041A8C3817001BFA95 /* LogViewController.swift */; };
 		EBF59A941A2E2B5000AB8C67 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF59A931A2E2B5000AB8C67 /* Shadow.swift */; };
 /* End PBXBuildFile section */
 
@@ -513,6 +515,8 @@
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		EBE3A75619DF79C400A77736 /* Prototope.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Prototope.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE3A75919DF79C400A77736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBE675F51A8C379B001BFA95 /* LogWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
+		EBE676041A8C3817001BFA95 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		EBF59A931A2E2B5000AB8C67 /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -823,6 +827,8 @@
 				EB6BFBAF1A85763F002B4E6A /* ProtoscopeScanner.swift */,
 				EBC00D9F1A86C718008D4FF5 /* URLMonitor.swift */,
 				EB6BFB841A857326002B4E6A /* AppDelegate.swift */,
+				EBE675F51A8C379B001BFA95 /* LogWindowController.swift */,
+				EBE676041A8C3817001BFA95 /* LogViewController.swift */,
 				EB6BFB861A857326002B4E6A /* ViewController.swift */,
 				EB6BFB881A857326002B4E6A /* Images.xcassets */,
 				EB6BFB8A1A857326002B4E6A /* Main.storyboard */,
@@ -1529,10 +1535,12 @@
 				EBC00DA11A86C720008D4FF5 /* URLMonitor.swift in Sources */,
 				EB7526BF1A8A803400D5D187 /* DictionaryExt.swift in Sources */,
 				EB7526C81A8A804F00D5D187 /* NSArrayExt.swift in Sources */,
+				EBE676051A8C3817001BFA95 /* LogViewController.swift in Sources */,
 				EB05D2C51A894A9200F4CFD4 /* Prototype.swift in Sources */,
 				EB7526C51A8A804A00D5D187 /* NSDictionaryExt.swift in Sources */,
 				EB6BFBB01A85763F002B4E6A /* ProtoscopeScanner.swift in Sources */,
 				EB05D2B01A8946AA00F4CFD4 /* Message.swift in Sources */,
+				EBE675F61A8C379B001BFA95 /* LogWindowController.swift in Sources */,
 				EB6BFB871A857326002B4E6A /* ViewController.swift in Sources */,
 				EB6BFB851A857326002B4E6A /* AppDelegate.swift in Sources */,
 				EB7526BC1A8A7FF300D5D187 /* JSON.swift in Sources */,

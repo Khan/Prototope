@@ -9,5 +9,21 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate { }
+class AppDelegate: NSObject, NSApplicationDelegate {
+	var logWindowController: LogWindowController!
+
+	func applicationDidFinishLaunching(notification: NSNotification) {
+		let windows = NSApplication.sharedApplication().windows as! [NSWindow]
+
+		let storyboard = NSStoryboard(name: "Main", bundle: nil)
+		logWindowController = storyboard?.instantiateControllerWithIdentifier("Log") as! LogWindowController
+		logWindowController.showWindow(nil)
+
+		// I have no idea why this dance is required.
+		windows.first!.makeKeyWindow()
+		logWindowController.window!.orderFrontRegardless()
+
+		logWindowController.appendConsoleMessage("HIIIII")
+	}
+}
 
