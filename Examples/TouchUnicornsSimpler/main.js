@@ -17,4 +17,5 @@ Layer.root.gestures = [new PanGesture({handler: function(phase, centroidSequence
 	var sparkle = gimmeSparkle()
 	sparkle.position = finger
 	unicornLayer.position = finger
+	unicornLayer.zPosition = 1
 }})]

@@ -22,4 +22,5 @@ Layer.root.gestures = [new PanGesture({handler: function(phase, centroidSequence
 	unicornLayer.x = finger.x
 	unicornLayer.y = finger.y
 	// or: unicornLayer.position = finger
+	unicornLayer.zPosition = 1
 }})]

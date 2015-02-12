@@ -31,6 +31,7 @@ import JavaScriptCore
     var x: Double { get set }
     var y: Double { get set }
     var position: PointJSExport { get set }
+	var zPosition: Double { get set }
     var width: Double { get set }
     var height: Double { get set }
     var size: SizeJSExport { get set }
@@ -171,6 +172,11 @@ import JavaScriptCore
         get { return PointBridge(layer.position) }
         set { layer.position = (newValue as JSExport as! PointBridge).point }
     }
+
+	public var zPosition: Double {
+		get { return layer.zPosition }
+		set { layer.zPosition = newValue }
+	}
     
     public var width: Double {
         get { return layer.width }
