@@ -31,9 +31,9 @@ public class Layer: Equatable, Hashable {
 
 	/** Creates a layer with an optional parent and name. */
 	public init(parent: Layer? = nil, name: String? = nil, viewClass: UIView.Type? = nil) {
-		self.parent = parent
+		self.parent = parent ?? Layer.root
 		self.name = name
-		
+
 		if let viewClass = viewClass {
 			self.view = viewClass()
 		} else {
@@ -43,6 +43,8 @@ public class Layer: Equatable, Hashable {
 		self.view.userInteractionEnabled = true
 
 		self.parentDidChange()
+
+		self.frame = Rect(x: 0, y: 0, width: 100, height: 100)
 	}
 
 	/** Convenience initializer; makes a layer which displays an image by name.
