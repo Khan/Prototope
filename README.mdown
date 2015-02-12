@@ -9,7 +9,7 @@ Prototope is a lightweight, high-performance prototyping framework. Its goals ar
  * high performance execution
  * concepts easily mapped onto production implementation
 
-Interfaces to the API are presently available in Swift and JavaScript. The current implement only runs on iOS, but the interface should be portable.
+Interfaces to the API are presently available in Swift and JavaScript. The current implementation only runs on iOS, but the interface should be portable.
 
 You can use Protocaster (a Mac app) to broadcast live-reloading JavaScript prototypes to Protoscope (an iOS app). More documentation about this is forthcoming.
 
