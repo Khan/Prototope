@@ -97,6 +97,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 		switch JSONValue.decode(object as! NSData) >>- Message.fromJSON {
 		case let .Some(.PrototypeHitException(exception)):
 			logWindowController.appendException(exception)
+			let notification = NSUserNotification()
+			notification.title = "Protonope!"
+			notification.informativeText = exception
+			NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
 		case let .Some(.PrototypeConsoleLog(message)):
 			logWindowController.appendConsoleMessage(message)
 		default:
