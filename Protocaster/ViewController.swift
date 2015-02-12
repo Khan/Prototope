@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import swiftz_core
 
 class ViewController: NSViewController, DTBonjourDataConnectionDelegate {
 
@@ -58,6 +59,17 @@ class ViewController: NSViewController, DTBonjourDataConnectionDelegate {
 
 	func connectionDidOpen(connection: DTBonjourDataConnection!) {
 		sendPrototypeData()
+	}
+
+	func connection(connection: DTBonjourDataConnection!, didReceiveObject object: AnyObject!) {
+		switch JSONValue.decode(object as! NSData) >>- Message.fromJSON {
+		case let .Some(.PrototypeHitException(exception)):
+			println("Exception: \(exception)")
+		case let .Some(.PrototypeConsoleLog(message)):
+			println("Console log: \(message)")
+		default:
+			println("Unknown message: \(object)")
+		}
 	}
 
 	func sendPrototypeData() {

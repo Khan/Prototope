@@ -12,12 +12,23 @@ import swiftz_core
 class ProtoscopeServer {
 	private let bonjourServer: DTBonjourServer
 	private var serverDelegate: ServerDelegate?
+	private var currentConnection: DTBonjourDataConnection?
 
 	init(messageHandler: Message -> ()) {
-		serverDelegate = ServerDelegate(messageHandler: messageHandler)
 		bonjourServer = DTBonjourServer(bonjourType: ProtoropeReceiverServiceType)
+		serverDelegate = ServerDelegate(
+			connectionHandler: { [weak self] connection in
+				self?.currentConnection = connection
+				return
+			},
+			messageHandler: messageHandler
+		)
 		bonjourServer.delegate = serverDelegate!
 		bonjourServer.start()
+	}
+
+	func sendMessage(message: Message) {
+		currentConnection?.sendObject(Message.toJSON(message).encode()!, error: nil)
 	}
 
 	func stop() {
@@ -31,10 +42,16 @@ class ProtoscopeServer {
 	}
 
 	@objc private class ServerDelegate: NSObject, DTBonjourServerDelegate {
+		let connectionHandler: DTBonjourDataConnection -> ()
 		let messageHandler: Message -> ()
 
-		init(messageHandler: Message -> ()) {
+		init(connectionHandler: DTBonjourDataConnection -> (), messageHandler: Message -> ()) {
+			self.connectionHandler = connectionHandler
 			self.messageHandler = messageHandler
+		}
+
+		@objc private func bonjourServer(server: DTBonjourServer!, didAcceptConnection connection: DTBonjourDataConnection!) {
+			connectionHandler(connection)
 		}
 
 		@objc private func bonjourServer(server: DTBonjourServer!, didReceiveObject object: AnyObject!, onConnection connection: DTBonjourDataConnection!) {
