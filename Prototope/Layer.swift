@@ -30,7 +30,7 @@ public class Layer: Equatable, Hashable {
 	public class var root: Layer! { return Environment.currentEnvironment?.rootLayer }
 
 	/** Creates a layer with an optional parent and name. */
-	public init(parent: Layer? = nil, name: String? = nil, viewClass: UIView.Type? = nil) {
+	public init(parent: Layer? = Layer.root, name: String? = nil, viewClass: UIView.Type? = nil) {
 		self.parent = parent ?? Layer.root
 		self.name = name
 
