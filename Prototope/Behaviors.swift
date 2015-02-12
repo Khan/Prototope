@@ -79,8 +79,8 @@ enum CollisionState {
     case Contains
     
     static func stateForLayer(layer1: Layer, andLayer layer2: Layer) -> CollisionState {
-        let rect1 = CGRect(layer1.frame)
-        let rect2 = CGRect(layer2.frame)
+        let rect1 = Layer.root.view.convertRect(CGRect(layer1.frame), fromView:layer1.view.superview)
+        let rect2 = Layer.root.view.convertRect(CGRect(layer2.frame), fromView:layer2.view.superview)
         
         if !CGRectIntersectsRect(rect1, rect2) {
             return .NonOverlapping
