@@ -81,6 +81,9 @@ import JavaScriptCore
 	// MARK: Particle emitters
 	func addParticleEmitter(emitterBridge: ParticleEmitterJSExport)
 	func removeParticleEmitter(emitterBridge: ParticleEmitterJSExport)
+    
+    // MARK: Behaviors
+    var behaviors: [BehaviorBridgeType] { get set }
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -98,7 +101,7 @@ import JavaScriptCore
         return LayerBridge(Layer.root)!
     }
     
-    private init?(_ wrappingLayer: Layer?) {
+    internal init?(_ wrappingLayer: Layer?) {
         super.init()
         if let wrappingLayer = wrappingLayer {
             layer = wrappingLayer
@@ -337,6 +340,16 @@ import JavaScriptCore
             layer.gestures = newValue.map { gestureBridge in
                 gestureForGestureBridge(gestureBridge)
             }
+        }
+    }
+    
+    public var behaviors: [BehaviorBridgeType] {
+        get {
+            return layer.behaviors.map(behaviorBridgeForBehavior)
+        }
+
+        set {
+            layer.behaviors = newValue.map(behaviorForBehaviorBridge)
         }
     }
 

@@ -13,6 +13,7 @@
 		753E20E81A84A12100E30460 /* JSTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 753E20E71A84A12100E30460 /* JSTest.js */; };
 		9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6411A8D4C47003D386B /* ScrollLayer.swift */; };
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
+		75A02AF01A8C95AC00938B4E /* BehaviorBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A02AE11A8C94BE00938B4E /* BehaviorBridge.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -405,6 +406,7 @@
 		753E20E71A84A12100E30460 /* JSTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTest.js; sourceTree = "<group>"; };
 		9632F6411A8D4C47003D386B /* ScrollLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayer.swift; sourceTree = "<group>"; };
 		9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayerBridge.swift; sourceTree = "<group>"; };
+		75A02AE11A8C94BE00938B4E /* BehaviorBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorBridge.swift; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -751,7 +753,6 @@
 		EB306C3319DF78A900113FA3 /* 📚 Prototope */ = {
 			isa = PBXGroup;
 			children = (
-				7520648F1A89E39F005E38A2 /* Behaviors.swift */,
 				EBE3A74E19DF78D500A77736 /* Layer.swift */,
 				EBABE67C19E4AEF100483EEF /* Geometry.swift */,
 				EB8BC1C91A2CE7B5005E799C /* Border.swift */,
@@ -772,6 +773,7 @@
 				EBB43C811A8BEAE400CE943C /* VideoLayer.swift */,
 				EB05D2A91A8823F200F4CFD4 /* Environment.swift */,
 				9632F6411A8D4C47003D386B /* ScrollLayer.swift */,
+				7520648F1A89E39F005E38A2 /* Behaviors.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
@@ -987,6 +989,7 @@
 				EBC43D631A8010770075272A /* ImageBridge.swift */,
 				EBC43D7F1A81B5EB0075272A /* MathBridge.swift */,
 				EB2A88531A82FD5900E3987F /* GestureBridge.swift */,
+				75A02AE11A8C94BE00938B4E /* BehaviorBridge.swift */,
 				EBC43D831A81BA360075272A /* HeartbeatBridge.swift */,
 				EBC43D871A81C47A0075272A /* SoundBridge.swift */,
 				EBB43C911A8BEB2200CE943C /* ParticleBridge.swift */,
@@ -1516,6 +1519,7 @@
 				EB453DB21A7AB116006F2A72 /* LayerBridge.swift in Sources */,
 				EB6EA8571A83DEA2006839EF /* AnimationBridge.swift in Sources */,
 				EBC43D801A81B5EB0075272A /* MathBridge.swift in Sources */,
+				75A02AF01A8C95AC00938B4E /* BehaviorBridge.swift in Sources */,
 				EBC43D7C1A81AF350075272A /* TimingBridge.swift in Sources */,
 				EBB43C961A8BEB2200CE943C /* ParticleEmitterBridge.swift in Sources */,
 				EBB43C971A8BEB2200CE943C /* VideoBridge.swift in Sources */,

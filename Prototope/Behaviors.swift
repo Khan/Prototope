@@ -13,6 +13,16 @@ import Foundation
 /** Protocol for types describing the "configuration" of a behavior. */
 public protocol BehaviorType {}
 
+/** Describes a behavior that just calls a closure/block on every heartbeat,
+    passing the host layer to the closure. */
+public struct BlockBehavior: BehaviorType {
+    let handler: Layer -> Void
+    
+    public init(handler: Layer->Void) {
+        self.handler = handler
+    }
+}
+
 /** Value type describing the configuration of a collision behavior, specifying
  the kind of the interaction (the collision conditions which should trigger the handler)
  the layer with which the host layer is supposed to be colliding and a handler function */
@@ -132,6 +142,21 @@ class CollisionBehaviorBinding : BehaviorBinding {
     }
 }
 
+/** Concrete BehaviorBinding for BlockBehavior */
+class BlockBehaviorBinding : BehaviorBinding {
+    let config: BlockBehavior
+    
+    init(hostLayer: Layer, config: BlockBehavior) {
+        self.config = config
+        
+        super.init(hostLayer: hostLayer)
+    }
+    
+    override func update() {
+        config.handler(hostLayer)
+    }
+}
+
 //MARK: Behavior Driver
 
 /** Manages all the behaviors in a given Environment */
@@ -185,8 +210,9 @@ class BehaviorDriver {
     func createBindingForLayer(layer: Layer, behavior: BehaviorType) -> BehaviorBinding? {
         if let collisionBehavior = behavior as? CollisionBehavior {
             return CollisionBehaviorBinding(hostLayer: layer, config: collisionBehavior)
+        } else if let blockBehavior = behavior as? BlockBehavior {
+            return BlockBehaviorBinding(hostLayer: layer, config: blockBehavior)
         }
-        
         return nil
     }
 }
