@@ -53,8 +53,8 @@ extension Layer {
 	
 	
 	/** Moves the receiver vertically above the given sibling layer. Does not horizontally align automatically. */
-	public func moveAboveSiblingView(siblingView: Layer, margin: Double = 0.0) {
-		self.frameMinY = siblingView.frameMinY - (self.height + margin)
+	public func moveAboveSiblingLayer(siblingLayer: Layer, margin: Double = 0.0) {
+		self.frameMinY = siblingLayer.frameMinY - (self.height + margin)
 	}
 	
 	
