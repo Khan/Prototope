@@ -24,7 +24,6 @@ public struct ActionBehavior: BehaviorType {
 }
 
 /** Value type describing the configuration of a collision behavior, specifying
- the kind of the interaction (the collision conditions which should trigger the handler)
  the layer with which the host layer is supposed to be colliding and a handler function */
 public struct CollisionBehavior: BehaviorType {
     public enum Kind {
@@ -32,12 +31,10 @@ public struct CollisionBehavior: BehaviorType {
         case Leaving
     }
     
-    let kind: Kind
     let otherLayer: Layer
-    let handler: () -> Void
+    let handler: (CollisionBehavior.Kind)->Void
     
-    public init(on kind: Kind, _ otherLayer: Layer, handler: ()->Void) {
-        self.kind = kind
+    public init(with otherLayer: Layer, handler: (CollisionBehavior.Kind)->Void) {
         self.otherLayer = otherLayer
         self.handler = handler
     }
@@ -113,32 +110,35 @@ class CollisionBehaviorBinding : BehaviorBinding {
     }
     
     func updateWithState(state: CollisionState) {
+        let kind: CollisionBehavior.Kind?
+        
         let old = previousState
-        switch (self.config.kind, old, state) {
+        switch (old, state) {
             
-        case (.Entering,.NonOverlapping,.PartiallyIntersects):
+        case (.NonOverlapping,.PartiallyIntersects):
             fallthrough
-        case (.Entering,.NonOverlapping,.ContainedIn):
+        case (.NonOverlapping,.ContainedIn):
             fallthrough
-        case (.Entering,.NonOverlapping,.Contains):
-            fire()
+        case (.NonOverlapping,.Contains):
+            kind = .Entering
             
-        case (.Leaving,.PartiallyIntersects,.NonOverlapping):
+        case (.PartiallyIntersects,.NonOverlapping):
             fallthrough
-        case (.Leaving,.ContainedIn,.NonOverlapping):
+        case (.ContainedIn,.NonOverlapping):
             fallthrough
-        case (.Leaving,.Contains,.NonOverlapping):
-            fire()
+        case (.Contains,.NonOverlapping):
+            kind = .Leaving
             
         default:
-            ()
+            kind = nil
         }
         
+        kind.map(fire)
         self.previousState = state
     }
     
-    func fire() {
-        self.config.handler()
+    func fire(kind: CollisionBehavior.Kind) {
+        self.config.handler(kind)
     }
 }
 

@@ -49,17 +49,14 @@ func behaviorForBehaviorBridge(behaviorBridge: BehaviorBridgeType) -> BehaviorTy
     }
     
     required public init?(args: JSValue) {
-        let kindValue = args.valueForProperty("kind")
-        let otherLayerValue = args.valueForProperty("otherLayer")
-        let handler = args.objectForKeyedSubscript("handler")
+        let otherLayerValue = args.valueForProperty("with")
+        let handler = args.valueForProperty("handler")
         
-        if let kind = CollisionBehaviorKindBridge.decodeKind(kindValue) where !kindValue.isUndefined(),
-            let otherLayer = (otherLayerValue as? JSExport as? LayerBridge)?.layer where !otherLayerValue.isUndefined(),
+        if let otherLayer = (otherLayerValue as? JSExport as? LayerBridge)?.layer where !otherLayerValue.isUndefined(),
             let handler = handler where !handler.isUndefined() {
-                
-                collisionBehavior = CollisionBehavior(on: kind, otherLayer) { () -> Void in
-                    handler.callWithArguments([])
-                }
+                collisionBehavior = CollisionBehavior(with: otherLayer, handler: { kind in
+                    handler.callWithArguments([CollisionBehaviorKindBridge.encodeKind(kind, inContext: JSContext.currentContext())])
+                })
                 super.init()
         } else {
             collisionBehavior = nil
