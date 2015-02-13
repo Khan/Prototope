@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Khan Academy. All rights reserved.
 //
 
+import AVFoundation
 import Foundation
-import AudioToolbox
 
 /** Provides a simple way to play sound files. Supports .aif, .aiff, .wav, and .caf files. */
 public struct Sound {
@@ -17,10 +17,8 @@ public struct Sound {
 		if let cachedSound = cachedSounds[name] {
 			self = cachedSound
 		} else {
-			if let path = Sound.bundlePathForSoundNamed(name) {
-				var soundID: SystemSoundID = 0
-				AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: path), &soundID)
-				systemSoundID = soundID
+			if let URL = Sound.bundleURLForSoundNamed(name) {
+				player = AVAudioPlayer(contentsOfURL: URL, error: nil)
 				cachedSounds[name] = self
 			} else {
 				return nil
@@ -29,18 +27,18 @@ public struct Sound {
 	}
 
 	public func play() {
-		AudioServicesPlaySystemSound(systemSoundID)
+		player.play()
 	}
 
 	// MARK: Private interfaces
 
 	private static let validExtensions = ["caf", "aif", "aiff", "wav"]
-	private let systemSoundID: SystemSoundID!
+	private let player: AVAudioPlayer
 
-	private static func bundlePathForSoundNamed(name: String) -> String? {
+	private static func bundleURLForSoundNamed(name: String) -> NSURL? {
 		for fileExtension in validExtensions {
-			if let path = NSBundle.mainBundle().pathForResource(name, ofType: fileExtension) {
-				return path
+			if let URL = NSBundle.mainBundle().URLForResource(name, withExtension: fileExtension) {
+				return URL
 			}
 		}
 		return nil
