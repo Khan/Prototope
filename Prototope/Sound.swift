@@ -11,14 +11,17 @@ import Foundation
 
 /** Provides a simple way to play sound files. Supports .aif, .aiff, .wav, and .caf files. */
 public struct Sound {
+
+	private let player: AVAudioPlayer
+
 	/** Creates a sound from a filename. No need to include the file extension: Prototope will
 		try all the valid extensions. */
 	public init!(name: String) {
 		if let cachedSound = cachedSounds[name] {
 			self = cachedSound
 		} else {
-			if let URL = Sound.bundleURLForSoundNamed(name) {
-				player = AVAudioPlayer(contentsOfURL: URL, error: nil)
+			if let data = Environment.currentEnvironment!.soundProvider(name) {
+				player = AVAudioPlayer(data: data, error: nil)
 				cachedSounds[name] = self
 			} else {
 				return nil
@@ -30,19 +33,6 @@ public struct Sound {
 		player.play()
 	}
 
-	// MARK: Private interfaces
-
-	private static let validExtensions = ["caf", "aif", "aiff", "wav"]
-	private let player: AVAudioPlayer
-
-	private static func bundleURLForSoundNamed(name: String) -> NSURL? {
-		for fileExtension in validExtensions {
-			if let URL = NSBundle.mainBundle().URLForResource(name, withExtension: fileExtension) {
-				return URL
-			}
-		}
-		return nil
-	}
 }
 
 // They live forever, of course. If that's a problem, we'll deal with it later.
