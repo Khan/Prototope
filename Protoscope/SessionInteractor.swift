@@ -35,6 +35,14 @@ class SessionInteractor {
 				}
 
 				return loadImage(filenameWithScale, scale) ?? loadImage(filename, 1)
+			},
+			soundProvider: { name in
+				for fileExtension in Sound.supportedExtensions {
+					if let data = prototype.resources[name.stringByAppendingPathExtension(fileExtension)!] {
+						return data
+					}
+				}
+				return nil
 			}
 		)
 

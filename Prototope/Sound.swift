@@ -17,15 +17,10 @@ public struct Sound {
 	/** Creates a sound from a filename. No need to include the file extension: Prototope will
 		try all the valid extensions. */
 	public init!(name: String) {
-		if let cachedSound = cachedSounds[name] {
-			self = cachedSound
+		if let data = Environment.currentEnvironment!.soundProvider(name) {
+			player = AVAudioPlayer(data: data, error: nil)
 		} else {
-			if let data = Environment.currentEnvironment!.soundProvider(name) {
-				player = AVAudioPlayer(data: data, error: nil)
-				cachedSounds[name] = self
-			} else {
-				return nil
-			}
+			return nil
 		}
 	}
 
@@ -33,7 +28,5 @@ public struct Sound {
 		player.play()
 	}
 
+	public static var supportedExtensions = ["caf", "aif", "aiff", "wav"]
 }
-
-// They live forever, of course. If that's a problem, we'll deal with it later.
-private var cachedSounds = [String: Sound]()

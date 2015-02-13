@@ -51,10 +51,11 @@ extension Prototype {
 				return nil
 			}
 
-			for imageName in contents!.filter({ $0.pathExtension == "png" }) {
-				let imagePath = path.stringByAppendingPathComponent(imageName)
-				if let imageData = NSData(contentsOfFile: imagePath, options: nil, error: &error) {
-					self.resources[imageName] = imageData
+			var resourceExtensions = Set(["png", "caf", "aif", "aiff", "wav"])
+			for resources in contents!.filter({ resourceExtensions.contains($0.pathExtension) }) {
+				let resourcePath = path.stringByAppendingPathComponent(resources)
+				if let resourceData = NSData(contentsOfFile: resourcePath, options: nil, error: &error) {
+					self.resources[resources] = resourceData
 				}
 			}
 

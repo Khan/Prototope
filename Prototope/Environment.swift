@@ -13,7 +13,7 @@ public struct Environment {
 	public let rootLayer: Layer
 	public let imageProvider: String -> UIImage?
 	public let soundProvider: String -> NSData?
-    public let behaviorDriver: BehaviorDriver
+    tlet behaviorDriver: BehaviorDriver
 
 	public static var currentEnvironment: Environment?
 
@@ -42,7 +42,7 @@ public struct Environment {
 			rootView: rootView,
 			imageProvider: { UIImage(named: $0) },
 			soundProvider: { name in
-				for fileExtension in ["caf", "aif", "aiff", "wav"] {
+				for fileExtension in Sound.supportedExtensions {
 					if let URL = NSBundle.mainBundle().URLForResource(name, withExtension: fileExtension) {
 						return NSData(contentsOfURL: URL, options: nil, error: nil)
 					}

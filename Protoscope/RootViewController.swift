@@ -34,6 +34,7 @@ class RootViewController: UIViewController {
 		case .WaitingForConnection:
 			let sceneViewController = SceneViewController()
 			protoscopeNavigationController.pushViewController(sceneViewController, animated: true)
+			protoscopeNavigationController.view.layoutIfNeeded()
 			state = .DisplayingScene(sceneViewController)
 			return sceneViewController.sceneView
 		case let .DisplayingScene(sceneViewController):
