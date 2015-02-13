@@ -31,7 +31,7 @@ class SessionInteractor {
 				let filename = name.stringByAppendingPathExtension("png")!
 
 				let loadImage: (String, CGFloat) -> UIImage? = { filename, scale in
-					return prototype.images[filename] >>- { UIImage(data: $0, scale: scale) }
+					return prototype.resources[filename] >>- { UIImage(data: $0, scale: scale) }
 				}
 
 				return loadImage(filenameWithScale, scale) ?? loadImage(filename, 1)

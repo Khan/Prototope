@@ -11,7 +11,7 @@ import swiftz_core
 
 struct Prototype {
 	var mainScript: NSData
-	var images: [String: NSData]
+	var resources: [String: NSData]
 }
 
 extension Prototype {
@@ -30,7 +30,7 @@ extension Prototype {
 		}
 
 		var mainScriptPath: String
-		self.images = [:]
+		self.resources = [:]
 		if isDirectory.boolValue {
 			var error: NSError? = nil
 			let contents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(path, error: &error) as! [String]?
@@ -54,7 +54,7 @@ extension Prototype {
 			for imageName in contents!.filter({ $0.pathExtension == "png" }) {
 				let imagePath = path.stringByAppendingPathComponent(imageName)
 				if let imageData = NSData(contentsOfFile: imagePath, options: nil, error: &error) {
-					self.images[imageName] = imageData
+					self.resources[imageName] = imageData
 				}
 			}
 
@@ -72,14 +72,14 @@ extension Prototype {
 }
 
 extension Prototype: JSON {
-	private static func create(mainScript: NSData)(images: [String: NSData]) -> Prototype { return Prototype(mainScript: mainScript, images: images) }
+	private static func create(mainScript: NSData)(resources: [String: NSData]) -> Prototype { return Prototype(mainScript: mainScript, resources: resources) }
 
 	static func fromJSON(jsonValue: JSONValue) -> Prototype? {
 		switch jsonValue {
 		case let .JSONObject(dictionary):
 			return create
 				<^> (dictionary["mainScript"] >>- NSDataJSONCoder.fromJSON)
-				<*> (dictionary["images"] >>- JDictionaryFrom<NSData, NSDataJSONCoder>.fromJSON)
+				<*> (dictionary["resources"] >>- JDictionaryFrom<NSData, NSDataJSONCoder>.fromJSON)
 		default:
 			return nil
 		}
@@ -88,7 +88,7 @@ extension Prototype: JSON {
 	static func toJSON(prototype: Prototype) -> JSONValue {
 		return .JSONObject([
 			"mainScript": NSDataJSONCoder.toJSON(prototype.mainScript),
-			"images": JDictionaryTo<NSData, NSDataJSONCoder>.toJSON(prototype.images)
+			"resources": JDictionaryTo<NSData, NSDataJSONCoder>.toJSON(prototype.resources)
 		])
 	}
 }
