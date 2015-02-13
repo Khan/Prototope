@@ -15,7 +15,7 @@ public protocol BehaviorType {}
 
 /** Describes a behavior that just calls a closure/block on every heartbeat,
     passing the host layer to the closure. */
-public struct BlockBehavior: BehaviorType {
+public struct ActionBehavior: BehaviorType {
     let handler: Layer -> Void
     
     public init(handler: Layer->Void) {
@@ -142,11 +142,11 @@ class CollisionBehaviorBinding : BehaviorBinding {
     }
 }
 
-/** Concrete BehaviorBinding for BlockBehavior */
-class BlockBehaviorBinding : BehaviorBinding {
-    let config: BlockBehavior
+/** Concrete BehaviorBinding for ActionBehavior */
+class ActionBehaviorBinding : BehaviorBinding {
+    let config: ActionBehavior
     
-    init(hostLayer: Layer, config: BlockBehavior) {
+    init(hostLayer: Layer, config: ActionBehavior) {
         self.config = config
         
         super.init(hostLayer: hostLayer)
@@ -210,8 +210,8 @@ class BehaviorDriver {
     func createBindingForLayer(layer: Layer, behavior: BehaviorType) -> BehaviorBinding? {
         if let collisionBehavior = behavior as? CollisionBehavior {
             return CollisionBehaviorBinding(hostLayer: layer, config: collisionBehavior)
-        } else if let blockBehavior = behavior as? BlockBehavior {
-            return BlockBehaviorBinding(hostLayer: layer, config: blockBehavior)
+        } else if let actionBehavior = behavior as? ActionBehavior {
+            return ActionBehaviorBinding(hostLayer: layer, config: actionBehavior)
         }
         return nil
     }

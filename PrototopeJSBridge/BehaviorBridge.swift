@@ -13,7 +13,7 @@ import Prototope
 func behaviorBridgeForBehavior(behavior: BehaviorType) -> BehaviorBridgeType {
     switch behavior {
     case is CollisionBehavior: return CollisionBehaviorBridge(behavior as! CollisionBehavior)
-    case is BlockBehavior: return BlockBehaviorBridge(behavior as! BlockBehavior)
+    case is ActionBehavior: return ActionBehaviorBridge(behavior as! ActionBehavior)
         
     default: abort()
     }
@@ -22,7 +22,7 @@ func behaviorBridgeForBehavior(behavior: BehaviorType) -> BehaviorBridgeType {
 func behaviorForBehaviorBridge(behaviorBridge: BehaviorBridgeType) -> BehaviorType {
     switch behaviorBridge {
     case is CollisionBehaviorBridge: return (behaviorBridge as! CollisionBehaviorBridge).collisionBehavior
-    case is BlockBehaviorBridge: return (behaviorBridge as! BlockBehaviorBridge).blockBehavior
+    case is ActionBehaviorBridge: return (behaviorBridge as! ActionBehaviorBridge).actionBehavior
     default: abort()
     }
 }
@@ -105,22 +105,22 @@ public class CollisionBehaviorKindBridge: NSObject, BridgeType {
     }
 }
 
-// MARK: BlockBehavior
+// MARK: ActionBehavior
 
-@objc public protocol BlockBehaviorJSExport: JSExport {
+@objc public protocol ActionBehaviorJSExport: JSExport {
     init?(args: JSValue)
 }
 
 
-@objc public class BlockBehaviorBridge: NSObject, BridgeType, BehaviorBridgeType, BlockBehaviorJSExport {
-    let blockBehavior: Prototope.BlockBehavior!
+@objc public class ActionBehaviorBridge: NSObject, BridgeType, BehaviorBridgeType, ActionBehaviorJSExport {
+    let actionBehavior: Prototope.ActionBehavior!
     
     public class func addToContext(context: JSContext) {
-        context.setObject(self, forKeyedSubscript: "BlockBehavior")
+        context.setObject(self, forKeyedSubscript: "ActionBehavior")
     }
     
-    public init(_ behavior: BlockBehavior) {
-        self.blockBehavior = behavior
+    public init(_ behavior: ActionBehavior) {
+        self.actionBehavior = behavior
         super.init()
     }
     
@@ -128,12 +128,12 @@ public class CollisionBehaviorKindBridge: NSObject, BridgeType {
         let handler = args.objectForKeyedSubscript("handler")
         
         if let handler = handler where !handler.isUndefined() {
-            blockBehavior = BlockBehavior { layer in
+            actionBehavior = ActionBehavior { layer in
                 handler.callWithArguments([LayerBridge(layer)!])
             }
             super.init()
         } else {
-            blockBehavior = nil
+            actionBehavior = nil
             super.init()
             return nil
         }

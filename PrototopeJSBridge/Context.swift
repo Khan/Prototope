@@ -73,6 +73,6 @@ public class Context {
 		ParticleEmitterBridge.addToContext(context)
 		ScrollLayerBridge.addToContext(context)
         CollisionBehaviorBridge.addToContext(context)
-        BlockBehaviorBridge.addToContext(context)
+        ActionBehaviorBridge.addToContext(context)
 	}
 }
