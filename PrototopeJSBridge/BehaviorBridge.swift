@@ -52,10 +52,11 @@ func behaviorForBehaviorBridge(behaviorBridge: BehaviorBridgeType) -> BehaviorTy
         let otherLayerValue = args.valueForProperty("with")
         let handler = args.valueForProperty("handler")
         
-        if let otherLayer = (otherLayerValue as? JSExport as? LayerBridge)?.layer where !otherLayerValue.isUndefined(),
+        if let otherLayer = (otherLayerValue.toObject() as? JSExport as? LayerBridge)?.layer where !otherLayerValue.isUndefined(),
             let handler = handler where !handler.isUndefined() {
                 collisionBehavior = CollisionBehavior(with: otherLayer, handler: { kind in
-                    handler.callWithArguments([CollisionBehaviorKindBridge.encodeKind(kind, inContext: JSContext.currentContext())])
+                    let bridgedKind = CollisionBehaviorKindBridge.encodeKind(kind, inContext: handler.context)
+                    handler.callWithArguments([bridgedKind])
                 })
                 super.init()
         } else {
@@ -78,7 +79,7 @@ public class CollisionBehaviorKindBridge: NSObject, BridgeType {
         let kindObject = JSValue(newObjectInContext: context)
         kindObject.setObject(RawKind.Entering.rawValue, forKeyedSubscript: "Entering")
         kindObject.setObject(RawKind.Leaving.rawValue, forKeyedSubscript: "Leaving")
-        context.setObject(kindObject, forKeyedSubscript: "Kind")
+        context.setObject(kindObject, forKeyedSubscript: "CollisionBehaviorKind")
     }
     
     public class func encodeKind(kind: Prototope.CollisionBehavior.Kind, inContext context: JSContext) -> JSValue {
