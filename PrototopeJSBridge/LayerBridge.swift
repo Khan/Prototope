@@ -64,6 +64,7 @@ import JavaScriptCore
     // MARK: Touches and gestures
     var userInteractionEnabled: Bool { get set }
     var activeTouchSequences: JSValue { get }
+	var numberOfActiveTouches: Int32 { get }
     var gestures: [GestureBridgeType] { get set }
     var touchesBeganHandler: JSValue? { get set }
     var touchesMovedHandler: JSValue? { get set }
@@ -329,6 +330,11 @@ import JavaScriptCore
     public var activeTouchSequences: JSValue {
         return LayerBridge.bridgeTouchSequenceMapping(layer.activeTouchSequences, context: JSContext.currentContext())
     }
+
+	// JavaScript "hashes" are actually just objects, and they don't have a convenient "length" method, so:
+	public var numberOfActiveTouches: Int32 {
+		return Int32(layer.activeTouchSequences.count)
+	}
 
     public var gestures: [GestureBridgeType] {
         get {
