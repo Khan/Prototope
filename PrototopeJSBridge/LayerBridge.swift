@@ -321,7 +321,7 @@ import JavaScriptCore
     }
 
 	private class func bridgeTouchSequence(sequence: TouchSequence<UITouchID>, context: JSContext) -> TouchSequenceBridge {
-        let bridgedID = JSValue(object: UITouchIDBridge(sequence.id), inContext: context)!
+        let bridgedID = JSValue(object: sequence.id.description, inContext: context)!
         let jsValueIDedSequence = TouchSequence(samples: sequence.samples, id: bridgedID)
         let bridge = TouchSequenceBridge(jsValueIDedSequence)
         return bridge
