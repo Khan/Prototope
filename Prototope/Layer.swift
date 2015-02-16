@@ -184,15 +184,15 @@ public class Layer: Equatable, Hashable {
 	/** The layer's width, expressed in its own coordinate space. Animatable (but not yet
 		via the dynamic animators). */
 	public var width: Double {
-		get { return Double(layer.bounds.size.width) }
-		set { layer.bounds.size.width = CGFloat(newValue) }
+		get { return bounds.size.width }
+		set { bounds.size.width = newValue }
 	}
 
 	/** The layer's height, expressed in its own coordinate space. Animatable (but not yet
 		via the dynamic animators). */
 	public var height: Double {
-		get { return Double(layer.bounds.size.height) }
-		set { layer.bounds.size.height = CGFloat(newValue) }
+		get { return bounds.size.height }
+		set { bounds.size.height = newValue }
 	}
 
 	/** The layer's size, expressed in its own coordinate space. Animatable. */

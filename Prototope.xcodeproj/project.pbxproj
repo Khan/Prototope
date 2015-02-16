@@ -128,6 +128,8 @@
 		EBC43D841A81BA360075272A /* HeartbeatBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D831A81BA360075272A /* HeartbeatBridge.swift */; };
 		EBC43D861A81BBC30075272A /* HeartbeatBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */; };
 		EBC43D881A81C47A0075272A /* SoundBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D871A81C47A0075272A /* SoundBridge.swift */; };
+		EBD43A9F1A9186F900BB2E6A /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */; };
+		EBD43AAF1A918A8900BB2E6A /* TextLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
 		EBE17A0819E65E5500C308E5 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		EBE3A76A19DF79C400A77736 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
@@ -520,6 +522,8 @@
 		EBC43D831A81BA360075272A /* HeartbeatBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridge.swift; sourceTree = "<group>"; };
 		EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridgeTests.swift; sourceTree = "<group>"; };
 		EBC43D871A81C47A0075272A /* SoundBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundBridge.swift; sourceTree = "<group>"; };
+		EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayer.swift; sourceTree = "<group>"; };
+		EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayerBridge.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		EBE17A0719E65E5500C308E5 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		EBE3A74E19DF78D500A77736 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -777,6 +781,7 @@
 				9632F6411A8D4C47003D386B /* ScrollLayer.swift */,
 				7520648F1A89E39F005E38A2 /* Behaviors.swift */,
 				9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */,
+				EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
@@ -1000,6 +1005,7 @@
 				EBB43C931A8BEB2200CE943C /* VideoBridge.swift */,
 				EBB43C941A8BEB2200CE943C /* VideoLayerBridge.swift */,
 				9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */,
+				EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -1512,6 +1518,7 @@
 				EBC43D881A81C47A0075272A /* SoundBridge.swift in Sources */,
 				EBC43D781A81999B0075272A /* JSContext+BridgingExtensions.swift in Sources */,
 				EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */,
+				EBD43AAF1A918A8900BB2E6A /* TextLayerBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
 				EBC43D6F1A81916E0075272A /* Context.swift in Sources */,
 				EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */,
@@ -1611,6 +1618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBE3A77519DF79E900A77736 /* Layer.swift in Sources */,
+				EBD43A9F1A9186F900BB2E6A /* TextLayer.swift in Sources */,
 				CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */,
 				CD3F93A01A852AF500B964FC /* ParticlePreset.swift in Sources */,
 				CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */,

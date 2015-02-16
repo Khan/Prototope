@@ -11,26 +11,25 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol VideoLayerJSExport: JSExport {
-	init(args: NSDictionary)
+	init?(args: NSDictionary)
 	func play()
 	func pause()
 }
 
 
 @objc public class VideoLayerBridge: LayerBridge, VideoLayerJSExport, BridgeType {
-	var videoLayer: VideoLayer
+	var videoLayer: VideoLayer { return layer as! VideoLayer }
 	
 	public override class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "VideoLayer")
 	}
 	
-	required public init(args: NSDictionary) {
+	required public init?(args: NSDictionary) {
 		let parentLayer = (args["parent"] as! LayerBridge?)?.layer
 		let video = (args["video"] as! VideoBridge?)?.video
 		
-		self.videoLayer = VideoLayer(parent: parentLayer, video: video)
-
-		super.init(args: args)
+		let videoLayer = VideoLayer(parent: parentLayer, video: video)
+		super.init(videoLayer)
 		
 	}
 	
