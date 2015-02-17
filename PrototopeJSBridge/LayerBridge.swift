@@ -14,7 +14,7 @@ import JavaScriptCore
 	static var root: LayerJSExport { get } // Not automatically imported via JSExport.
     
     // MARK: Creating and identifying layers
-	init(args: NSDictionary)
+	init?(args: NSDictionary)
     var name: String? { get }
     
     // MARK: Layer hierarchy access and manipulation
@@ -117,7 +117,7 @@ import JavaScriptCore
     
     // MARK: Creating and identifying layers
 
-    required public init(args: NSDictionary) {
+    required public init?(args: NSDictionary) {
 		let parentLayer = (args["parent"] as! LayerBridge?)?.layer
 		if let imageName = args["imageName"] as! String? {
 			layer = Layer(parent: parentLayer, imageName: imageName)

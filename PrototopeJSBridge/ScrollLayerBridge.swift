@@ -11,7 +11,7 @@ import Prototope
 import JavaScriptCore
 
 @objc public protocol ScrollLayerJSExport: JSExport {
-	init(args: NSDictionary)
+	init?(args: NSDictionary)
 	
 	
 	var scrollableSize: SizeBridge { get set }
@@ -22,19 +22,18 @@ import JavaScriptCore
 
 
 @objc public class ScrollLayerBridge: LayerBridge, ScrollLayerJSExport, BridgeType {
-	var scrollLayer: ScrollLayer
+	var scrollLayer: ScrollLayer { return layer as! ScrollLayer }
 	
 	public override class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "ScrollLayer")
 	}
 	
-	required public init(args: NSDictionary) {
+	required public init?(args: NSDictionary) {
 		let parentLayer = (args["parent"] as! LayerBridge?)?.layer
 		let name = args["name"] as! String?
 		
-		self.scrollLayer = ScrollLayer(parent: parentLayer, name: name)
-		
-		super.init(args: args)
+		let scrollLayer = ScrollLayer(parent: parentLayer, name: name)
+		super.init(scrollLayer)
 		
 	}
 	
