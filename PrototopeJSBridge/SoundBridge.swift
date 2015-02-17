@@ -13,6 +13,7 @@ import JavaScriptCore
 @objc public protocol SoundJSExport: JSExport {
 	init?(args: NSDictionary)
 	func play()
+	func stop()
 }
 
 @objc public class SoundBridge: NSObject, SoundJSExport, BridgeType {
@@ -34,5 +35,9 @@ import JavaScriptCore
 
 	public func play() {
 		sound.play()
+	}
+
+	public func stop() {
+		sound.stop()
 	}
 }
