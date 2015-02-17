@@ -16,11 +16,11 @@ public struct Speech {
 	
 	
 	private static var speech: Speech {
-		struct InternalSpeech {
+		struct InnerVoice {
 			static let instance = Speech()
 		}
 		
-		return InternalSpeech.instance
+		return InnerVoice.instance
 	}
 	
 	
