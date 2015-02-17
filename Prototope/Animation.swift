@@ -212,10 +212,10 @@ extension Layer {
 
 // MARK: - Internal interfaces
 
-@objc public class AnimationDelegate: NSObject, POPAnimationDelegate {
+private class AnimationDelegate: NSObject, POPAnimationDelegate {
 	var completionHandler: (() -> Void)?
 
-	public func pop_animationDidStop(animation: POPAnimation, finished: Bool) {
+	@objc func pop_animationDidStop(animation: POPAnimation, finished: Bool) {
 		completionHandler?()
 	}
 }
