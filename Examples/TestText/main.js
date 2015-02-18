@@ -12,6 +12,7 @@ singleLineLayer.y = 30
 
 var wrappingLayer = new TextLayer()
 wrappingLayer.text = "Hello there and welcome to Prototope, where we wrap text for you if you want."
+wrappingLayer.textAlignment = TextAlignment.Right
 wrappingLayer.textColor = Color.white
 wrappingLayer.wraps = true
 wrappingLayer.border = new Border({color: Color.red, width: 1})

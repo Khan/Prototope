@@ -18,6 +18,45 @@ import UIKit
 	If text is not being wrapped, then the layer's size will automatically grow to accommodate the full string. If text *is* being wrapped, the layer will respect its given width but will adjust its height to accommodate the full string. Except when the layer's size is directly being changed (i.e. via layer.width or layer.bounds.width--but not layer.frame.width), the layer's origin will be preserved if the size changes to accommodate the text. If the layer's size is changed direclty, then its position will be preserved.
 */
 public class TextLayer: Layer {
+	
+	/** Text alignment */
+	public enum Alignment {
+		/** Visually left aligned */
+		case Left
+		
+		/** Visually centered */
+		case Center
+		
+		/** Visually right aligned */
+		case Right
+		
+		/** Fully-justified. The last line in a paragraph is natural-aligned. */
+		case Justified
+		
+		/** Indicates the default alignment for script */
+		case Natural
+		
+		internal func toNSTextAlignment() -> NSTextAlignment {
+			switch self {
+			case .Left: return .Left
+			case .Center: return .Center
+			case .Right: return .Right
+			case .Justified: return .Justified
+			case .Natural: return .Natural
+			}
+		}
+		
+		internal init(nsTextAlignment: NSTextAlignment) {
+			switch nsTextAlignment {
+			case .Left: self = .Left
+			case .Center: self = .Center
+			case .Right: self = .Right
+			case .Justified: self = .Justified
+			case .Natural: self = .Natural
+			}
+		}
+	}
+	
 	public var text: String? {
 		get {
 			return label.text
@@ -54,6 +93,16 @@ public class TextLayer: Layer {
 		set {
 			label.numberOfLines = newValue ? 0 : 1
 			updateSizePreservingOrigin() // Adjust width/height as necessary for new wrapping mode.
+		}
+	}
+	
+	public var textAlignment: Alignment {
+		get {
+			return Alignment(nsTextAlignment: label.textAlignment)
+		}
+		set {
+			label.textAlignment = newValue.toNSTextAlignment()
+			//No need to adjust size, since changing alignment doesn't influence it
 		}
 	}
 
