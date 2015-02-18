@@ -113,11 +113,9 @@ public class TextLayer: Layer {
 	
 	/** Aligns this layer's first baseline with the first baseline of the other layer */
 	public func alignWithBaselineOf(otherLayer: TextLayer) {
-		var delta = pixelAwareCeil(otherLayer.baselineHeight-baselineHeight)
+		let delta = pixelAwareCeil(otherLayer.baselineHeight-baselineHeight)
 		
-		var frame = self.frame
-		frame.origin.y = otherLayer.frame.minY + delta
-		self.frame = frame
+		self.frame.origin.y = otherLayer.frame.minY + delta
 	}
 	
 	public override var frame: Rect {
