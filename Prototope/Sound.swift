@@ -19,13 +19,19 @@ public struct Sound {
 	public init!(name: String) {
 		if let data = Environment.currentEnvironment!.soundProvider(name) {
 			player = AVAudioPlayer(data: data, error: nil)
+			player.prepareToPlay()
 		} else {
 			return nil
 		}
 	}
 
 	public func play() {
+		player.currentTime = 0
 		player.play()
+	}
+
+	public func stop() {
+		player.stop()
 	}
 
 	public static var supportedExtensions = ["caf", "aif", "aiff", "wav"]

@@ -32,4 +32,6 @@ layer.removeParticleEmitter(emitter);
 var scrollLayer = new ScrollLayer({parent: layer, name: "yo"});
 scrollLayer.updateScrollableSizeToFitSublayers();
 
+Speech.say({text: " "}); // silent, but here for illustration.
+
 "Done JSTest.js"

@@ -76,6 +76,7 @@ public class Context {
         ActionBehaviorBridge.addToContext(context)
         CollisionBehaviorKindBridge.addToContext(context)
 		TextLayerBridge.addToContext(context)
+		SpeechBridge.addToContext(context)
 		TextAlignmentBridge.addToContext(context)
 	}
 }
