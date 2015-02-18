@@ -85,6 +85,23 @@ import JavaScriptCore
     
     // MARK: Behaviors
     var behaviors: [BehaviorBridgeType] { get set }
+    
+    
+    // MARK: Layout
+    
+    var frameMinX: Double { get set }
+    var frameMaxX: Double { get }
+    var frameMinY: Double { get set }
+    var frameMaxY: Double { get }
+    
+	func moveToRightOfSiblingLayer(args: JSValue)
+    func moveToLeftOfSiblingLayer(args: JSValue)
+    func moveBelowSiblingLayer(args: JSValue)
+    func moveAboveSiblingLayer(args: JSValue)
+    func moveToRightSideOfParentLayer(margin: Double)
+    func moveToVerticalCenterOfParentLayer()
+    func moveToHorizontalCenterOfParentLayer()
+    func moveToCenterOfParentLayer()
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
@@ -527,7 +544,7 @@ import JavaScriptCore
 	
 	
 	// MARK: Particle emitters
-	// TODO(jb): The JS bridge doesn't seem to recognize these..why?
+	
 	public func addParticleEmitter(emitterBridge: ParticleEmitterJSExport) {
 		layer.addParticleEmitter(emitterBridge.emitterBridge.emitter)
 	}
@@ -535,6 +552,92 @@ import JavaScriptCore
 	
 	public func removeParticleEmitter(emitterBridge: ParticleEmitterJSExport) {
 		layer.removeParticleEmitter(emitterBridge.emitterBridge.emitter)
+	}
+	
+	
+	// MARK: Layer layout
+
+	
+	/** The minX of the layer's frame. */
+	public var frameMinX: Double {
+	    get { return self.layer.frameMinX }
+	    set { self.layer.frameMinX = newValue }
+	}
+	
+	
+	/** The maxX of the layer's frame. */
+	public var frameMaxX: Double { return self.layer.frameMaxX }
+	
+	
+	/** The minY of the layer's frame. */
+	public var frameMinY: Double {
+	    get { return self.layer.frameMinY }
+	    set { self.layer.frameMinY = newValue }
+	}
+	
+	
+	/** The maxY of the layer's frame. */
+	public var frameMaxY: Double { return self.layer.frameMinY }
+	
+	
+	/** Moves the receiver to the right of the given sibling layer. */
+	public func moveToRightOfSiblingLayer(args: JSValue) {
+		let (layer, margin) = layerAndMarginFromArgs(args)
+		self.layer.moveToRightOfSiblingLayer(layer, margin: margin)
+	}
+	
+	
+	/** Moves the receiver to the left of the given sibling layer. */
+	public func moveToLeftOfSiblingLayer(args: JSValue) {
+		let (layer, margin) = layerAndMarginFromArgs(args)
+		
+		self.layer.moveToLeftOfSiblingLayer(layer, margin: margin)
+	}
+	
+	
+	/** Moves the receiver vertically below the given sibling layer. Does not horizontally align automatically. */
+	public func moveBelowSiblingLayer(args: JSValue) {
+		let (layer, margin) = layerAndMarginFromArgs(args)
+	    self.layer.moveBelowSiblingLayer(layer, margin: margin)
+	}
+	
+	
+	/** Moves the receiver vertically above the given sibling layer. Does not horizontally align automatically. */
+	public func moveAboveSiblingLayer(args: JSValue) {
+		let (layer, margin) = layerAndMarginFromArgs(args)
+	    self.layer.moveAboveSiblingLayer(layer, margin: margin)
+	}
+	
+	
+	/** Moves the receiver so that its right side is aligned with the right side of its parent layer. */
+	public func moveToRightSideOfParentLayer(margin: Double) {
+	    self.layer.moveToRightSideOfParentLayer(margin: margin)
+	}
+	
+	
+	/** Moves the receiver to be vertically centred in its parent. */
+	public func moveToVerticalCenterOfParentLayer() {
+	    self.layer.moveToVerticalCenterOfParentLayer()
+	}
+	
+	
+	/** Moves the receiver to be horizontally centred in its parent. */
+	public func moveToHorizontalCenterOfParentLayer() {
+		self.layer.moveToHorizontalCenterOfParentLayer()
+	}
+	
+	
+	/** Moves the receiver to be centered in its parent. */
+	public func moveToCenterOfParentLayer() {
+	    self.layer.moveToCenterOfParentLayer()
+	}
+	
+	
+	private func layerAndMarginFromArgs(args: JSValue) -> (layer: Layer, margin: Double) {
+		let siblingLayer = args.objectForKeyedSubscript("siblingLayer").toObject() as! LayerBridge
+		let margin = args.objectForKeyedSubscript("margin")?.toDouble() ?? 0
+		
+		return (siblingLayer.layer, margin)
 	}
 
 }
