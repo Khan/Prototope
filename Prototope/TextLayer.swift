@@ -111,7 +111,7 @@ public class TextLayer: Layer {
 		return Double(label.font.ascender)
 	}
 	
-	/** Aligns this layer with the first baseline of the other layer */
+	/** Aligns this layer's first baseline with the first baseline of the other layer */
 	public func alignWithBaselineOf(otherLayer: TextLayer) {
 		var delta = pixelAwareCeil(otherLayer.baselineHeight-baselineHeight)
 		
