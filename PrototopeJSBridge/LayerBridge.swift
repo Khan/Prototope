@@ -577,7 +577,7 @@ import JavaScriptCore
 	
 	
 	/** The maxY of the layer's frame. */
-	public var frameMaxY: Double { return self.layer.frameMinY }
+	public var frameMaxY: Double { return self.layer.frameMaxY }
 	
 	
 	/** Moves the receiver to the right of the given sibling layer. */
