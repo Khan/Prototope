@@ -105,7 +105,19 @@ public class TextLayer: Layer {
 			//No need to adjust size, since changing alignment doesn't influence it
 		}
 	}
-
+	
+	/** Distance from top of layer to the first line's baseline */
+	public var baselineHeight: Double {
+		return Double(label.font.ascender)
+	}
+	
+	/** Aligns this layer's first baseline with the first baseline of the other layer */
+	public func alignWithBaselineOf(otherLayer: TextLayer) {
+		let delta = pixelAwareCeil(otherLayer.baselineHeight-baselineHeight)
+		
+		self.frame.origin.y = otherLayer.frame.minY + delta
+	}
+	
 	public override var frame: Rect {
 		didSet {
 			// Respect the new width; resize height so as not to truncate.

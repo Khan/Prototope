@@ -40,5 +40,19 @@ public struct MathBridge: BridgeType {
 			)
 		}
 		context.setFunctionForKey("clip", fn: clipTrampoline)
+		
+		let pixelAwareCeil: @objc_block NSDictionary -> Double = { args in
+			Prototope.pixelAwareCeil(
+				(args["value"] as! Double?) ?? 0
+			)
+		}
+		context.setFunctionForKey("pixelAwareCeil", fn: pixelAwareCeil)
+		
+		let pixelAwareFloor: @objc_block NSDictionary -> Double = { args in
+			Prototope.pixelAwareFloor(
+				(args["value"] as! Double?) ?? 0
+			)
+		}
+		context.setFunctionForKey("pixelAwareFloor", fn: pixelAwareCeil)
 	}
 }
