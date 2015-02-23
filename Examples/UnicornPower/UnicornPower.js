@@ -85,7 +85,7 @@ function animateSparkleCircle() {
 	for (layerIndex in sparkleParentLayer.sublayers) {
 		var layer = sparkleParentLayer.sublayers[layerIndex]
 		var deltaVector = layer.position.subtract(unicornLayer.position)
-		var scaledVector = deltaVector.multiply(600)
+		var scaledVector = deltaVector.multiply(100)
 		var sparklePosition = scaledVector.add(layer.position) 
 		layer.animators.position.target = sparklePosition
 	}
