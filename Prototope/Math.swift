@@ -33,3 +33,15 @@ public func map(value: Double, #fromInterval: (Double, Double), #toInterval: (Do
 public func clip<T: Comparable>(value: T, min minValue: T, max maxValue: T) -> T {
 	return max(min(value, maxValue), minValue)
 }
+
+/** `ceil`s the value, snapping to screen's pixel values */
+public func pixelAwareCeil(value: Double) -> Double {
+	let scale = Double(UIScreen.mainScreen().scale)
+	return ceil(value*scale)/scale
+}
+
+/** `floor`s the value, snapping to screen's pixel values */
+public func pixelAwareFloor(value: Double) -> Double {
+	let scale = Double(UIScreen.mainScreen().scale)
+	return floor(value*scale)/scale
+}

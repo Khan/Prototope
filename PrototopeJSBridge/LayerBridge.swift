@@ -99,6 +99,9 @@ import JavaScriptCore
     func moveBelowSiblingLayer(args: JSValue)
     func moveAboveSiblingLayer(args: JSValue)
     func moveToRightSideOfParentLayer(margin: Double)
+	func moveToLeftSideOfParentLayer(margin: Double)
+	func moveToTopSideOfParentLayer(margin: Double)
+	func moveToBottomSideOfParentLayer(margin: Double)
     func moveToVerticalCenterOfParentLayer()
     func moveToHorizontalCenterOfParentLayer()
     func moveToCenterOfParentLayer()
@@ -577,7 +580,7 @@ import JavaScriptCore
 	
 	
 	/** The maxY of the layer's frame. */
-	public var frameMaxY: Double { return self.layer.originY }
+	public var frameMaxY: Double { return self.layer.frameMaxY }
 	
 	
 	/** Moves the receiver to the right of the given sibling layer. */
@@ -612,6 +615,24 @@ import JavaScriptCore
 	/** Moves the receiver so that its right side is aligned with the right side of its parent layer. */
 	public func moveToRightSideOfParentLayer(margin: Double) {
 	    self.layer.moveToRightSideOfParentLayer(margin: margin)
+	}
+	
+	
+	/** Moves the receiver so that its left side is aligned with the left side of its parent layer. */
+	public func moveToLeftSideOfParentLayer(margin: Double) {
+		self.layer.moveToLeftSideOfParentLayer(margin: margin)
+	}
+	
+	
+	/** Moves the receiver so that its top side is aligned with the top side of its parent layer. */
+	public func moveToTopSideOfParentLayer(margin: Double) {
+		self.layer.moveToTopSideOfParentLayer(margin: margin)
+	}
+	
+	
+	/** Moves the receiver so that its bottom side is aligned with the bottom side of its parent layer. */
+	public func moveToBottomSideOfParentLayer(margin: Double) {
+		self.layer.moveToBottomSideOfParentLayer(margin: margin)
 	}
 	
 	

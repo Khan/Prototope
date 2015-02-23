@@ -17,8 +17,9 @@ import JavaScriptCore
 	var textColor: ColorJSExport { get set }
 	var wraps: Bool { get set }
 	var textAlignment: JSValue { get set }
+	var baselineHeight: Double { get }
+	func alignWithBaselineOf(layer: TextLayerJSExport)
 }
-
 
 @objc public class TextLayerBridge: LayerBridge, TextLayerJSExport, BridgeType {
 	var textLayer: TextLayer { return layer as! TextLayer }
@@ -62,6 +63,14 @@ import JavaScriptCore
 	public var textAlignment: JSValue {
 		get { return TextAlignmentBridge.encodeAlignment(textLayer.textAlignment, inContext: JSContext.currentContext()) }
 		set { textLayer.textAlignment = TextAlignmentBridge.decodeAlignment(newValue) }
+	}
+	
+	public var baselineHeight: Double {
+		return textLayer.baselineHeight
+	}
+	
+	public func alignWithBaselineOf(otherLayer: TextLayerJSExport) {
+		textLayer.alignWithBaselineOf((otherLayer as JSExport as! TextLayerBridge).textLayer)
 	}
 }
 
