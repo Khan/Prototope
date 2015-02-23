@@ -13,7 +13,7 @@ extension Layer {
 	
 	
 	/** The minX of the layer's frame. */
-	public var frameMinX: Double {
+	public var originX: Double {
 		get { return self.frame.minX }
 		set { self.frame.origin.x = newValue }
 	}
@@ -24,7 +24,7 @@ extension Layer {
 	
 	
 	/** The minY of the layer's frame. */
-	public var frameMinY: Double {
+	public var originY: Double {
 		get { return self.frame.minY }
 		set { self.frame.origin.y = newValue }
 	}
@@ -36,32 +36,32 @@ extension Layer {
 	
 	/** Moves the receiver to the right of the given sibling layer. */
 	public func moveToRightOfSiblingLayer(siblingLayer: Layer, margin: Double = 0.0) {
-		self.frameMinX = floor(siblingLayer.frameMaxX + margin)
+		self.originX = floor(siblingLayer.frameMaxX + margin)
 	}
 	
 	
 	/** Moves the receiver to the left of the given sibling layer. */
 	public func moveToLeftOfSiblingLayer(siblingLayer: Layer, margin: Double = 0.0) {
-		self.frameMinX = floor(siblingLayer.frameMinX - (self.width + margin))
+		self.originX = floor(siblingLayer.originX - (self.width + margin))
 	}
 	
 	
 	/** Moves the receiver vertically below the given sibling layer. Does not horizontally align automatically. */
 	public func moveBelowSiblingLayer(siblingLayer: Layer, margin: Double = 0.0) {
-		self.frameMinY = siblingLayer.frameMaxY + margin
+		self.originY = siblingLayer.originY + margin
 	}
 	
 	
 	/** Moves the receiver vertically above the given sibling layer. Does not horizontally align automatically. */
 	public func moveAboveSiblingLayer(siblingLayer: Layer, margin: Double = 0.0) {
-		self.frameMinY = siblingLayer.frameMinY - (self.height + margin)
+		self.originY = siblingLayer.originY - (self.height + margin)
 	}
 	
 	
 	/** Moves the receiver so that its right side is aligned with the right side of its parent layer. */
 	public func moveToRightSideOfParentLayer(margin: Double = 0.0) {
 		if let parent = self.parent {
-			self.frameMinX = floor(parent.width - self.width - margin)
+			self.originX = floor(parent.width - self.width - margin)
 		}
 	}
 	
@@ -69,7 +69,7 @@ extension Layer {
 	/** Moves the receiver to be vertically centred in its parent. */
 	public func moveToVerticalCenterOfParentLayer() {
 		if let parent = self.parent {
-			self.frameMinY = floor(parent.height / 2.0 - self.height / 2.0)
+			self.originY = floor(parent.height / 2.0 - self.height / 2.0)
 		}
 	}
 	
@@ -77,7 +77,7 @@ extension Layer {
 	/** Moves the receiver to be horizontally centred in its parent. */
 	public func moveToHorizontalCenterOfParentLayer() {
 		if let parent = self.parent {
-			self.frameMinX = floor(parent.width / 2.0 - self.width / 2.0)
+			self.originX = floor(parent.width / 2.0 - self.width / 2.0)
 		}
 	}
 	

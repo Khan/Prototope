@@ -89,9 +89,9 @@ import JavaScriptCore
     
     // MARK: Layout
     
-    var frameMinX: Double { get set }
+    var originX: Double { get set }
     var frameMaxX: Double { get }
-    var frameMinY: Double { get set }
+    var originY: Double { get set }
     var frameMaxY: Double { get }
     
 	func moveToRightOfSiblingLayer(args: JSValue)
@@ -559,9 +559,9 @@ import JavaScriptCore
 
 	
 	/** The minX of the layer's frame. */
-	public var frameMinX: Double {
-	    get { return self.layer.frameMinX }
-	    set { self.layer.frameMinX = newValue }
+	public var originX: Double {
+	    get { return self.layer.originX }
+	    set { self.layer.originX = newValue }
 	}
 	
 	
@@ -570,14 +570,14 @@ import JavaScriptCore
 	
 	
 	/** The minY of the layer's frame. */
-	public var frameMinY: Double {
-	    get { return self.layer.frameMinY }
-	    set { self.layer.frameMinY = newValue }
+	public var originY: Double {
+	    get { return self.layer.originY }
+	    set { self.layer.originY = newValue }
 	}
 	
 	
 	/** The maxY of the layer's frame. */
-	public var frameMaxY: Double { return self.layer.frameMinY }
+	public var frameMaxY: Double { return self.layer.originY }
 	
 	
 	/** Moves the receiver to the right of the given sibling layer. */
