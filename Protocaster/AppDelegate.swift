@@ -32,9 +32,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 			}
 		}
 	}
+    
+    private final func sceneURL(fromURL URL: NSURL) -> NSURL? {
+        var isDirectoryValue: AnyObject?
+        URL.getResourceValue(&isDirectoryValue, forKey: NSURLIsDirectoryKey, error: nil)
+        
+        let isDirectory = (isDirectoryValue as? NSNumber)?.boolValue ?? false
+        
+        if !isDirectory {
+            return URL.URLByDeletingLastPathComponent
+        }
+        
+        return URL
+    }
 
 	private func selectedPathDidChange(newURL: NSURL?) {
-		if let URL = newURL {
+		if let URL = (newURL >>- sceneURL) {
 			if .Some(URL) != monitor?.URL {
 				monitor = URLMonitor(URL: URL)
 				monitor!.everythingDidChangeHandler = {
