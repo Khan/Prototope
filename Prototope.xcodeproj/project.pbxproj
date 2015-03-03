@@ -38,7 +38,6 @@
 		EB1C2A7C19E4D2B8000DC2C1 /* Prototope.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB2A88541A82FD5900E3987F /* GestureBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A88531A82FD5900E3987F /* GestureBridge.swift */; };
 		EB2A88591A83008000E3987F /* GestureBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A88581A83008000E3987F /* GestureBridgeTests.swift */; };
-		EB2D4BC91A7C9089005A67EE /* JSTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D4BC81A7C9089005A67EE /* JSTest.swift */; };
 		EB2D4BCB1A7C9136005A67EE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2D4BCA1A7C9136005A67EE /* JavaScriptCore.framework */; };
 		EB2D4BCC1A7C9154005A67EE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2D4BCA1A7C9136005A67EE /* JavaScriptCore.framework */; };
 		EB306C0F19DF77CC00113FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */; };
@@ -439,7 +438,6 @@
 		EB1C2A7619E4D1AC000DC2C1 /* ViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		EB2A88531A82FD5900E3987F /* GestureBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureBridge.swift; sourceTree = "<group>"; };
 		EB2A88581A83008000E3987F /* GestureBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureBridgeTests.swift; sourceTree = "<group>"; };
-		EB2D4BC81A7C9089005A67EE /* JSTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSTest.swift; sourceTree = "<group>"; };
 		EB2D4BCA1A7C9136005A67EE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EB306C0919DF77CC00113FA3 /* PrototopeTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrototopeTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB306C0D19DF77CC00113FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -493,6 +491,7 @@
 		EBA049B01A8AFC87008BC4AD /* ExceptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionView.swift; sourceTree = "<group>"; };
 		EBA049BF1A8BCB32008BC4AD /* ConsoleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
 		EBA049C11A8BCCB0008BC4AD /* ExceptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionViewController.swift; sourceTree = "<group>"; };
+		EBA0DB281AA533BE00A030A0 /* README.mdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.mdown; sourceTree = "<group>"; };
 		EBA0DB2D1AA5426E00A030A0 /* ContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextTests.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		EBA8371B1A1DB51000D23C9D /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
@@ -739,9 +738,9 @@
 		EB306C0B19DF77CC00113FA3 /* 🚦 PrototopeTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				EBA0DB281AA533BE00A030A0 /* README.mdown */,
 				EB306C0E19DF77CC00113FA3 /* AppDelegate.swift */,
 				EB306C1019DF77CC00113FA3 /* ViewController.swift */,
-				EB2D4BC81A7C9089005A67EE /* JSTest.swift */,
 				753E20E71A84A12100E30460 /* JSTest.js */,
 				EB306C1219DF77CD00113FA3 /* Main.storyboard */,
 				EB306C1519DF77CD00113FA3 /* Images.xcassets */,
@@ -1511,7 +1510,6 @@
 			files = (
 				EB306C1119DF77CC00113FA3 /* ViewController.swift in Sources */,
 				EB306C0F19DF77CC00113FA3 /* AppDelegate.swift in Sources */,
-				EB2D4BC91A7C9089005A67EE /* JSTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
