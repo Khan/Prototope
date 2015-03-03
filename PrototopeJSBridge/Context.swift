@@ -31,7 +31,7 @@ public class Context {
 	}
 
 	public func evaluateScript(script: String!) -> JSValue {
-		return context.evaluateScript(script)
+		return context.evaluateScript("\"use strict\";" + script)
 	}
 
 	private func addBridgedTypes() {
@@ -76,5 +76,7 @@ public class Context {
         ActionBehaviorBridge.addToContext(context)
         CollisionBehaviorKindBridge.addToContext(context)
 		TextLayerBridge.addToContext(context)
+		SpeechBridge.addToContext(context)
+		TextAlignmentBridge.addToContext(context)
 	}
 }

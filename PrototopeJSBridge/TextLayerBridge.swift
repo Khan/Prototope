@@ -16,8 +16,10 @@ import JavaScriptCore
 	var fontSize: Double { get set }
 	var textColor: ColorJSExport { get set }
 	var wraps: Bool { get set }
+	var textAlignment: JSValue { get set }
+	var baselineHeight: Double { get }
+	func alignWithBaselineOf(layer: TextLayerJSExport)
 }
-
 
 @objc public class TextLayerBridge: LayerBridge, TextLayerJSExport, BridgeType {
 	var textLayer: TextLayer { return layer as! TextLayer }
@@ -57,4 +59,64 @@ import JavaScriptCore
 		get { return textLayer.wraps }
 		set { textLayer.wraps = newValue }
 	}
+	
+	public var textAlignment: JSValue {
+		get { return TextAlignmentBridge.encodeAlignment(textLayer.textAlignment, inContext: JSContext.currentContext()) }
+		set { textLayer.textAlignment = TextAlignmentBridge.decodeAlignment(newValue) }
+	}
+	
+	public var baselineHeight: Double {
+		return textLayer.baselineHeight
+	}
+	
+	public func alignWithBaselineOf(otherLayer: TextLayerJSExport) {
+		textLayer.alignWithBaselineOf((otherLayer as JSExport as! TextLayerBridge).textLayer)
+	}
 }
+
+public class TextAlignmentBridge: NSObject, BridgeType {
+	enum RawAlignment: Int {
+		case Left = 0
+		case Center = 1
+		case Right = 2
+		case Justified = 3
+		case Natural = 4
+	}
+	
+	public class func addToContext(context: JSContext) {
+		let alignmentObject = JSValue(newObjectInContext: context)
+		alignmentObject.setObject(RawAlignment.Left.rawValue, forKeyedSubscript: "Left")
+		alignmentObject.setObject(RawAlignment.Center.rawValue, forKeyedSubscript: "Center")
+		alignmentObject.setObject(RawAlignment.Right.rawValue, forKeyedSubscript: "Right")
+		alignmentObject.setObject(RawAlignment.Justified.rawValue, forKeyedSubscript: "Justified")
+		alignmentObject.setObject(RawAlignment.Natural.rawValue, forKeyedSubscript: "Natural")
+		context.setObject(alignmentObject, forKeyedSubscript: "TextAlignment")
+	}
+	
+	public class func encodeAlignment(kind: Prototope.TextLayer.Alignment, inContext context: JSContext) -> JSValue {
+		var rawAlignment: RawAlignment
+		switch kind {
+		case .Left: rawAlignment = .Left
+		case .Center: rawAlignment = .Center
+		case .Right: rawAlignment = .Right
+		case .Justified: rawAlignment = .Justified
+		case .Natural: rawAlignment = .Natural
+		}
+		return JSValue(int32: Int32(rawAlignment.rawValue), inContext: context)
+	}
+	
+	public class func decodeAlignment(bridgedAlignment: JSValue) -> Prototope.TextLayer.Alignment {
+		if let rawAlignment = RawAlignment(rawValue: Int(bridgedAlignment.toInt32())) {
+			switch rawAlignment {
+			case .Left: return .Left
+			case .Center: return .Center
+			case .Right: return .Right
+			case .Justified: return .Justified
+			case .Natural: return .Natural
+			}
+		} else {
+			return .Natural
+		}
+	}
+}
+

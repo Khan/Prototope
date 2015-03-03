@@ -53,6 +53,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 	var alpha: AnimatorJSExport { get }
 	var rotationRadians: AnimatorJSExport { get }
 	var scale: AnimatorJSExport { get }
+	var cornerRadius: AnimatorJSExport { get }
 }
 
 @objc public class LayerAnimatorStoreBridge: NSObject, LayerAnimatorStoreJSExport {
@@ -72,6 +73,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 	public var alpha: AnimatorJSExport { return DoubleAnimatorBridge(animatorStore.alpha) }
 	public var rotationRadians: AnimatorJSExport { return DoubleAnimatorBridge(animatorStore.rotationRadians) }
 	public var scale: AnimatorJSExport { return PointAnimatorBridge(animatorStore.scale) }
+	public var cornerRadius: AnimatorJSExport { return DoubleAnimatorBridge(animatorStore.cornerRadius) }
 }
 
 @objc public protocol AnimatorJSExport: JSExport {

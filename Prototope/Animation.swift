@@ -50,6 +50,9 @@ public class LayerAnimatorStore {
 	public var rotationRadians: Animator<Double>
 	//kPOPScaleXY expects two values, not one!
 	public var scale: Animator<Point>
+	
+	// TODO(jb): cornerRadius seems like it doesn't really obey the animation properties. Not sure why
+	public var cornerRadius: Animator<Double>
 
 /*	TODO:
 	width, height, anchorPoint, cornerRadius,
@@ -71,6 +74,7 @@ public class LayerAnimatorStore {
 		alpha = Animator(layer: layer, propertyName: kPOPViewAlpha)
 		rotationRadians = Animator(layer: layer, propertyName: kPOPLayerRotation, shouldAnimateLayer: true)
         scale = Animator(layer: layer, propertyName: kPOPLayerScaleXY, shouldAnimateLayer: true)
+		cornerRadius = Animator(layer: layer, propertyName: kPOPLayerCornerRadius, shouldAnimateLayer: true)
 	}
 }
 
@@ -212,10 +216,10 @@ extension Layer {
 
 // MARK: - Internal interfaces
 
-@objc private class AnimationDelegate: NSObject, POPAnimationDelegate {
+private class AnimationDelegate: NSObject, POPAnimationDelegate {
 	var completionHandler: (() -> Void)?
 
-	func pop_animationDidStop(animation: POPAnimation, finished: Bool) {
+	@objc func pop_animationDidStop(animation: POPAnimation, finished: Bool) {
 		completionHandler?()
 	}
 }

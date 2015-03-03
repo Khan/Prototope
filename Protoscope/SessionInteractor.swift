@@ -31,7 +31,11 @@ class SessionInteractor {
 				let filename = name.stringByAppendingPathExtension("png")!
 
 				let loadImage: (String, CGFloat) -> UIImage? = { filename, scale in
-					return prototype.resources[filename] >>- { UIImage(data: $0, scale: scale) }
+					// What does the brainfuck operator do?
+					return prototype.resources[filename] >>- {
+						let image = UIImage(data: $0, scale: scale)
+						return image
+					}
 				}
 
 				return loadImage(filenameWithScale, scale) ?? loadImage(filename, 1)

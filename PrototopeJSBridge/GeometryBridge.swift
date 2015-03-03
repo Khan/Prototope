@@ -17,7 +17,7 @@ import Prototope
 	var x: Double { get }
 	var y: Double { get }
 	static var zero: PointJSExport { get } // exported manually
-	init(args: NSDictionary)
+	init(args: NSDictionary) 
 	func distanceToPoint(point: PointJSExport) -> Double
 	var length: Double { get }
 

@@ -20,7 +20,7 @@ layer.shadow = new Shadow({alpha: 1.0});
 
 var video = new Video({name: "countdown.mp4"});
 var videoLayer = new VideoLayer({parent: Layer.root, video: video });
-videoLayer.play();
+//videoLayer.play();
 
 var particle = new Particle({imageName: "paint"})
 particle.spin = 2;
@@ -31,5 +31,10 @@ layer.removeParticleEmitter(emitter);
 
 var scrollLayer = new ScrollLayer({parent: layer, name: "yo"});
 scrollLayer.updateScrollableSizeToFitSublayers();
+
+
+scrollLayer.moveToRightOfSiblingLayer({siblingLayer: layer, margin: 10.0});
+
+Speech.say({text: " "}); // silent, but here for illustration.
 
 "Done JSTest.js"

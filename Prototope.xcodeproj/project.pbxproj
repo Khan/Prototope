@@ -13,6 +13,8 @@
 		753E20E81A84A12100E30460 /* JSTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 753E20E71A84A12100E30460 /* JSTest.js */; };
 		75A02AF01A8C95AC00938B4E /* BehaviorBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A02AE11A8C94BE00938B4E /* BehaviorBridge.swift */; };
 		9619D3AC1A8E56F20022DC54 /* Layer+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */; };
+		961AC2061A93B9D500ED9744 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
+		961AC2151A93D45D00ED9744 /* SpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2141A93D45D00ED9744 /* SpeechBridge.swift */; };
 		9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6411A8D4C47003D386B /* ScrollLayer.swift */; };
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
@@ -93,6 +95,7 @@
 		EBA049B11A8AFC87008BC4AD /* ExceptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA049B01A8AFC87008BC4AD /* ExceptionView.swift */; };
 		EBA049C01A8BCB32008BC4AD /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA049BF1A8BCB32008BC4AD /* ConsoleView.swift */; };
 		EBA049C21A8BCCB0008BC4AD /* ExceptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA049C11A8BCCB0008BC4AD /* ExceptionViewController.swift */; };
+		EBA0DB2E1AA5426E00A030A0 /* ContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0DB2D1AA5426E00A030A0 /* ContextTests.swift */; };
 		EBA837171A1DADDF00D23C9D /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
 		EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8371B1A1DB51000D23C9D /* Sound.swift */; };
 		EBA8371E1A1DB6E300D23C9D /* Glass.aiff in Resources */ = {isa = PBXBuildFile; fileRef = EBA8371D1A1DB6E300D23C9D /* Glass.aiff */; };
@@ -408,6 +411,8 @@
 		753E20E71A84A12100E30460 /* JSTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTest.js; sourceTree = "<group>"; };
 		75A02AE11A8C94BE00938B4E /* BehaviorBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorBridge.swift; sourceTree = "<group>"; };
 		9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Layer+Layout.swift"; sourceTree = "<group>"; };
+		961AC2051A93B9D500ED9744 /* Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
+		961AC2141A93D45D00ED9744 /* SpeechBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBridge.swift; sourceTree = "<group>"; };
 		9632F6411A8D4C47003D386B /* ScrollLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayer.swift; sourceTree = "<group>"; };
 		9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayerBridge.swift; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
@@ -487,6 +492,7 @@
 		EBA049BF1A8BCB32008BC4AD /* ConsoleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
 		EBA049C11A8BCCB0008BC4AD /* ExceptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionViewController.swift; sourceTree = "<group>"; };
 		EBA0DB281AA533BE00A030A0 /* README.mdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.mdown; sourceTree = "<group>"; };
+		EBA0DB2D1AA5426E00A030A0 /* ContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextTests.swift; sourceTree = "<group>"; };
 		EBA837161A1DADDF00D23C9D /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		EBA8371B1A1DB51000D23C9D /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		EBA8371D1A1DB6E300D23C9D /* Glass.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Glass.aiff; sourceTree = "<group>"; };
@@ -781,6 +787,7 @@
 				7520648F1A89E39F005E38A2 /* Behaviors.swift */,
 				9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */,
 				EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */,
+				961AC2051A93B9D500ED9744 /* Speech.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
@@ -824,6 +831,7 @@
 				EBC43D811A81B7040075272A /* MathBridgeTests.swift */,
 				EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */,
 				EB2A88581A83008000E3987F /* GestureBridgeTests.swift */,
+				EBA0DB2D1AA5426E00A030A0 /* ContextTests.swift */,
 				EB453DA01A7AB0B2006F2A72 /* Supporting Files */,
 			);
 			name = Tests;
@@ -1005,6 +1013,7 @@
 				EBB43C941A8BEB2200CE943C /* VideoLayerBridge.swift */,
 				9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */,
 				EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */,
+				961AC2141A93D45D00ED9744 /* SpeechBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -1510,6 +1519,7 @@
 			files = (
 				EBC43D5D1A7FF8920075272A /* BorderBridge.swift in Sources */,
 				EBC43D761A8198EA0075272A /* TunableBridge.swift in Sources */,
+				961AC2151A93D45D00ED9744 /* SpeechBridge.swift in Sources */,
 				EBB43C981A8BEB2200CE943C /* VideoLayerBridge.swift in Sources */,
 				6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */,
 				6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */,
@@ -1543,6 +1553,7 @@
 				EBC43D7A1A81AC020075272A /* TunableBridgeTests.swift in Sources */,
 				EB2A88591A83008000E3987F /* GestureBridgeTests.swift in Sources */,
 				EBC43D7E1A81B0FB0075272A /* TimingBridgeTests.swift in Sources */,
+				EBA0DB2E1AA5426E00A030A0 /* ContextTests.swift in Sources */,
 				EBC43D741A81959B0075272A /* JSBridgeTestCase.swift in Sources */,
 				EBC43D821A81B7040075272A /* MathBridgeTests.swift in Sources */,
 			);
@@ -1618,6 +1629,7 @@
 				EBE3A77519DF79E900A77736 /* Layer.swift in Sources */,
 				EBD43A9F1A9186F900BB2E6A /* TextLayer.swift in Sources */,
 				CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */,
+				961AC2061A93B9D500ED9744 /* Speech.swift in Sources */,
 				CD3F93A01A852AF500B964FC /* ParticlePreset.swift in Sources */,
 				CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */,
 				EB8BC1CA1A2CE7B5005E799C /* Border.swift in Sources */,
