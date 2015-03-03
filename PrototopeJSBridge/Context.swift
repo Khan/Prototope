@@ -31,7 +31,7 @@ public class Context {
 	}
 
 	public func evaluateScript(script: String!) -> JSValue {
-		return context.evaluateScript(script)
+		return context.evaluateScript("\"use strict\";" + script)
 	}
 
 	private func addBridgedTypes() {
