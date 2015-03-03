@@ -594,10 +594,19 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
-	init(wrappingView: UIView, name: String? = nil) {
+	private init(wrappingView: UIView, name: String? = nil) {
 		view = wrappingView
 		self.name = name
 	}
+    
+    
+	/** Creates a new layer hosted by the given view. The layer wraps its own view, which is sized to the full dimensions of the hosting view. */
+    convenience init(hostingView: UIView, name: String? = nil) {
+        self.init()
+        self.parentView = hostingView
+		self.frame = Rect(hostingView.bounds)
+		self.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+    }
 
 	// MARK: UIKit mapping
 
