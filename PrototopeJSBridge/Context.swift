@@ -20,7 +20,9 @@ public class Context {
 		}
 	}
 
-	public var consoleLogHandler: (String -> Void)?
+    public var consoleLogHandler: (String -> Void)? = { str in
+        println(str)
+    }
 
 	private let vm = JSVirtualMachine()
 	private let context: JSContext
