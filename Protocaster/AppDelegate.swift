@@ -47,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
     }
 
 	private func selectedPathDidChange(newURL: NSURL?) {
-		if let URL = (newURL >>- sceneURL) {
+        if let URL = newURL, let sceneURL = sceneURL(fromURL: URL) {
 			if .Some(URL) != monitor?.URL {
 				monitor = URLMonitor(URL: URL)
 				monitor!.everythingDidChangeHandler = {
