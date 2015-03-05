@@ -19,7 +19,7 @@ public struct Environment {
 	public static var currentEnvironment: Environment?
 
 	public init(rootView: UIView, imageProvider: String -> UIImage?, soundProvider: String -> NSData?, exceptionHandler: String -> Void) {
-		self.rootLayer = Layer(wrappingView: rootView, name: "Root")
+		self.rootLayer = Layer(hostingView: rootView, name: "Root")
 
 		// TODO: move defaultSpec into Environment.
 		let gesture = defaultSpec.twoFingerTripleTapGestureRecognizer()
