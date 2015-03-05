@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-/** A layer that shows the output of one of the device's cameras. */
+/** A layer that shows the output of one of the device's cameras. Defaults to using the back camera. */
 public class CameraLayer: Layer {
 	public enum CameraPosition: Printable {
 		/** The device's front-facing camera. */
@@ -40,8 +40,8 @@ public class CameraLayer: Layer {
 
 	private var captureSession: AVCaptureSession?
 
-	public init(parent: Layer? = Layer.root, name: String? = nil, cameraPosition: CameraPosition = .Front) {
-		self.cameraPosition = cameraPosition
+	public init(parent: Layer? = Layer.root, name: String? = nil) {
+		self.cameraPosition = .Back
 		super.init(parent: parent, name: name, viewClass: CameraView.self)
 		updateSession()
 	}
