@@ -130,6 +130,8 @@
 		EBC43D841A81BA360075272A /* HeartbeatBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D831A81BA360075272A /* HeartbeatBridge.swift */; };
 		EBC43D861A81BBC30075272A /* HeartbeatBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */; };
 		EBC43D881A81C47A0075272A /* SoundBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC43D871A81C47A0075272A /* SoundBridge.swift */; };
+		EBCEBBD01AA8DB7F00B58A6C /* CameraLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCEBBCF1AA8DB7F00B58A6C /* CameraLayer.swift */; };
+		EBCEBBDF1AA8DC9800B58A6C /* CameraLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCEBBDE1AA8DC9800B58A6C /* CameraLayerBridge.swift */; };
 		EBD43A9F1A9186F900BB2E6A /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */; };
 		EBD43AAF1A918A8900BB2E6A /* TextLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */; };
 		EBE17A0619E65D1B00C308E5 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
@@ -527,6 +529,8 @@
 		EBC43D831A81BA360075272A /* HeartbeatBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridge.swift; sourceTree = "<group>"; };
 		EBC43D851A81BBC30075272A /* HeartbeatBridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartbeatBridgeTests.swift; sourceTree = "<group>"; };
 		EBC43D871A81C47A0075272A /* SoundBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundBridge.swift; sourceTree = "<group>"; };
+		EBCEBBCF1AA8DB7F00B58A6C /* CameraLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraLayer.swift; sourceTree = "<group>"; };
+		EBCEBBDE1AA8DC9800B58A6C /* CameraLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraLayerBridge.swift; sourceTree = "<group>"; };
 		EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayer.swift; sourceTree = "<group>"; };
 		EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayerBridge.swift; sourceTree = "<group>"; };
 		EBE17A0519E65D1B00C308E5 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
@@ -787,6 +791,7 @@
 				7520648F1A89E39F005E38A2 /* Behaviors.swift */,
 				9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */,
 				EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */,
+				EBCEBBCF1AA8DB7F00B58A6C /* CameraLayer.swift */,
 				961AC2051A93B9D500ED9744 /* Speech.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
@@ -1013,6 +1018,7 @@
 				EBB43C941A8BEB2200CE943C /* VideoLayerBridge.swift */,
 				9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */,
 				EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */,
+				EBCEBBDE1AA8DC9800B58A6C /* CameraLayerBridge.swift */,
 				961AC2141A93D45D00ED9744 /* SpeechBridge.swift */,
 			);
 			name = "Bridged Types";
@@ -1529,6 +1535,7 @@
 				EBD43AAF1A918A8900BB2E6A /* TextLayerBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
 				EBC43D6F1A81916E0075272A /* Context.swift in Sources */,
+				EBCEBBDF1AA8DC9800B58A6C /* CameraLayerBridge.swift in Sources */,
 				EBC43D671A8042740075272A /* GeometryBridge.swift in Sources */,
 				9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */,
 				EBC43D841A81BA360075272A /* HeartbeatBridge.swift in Sources */,
@@ -1628,6 +1635,7 @@
 			files = (
 				EBE3A77519DF79E900A77736 /* Layer.swift in Sources */,
 				EBD43A9F1A9186F900BB2E6A /* TextLayer.swift in Sources */,
+				EBCEBBD01AA8DB7F00B58A6C /* CameraLayer.swift in Sources */,
 				CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */,
 				961AC2061A93B9D500ED9744 /* Speech.swift in Sources */,
 				CD3F93A01A852AF500B964FC /* ParticlePreset.swift in Sources */,
