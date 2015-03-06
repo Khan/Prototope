@@ -173,6 +173,13 @@ public class Layer: Equatable, Hashable {
 		set { layer.position.y = CGFloat(newValue) }
 	}
 
+    /** The position of the layer's origin point (the upper left-hand corner), 
+        relative to the origin of its parent layer and expressed in the parent coordinate space. */
+    public var origin: Point {
+        get { return Point(layer.frame.origin) }
+        set { layer.frame.origin = CGPoint(newValue) }
+    }
+
 	/** The position of the layer's anchor point (by default the center), relative to the
 		origin of its parent layer and expressed in the parent coordinate space.
 		Animatable. */
