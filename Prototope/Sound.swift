@@ -16,7 +16,7 @@ public struct Sound {
 
 	/** Creates a sound from a filename. No need to include the file extension: Prototope will
 		try all the valid extensions. */
-	public init!(name: String) {
+	public init?(name: String) {
 		if let data = Environment.currentEnvironment!.soundProvider(name) {
 			player = AVAudioPlayer(data: data, error: nil)
 			player.prepareToPlay()

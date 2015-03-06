@@ -18,7 +18,7 @@ public struct Particle {
 	
 	/** Create a new particle with the given image name and optional preset. */
 	public init(imageName: String, preset: ParticlePreset = .IKnowWhatImDoing) {
-		self.image = Image(name: imageName)
+		self.image = Image(name: imageName) ?? Image(UIImage())
 		
 		self.emitterCell = CAEmitterCell()
 		self.emitterCell.contents = self.image.uiImage.CGImage

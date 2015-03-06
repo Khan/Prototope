@@ -53,7 +53,7 @@ class ViewController: UIViewController {
 		}))
 		redLayer.gestures.append(TapGesture(handler: { location in
 			if tunable(true, name: "shrinks when tapped") {
-				Sound(name: "Glass").play()
+				Sound(name: "Glass")?.play()
 				redLayer.animators.frame.target = Rect(x: 30, y: 30, width: 50, height: 50)
 				redLayer.animators.frame.completionHandler = { println("Converged") }
 			}
