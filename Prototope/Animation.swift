@@ -41,6 +41,7 @@ extension Layer {
 public class LayerAnimatorStore {
 	public var x: Animator<Double>
 	public var y: Animator<Double>
+    public var origin: Animator<Point>
 	public var position: Animator<Point>
 	public var size: Animator<Size>
 	public var frame: Animator<Rect>
@@ -66,6 +67,19 @@ public class LayerAnimatorStore {
 		self.layer = layer
 		x = Animator(layer: layer, propertyName: kPOPLayerPositionX)
 		y = Animator(layer: layer, propertyName: kPOPLayerPositionY)
+        
+        let animatableOrigin = POPAnimatableProperty.propertyWithName("origin") { property in
+            property.readBlock = { obj, values in
+                values[0] = (obj as! UIView).frame.origin.x
+                values[1] = (obj as! UIView).frame.origin.y
+            }
+            property.writeBlock = { obj, values in
+                (obj as! UIView).frame.origin.x = values[0]
+                (obj as! UIView).frame.origin.y = values[1]
+            }
+        } as! POPAnimatableProperty
+        origin = Animator(layer: layer, property: animatableOrigin)
+        
 		position = Animator(layer: layer, propertyName: kPOPLayerPosition)
 		size = Animator(layer: layer, propertyName: kPOPLayerSize)
 		bounds = Animator(layer: layer, propertyName: kPOPLayerBounds)
