@@ -21,7 +21,8 @@ public struct Sound {
 			player = AVAudioPlayer(data: data, error: nil)
 			player.prepareToPlay()
 		} else {
-			return nil
+            Environment.currentEnvironment?.exceptionHandler("⚠️ Sound named \(name) not found")
+            return nil
 		}
 	}
 

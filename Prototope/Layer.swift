@@ -561,7 +561,7 @@ public class Layer: Equatable, Hashable {
 				}
 				// in this case unless you have a complex hierarchy,
 				// you should probably use a rounded image.
-				fatalError("⚠️ \(prefix) can't have images, shadows and corner radii set all at the same time. 😣")
+				Environment.currentEnvironment?.exceptionHandler("⚠️ \(prefix) can't have images, shadows and corner radii set all at the same time. 😣")
 			}
 
 			// don't set masksToBounds unless you have an image and a corner radius

@@ -25,7 +25,7 @@ public struct Image {
 			uiImage = image
 			self.name = name
 		} else {
-			fatalError("Image named \(name) not found")
+			Environment.currentEnvironment?.exceptionHandler("⚠️ Image named \(name) not found")
 			return nil
 		}
 	}
