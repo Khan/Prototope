@@ -82,5 +82,34 @@ public class Context {
 		TextAlignmentBridge.addToContext(context)
 		CameraLayerBridge.addToContext(context)
 		CameraPositionBridge.addToContext(context)
+
+		// TODO: Wrap all of these types
+		wrapBridgedType("TextLayer")
+	}
+
+	/// Wraps the global context variable `jsName` in a guard that throws a JS error if the constructor is called as a function, to prevent JavaScriptCore from crashing hard. See https://github.com/Khan/Prototope/issues/25.
+	private func wrapBridgedType(jsName: String) {
+		let originalType = context.objectForKeyedSubscript(jsName)
+		let wrappedType = bridgedTypeWrapper.callWithArguments([originalType])
+		context.setObject(wrappedType, forKeyedSubscript: jsName)
+	}
+
+	private var bridgedTypeWrapper: JSValue {
+		let script = [
+			"(function wrap(OriginalConstructor) {",
+				"function Constructor() {",
+					"if (!(this instanceof Constructor)) {",
+						"// TODO: This uses the Swift class name, not the JavaScript name",
+						"throw new Error('Use `new` to instantiate ' + OriginalConstructor.name);",
+					"}",
+					"return new (Function.prototype.bind.apply(OriginalConstructor, arguments));",
+				"}",
+				"Constructor.prototype = OriginalConstructor.prototype;",
+				"// This is sketchy and mutates the original prototype, but seems to work.",
+				"Constructor.prototype.constructor = Constructor;",
+				"return Constructor;",
+			"})"
+		]
+		return context.evaluateScript("\n".join(script))
 	}
 }
