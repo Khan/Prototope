@@ -48,6 +48,10 @@
   - init_white
   - vars
 
+- title: CameraLayer
+  docs:
+  - vars
+
 - title: Gesture
   docs:
   - continuous_gesture_phase
