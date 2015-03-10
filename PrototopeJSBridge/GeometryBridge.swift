@@ -29,11 +29,13 @@ import Prototope
 }
 
 @objc public class PointBridge: NSObject, PointJSExport, BridgeType {
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Point")
-		let pointBridge = context.objectForKeyedSubscript("Point")
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
+		let pointBridge = JSValue(object: self, inContext: context)
 		pointBridge.setObject(zero, forKeyedSubscript: "zero")
+		return pointBridge
 	}
+
+	public static var bridgedConstructorName: String = "Point"
 
 	var point: Prototope.Point
 	public required init(args: NSDictionary) {
@@ -95,11 +97,13 @@ import Prototope
 }
 
 @objc public class SizeBridge: NSObject, SizeJSExport, BridgeType {
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Size")
-		let sizeBridge = context.objectForKeyedSubscript("Size")
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
+		let sizeBridge = JSValue(object: self, inContext: context)
 		sizeBridge.setObject(zero, forKeyedSubscript: "zero")
+		return sizeBridge
 	}
+
+	public static var bridgedConstructorName: String = "Size"
 
 	public class var zero: SizeJSExport { return SizeBridge(Prototope.Size.zero) }
 
@@ -150,11 +154,13 @@ import Prototope
 }
 
 @objc public class RectBridge: NSObject, RectJSExport, BridgeType {
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Rect")
-		let rectBridge = context.objectForKeyedSubscript("Rect")
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
+		let rectBridge = JSValue(object: self, inContext: context)
 		rectBridge.setObject(zero, forKeyedSubscript: "zero")
+		return rectBridge
 	}
+
+	public static var bridgedConstructorName: String = "Rect"
 
 	public class var zero: RectJSExport { return RectBridge(Rect.zero) }
 

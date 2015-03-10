@@ -82,16 +82,18 @@ public class TextAlignmentBridge: NSObject, BridgeType {
 		case Justified = 3
 		case Natural = 4
 	}
-	
-	public class func addToContext(context: JSContext) {
+
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
 		let alignmentObject = JSValue(newObjectInContext: context)
 		alignmentObject.setObject(RawAlignment.Left.rawValue, forKeyedSubscript: "Left")
 		alignmentObject.setObject(RawAlignment.Center.rawValue, forKeyedSubscript: "Center")
 		alignmentObject.setObject(RawAlignment.Right.rawValue, forKeyedSubscript: "Right")
 		alignmentObject.setObject(RawAlignment.Justified.rawValue, forKeyedSubscript: "Justified")
 		alignmentObject.setObject(RawAlignment.Natural.rawValue, forKeyedSubscript: "Natural")
-		context.setObject(alignmentObject, forKeyedSubscript: "TextAlignment")
+		return alignmentObject
 	}
+
+	public static var bridgedConstructorName: String = "TextAlignment"
 	
 	public class func encodeAlignment(kind: Prototope.TextLayer.Alignment, inContext context: JSContext) -> JSValue {
 		var rawAlignment: RawAlignment

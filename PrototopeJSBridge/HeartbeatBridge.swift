@@ -20,9 +20,8 @@ import JavaScriptCore
 @objc public class HeartbeatBridge: NSObject, HeartbeatJSExport, BridgeType {
 	var heartbeat: Heartbeat!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Heartbeat")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "Heartbeat"
 
 	required public init?(args: JSValue) {
 		super.init()

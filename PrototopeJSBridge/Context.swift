@@ -45,6 +45,8 @@ public class Context {
 		console.setFunctionForKey("log", fn: loggingTrampoline)
 		context.setObject(console, forKeyedSubscript: "console")
 
+		// Swift doesn't support member access on protocol type variables, so we get copy-pasta:
+		addBridgedPrototype(ColorBridge.bridgedPrototypeInContext(context), toContext: context, withConstructorName: ColorBridge.bridgedConstructorName)
 		LayerBridge.addToContext(context)
 		ColorBridge.addToContext(context)
 		BorderBridge.addToContext(context)
@@ -82,17 +84,14 @@ public class Context {
 		TextAlignmentBridge.addToContext(context)
 		CameraLayerBridge.addToContext(context)
 		CameraPositionBridge.addToContext(context)
-
-		// TODO: Wrap all of these types
-		wrapBridgedType("TextLayer")
 	}
 
-	/// Wraps the global context variable `jsName` in a guard that throws a JS error if the constructor is called as a function, to prevent JavaScriptCore from crashing hard. See https://github.com/Khan/Prototope/issues/25.
-	private func wrapBridgedType(jsName: String) {
-		let originalType = context.objectForKeyedSubscript(jsName)
-		let wrappedType = bridgedTypeWrapper.callWithArguments([originalType])
-		context.setObject(wrappedType, forKeyedSubscript: jsName)
+	/// Makes `prototype` constructable in `context` via `constructorName`, first wrapping the constructor in a facade which throws a nice error if you forget to write `new`. This prevents JavaScriptCore from crashing hard. See https://github.com/Khan/Prototope/issues/25.
+	private func addBridgedPrototype(prototype: JSValue, toContext context: JSContext, withConstructorName constructorName: String) {
+		let wrappedPrototype = bridgedTypeWrapper.callWithArguments([prototype])
+		context.setObject(wrappedPrototype, forKeyedSubscript: constructorName)
 	}
+
 
 	private var bridgedTypeWrapper: JSValue {
 		let script = [

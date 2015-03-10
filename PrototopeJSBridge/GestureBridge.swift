@@ -22,9 +22,8 @@ import JavaScriptCore
 @objc public class TouchSampleBridge: NSObject, TouchSampleJSExport, BridgeType {
 	var touchSample: Prototope.TouchSample!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "TouchSample")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "TouchSample"
 
 	public required init?(args: JSValue) {
 		super.init()
@@ -58,10 +57,8 @@ import JavaScriptCore
 	func equals(other: UITouchIDBridge) -> Bool
 }
 
-@objc public class UITouchIDBridge: NSObject, UITouchIDJSExport, BridgeType {
+@objc public class UITouchIDBridge: NSObject, UITouchIDJSExport {
 	var uiTouchID: UITouchID
-
-	public class func addToContext(context: JSContext) {}
 
 	init(_ uiTouchID: UITouchID) {
 		self.uiTouchID = uiTouchID
@@ -90,9 +87,8 @@ extension JSValue: SampleType {}
 @objc public class SampleSequenceBridge: NSObject, SampleSequenceJSExport, BridgeType {
 	var sampleSequence: Prototope.SampleSequence<JSValue, JSValue>!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "SampleSequence")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "SampleSequence"
 
 	public required init?(args: JSValue) {
 		let samplesValue = args.valueForProperty("samples")
@@ -141,9 +137,8 @@ extension JSValue: SampleType {}
 @objc public class TouchSequenceBridge: NSObject, TouchSequenceJSExport, BridgeType {
 	var touchSequence: Prototope.TouchSequence<JSValue>!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "TouchSequence")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "TouchSequence"
 
 	public required init?(args: JSValue) {
 		super.init()
@@ -237,10 +232,9 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 @objc public class TapGestureBridge: NSObject, TapGestureJSExport, BridgeType, GestureBridgeType {
 	let tapGesture: Prototope.TapGesture!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "TapGesture")
-	}
-    
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "TapGesture"
+
     public var shouldRecognizeSimultaneouslyWithGesture: JSValue? {
         didSet {
             if let f = shouldRecognizeSimultaneouslyWithGesture {
@@ -304,14 +298,16 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 		case Cancelled
 	}
 
-	public class func addToContext(context: JSContext) {
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
 		let continuousGesturePhaseObject = JSValue(newObjectInContext: context)
 		continuousGesturePhaseObject.setObject(RawPhase.Began.rawValue, forKeyedSubscript: "Began")
 		continuousGesturePhaseObject.setObject(RawPhase.Changed.rawValue, forKeyedSubscript: "Changed")
 		continuousGesturePhaseObject.setObject(RawPhase.Ended.rawValue, forKeyedSubscript: "Ended")
 		continuousGesturePhaseObject.setObject(RawPhase.Cancelled.rawValue, forKeyedSubscript: "Cancelled")
-		context.setObject(continuousGesturePhaseObject, forKeyedSubscript: "ContinuousGesturePhase")
+		return continuousGesturePhaseObject
 	}
+
+	public static var bridgedConstructorName: String = "ContinuousGesturePhase"
 
 	public class func encodePhase(phase: ContinuousGesturePhase, inContext context: JSContext) -> JSValue {
 		var rawPhase: RawPhase
@@ -349,9 +345,8 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
         }
     }
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "PanGesture")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "PanGesture"
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
@@ -406,9 +401,8 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 @objc public class RotationSampleBridge: NSObject, RotationSampleJSExport, BridgeType {
 	var rotationSample: Prototope.RotationSample!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "RotationSample")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "RotationSample"
 
 	init(_ rotationSample: RotationSample) {
 		self.rotationSample = rotationSample
@@ -430,10 +424,9 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 @objc public class RotationGestureBridge: NSObject, RotationGestureJSExport, BridgeType, GestureBridgeType {
 	let rotationGesture: Prototope.RotationGesture!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "RotationGesture")
-	}
-    
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "RotationGesture"
+
     public var shouldRecognizeSimultaneouslyWithGesture: JSValue? {
         didSet {
             if let f = shouldRecognizeSimultaneouslyWithGesture {
@@ -492,9 +485,8 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 @objc public class PinchSampleBridge: NSObject, PinchSampleJSExport, BridgeType {
 	var pinchSample: Prototope.PinchSample!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "PinchSample")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "PinchSample"
 
 	init(_ pinchSample: PinchSample) {
 		self.pinchSample = pinchSample
@@ -514,9 +506,8 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 @objc public class PinchGestureBridge: NSObject, PinchGestureJSExport, BridgeType, GestureBridgeType {
 	let pinchGesture: Prototope.PinchGesture!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "PinchGesture")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "PinchGesture"
 
     public var shouldRecognizeSimultaneouslyWithGesture: JSValue? {
         didSet {

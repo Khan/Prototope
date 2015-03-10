@@ -10,10 +10,7 @@ import Foundation
 import Prototope
 import JavaScriptCore
 
-@objc public protocol SpeechJSExport: JSExport {
-}
-
-@objc public class SpeechBridge: NSObject, SpeechJSExport, BridgeType {
+@objc public class SpeechBridge: NSObject, JSExport {
 	
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "Speech")

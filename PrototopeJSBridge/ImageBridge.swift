@@ -17,9 +17,8 @@ import JavaScriptCore
 @objc public class ImageBridge: NSObject, ImageJSExport, BridgeType {
 	var image: Image!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Image")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "Image"
 
 	required public init?(args: NSDictionary) {
 		if let imageName = args["name"] as! String? {

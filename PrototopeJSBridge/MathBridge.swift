@@ -10,7 +10,7 @@ import Foundation
 import Prototope
 import JavaScriptCore
 
-public struct MathBridge: BridgeType {
+public struct MathBridge {
 	public static func addToContext(context: JSContext) {
 		let interpolateTrampoline: @objc_block NSDictionary -> Double = { args in
 			Prototope.interpolate(

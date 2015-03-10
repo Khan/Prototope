@@ -27,10 +27,9 @@ import JavaScriptCore
 @objc public class ParticleEmitterBridge: NSObject, ParticleEmitterJSExport, BridgeType {
 	var emitter: ParticleEmitter!
 	
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "ParticleEmitter")
-	}
-	
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "ParticleEmitter"
+
 	required public init?(args: NSDictionary) {
 		if let particleBridge = args["particle"] as! ParticleBridge? {
 			self.emitter = ParticleEmitter(particle: particleBridge.particle)

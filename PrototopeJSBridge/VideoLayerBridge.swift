@@ -20,10 +20,9 @@ import JavaScriptCore
 @objc public class VideoLayerBridge: LayerBridge, VideoLayerJSExport, BridgeType {
 	var videoLayer: VideoLayer { return layer as! VideoLayer }
 	
-	public override class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "VideoLayer")
-	}
-	
+	public override class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "VideoLayer"
+
 	required public init?(args: NSDictionary) {
 		let parentLayer = (args["parent"] as! LayerBridge?)?.layer
 		let video = (args["video"] as! VideoBridge?)?.video

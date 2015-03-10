@@ -15,10 +15,9 @@ import JavaScriptCore
 }
 
 @objc public class ColorBridge: NSObject, ColorJSExport, BridgeType {
-    
-    public class func addToContext(context: JSContext) {
-        context.setObject(self, forKeyedSubscript: "Color")
-		let colorBridge = context.objectForKeyedSubscript("Color")
+
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
+		let colorBridge = JSValue(object: self, inContext: context)
 		colorBridge.setObject(ColorBridge(Color.black), forKeyedSubscript: "black")
 		colorBridge.setObject(ColorBridge(Color.darkGray), forKeyedSubscript: "darkGray")
 		colorBridge.setObject(ColorBridge(Color.lightGray), forKeyedSubscript: "lightGray")
@@ -34,8 +33,11 @@ import JavaScriptCore
 		colorBridge.setObject(ColorBridge(Color.purple), forKeyedSubscript: "purple")
 		colorBridge.setObject(ColorBridge(Color.brown), forKeyedSubscript: "brown")
 		colorBridge.setObject(ColorBridge(Color.clear), forKeyedSubscript: "clear")
-    }
-    
+		return colorBridge
+	}
+
+	public static var bridgedConstructorName: String = "Color"
+
     let color: Color!
     
     required public init?(args: NSDictionary) {

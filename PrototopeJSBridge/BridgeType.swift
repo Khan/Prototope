@@ -9,5 +9,8 @@
 import JavaScriptCore
 
 public protocol BridgeType {
-    static func addToContext(context: JSContext)
+	static func bridgedPrototypeInContext(context: JSContext) -> JSValue
+	static var bridgedConstructorName: String { get }
+
+//    optional static func addToContext(context: JSContext)
 }

@@ -24,10 +24,9 @@ import JavaScriptCore
 @objc public class ScrollLayerBridge: LayerBridge, ScrollLayerJSExport, BridgeType {
 	var scrollLayer: ScrollLayer { return layer as! ScrollLayer }
 	
-	public override class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "ScrollLayer")
-	}
-	
+	public override class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "ScrollLayer"
+
 	required public init?(args: NSDictionary) {
 		let parentLayer = (args["parent"] as! LayerBridge?)?.layer
 		let name = args["name"] as! String?

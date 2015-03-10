@@ -305,14 +305,16 @@ public class AnimationCurveBridge: NSObject, BridgeType {
 		case EaseInOut
 	}
 
-	public class func addToContext(context: JSContext) {
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
 		let animationCurveBridge = JSValue(newObjectInContext: context)
 		animationCurveBridge.setObject(RawCurve.Linear.rawValue, forKeyedSubscript: "Linear")
 		animationCurveBridge.setObject(RawCurve.EaseIn.rawValue, forKeyedSubscript: "EaseIn")
 		animationCurveBridge.setObject(RawCurve.EaseOut.rawValue, forKeyedSubscript: "EaseOut")
 		animationCurveBridge.setObject(RawCurve.EaseInOut.rawValue, forKeyedSubscript: "EaseInOut")
-		context.setObject(animationCurveBridge, forKeyedSubscript: "AnimationCurve")
+		return animationCurveBridge
 	}
+
+	public static var bridgedConstructorName: String = "AnimationCurve"
 
 	public class func decodeCurve(bridgedCurve: JSValue) -> Prototope.Layer.AnimationCurve? {
 		if let rawCurve = RawCurve(rawValue: Int(bridgedCurve.toInt32())) {

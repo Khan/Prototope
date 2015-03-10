@@ -109,14 +109,16 @@ import JavaScriptCore
 }
 
 @objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
-    
-    public class func addToContext(context: JSContext) {
-        context.setObject(LayerBridge.self, forKeyedSubscript: "Layer")
-        let layerBridge = context.objectForKeyedSubscript("Layer")
-        layerBridge.setObject(LayerBridge.root, forKeyedSubscript: "root")
-        layerBridge.setFunctionForKey("animate", fn: animateWithDurationBridgingTrampoline)
-    }
-    
+
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
+		let layerBridge = JSValue(object: self, inContext: context)
+		layerBridge.setObject(LayerBridge.root, forKeyedSubscript: "root")
+		layerBridge.setFunctionForKey("animate", fn: animateWithDurationBridgingTrampoline)
+		return layerBridge
+	}
+
+	public static var bridgedConstructorName: String = "Layer"
+
     public var layer: Layer!
     
     public class var root: LayerJSExport {

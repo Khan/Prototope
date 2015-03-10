@@ -42,10 +42,9 @@ import JavaScriptCore
 @objc public class ParticleBridge: NSObject, ParticleJSExport, BridgeType {
 	var particle: Particle!
 	
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Particle")
-	}
-	
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "Particle"
+
 	required public init?(args: NSDictionary) {
 		if let imageName = args["imageName"] as! String? {
 			// TODO(jb): Particle preset.

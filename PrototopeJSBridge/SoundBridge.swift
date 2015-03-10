@@ -19,9 +19,8 @@ import JavaScriptCore
 @objc public class SoundBridge: NSObject, SoundJSExport, BridgeType {
 	var sound: Sound!
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Sound")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "Sound"
 
 	required public init?(args: NSDictionary) {
 		if let soundName = args["name"] as! String? {

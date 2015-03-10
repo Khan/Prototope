@@ -18,9 +18,8 @@ import JavaScriptCore
 @objc public class ShadowBridge: NSObject, ShadowJSExport, BridgeType {
 	var shadow: Shadow
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Shadow")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "Shadow"
 
 	required public init(args: NSDictionary) {
 		shadow = Shadow(

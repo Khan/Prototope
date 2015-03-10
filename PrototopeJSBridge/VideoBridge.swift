@@ -17,10 +17,9 @@ import JavaScriptCore
 @objc public class VideoBridge: NSObject, VideoJSExport, BridgeType {
 	var video: Video!
 	
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Video")
-	}
-	
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "Video"
+
 	required public init?(args: NSDictionary) {
 		if let videoName = args["name"] as! String? {
 			video = Video(name: videoName)

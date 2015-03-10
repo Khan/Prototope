@@ -38,11 +38,10 @@ func behaviorForBehaviorBridge(behaviorBridge: BehaviorBridgeType) -> BehaviorTy
 
 @objc public class CollisionBehaviorBridge: NSObject, BridgeType, BehaviorBridgeType, CollisionBehaviorJSExport {
     let collisionBehavior: Prototope.CollisionBehavior!
-    
-    public class func addToContext(context: JSContext) {
-        context.setObject(self, forKeyedSubscript: "CollisionBehavior")
-    }
-    
+
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "CollisionBehavior"
+
     public init(_ behavior: CollisionBehavior) {
         self.collisionBehavior = behavior
         super.init()
@@ -74,14 +73,16 @@ public class CollisionBehaviorKindBridge: NSObject, BridgeType {
         case Entering = 0
         case Leaving
     }
-    
-    public class func addToContext(context: JSContext) {
-        let kindObject = JSValue(newObjectInContext: context)
-        kindObject.setObject(RawKind.Entering.rawValue, forKeyedSubscript: "Entering")
-        kindObject.setObject(RawKind.Leaving.rawValue, forKeyedSubscript: "Leaving")
-        context.setObject(kindObject, forKeyedSubscript: "CollisionBehaviorKind")
-    }
-    
+
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
+		let kindObject = JSValue(newObjectInContext: context)
+		kindObject.setObject(RawKind.Entering.rawValue, forKeyedSubscript: "Entering")
+		kindObject.setObject(RawKind.Leaving.rawValue, forKeyedSubscript: "Leaving")
+		return kindObject
+	}
+
+	public static var bridgedConstructorName: String = "CollisionBehaviorKind"
+
     public class func encodeKind(kind: Prototope.CollisionBehavior.Kind, inContext context: JSContext) -> JSValue {
         var rawKind: RawKind
         switch kind {
@@ -113,10 +114,9 @@ public class CollisionBehaviorKindBridge: NSObject, BridgeType {
 @objc public class ActionBehaviorBridge: NSObject, BridgeType, BehaviorBridgeType, ActionBehaviorJSExport {
     let actionBehavior: Prototope.ActionBehavior!
     
-    public class func addToContext(context: JSContext) {
-        context.setObject(self, forKeyedSubscript: "ActionBehavior")
-    }
-    
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "ActionBehavior"
+
     public init(_ behavior: ActionBehavior) {
         self.actionBehavior = behavior
         super.init()

@@ -17,9 +17,8 @@ import JavaScriptCore
 @objc public class CameraLayerBridge: LayerBridge, CameraLayerJSExport, BridgeType {
 	var cameraLayer: CameraLayer { return layer as! CameraLayer }
 
-	public override class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "CameraLayer")
-	}
+	public override class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "CameraLayer"
 
 	public required init?(args: NSDictionary) {
 		let parentLayer = (args["parent"] as! LayerBridge?)?.layer
@@ -39,14 +38,16 @@ public class CameraPositionBridge: NSObject, BridgeType {
 		case Front = 0
 		case Back = 1
 	}
-	
-	public class func addToContext(context: JSContext) {
+
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue {
 		let alignmentObject = JSValue(newObjectInContext: context)
 		alignmentObject.setObject(RawCameraPosition.Front.rawValue, forKeyedSubscript: "Front")
 		alignmentObject.setObject(RawCameraPosition.Back.rawValue, forKeyedSubscript: "Back")
-		context.setObject(alignmentObject, forKeyedSubscript: "CameraPosition")
+		return alignmentObject
 	}
-	
+
+	public static var bridgedConstructorName: String = "CameraPosition"
+
 	public class func encodeCameraPosition(cameraPosition: Prototope.CameraLayer.CameraPosition, inContext context: JSContext) -> JSValue {
 		var rawCameraPosition: RawCameraPosition
 		switch cameraPosition {

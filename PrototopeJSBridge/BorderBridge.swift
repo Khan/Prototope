@@ -20,9 +20,8 @@ import JavaScriptCore
 @objc public class BorderBridge: NSObject, BorderJSExport, BridgeType {
 	var border: Border
 
-	public class func addToContext(context: JSContext) {
-		context.setObject(self, forKeyedSubscript: "Border")
-	}
+	public class func bridgedPrototypeInContext(context: JSContext) -> JSValue { return JSValue(object: self, inContext: context) }
+	public static var bridgedConstructorName: String = "Border"
 
 	required public init(args: NSDictionary) {
 		border = Border(
