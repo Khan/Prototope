@@ -1,6 +1,6 @@
 <li class="{{page.doctype | join: " "}}">
 <a href="#{{page.slug}}" class="permalink">&#9875;</a>
-<h4 id="{{page.slug}}">{{ page.title | escape }}</h4>
+<h4 id="{{page.slug}}"><span {% if page.js-title %}class="swift-only"{% endif %}>{{ page.title | escape }}</span><span class="js-only">{{ page.js-title | escape }}</h4>
 
 {{ content | markdownify }}
 

@@ -32,6 +32,7 @@
   - animatewithduration
   - animatewithduration_curve
   - animationcurve
+  - vars
 
 - title: AnimatorValueConvertible
 
