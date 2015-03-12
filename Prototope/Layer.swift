@@ -637,7 +637,7 @@ public class Layer: Equatable, Hashable {
 			super.init(frame: frame)
 		}
 
-		override convenience init() {
+		convenience init() {
 			self.init(frame: CGRect())
 		}
 

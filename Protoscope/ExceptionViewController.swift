@@ -16,7 +16,7 @@ class ExceptionViewController: UIViewController {
 
 	private var exceptionView: ExceptionView { return view as! ExceptionView }
 
-	override init() {
+	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
 
