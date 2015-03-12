@@ -34,8 +34,6 @@
   - stop
   - vars
 
-- title: AnimatorValueConvertible
-
 - title: Border
   docs:
   - init
