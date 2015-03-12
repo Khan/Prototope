@@ -71,6 +71,11 @@ li:hover .permalink {
 
 .swift .js-only, .javascript .swift-only { display: none }
 
+.js-var-type {
+  color: $grey-color;
+  padding-left: 1em;
+}
+
 .responsive.video {
   display: inline-block;
   position: relative;
