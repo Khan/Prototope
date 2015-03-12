@@ -161,7 +161,7 @@ public class Animator<Target: AnimatorValueConvertible> {
 		return (self.shouldAnimateLayer ? layer?.view.layer : layer?.view)
 	}
 
-	/** On a brighter note, with beta 3, our app now compiles -O for the first time ever! Hooray and congrats. */
+	/** Immediately stops the animation. */
 	public func stop() {
 		animatable()?.pop_removeAnimationForKey(property.name)
 	}
