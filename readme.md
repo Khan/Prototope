@@ -20,6 +20,8 @@ you would save it in `_methods/color/interpolate.md` and you would seed it with 
     ---
     slug: interpolate
     title: "public func interpolate(a: Color, b: Color) -> [Color]"
+    js-title: "interpolate(colorA, colorB)"
+    js-type: "fn(+Color, +Color) -> [+Color]"
     doctype:
         - method
     ---
@@ -41,6 +43,7 @@ some notes:
 
 * the `slug` parameter in the frontmatter does not have to be unique globally, only unique within the color files. to help maintain this, you should name the file `<slug>.md`
 * the `doctype` is a list of classes that gets appended to the whole piece of documentation. The idea is to make it easier to filter methods, variables, typealiases, etc at some point.
+* the `js-` fields can be used to specify alternate values for display in JavaScript mode. `js-type` should be specified using [tern's type syntax](http://ternjs.net/doc/manual.html#typedef).
 
 *future planning note: if doing docs for multiple languages (i.e. swift + js), our best bet may be to add a parallel title element, i.e. `js_title` alongside the regular title (which would be implicitly a swift title) and also a separate `js_types` array and, having a `swift_notes`, `js_notes`, etc parameter that could be multi-line. This way we can keep the docs together for each function, but keep the data distinct?*
 
@@ -57,6 +60,8 @@ variables work mostly the same way, except their markdown files don't usually co
     variables:
       -
         name: "public private(set) var favoriteColor: Color!"
+        js-name: this.favoriteColor
+        js-type: +Color
         desc: |
             this could possibly be my favoritest color... ever
 
@@ -83,6 +88,12 @@ some notes on this:
 * the `desc` parameter here is shown in multiline and single line form. both get markodwnified.
 * the `type` param here overrides the doctype (which is variable) (the `stareAtSun` method will not even be tagged as a variable, instead it will be tagged with `method` and `optional`)
 * you'll notice some `convenience_methods` versions of this file, they are basically for methods which also are mostly self-explanatory setters/getters or for overloaded operators that operate on special prototope structs/classes. the idea is basically the same, though.
+
+## Language-specific content
+
+Besides the extra structural fields displayed above, you can show or hide language-specific content in documentation content using the special CSS classes `js-only` and `swift-only`, e.g.:
+
+    When the moon is full, this method will return <span class="js-only">undefined</span><span class="swift-only">nil</span>.
 
 ## Top Level Documents
 
