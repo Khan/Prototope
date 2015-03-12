@@ -25,13 +25,13 @@
   - gestures_section
   - vars_gesture
   - vars_convenience
+  - animatewithduration
+  - animatewithduration_curve
+  - animationcurve
 
 - title: Animator
   docs:
   - stop
-  - animatewithduration
-  - animatewithduration_curve
-  - animationcurve
   - vars
 
 - title: AnimatorValueConvertible
