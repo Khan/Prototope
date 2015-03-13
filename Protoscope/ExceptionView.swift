@@ -34,7 +34,7 @@ class ExceptionView: UIView {
 		return textView
 	}()
 
-	override init() {
+	init() {
 		super.init(frame: CGRect())
 		backgroundColor = Style.warning
 
