@@ -13,7 +13,7 @@ import UIKit
 public class ScrollLayer: Layer {
 	
 	/** Create a layer with an optional parent layer and name. */
-	public init(parent: Layer?, name: String?) {
+	public init(parent: Layer? = nil, name: String? = nil) {
 		super.init(parent: parent, name: name, viewClass: UIScrollView.self)
 		scrollView.delegate = scrollViewDelegate
 	}
