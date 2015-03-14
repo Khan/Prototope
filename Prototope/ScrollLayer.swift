@@ -74,7 +74,7 @@ public class ScrollLayer: Layer {
 	@objc private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
 		var decelerationRetargetingHandler: ((velocity: Point, decelerationTarget: Point) -> Point)?
 
-		func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+		@objc func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
 			if let decelerationRetargetingHandler = decelerationRetargetingHandler {
 				let newTargetContentOffset = decelerationRetargetingHandler(velocity: Point(velocity), decelerationTarget: Point(targetContentOffset.memory))
 				targetContentOffset.memory = CGPoint(newTargetContentOffset)
