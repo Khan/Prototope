@@ -45,8 +45,6 @@ some notes:
 * the `doctype` is a list of classes that gets appended to the whole piece of documentation. The idea is to make it easier to filter methods, variables, typealiases, etc at some point.
 * the `js-` fields can be used to specify alternate values for display in JavaScript mode. `js-type` should be specified using [tern's type syntax](http://ternjs.net/doc/manual.html#typedef).
 
-*future planning note: if doing docs for multiple languages (i.e. swift + js), our best bet may be to add a parallel title element, i.e. `js_title` alongside the regular title (which would be implicitly a swift title) and also a separate `js_types` array and, having a `swift_notes`, `js_notes`, etc parameter that could be multi-line. This way we can keep the docs together for each function, but keep the data distinct?*
-
 ## class variables
 
 variables work mostly the same way, except their markdown files don't usually contain content: everything is hosted in the frontmatter. here's a sample
