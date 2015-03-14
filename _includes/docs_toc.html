@@ -3,4 +3,9 @@
 {% for proto_class in site.docs %}
     <li><a href="{{ site.baseurl }}{{ proto_class.url }}">{{ proto_class.title }}</a></li>
 {% endfor %}
+	<ul class="view-as">
+		<li class="header">View as:</li>
+		<li class="swift-mode"><a href="#" onclick="setLanguage(Language.Swift); return false;">Swift</a></li>
+		<li class="javascript-mode"><a href="#" onclick="setLanguage(Language.JavaScript); return false;">JavaScript</a></li>
+	</ul>
 </ul>

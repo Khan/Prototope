@@ -44,10 +44,15 @@ li:hover .permalink {
   padding-bottom: 15px;
   border-bottom: 1px solid #ccc;
 
-  > li {
+  .view-as {
+    margin-top: 15px;
+    margin-left: 0;
+  }
+
+  li {
     list-style: none;
-    padding: 0;
-    margin: 0 1em 0 0 ;
+    padding: 0 0.5em;
+    margin: 0;
     display: inline-block;
     font-family: "input mono cond";
     font-size: 13px;
@@ -57,6 +62,18 @@ li:hover .permalink {
       color: #aaa;
     }
   }
+}
+
+.swift .api-nav .swift-mode, .javascript .api-nav .javascript-mode {
+  border: 1px solid $brand-color;
+  border-radius: 10px;
+}
+
+.swift .js-only, .javascript .swift-only { display: none }
+
+.js-var-type {
+  color: $grey-color;
+  padding-left: 1em;
 }
 
 .responsive.video {
