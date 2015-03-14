@@ -27,7 +27,7 @@ gifLayer.x = Layer.root.x
 
 // start looping on touch
 touchCatchingLayer.touchBeganHandler = function(touchSequence) {
-	
+	touchCatchingLayer.behaviors = [playThroughImages] 
 }
 
 // speed and slow animation depending on where the touch is in x
@@ -45,6 +45,7 @@ var playThroughImages = new ActionBehavior({handler:function(layer) {
 	gifLayer.image = new Image({name:nextFrameName})
 	if (currentFrame + 1 > numLastFrame) {
 		currentFrame = numFirstFrame
+		touchCatchingLayer.behaviors = [] 
 	}
 	else { 
 		currentFrame++
@@ -53,7 +54,7 @@ var playThroughImages = new ActionBehavior({handler:function(layer) {
 	}
 })
 
-touchCatchingLayer.behaviors = [playThroughImages] 
+
 
 function playThroughImagesWithSpeed(fps) {
 
