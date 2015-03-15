@@ -52,7 +52,7 @@ public struct Environment {
 				return nil
 			},
 			exceptionHandler: { exception in
-				fatalError("Prototope exception: \(exception)")
+				fatalError("⚠️ Prototope exception: \(exception)")
 			}
 		)
 	}
