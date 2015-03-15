@@ -30,7 +30,7 @@ class StatusView: UIView {
 			}, completion: nil)
 	}
 
-	override init() {
+	init() {
 		super.init(frame: CGRect())
 		backgroundColor = Style.cyan
 		addSubview(prototopeP)

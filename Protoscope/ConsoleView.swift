@@ -40,7 +40,7 @@ class ConsoleView: UIView {
 		textView.textStorage.deleteCharactersInRange(NSMakeRange(0, textView.textStorage.length))
 	}
 
-	override init() {
+	init() {
 		let blurEffect = UIBlurEffect(style: .Dark)
 		visualEffectView = UIVisualEffectView(effect: blurEffect)
 		visualEffectView.autoresizingMask = .FlexibleWidth | .FlexibleHeight

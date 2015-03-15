@@ -9,7 +9,7 @@
 import UIKit
 
 class StatusViewController: UIViewController {
-	override init() {
+	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
 

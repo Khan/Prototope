@@ -72,7 +72,7 @@ class SceneViewController: UIViewController {
 		}
 	}
 
-	override init() {
+	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
 

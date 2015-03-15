@@ -63,21 +63,21 @@ public class TextLayer: Layer {
 		}
 		set {
 			label.text = newValue
-			updateSizePreservingOrigin()
+			updateSize()
 		}
 	}
 
 	public var fontName: String = "Futura" {
 		didSet {
 			updateFont()
-			updateSizePreservingOrigin()
+			updateSize()
 		}
 	}
 
 	public var fontSize: Double = 16 {
 		didSet {
 			updateFont()
-			updateSizePreservingOrigin()
+			updateSize()
 		}
 	}
 
@@ -92,7 +92,7 @@ public class TextLayer: Layer {
 		}
 		set {
 			label.numberOfLines = newValue ? 0 : 1
-			updateSizePreservingOrigin() // Adjust width/height as necessary for new wrapping mode.
+			updateSize() // Adjust width/height as necessary for new wrapping mode.
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class TextLayer: Layer {
 		didSet {
 			// Respect the new width; resize height so as not to truncate.
 			if wraps {
-				updateSizePreservingOrigin()
+				updateSize()
 			}
 		}
 	}
@@ -140,14 +140,33 @@ public class TextLayer: Layer {
 
 	private func updateFont() {
 		label.font = UIFont(name: fontName, size: CGFloat(fontSize))!
-		updateSizePreservingOrigin()
+		updateSize()
 	}
 
-	private func updateSizePreservingOrigin() {
+	private func updateSize() {
+        let prePoint = self.sizeUpdatePivotPoint()
 		label.sizeToFit()
-	}
-
-	private var label: UILabel {
+        let postPoint = self.sizeUpdatePivotPoint()
+        let delta = postPoint - prePoint
+        self.position -= delta
+    }
+    
+    func sizeUpdatePivotPoint() -> Point {
+        switch self.textAlignment {
+        case .Natural: // assume left for .Natural
+            fallthrough
+        case .Justified:
+            fallthrough
+            case .Left:
+            return Point(x: self.frame.minX, y: self.frame.minY)
+        case .Right:
+            return Point(x: self.frame.maxX, y: self.frame.minY)
+        case .Center:
+            return Point(x: self.frame.midX, y: self.frame.minY)
+        }
+    }
+    
+    private var label: UILabel {
 		return self.view as! UILabel
 	}
 

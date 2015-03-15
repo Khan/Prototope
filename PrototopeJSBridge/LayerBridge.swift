@@ -30,6 +30,7 @@ import JavaScriptCore
     // MARK: Geometry
     var x: Double { get set }
     var y: Double { get set }
+    var origin: PointJSExport { get set }
     var position: PointJSExport { get set }
 	var zPosition: Double { get set }
     var width: Double { get set }
@@ -190,6 +191,11 @@ import JavaScriptCore
     public var y: Double {
         get { return layer.y }
         set { layer.y = newValue }
+    }
+    
+    public var origin: PointJSExport {
+        get { return PointBridge(layer.origin) }
+        set { layer.origin = (newValue as JSExport as! PointBridge).point }
     }
     
     public var position: PointJSExport {

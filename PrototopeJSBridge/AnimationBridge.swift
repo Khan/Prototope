@@ -45,6 +45,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 @objc public protocol LayerAnimatorStoreJSExport: JSExport {
 	var x: AnimatorJSExport { get }
 	var y: AnimatorJSExport { get }
+    var origin: AnimatorJSExport { get }
 	var position: AnimatorJSExport { get }
 	var size: AnimatorJSExport { get }
 	var frame: AnimatorJSExport { get }
@@ -65,6 +66,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 
 	public var x: AnimatorJSExport { return DoubleAnimatorBridge(animatorStore.x) }
 	public var y: AnimatorJSExport { return DoubleAnimatorBridge(animatorStore.y) }
+    public var origin: AnimatorJSExport { return PointAnimatorBridge(animatorStore.origin) }
 	public var position: AnimatorJSExport { return PointAnimatorBridge(animatorStore.position) }
 	public var size: AnimatorJSExport { return SizeAnimatorBridge(animatorStore.size) }
 	public var frame: AnimatorJSExport { return RectAnimatorBridge(animatorStore.frame) }

@@ -20,7 +20,7 @@ class RootViewController: UIViewController {
 	var protoscopeNavigationController: UINavigationController!
 	var statusViewController: UIViewController!
 
-	override init() {
+	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
 
