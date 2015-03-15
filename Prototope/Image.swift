@@ -20,12 +20,12 @@ public struct Image {
 	var uiImage: UIImage
 
 	/** Loads a named image from the assets built into the app. */
-	public init!(name: String) {
+	public init?(name: String) {
 		if let image = Environment.currentEnvironment!.imageProvider(name) {
 			uiImage = image
 			self.name = name
 		} else {
-			fatalError("Image named \(name) not found")
+			Environment.currentEnvironment?.exceptionHandler("Image named \(name) not found")
 			return nil
 		}
 	}

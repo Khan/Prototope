@@ -21,7 +21,8 @@ public struct Video {
 		if let URL = NSBundle.mainBundle().URLForResource(name, withExtension: nil) {
 			self.player = AVPlayer(URL: URL)
 		} else {
-			return nil
+            Environment.currentEnvironment?.exceptionHandler("Video named \(name) not found")
+            return nil
 		}
 	}
 }
