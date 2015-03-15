@@ -13,14 +13,20 @@ import UIKit
 public class ScrollLayer: Layer {
 	
 	/** Create a layer with an optional parent layer and name. */
-	public init(parent: Layer?, name: String?) {
+	public init(parent: Layer? = nil, name: String? = nil) {
 		super.init(parent: parent, name: name, viewClass: UIScrollView.self)
+		scrollView.delegate = scrollViewDelegate
 	}
-	
+
+	deinit {
+		scrollView.delegate = nil
+	}
 	
 	var scrollView: UIScrollView {
 		return self.view as! UIScrollView
 	}
+
+	private var scrollViewDelegate = ScrollViewDelegate()
 	
 	// MARK: - Properties
 	
@@ -43,6 +49,14 @@ public class ScrollLayer: Layer {
 		get { return self.scrollView.showsHorizontalScrollIndicator }
 		set { self.scrollView.showsHorizontalScrollIndicator = newValue }
 	}
+
+	/** This handler provides an opportunity to change the way a scroll layer decelerates.
+
+		It will be called when the user lifts their finger from the scroll layer. The system will provide the user's velocity (in points per second) when they lifted their finger, along with a computed deceleration target (i.e. the point where the scroll view will stop decelerating). If you specify a non-nil handler, the point you return from this handler will be used as the final deceleration target for a decelerating scroll layer. You can return the original deceleration target if you don't need to modify it. **/
+	public var decelerationRetargetingHandler: ((velocity: Point, decelerationTarget: Point) -> Point)? {
+		get { return scrollViewDelegate.decelerationRetargetingHandler }
+		set { scrollViewDelegate.decelerationRetargetingHandler = newValue }
+	}
 	
 	
 	// MARK: - Methods
@@ -55,5 +69,16 @@ public class ScrollLayer: Layer {
 		}
 		
 		self.scrollableSize = Size(maxRect.size)
+	}
+
+	@objc private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
+		var decelerationRetargetingHandler: ((velocity: Point, decelerationTarget: Point) -> Point)?
+
+		@objc func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+			if let decelerationRetargetingHandler = decelerationRetargetingHandler {
+				let newTargetContentOffset = decelerationRetargetingHandler(velocity: Point(velocity), decelerationTarget: Point(targetContentOffset.memory))
+				targetContentOffset.memory = CGPoint(newTargetContentOffset)
+			}
+		}
 	}
 }
