@@ -210,6 +210,12 @@ public struct Rect: Equatable {
     
     /** Returns a Rect constructed by insetting the receiver. */
     public func inset(top: Double = 0, right: Double = 0, bottom: Double = 0, left: Double = 0) -> Rect {
+        if top + bottom > size.height {
+            Environment.currentEnvironment?.exceptionHandler("Trying to inset \(self) with vertical insets (\(top),\(bottom)) greater than the height")
+        } else if left + right > size.width {
+            Environment.currentEnvironment?.exceptionHandler("Trying to inset \(self) with horizontal insets (\(left),\(right)) greater than the width")
+        }
+        
         var newRect = self
         newRect.origin.x += left
         newRect.size.width -= left + right
