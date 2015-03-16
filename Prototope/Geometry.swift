@@ -214,7 +214,7 @@ public struct Rect: Equatable {
         newRect.origin.x += left
         newRect.size.width -= left + right
         newRect.origin.y += top
-        newRect.size.height -= top + right
+        newRect.size.height -= top + bottom
         
         return newRect
     }
