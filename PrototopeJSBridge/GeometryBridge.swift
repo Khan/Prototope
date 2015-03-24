@@ -187,12 +187,14 @@ import Prototope
         let simplified = hasKey("vertical") || hasKey("horizontal")
         let core = hasKey("top") || hasKey("right") || hasKey("bottom") || hasKey("left")
         
+        // This switch statement guarantees that only one of the three possible sets
+        // of arguments was passed in.
         switch (justValue, simplified, core) {
-        case (true, false, false):
+        case (true, false, false): // "value"
             return RectBridge(rect.inset(value: getValue("value")))
-        case (false, true, false):
+        case (false, true, false): // "vertical", "horizontal"
             return RectBridge(rect.inset(vertical: getValue("vertical"), horizontal: getValue("horizontal")))
-        case (false, false, true):
+        case (false, false, true): // "top", "right", "bottom" "left"
             return RectBridge(rect.inset(top: getValue("top"), right: getValue("right"), bottom: getValue("bottom"), left: getValue("left")))
         default:
             Environment.currentEnvironment?.exceptionHandler("Trying to call inset on with invalid parameters: \(args)")
