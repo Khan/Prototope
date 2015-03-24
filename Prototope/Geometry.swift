@@ -208,6 +208,33 @@ public struct Rect: Equatable {
 		size = Size(rect.size)
 	}
     
+    /** Returns a Rect constructed by insetting the receiver. */
+    public func inset(top: Double = 0, right: Double = 0, bottom: Double = 0, left: Double = 0) -> Rect {
+        if top + bottom > size.height {
+            Environment.currentEnvironment?.exceptionHandler("Trying to inset \(self) with vertical insets (\(top),\(bottom)) greater than the height")
+        } else if left + right > size.width {
+            Environment.currentEnvironment?.exceptionHandler("Trying to inset \(self) with horizontal insets (\(left),\(right)) greater than the width")
+        }
+        
+        var newRect = self
+        newRect.origin.x += left
+        newRect.size.width -= left + right
+        newRect.origin.y += top
+        newRect.size.height -= top + bottom
+        
+        return newRect
+    }
+    
+    /** Convenience function. Returns a Rect constructed by insetting the receiver. */
+    public func inset(vertical: Double = 0, horizontal: Double = 0) -> Rect {
+        return inset(top: vertical, right: horizontal, bottom: vertical, left: horizontal)
+    }
+    
+    /** Convenience function. Returns a Rect constructed by insetting the receiver. */
+    public func inset(value: Double = 0) -> Rect {
+        return inset(top: value, right: value, bottom: value, left: value)
+    }
+    
     /** Determines whether this rectangle contains the specified point. */
     public func contains(point: Point) -> Bool {
         let r = CGRect(self)
