@@ -183,21 +183,20 @@ import Prototope
             return (args.objectForKey(key) as! Double?) ?? 0
         }
         
-        let justValue = hasKey("value")
-        let simplified = hasKey("vertical") || hasKey("horizontal")
-        let core = hasKey("top") || hasKey("right") || hasKey("bottom") || hasKey("left")
-        
-        switch (justValue, simplified, core) {
-        case (true, false, false):
+        if hasKey("value") {
             return RectBridge(rect.inset(value: getValue("value")))
-        case (false, true, false):
-            return RectBridge(rect.inset(vertical: getValue("vertical"), horizontal: getValue("horizontal")))
-        case (false, false, true):
-            return RectBridge(rect.inset(top: getValue("top"), right: getValue("right"), bottom: getValue("bottom"), left: getValue("left")))
-        default:
-            Environment.currentEnvironment?.exceptionHandler("Trying to call inset on with invalid parameters: \(args)")
-            return self
         }
+        
+        if hasKey("vertical") || hasKey("horizontal") {
+            return RectBridge(rect.inset(vertical: getValue("vertical"), horizontal: getValue("horizontal")))
+        }
+        
+        if hasKey("top") || hasKey("right") || hasKey("bottom") || hasKey("left") {
+            return RectBridge(rect.inset(top: getValue("top"), right: getValue("right"), bottom: getValue("bottom"), left: getValue("left")))
+        }
+        
+        Environment.currentEnvironment?.exceptionHandler("Trying to call inset on with invalid parameters: \(args)")
+        return self
     }
 
 	public var origin: PointJSExport { return PointBridge(rect.origin) }
