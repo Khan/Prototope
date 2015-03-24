@@ -373,6 +373,19 @@ public class Layer: Equatable, Hashable {
 			layer.masksToBounds = self._shouldMaskToBounds()
 		}
 	}
+    
+    public var maskLayer: Layer? {
+        willSet {
+            newValue?.parent = nil
+            newValue?.maskedLayer?.maskLayer = nil
+        }
+        didSet {
+            view.maskView = maskLayer?.view
+            maskLayer?.maskedLayer = self
+        }
+    }
+    
+    private weak var maskedLayer: Layer?
 
     // MARK: Touches and gestures
 
