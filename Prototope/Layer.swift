@@ -374,6 +374,15 @@ public class Layer: Equatable, Hashable {
 		}
 	}
     
+    /** The mask layer is used to clip or filter the contents of a layer. Those contents will be
+        rendered only where the mask layer's contents are opaque. Partially transparent regions
+        of the mask layer will result in partially transparent renderings of the host layer.
+
+        The mask layer operates within the coordinate space of its host layer. In most cases,
+        you'll want to set a mask layer's frame to be equal to its host's bounds.
+
+        Be aware: mask layers do incur an additional performance cost. If the cost becomes too
+        onerous, consider making flattened images of the masked content instead. */
     public var maskLayer: Layer? {
         willSet {
             newValue?.parent = nil
