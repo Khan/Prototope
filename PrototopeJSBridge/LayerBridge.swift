@@ -56,6 +56,7 @@ import JavaScriptCore
     var image: ImageJSExport? { get set }
     var border: BorderJSExport? { get set }
     var shadow: ShadowJSExport? { get set }
+    var maskLayer: LayerJSExport? { get set }
 
 	// MARK: Convenience utilities
 	var willBeRemovedSoon: Bool { get }
@@ -323,6 +324,11 @@ import JavaScriptCore
 			}
 		}
 	}
+    
+    public var maskLayer: LayerJSExport? {
+        get { return LayerBridge(layer.maskLayer) }
+        set { layer.maskLayer = (newValue as! LayerBridge?)?.layer }
+    }
 
 	// MARK: Convenience utilities
 
