@@ -5,4 +5,4 @@ title: Border
 doctype: struct
 ---
 
-Border is a `struct` that is a simple specification of a layer border.
+Border is a simple specification of a layer border. <span class="swift-only">It's a `struct`, so a new copy is made every time it's assigned to a variable.</span>

@@ -6,9 +6,13 @@ doctype:
 variables:
   -
     name: "public var color: Color"
-    desc: ""
+    js-name: "this.color"
+    js-type: "Color"
+    desc: "The color of the border stroke.<span style='js-only'> Read-only.</span>"
   -
     name: "public var width: Double"
-    desc: "Specifies the width of the border in the border-owning layer's coordinate space"
+    js-name: "this.width"
+    js-type: "Number"
+    desc: "Specifies the width of the border in the border-owning layer's coordinate space.<span style='js-only'> Read-only.</span>"
 
 ---
