@@ -10,6 +10,7 @@ import UIKit
 
 public class ShapeLayer: Layer {
 	
+	public var path: Path
 	
 	/** The fill colour for the shape. Defaults to `Color.black`. This is distinct from the layer's background colour. */
 	public var fillColor = Color.black
@@ -23,53 +24,14 @@ public class ShapeLayer: Layer {
 	public var strokeWidth = 1.0
 	
 	
-	public init(rectangle: Rect, cornerRadius: Double = 0, parent: Layer? = nil, name: String? = nil) {
-		self.path = UIBezierPath(roundedRect: CGRect(rectangle), cornerRadius: CGFloat(cornerRadius))
+	/** Initialize the ShapeLayer with a given path. */
+	public init(path: Path, parent: Layer? = nil, name: String? = nil) {
+		self.path = path
 		super.init(parent: parent, name: name, viewClass: ShapeView.self)
 		
-		self.frame = rectangle
-		self.shapeViewLayer.path = self.path.CGPath
+		self.bounds = self.path.bounds
+		self.shapeViewLayer.path = self.path.bezierPath.CGPath
 	}
-	
-	
-	public init(ovalInRectangle: Rect, parent: Layer? = nil, name: String? = nil) {
-		self.path = UIBezierPath(ovalInRect: CGRect(ovalInRectangle))
-		super.init(parent: parent, name: name, viewClass: ShapeView.self)
-		self.frame = ovalInRectangle
-	}
-	
-	
-	/** Creates a regular polygon shape with the given number of sides.
-		ShapeLayer: Please provide at least 3 sides for the shape.
-		You: 2
-		ShapeLayer: oh my god
-	*/
-	public init(numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
-		if numberOfSides < 3 {
-			Environment.currentEnvironment?.exceptionHandler("Tried to create a ShapeLayer with \(numberOfSides), but we need at least 3 to make a polygon. Triagain.")
-		}
-		
-		// TODO(jb): finish this..
-		self.path = UIBezierPath()
-		super.init(parent: parent, name: name, viewClass: ShapeView.self)
-		
-	}
-	
-	
-	public init(lineFromFirstPoint firstPoint: Point, toSecondPoint secondPoint: Point, parent: Layer? = nil, name: String? = nil) {
-		self.path = UIBezierPath()
-		self.path.moveToPoint(CGPoint(firstPoint))
-		self.path.addLineToPoint(CGPoint(secondPoint))
-		self.path.lineWidth = 1.0
-		
-		super.init(parent: parent, name: name, viewClass: ShapeView.self)
-		self.frame = Rect(self.path.bounds)
-		self.shapeViewLayer.path = self.path.CGPath
-		self.shapeViewLayer.strokeColor = self.strokeColor.CGColor
-	}
-	
-	
-	private var path: UIBezierPath
 	
 	
 	private var shapeViewLayer: CAShapeLayer {
@@ -83,3 +45,73 @@ public class ShapeLayer: Layer {
 		}
 	}
 }
+
+
+/** Paths represent the geometry of a shape or set of lines or curves. */
+public class Path {
+
+	
+	/** Creates an empty path. */
+	public init() {}
+	
+	
+	/** Creates a path preconfigured to be a perfect circle with the given center and radius. */
+	public init(circleCenter: Point, radius: Double) {}
+	
+	
+	/** Creates an ovalular path within the given rectangle. */
+	public init(ovalInRectangle: Rect) {}
+	
+	
+	/** Creates a rectangular path with an optional corner radius. */
+	public init(rectangle: Rect, cornerRadius: Double = 0) {}
+	
+	
+	/** Creates a line path from two points. */
+	public init(lineFromFirstPoint firstPoint: Point, toSecondPoint secondPoint: Point) {}
+	
+	
+	/** Creates a regular polygon path with the given number of sides. */
+	public init(polygonWithNumberOfSides: Int) {}
+	
+	
+	init(segments: [Segment]) {
+		self.segments = segments
+	}
+	
+	
+	// MARK: - Segments
+	
+	public var segments = [Segment]()
+	public var firstSegment: Segment? {
+		return segments.first
+	}
+	
+	public var lastSegment: Segment? {
+		return segments.last
+	}
+	
+	
+	public func addPoint(point: Point) {
+		self.segments.append(Segment(point: point))
+	}
+	
+	
+	// MARK: - Geometry
+	
+	var bounds: Rect {
+		return Rect(self.bezierPath.bounds)
+	}
+	
+	
+	var bezierPath: UIBezierPath {
+		return UIBezierPath()
+	}
+	
+}
+
+
+public struct Segment {
+	let point: Point
+}
+
