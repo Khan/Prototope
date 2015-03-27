@@ -77,7 +77,7 @@ public class ShapeLayer: Layer {
 	}
 	
 	
-	class ShapeView: UIView {
+	private class ShapeView: UIView {
 		override class func layerClass() -> AnyClass {
 			return CAShapeLayer.self
 		}
