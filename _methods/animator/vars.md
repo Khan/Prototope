@@ -11,16 +11,16 @@ variables:
     desc: |
       The target value for this animator. The `Animator` will continuously move its layer's value closer to this value. When the animation completes, the target value will be set back to <span class='swift-only'>`nil`</span><span class='js-only'>`undefined`</span>.
 
-      The type of this property will vary based on the animator. For instance, `Layer.animators.x`'s target is a `Float`, but `Layer.animators.backgroundColor` is a `Color`.
+      The type of this property will vary based on the animator. For instance, `Layer.animators.x`'s target is a <span class='swift-only'>`Double`</span><span class='js-only'>`Number`</span>, but `Layer.animators.backgroundColor` is a `Color`.
   -
     name: "public var springSpeed: Double"
     js-name: "this.springSpeed"
-    js-type: "Float"
+    js-type: "Number"
     desc: "How quickly the animation resolves to the target value. Valid range from 0 to 20. Defaults to 4."
   -
     name: "public var springBounciness: Double = 12.0 "
     js-name: "this.springBounciness"
-    js-type: "Float"
+    js-type: "Number"
     desc: "How springily the animation resolves to the target value. Valid range from 0 to 20. Defaults to 12."
   -
     name: "public var velocity: Target?"
