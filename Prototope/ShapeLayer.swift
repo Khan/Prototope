@@ -10,7 +10,7 @@ import UIKit
 
 public class ShapeLayer: Layer {
 	
-	public var path: Path
+	public let path: Path
 	
 	/** The fill colour for the shape. Defaults to `Color.black`. This is distinct from the layer's background colour. */
 	public var fillColor = Color.black
