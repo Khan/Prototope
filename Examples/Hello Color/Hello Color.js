@@ -24,3 +24,9 @@ Layer.root.touchBeganHandler = Layer.root.touchMovedHandler = Layer.root.touchEn
 	var size = Math.abs(sequence.currentSample.globalLocation.x - Layer.root.x) * 2.0
 	rect.animators.bounds.target = new Rect({x: 0, y: 0, width: size, height: size})
 }
+
+Layer.root.touchEndedHandler = function() {
+	Layer.root.animators.backgroundColor.target = Color.white
+	rect.animators.backgroundColor.target = Color.black
+	rect.animators.bounds.target = new Rect({x: 0, y: 0, width: 100, height: 100})
+}
