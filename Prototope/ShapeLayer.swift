@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+/** This layer represents a 2D shape, which is drawn from a supplied `Path` object. */
 public class ShapeLayer: Layer {
 	
 	var path: Path
@@ -195,21 +197,28 @@ public class Path {
 	
 	// MARK: - Segments
 	
+	/** A list of all segments of this path. */
 	public var segments = [Segment]()
+	
+	/** Gets the first segment of the path, if it exists. */
 	public var firstSegment: Segment? {
 		return segments.first
 	}
 	
+	
+	/** Gets the last segment of the path, if it exists. */
 	public var lastSegment: Segment? {
 		return segments.last
 	}
 	
 	
+	/** Convenience method to add a point by wrapping it in a segment. */
 	public func addPoint(point: Point) {
 		self.segments.append(Segment(point: point))
 	}
 	
 	
+	/** Replaces the segment at the given index. Throws an environment exception if the given index isn't in the segment list. */
 	public func replaceSegmentAtIndex(index: Int, withSegment segment: Segment) {
 		if index >= self.segments.count {
 			Environment.currentEnvironment?.exceptionHandler("Tried to replace a path segment at index \(index) but there are only \(self.segments.count) elements")
@@ -227,6 +236,7 @@ public class Path {
 	
 	// MARK: - Geometry
 	
+	/** Returns the bounds of the path, in its own coordinate space. */
 	public var bounds: Rect {
 		return Rect(self.bezierPath.bounds)
 	}
@@ -251,12 +261,25 @@ public class Path {
 	
 }
 
-
+/** A segment represents a point on a path, and may optionally have control handles for a curve on either side. */
 public struct Segment: Printable {
+	
+	/** The anchor point / location of this segment. */
 	public let point: Point
 	
-	public init(point: Point) {
+	
+	/** The control point going in to this segment, used when computing curves. */
+	public let handleIn: Point?
+	
+	/** The control point coming out of this segment, used when computing curves. */
+	public let handleOut: Point?
+	
+	
+	/** Initialize a segment with the given point and optional handle points. */
+	public init(point: Point, handleIn: Point? = nil, handleOut: Point? = nil) {
 		self.point = point
+		self.handleIn = handleIn
+		self.handleOut = handleOut
 	}
 	
 	public var description: String {
