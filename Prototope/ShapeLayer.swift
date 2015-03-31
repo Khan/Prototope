@@ -139,7 +139,7 @@ public class ShapeLayer: Layer {
 	
 	private func shapeViewLayerStyleChanged() {
 		var layer = self.shapeViewLayer
-		layer.lineCap = self.capStyle.capStyleString()
+		layer.lineCap = self.lineCapStyle.capStyleString()
 		layer.lineJoin = self.lineJoinStyle.joinStyleString()
 		
 		if let fillColor = fillColor {
@@ -210,6 +210,17 @@ public class Path {
 	}
 	
 	
+	public func replaceSegmentAtIndex(index: Int, withSegment segment: Segment) {
+		if index >= self.segments.count {
+			Environment.currentEnvironment?.exceptionHandler("Tried to replace a path segment at index \(index) but there are only \(self.segments.count) elements")
+			return
+		}
+		
+		self.segments[index] = segment
+		
+	}
+	
+	
 	/** If the path is closed, the first and last segments will be connected. */
 	public var closed = false
 	
@@ -241,7 +252,15 @@ public class Path {
 }
 
 
-public struct Segment {
-	let point: Point
+public struct Segment: Printable {
+	public let point: Point
+	
+	public init(point: Point) {
+		self.point = point
+	}
+	
+	public var description: String {
+		return self.point.description
+	}
 }
 
