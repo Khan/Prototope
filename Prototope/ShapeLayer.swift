@@ -20,16 +20,14 @@ public class ShapeLayer: Layer {
 	
 	
 	/** Creates an oval within the given rectangle. */
-	convenience public init(ovalInRectangle: Rect, parent: Layer? = nil, name: String? = nil) {
-		let bezier = UIBezierPath(ovalInRect: CGRect(ovalInRectangle))
-		
-		self.init(segments: bezier.segments, parent: parent, name: name)
+	convenience public init(ovalInRectangle: Rect, parent: Layer? = nil, name: String? = nil) {		
+		self.init(segments: Segment.segmentsForOvalInRect(ovalInRectangle), closed: true, parent: parent, name: name)
 	}
 	
 	
-	/** Creates a rectangul with an optional corner radius. */
+	/** Creates a rectangle with an optional corner radius. */
 	convenience public init(rectangle: Rect, cornerRadius: Double = 0, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: [Segment](), parent: parent, name: name)
+		self.init(segments: [Segment](), closed: true, parent: parent, name: name)
 	}
 	
 	
@@ -41,16 +39,17 @@ public class ShapeLayer: Layer {
 	
 	/** Creates a regular polygon path with the given number of sides. */
 	convenience public init(polygonWithNumberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: [Segment](), parent: parent, name: name)
+		self.init(segments: [Segment](), closed: true, parent: parent, name: name)
 	}
 	
 	
 	/** Initialize the ShapeLayer with a given path. */
-	public init(segments: [Segment], parent: Layer? = nil, name: String? = nil) {
+	public init(segments: [Segment], closed: Bool = false, parent: Layer? = nil, name: String? = nil) {
 		
 		self.segments = segments
-		super.init(parent: parent, name: name, viewClass: ShapeView.self)
+		self.closed = closed
 		
+		super.init(parent: parent, name: name, viewClass: ShapeView.self)
 		
 		self.shapeViewLayer.path = self.bezierPath.CGPath
 		self.shapeViewLayer.strokeColor = Color.black.CGColor
@@ -123,7 +122,11 @@ public class ShapeLayer: Layer {
 	
 	
 	/** If the path is closed, the first and last segments will be connected. */
-	public var closed = false
+	public var closed: Bool {
+		didSet {
+			self.shapeViewLayer.path = self.bezierPath.CGPath
+		}
+	}
 	
 	
 	/** Update the shape layer to show a new path. */
@@ -250,18 +253,45 @@ public class ShapeLayer: Layer {
 	var bezierPath: UIBezierPath {
 		// TODO(jb): Super naiive implementation. doesn't cache, doesn't handle "built in" shape paths, etc.
 		let bezierPath = UIBezierPath()
-		if let firstSegment = self.segments.first {
-			bezierPath.moveToPoint(CGPoint(firstSegment.point))
+		var isFirstSegment = true
+		var currentPoint = Point()
+		var previousPoint = Point()
+		var currentHandleIn = Point()
+		var currentHandleOut = Point()
+		
+		func drawSegment(segment: Segment) {
+			currentPoint = segment.point
 			
-			for segment in self.segments[1..<self.segments.count] {
+			if isFirstSegment {
+				bezierPath.moveToPoint(CGPoint(currentPoint))
+				isFirstSegment = false
+			} else {
+				if let segmentHandleIn = segment.handleIn {
+					currentHandleIn = currentPoint + segmentHandleIn
+				}
 				
-				bezierPath.addLineToPoint(CGPoint(segment.point))
+				if currentHandleIn == currentPoint && currentHandleOut == previousPoint {
+					bezierPath.addLineToPoint(CGPoint(currentPoint))
+				} else {
+					bezierPath.addCurveToPoint(CGPoint(currentPoint), controlPoint1: CGPoint(currentHandleOut), controlPoint2: CGPoint(currentHandleIn))
+				}
 			}
+			
+			previousPoint = currentPoint
+			if let segmentHandleOut = segment.handleOut {
+				currentHandleOut = previousPoint + segmentHandleOut
+			}
+			
+		}
+		for segment in self.segments {
+			drawSegment(segment)
 		}
 		
-		if self.closed {
+		if self.closed && self.segments.count > 0 {
+			drawSegment(self.segments[0])
 			bezierPath.closePath()
 		}
+		bezierPath.applyTransform(CGAffineTransformMakeTranslation(250, 250))
 		return bezierPath
 	}
 	
@@ -290,6 +320,40 @@ public struct Segment: Printable {
 	
 	public var description: String {
 		return self.point.description
+	}
+}
+
+
+/** Convenience functions for creating shapes. */
+extension Segment {
+	
+	// Magic number for approximating ellipse control points.
+	static let kappa = 4.0 * (sqrt(2.0) - 1.0) / 3.0
+	static let kappaSegments = [
+		Segment(point: Point(x: -1, y: 0), handleIn: Point(x: 0, y: kappa), handleOut: Point(x: 0, y: -kappa)),
+		Segment(point: Point(x: 0, y: -1), handleIn: Point(x: -kappa, y: 0), handleOut: Point(x: kappa, y: 0)),
+		Segment(point: Point(x: 1, y: 0), handleIn: Point(x: 0, y: -kappa), handleOut: Point(x: 0, y: kappa)),
+		Segment(point: Point(x: 0, y: 1), handleIn: Point(x: kappa, y: 0), handleOut: Point(x: -kappa, y: 0))
+	]
+	
+	static func segmentsForOvalInRect(rect: Rect) -> [Segment] {
+		
+		var segments = [Segment]()
+		let horizontalRadius = rect.size.height / 2.0
+		let verticalRadius = rect.size.width / 2.0
+		let center = rect.center
+		
+		for i in 0..<4 {
+			let kappaSegment = kappaSegments[i]
+			let radius = i % 2 == 0 ? horizontalRadius : verticalRadius
+			
+			let point = kappaSegment.point * radius + center
+			let handleIn = kappaSegment.handleIn! * radius
+			let handleOut = kappaSegment.handleOut! * radius
+			
+			segments.append(Segment(point: point, handleIn: handleIn, handleOut: handleOut))
+		}
+		return segments
 	}
 }
 
