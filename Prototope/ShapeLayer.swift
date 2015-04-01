@@ -273,6 +273,7 @@ public class ShapeLayer: Layer {
 				if currentHandleIn == currentPoint && currentHandleOut == previousPoint {
 					bezierPath.addLineToPoint(CGPoint(currentPoint))
 				} else {
+					println("p: \(currentPoint), cp1: \(currentHandleOut), cp2: \(currentHandleIn)")
 					bezierPath.addCurveToPoint(CGPoint(currentPoint), controlPoint1: CGPoint(currentHandleOut), controlPoint2: CGPoint(currentHandleIn))
 				}
 			}
@@ -327,25 +328,25 @@ public struct Segment: Printable {
 /** Convenience functions for creating shapes. */
 extension Segment {
 	
-	// Magic number for approximating ellipse control points.
-	static let kappa = 4.0 * (sqrt(2.0) - 1.0) / 3.0
-	static let kappaSegments = [
-		Segment(point: Point(x: -1, y: 0), handleIn: Point(x: 0, y: kappa), handleOut: Point(x: 0, y: -kappa)),
-		Segment(point: Point(x: 0, y: -1), handleIn: Point(x: -kappa, y: 0), handleOut: Point(x: kappa, y: 0)),
-		Segment(point: Point(x: 1, y: 0), handleIn: Point(x: 0, y: -kappa), handleOut: Point(x: 0, y: kappa)),
-		Segment(point: Point(x: 0, y: 1), handleIn: Point(x: kappa, y: 0), handleOut: Point(x: -kappa, y: 0))
-	]
 	
+	/** Creates a set of segments for drawing an oval in the given rect. Algorithm based on paper.js */
 	static func segmentsForOvalInRect(rect: Rect) -> [Segment] {
 		
+		// Magic number for approximating ellipse control points.
+		let kappa = 4.0 * (sqrt(2.0) - 1.0) / 3.0
+		let kappaSegments = [
+			Segment(point: Point(x: -1.0, y: 0.0), handleIn: Point(x: 0.0, y: kappa), handleOut: Point(x: 0.0, y: -kappa)),
+			Segment(point: Point(x: 0.0, y: -1.0), handleIn: Point(x: -kappa, y: 0.0), handleOut: Point(x: kappa, y: 0.0)),
+			Segment(point: Point(x: 1.0, y: 0.0), handleIn: Point(x: 0.0, y: -kappa), handleOut: Point(x: 0.0, y: kappa)),
+			Segment(point: Point(x: 0.0, y: 1.0), handleIn: Point(x: kappa, y: 0.0), handleOut: Point(x: -kappa, y: 0.0))
+		]
+		
 		var segments = [Segment]()
-		let horizontalRadius = rect.size.height / 2.0
-		let verticalRadius = rect.size.width / 2.0
+		let radius = Point(x: rect.size.width / 2.0, y: rect.size.height / 2.0)
 		let center = rect.center
 		
-		for i in 0..<4 {
+		for i in 0..<kappaSegments.count {
 			let kappaSegment = kappaSegments[i]
-			let radius = i % 2 == 0 ? horizontalRadius : verticalRadius
 			
 			let point = kappaSegment.point * radius + center
 			let handleIn = kappaSegment.handleIn! * radius
