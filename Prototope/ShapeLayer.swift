@@ -27,7 +27,7 @@ public class ShapeLayer: Layer {
 	
 	/** Creates a rectangle with an optional corner radius. */
 	convenience public init(rectangle: Rect, cornerRadius: Double = 0, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: [Segment](), closed: true, parent: parent, name: name)
+		self.init(segments: Segment.segmentsForRect(rectangle, cornerRadius: cornerRadius), closed: true, parent: parent, name: name)
 	}
 	
 	
@@ -268,7 +268,10 @@ public class ShapeLayer: Layer {
 			} else {
 				if let segmentHandleIn = segment.handleIn {
 					currentHandleIn = currentPoint + segmentHandleIn
+				} else {
+					currentHandleIn = currentPoint
 				}
+				
 				
 				if currentHandleIn == currentPoint && currentHandleOut == previousPoint {
 					bezierPath.addLineToPoint(CGPoint(currentPoint))
@@ -281,6 +284,8 @@ public class ShapeLayer: Layer {
 			previousPoint = currentPoint
 			if let segmentHandleOut = segment.handleOut {
 				currentHandleOut = previousPoint + segmentHandleOut
+			} else {
+				currentHandleOut = previousPoint
 			}
 			
 		}
@@ -353,6 +358,18 @@ extension Segment {
 			let handleOut = kappaSegment.handleOut! * radius
 			
 			segments.append(Segment(point: point, handleIn: handleIn, handleOut: handleOut))
+		}
+		return segments
+	}
+	
+	
+	static func segmentsForRect(rect: Rect, cornerRadius: Double) -> [Segment] {
+		var segments = [Segment]()
+		if cornerRadius <= 0.0 {
+			segments.append(Segment(point: rect.origin))
+			segments.append(Segment(point: Point(x: rect.maxX, y: rect.minY)))
+			segments.append(Segment(point: Point(x: rect.maxX, y: rect.maxY)))
+			segments.append(Segment(point: Point(x: rect.minX, y: rect.maxY)))
 		}
 		return segments
 	}
