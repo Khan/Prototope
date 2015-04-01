@@ -12,7 +12,55 @@ import UIKit
 /** This layer represents a 2D shape, which is drawn from a supplied `Path` object. */
 public class ShapeLayer: Layer {
 	
-	var path: Path
+	
+	/** Creates a circle with the given center and radius. */
+	convenience public init(circleCenter: Point, radius: Double, parent: Layer? = nil, name: String? = nil) {
+		self.init(ovalInRectangle: Rect(x: 0, y: 0, width: radius, height: radius), parent: parent, name: name)
+	}
+	
+	
+	/** Creates an oval within the given rectangle. */
+	convenience public init(ovalInRectangle: Rect, parent: Layer? = nil, name: String? = nil) {
+		let bezier = UIBezierPath(ovalInRect: CGRect(ovalInRectangle))
+		
+		self.init(segments: bezier.segments, parent: parent, name: name)
+	}
+	
+	
+	/** Creates a rectangul with an optional corner radius. */
+	convenience public init(rectangle: Rect, cornerRadius: Double = 0, parent: Layer? = nil, name: String? = nil) {
+		self.init(segments: [Segment](), parent: parent, name: name)
+	}
+	
+	
+	/** Creates a line from two points. */
+	convenience public init(lineFromFirstPoint firstPoint: Point, toSecondPoint secondPoint: Point, parent: Layer? = nil, name: String? = nil) {
+		self.init(segments: [Segment](), parent: parent, name: name)
+	}
+	
+	
+	/** Creates a regular polygon path with the given number of sides. */
+	convenience public init(polygonWithNumberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
+		self.init(segments: [Segment](), parent: parent, name: name)
+	}
+	
+	
+	/** Initialize the ShapeLayer with a given path. */
+	public init(segments: [Segment], parent: Layer? = nil, name: String? = nil) {
+		
+		self.segments = segments
+		super.init(parent: parent, name: name, viewClass: ShapeView.self)
+		
+		
+		self.shapeViewLayer.path = self.bezierPath.CGPath
+		self.shapeViewLayer.strokeColor = Color.black.CGColor
+		self.shapeViewLayer.fillColor = nil
+	}
+	
+	
+	
+	
+	// MARK: - Properties
 	
 	// TODO(jb): These aren't actually setting properly on the shapeLayer on init(). Fixit!
 	/** The fill colour for the shape. Defaults to `Color.black`. This is distinct from the layer's background colour. */
@@ -39,24 +87,51 @@ public class ShapeLayer: Layer {
 	}
 	
 	
-	/** Initialize the ShapeLayer with a given path. */
-	public init(path: Path, parent: Layer? = nil, name: String? = nil) {
-		self.path = path
-		super.init(parent: parent, name: name, viewClass: ShapeView.self)
-		
-		self.bounds = self.path.bounds
-		self.shapeViewLayer.path = self.path.bezierPath.CGPath
-		self.shapeViewLayer.strokeColor = Color.black.CGColor
-		self.shapeViewLayer.fillColor = nil
+	// MARK: - Segments
+	
+	/** A list of all segments of this path. */
+	public var segments: [Segment]
+	
+	/** Gets the first segment of the path, if it exists. */
+	public var firstSegment: Segment? {
+		return segments.first
 	}
+	
+	
+	/** Gets the last segment of the path, if it exists. */
+	public var lastSegment: Segment? {
+		return segments.last
+	}
+	
+	
+	/** Convenience method to add a point by wrapping it in a segment. */
+	public func addPoint(point: Point) {
+		self.segments.append(Segment(point: point))
+	}
+	
+	
+	/** Replaces the segment at the given index. Throws an environment exception if the given index isn't in the segment list. */
+	public func replaceSegmentAtIndex(index: Int, withSegment segment: Segment) {
+		if index >= self.segments.count {
+			Environment.currentEnvironment?.exceptionHandler("Tried to replace a path segment at index \(index) but there are only \(self.segments.count) elements")
+			return
+		}
+		
+		self.segments[index] = segment
+		
+	}
+	
+	
+	/** If the path is closed, the first and last segments will be connected. */
+	public var closed = false
 	
 	
 	/** Update the shape layer to show a new path. */
-	public func updatePath(newPath: Path) {
-		self.path = newPath
-		self.shapeViewLayer.path = self.path.bezierPath.CGPath
-		self.bounds = self.path.bounds
-	}
+//	public func updatePath(newPath: Path) {
+//		self.path = newPath
+//		self.shapeViewLayer.path = self.path.bezierPath.CGPath
+//		self.bounds = self.path.bounds
+//	}
 	
 	
 	/** Represents the types of cap styles path segment endpoints will show. Only affects open paths. */
@@ -159,87 +234,17 @@ public class ShapeLayer: Layer {
 		
 		self.shapeViewLayer.lineWidth = CGFloat(strokeWidth)
 	}
-}
-
-
-/** Paths represent the geometry of a shape or set of lines or curves. */
-public class Path {
-
-	
-	/** Creates an empty path. */
-	public init() {}
 	
 	
-	/** Creates a path preconfigured to be a perfect circle with the given center and radius. */
-	public init(circleCenter: Point, radius: Double) {}
 	
-	
-	/** Creates an ovalular path within the given rectangle. */
-	public init(ovalInRectangle: Rect) {}
-	
-	
-	/** Creates a rectangular path with an optional corner radius. */
-	public init(rectangle: Rect, cornerRadius: Double = 0) {}
-	
-	
-	/** Creates a line path from two points. */
-	public init(lineFromFirstPoint firstPoint: Point, toSecondPoint secondPoint: Point) {}
-	
-	
-	/** Creates a regular polygon path with the given number of sides. */
-	public init(polygonWithNumberOfSides: Int) {}
-	
-	
-	init(segments: [Segment]) {
-		self.segments = segments
-	}
-	
-	
-	// MARK: - Segments
-	
-	/** A list of all segments of this path. */
-	public var segments = [Segment]()
-	
-	/** Gets the first segment of the path, if it exists. */
-	public var firstSegment: Segment? {
-		return segments.first
-	}
-	
-	
-	/** Gets the last segment of the path, if it exists. */
-	public var lastSegment: Segment? {
-		return segments.last
-	}
-	
-	
-	/** Convenience method to add a point by wrapping it in a segment. */
-	public func addPoint(point: Point) {
-		self.segments.append(Segment(point: point))
-	}
-	
-	
-	/** Replaces the segment at the given index. Throws an environment exception if the given index isn't in the segment list. */
-	public func replaceSegmentAtIndex(index: Int, withSegment segment: Segment) {
-		if index >= self.segments.count {
-			Environment.currentEnvironment?.exceptionHandler("Tried to replace a path segment at index \(index) but there are only \(self.segments.count) elements")
-			return
-		}
-		
-		self.segments[index] = segment
-		
-	}
-	
-	
-	/** If the path is closed, the first and last segments will be connected. */
-	public var closed = false
 	
 	
 	// MARK: - Geometry
 	
 	/** Returns the bounds of the path, in its own coordinate space. */
-	public var bounds: Rect {
-		return Rect(self.bezierPath.bounds)
-	}
+//	public var bounds: Rect {
+//		return Rect(self.bezierPath.bounds)
+//	}
 	
 	
 	var bezierPath: UIBezierPath {
@@ -249,6 +254,7 @@ public class Path {
 			bezierPath.moveToPoint(CGPoint(firstSegment.point))
 			
 			for segment in self.segments[1..<self.segments.count] {
+				
 				bezierPath.addLineToPoint(CGPoint(segment.point))
 			}
 		}

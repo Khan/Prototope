@@ -18,6 +18,9 @@
 		961AC2151A93D45D00ED9744 /* SpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2141A93D45D00ED9744 /* SpeechBridge.swift */; };
 		9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6411A8D4C47003D386B /* ScrollLayer.swift */; };
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
+		96EFFE901ACB229D000EF94D /* UIBezierPath+Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EFFE8F1ACB229D000EF94D /* UIBezierPath+Segment.swift */; };
+		96EFFEA01ACB2973000EF94D /* UIBezierPath+Apply.h in Headers */ = {isa = PBXBuildFile; fileRef = 96EFFE9E1ACB2973000EF94D /* UIBezierPath+Apply.h */; };
+		96EFFEA11ACB2973000EF94D /* UIBezierPath+Apply.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EFFE9F1ACB2973000EF94D /* UIBezierPath+Apply.m */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -420,6 +423,9 @@
 		961AC2141A93D45D00ED9744 /* SpeechBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBridge.swift; sourceTree = "<group>"; };
 		9632F6411A8D4C47003D386B /* ScrollLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayer.swift; sourceTree = "<group>"; };
 		9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayerBridge.swift; sourceTree = "<group>"; };
+		96EFFE8F1ACB229D000EF94D /* UIBezierPath+Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Segment.swift"; sourceTree = "<group>"; };
+		96EFFE9E1ACB2973000EF94D /* UIBezierPath+Apply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Apply.h"; sourceTree = "<group>"; };
+		96EFFE9F1ACB2973000EF94D /* UIBezierPath+Apply.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Apply.m"; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -997,6 +1003,9 @@
 			children = (
 				EBB3505E1A166E690046AD07 /* Dictionary+Extensions.swift */,
 				CD26ECC51A83CE1000E8EC3B /* Radian.swift */,
+				96EFFE8F1ACB229D000EF94D /* UIBezierPath+Segment.swift */,
+				96EFFE9E1ACB2973000EF94D /* UIBezierPath+Apply.h */,
+				96EFFE9F1ACB2973000EF94D /* UIBezierPath+Apply.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1055,6 +1064,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */,
+				96EFFEA01ACB2973000EF94D /* UIBezierPath+Apply.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1652,6 +1662,7 @@
 				EB04E5D21A6606DE00FD1EE3 /* Tunable.swift in Sources */,
 				EBB43C821A8BEAE500CE943C /* Video.swift in Sources */,
 				9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */,
+				96EFFEA11ACB2973000EF94D /* UIBezierPath+Apply.m in Sources */,
 				EBA8371C1A1DB51000D23C9D /* Sound.swift in Sources */,
 				EBB43C831A8BEAE500CE943C /* VideoLayer.swift in Sources */,
 				EB50FA1219F04A07007A3C32 /* Image.swift in Sources */,
@@ -1662,6 +1673,7 @@
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
 				CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */,
 				9619D3AC1A8E56F20022DC54 /* Layer+Layout.swift in Sources */,
+				96EFFE901ACB229D000EF94D /* UIBezierPath+Segment.swift in Sources */,
 				752064901A89E3A0005E38A2 /* Behaviors.swift in Sources */,
 				EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */,
 				EB1C2A6519E4B534000DC2C1 /* Color.swift in Sources */,
