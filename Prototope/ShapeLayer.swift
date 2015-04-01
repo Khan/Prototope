@@ -333,12 +333,12 @@ public struct Segment: Printable {
 /** Convenience functions for creating shapes. */
 extension Segment {
 	
+	// Magic number for approximating ellipse control points.
+	static let kappa = 4.0 * (sqrt(2.0) - 1.0) / 3.0
 	
 	/** Creates a set of segments for drawing an oval in the given rect. Algorithm based on paper.js */
 	static func segmentsForOvalInRect(rect: Rect) -> [Segment] {
 		
-		// Magic number for approximating ellipse control points.
-		let kappa = 4.0 * (sqrt(2.0) - 1.0) / 3.0
 		let kappaSegments = [
 			Segment(point: Point(x: -1.0, y: 0.0), handleIn: Point(x: 0.0, y: kappa), handleOut: Point(x: 0.0, y: -kappa)),
 			Segment(point: Point(x: 0.0, y: -1.0), handleIn: Point(x: -kappa, y: 0.0), handleOut: Point(x: kappa, y: 0.0)),
@@ -350,8 +350,8 @@ extension Segment {
 		let radius = Point(x: rect.size.width / 2.0, y: rect.size.height / 2.0)
 		let center = rect.center
 		
-		for i in 0..<kappaSegments.count {
-			let kappaSegment = kappaSegments[i]
+		for index in 0..<kappaSegments.count {
+			let kappaSegment = kappaSegments[index]
 			
 			let point = kappaSegment.point * radius + center
 			let handleIn = kappaSegment.handleIn! * radius
@@ -363,13 +363,36 @@ extension Segment {
 	}
 	
 	
-	static func segmentsForRect(rect: Rect, cornerRadius: Double) -> [Segment] {
+	/** Creates a set of segments for drawing a rectangle, optionally with a corner radius. Algorithm based on paper.js */
+	static func segmentsForRect(rect: Rect, cornerRadius radius: Double) -> [Segment] {
 		var segments = [Segment]()
-		if cornerRadius <= 0.0 {
-			segments.append(Segment(point: rect.origin))
-			segments.append(Segment(point: Point(x: rect.maxX, y: rect.minY)))
-			segments.append(Segment(point: Point(x: rect.maxX, y: rect.maxY)))
-			segments.append(Segment(point: Point(x: rect.minX, y: rect.maxY)))
+		
+		let topLeft = rect.origin
+		let topRight = Point(x: rect.maxX, y: rect.minY)
+		let bottomRight = Point(x: rect.maxX, y: rect.maxY)
+		let bottomLeft = Point(x: rect.minX, y: rect.maxY)
+		
+		
+		if radius <= 0.0 {
+			segments.append(Segment(point: topLeft))
+			segments.append(Segment(point: topRight))
+			segments.append(Segment(point: bottomRight))
+			segments.append(Segment(point: bottomLeft))
+		} else {
+			let handle = radius * kappa
+			
+			segments.append(Segment(point: bottomLeft + Point(x: radius, y: 0.0), handleIn: nil, handleOut: Point(x: -1.0 * handle, y: 0)))
+			segments.append(Segment(point: bottomLeft - Point(x: 0.0, y: radius), handleIn: Point(x: 0.0, y: handle), handleOut: nil))
+			
+			segments.append(Segment(point: topLeft + Point(x: 0.0, y: radius), handleIn: nil, handleOut: Point(x: 0.0, y: -1.0 * handle)))
+			segments.append(Segment(point: topLeft + Point(x: radius, y: 0.0), handleIn: Point(x: -handle, y: 0.0), handleOut: nil))
+			
+			segments.append(Segment(point: topRight - Point(x: radius, y: 0.0), handleIn: nil, handleOut: Point(x: handle, y: 0)))
+			segments.append(Segment(point: topRight + Point(x: 0.0, y: radius), handleIn: Point(x: 0.0, y: -handle), handleOut: nil))
+			
+			segments.append(Segment(point: bottomRight - Point(x: 0.0, y: radius), handleIn: nil, handleOut: Point(x: 0.0, y: handle)))
+			segments.append(Segment(point: bottomRight - Point(x: radius, y: 0.0), handleIn: Point(x: handle, y: 0), handleOut: nil))
+			
 		}
 		return segments
 	}
