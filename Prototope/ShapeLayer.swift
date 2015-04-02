@@ -63,41 +63,12 @@ public class ShapeLayer: Layer {
 		
 		super.init(parent: parent, name: name, viewClass: ShapeView.self)
 		
-		let bezierPath = self.bezierPath
-		self.shapeViewLayer.path = bezierPath.CGPath
-		self.shapeViewLayer.strokeColor = Color.black.CGColor
-		self.shapeViewLayer.fillColor = nil
 		
+		self.shapeViewLayer.path = self.bezierPath.CGPath
+		self.shapeViewLayerStyleChanged()
+		
+		// debugging..
 		self.backgroundColor = Color.lightGray
-	}
-	
-	
-	
-	
-	// MARK: - Properties
-	
-	// TODO(jb): These aren't actually setting properly on the shapeLayer on init(). Fixit!
-	/** The fill colour for the shape. Defaults to `Color.black`. This is distinct from the layer's background colour. */
-	public var fillColor: Color? = Color.black {
-		didSet {
-			shapeViewLayerStyleChanged()
-		}
-	}
-	
-	
-	/** The stroke colour for the shape. Defaults to `Color.black`. */
-	public var strokeColor: Color? = Color.black {
-		didSet {
-			shapeViewLayerStyleChanged()
-		}
-	}
-	
-	
-	/** The width of the stroke. Defaults to 1.0. */
-	public var strokeWidth = 1.0 {
-		didSet {
-			shapeViewLayerStyleChanged()
-		}
 	}
 	
 	
@@ -136,10 +107,43 @@ public class ShapeLayer: Layer {
 	}
 	
 	
+	// TODO(jb): How can this be triggered automatically when mutating the segments?
+	/** Redraws the path. You can call this after you change path segments. */
+	public func setNeedsDisplay() {
+		self.shapeViewLayer.path = self.bezierPath.CGPath
+	}
+	
+	
+	// MARK: - Properties
+	
+	/** The fill colour for the shape. Defaults to `Color.black`. This is distinct from the layer's background colour. */
+	public var fillColor: Color? = Color.black {
+		didSet {
+			shapeViewLayerStyleChanged()
+		}
+	}
+	
+	
+	/** The stroke colour for the shape. Defaults to `Color.black`. */
+	public var strokeColor: Color? = Color.black {
+		didSet {
+			shapeViewLayerStyleChanged()
+		}
+	}
+	
+	
+	/** The width of the stroke. Defaults to 1.0. */
+	public var strokeWidth = 1.0 {
+		didSet {
+			shapeViewLayerStyleChanged()
+		}
+	}
+	
+	
 	/** If the path is closed, the first and last segments will be connected. */
 	public var closed: Bool {
 		didSet {
-			self.shapeViewLayer.path = self.bezierPath.CGPath
+			self.setNeedsDisplay()
 		}
 	}
 	
@@ -246,7 +250,7 @@ public class ShapeLayer: Layer {
 	}
 	
 	
-	var bezierPath: UIBezierPath {
+	private var bezierPath: UIBezierPath {
 		
 		let bezierPath = UIBezierPath()
 		var isFirstSegment = true
