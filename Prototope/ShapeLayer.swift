@@ -275,6 +275,12 @@ public class ShapeLayer: Layer {
 	
 	private var bezierPath: UIBezierPath {
 		
+		/*	This is modelled on paper.js' implementation of path rendering.
+			While iterating through the segments, this checks to see if a line or a curve should be drawn between them.
+			Each segment has an optional handleIn and handleOut, which act as control points for curves on either side.
+			See https://github.com/paperjs/paper.js/blob/1803cd216ae6b5adb6410b5e13285b0a7fc04526/src/path/Path.js#L2026
+		*/
+		
 		let bezierPath = UIBezierPath()
 		var isFirstSegment = true
 		var currentPoint = Point()
