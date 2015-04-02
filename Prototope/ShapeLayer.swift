@@ -65,15 +65,28 @@ public class ShapeLayer: Layer {
 		
 		super.init(parent: parent, name: name, viewClass: ShapeView.self)
 		
-		self.shapeViewLayer.path = self.bezierPath.CGPath
+		let view = self.view as! ShapeView
+		view.displayHandler = {
+			[weak self] in
+			if let aliveSelf = self {
+				aliveSelf.shapeViewLayer.path = aliveSelf.bezierPath.CGPath
+			}
+		}
+		
+		self.setNeedsDisplay()
 		self.shapeViewLayerStyleDidChange()
+		
 	}
 	
 	
 	// MARK: - Segments
 	
 	/** A list of all segments of this path. */
-	public var segments: [Segment]
+	public var segments: [Segment] {
+		didSet {
+			self.setNeedsDisplay()
+		}
+	}
 	
 	/** Gets the first segment of the path, if it exists. */
 	public var firstSegment: Segment? {
@@ -107,8 +120,8 @@ public class ShapeLayer: Layer {
 	
 	// TODO(jb): How can this be triggered automatically when mutating the segments?
 	/** Redraws the path. You can call this after you change path segments. */
-	public func setNeedsDisplay() {
-		self.shapeViewLayer.path = self.bezierPath.CGPath
+	private func setNeedsDisplay() {
+		self.view.setNeedsDisplay()
 	}
 	
 	
@@ -220,8 +233,20 @@ public class ShapeLayer: Layer {
 	
 	
 	private class ShapeView: UIView {
+		var displayHandler: (() -> Void)?
+		
 		override class func layerClass() -> AnyClass {
 			return CAShapeLayer.self
+		}
+		
+		
+		override func setNeedsDisplay() {
+			// The UIKit implementation (reasonably) won't call through to `CALayer` if you don't implement `drawRect:`, so we do it ourselves.
+			self.layer.setNeedsDisplay()
+		}
+		
+		@objc override func displayLayer(layer: CALayer!) {
+			self.displayHandler?()
 		}
 	}
 	
