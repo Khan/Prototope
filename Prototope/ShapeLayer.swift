@@ -51,7 +51,9 @@ public class ShapeLayer: Layer {
 	
 	/** Creates a regular polygon path with the given number of sides. */
 	convenience public init(polygonCenteretAtPoint centerPoint: Point, radius: Double, numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: Segment.segmentsForPolygonCenteredAtPoint(centerPoint, radius: radius, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
+		let frame = Rect(x: centerPoint.x - radius, y: centerPoint.y - radius, width: radius * 2, height: radius * 2)
+		self.init(segments: Segment.segmentsForPolygonCenteredAtPoint(frame.center, radius: radius, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
+		self.frame = frame
 	}
 	
 	
@@ -63,12 +65,8 @@ public class ShapeLayer: Layer {
 		
 		super.init(parent: parent, name: name, viewClass: ShapeView.self)
 		
-		
 		self.shapeViewLayer.path = self.bezierPath.CGPath
 		self.shapeViewLayerStyleChanged()
-		
-		// debugging..
-		self.backgroundColor = Color.lightGray
 	}
 	
 	
