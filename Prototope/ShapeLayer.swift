@@ -33,13 +33,13 @@ public class ShapeLayer: Layer {
 	
 	/** Creates a line from two points. */
 	convenience public init(lineFromFirstPoint firstPoint: Point, toSecondPoint secondPoint: Point, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: [Segment](), parent: parent, name: name)
+		self.init(segments: Segment.segmentsForLineFromFirstPoint(firstPoint, secondPoint: secondPoint), parent: parent, name: name)
 	}
 	
 	
 	/** Creates a regular polygon path with the given number of sides. */
-	convenience public init(polygonWithNumberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: [Segment](), closed: true, parent: parent, name: name)
+	convenience public init(polygonInRectangle rect: Rect, numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
+		self.init(segments: Segment.segmentsForPolygonInRect(rect, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
 	}
 	
 	
@@ -394,6 +394,35 @@ extension Segment {
 			segments.append(Segment(point: bottomRight - Point(x: radius, y: 0.0), handleIn: Point(x: handle, y: 0), handleOut: nil))
 			
 		}
+		return segments
+	}
+	
+	
+	static func segmentsForLineFromFirstPoint(firstPoint: Point, secondPoint: Point) -> [Segment] {
+		return [Segment(point: firstPoint), Segment(point: secondPoint)]
+	}
+	
+	
+	static func segmentsForPolygonInRect(rect: Rect, numberOfSides: Int) -> [Segment] {
+		var segments = [Segment]()
+		
+		if numberOfSides < 3 {
+			Environment.currentEnvironment?.exceptionHandler("Please use at least 3 sides for your polygon (you used \(numberOfSides))")
+			return segments
+		}
+		
+		let angle = Radian(degrees: 360.0 / Double(numberOfSides))
+		let radius = rect.size.width / 2.0
+		
+		// Start the shape at the top-middle of the rectangle
+		var currentPoint = Point(x: radius, y: 0)
+		
+		for index in 0..<numberOfSides {
+			let x = currentPoint.x + radius * cos(angle * Double(index))
+			let y = currentPoint.y + radius * sin(angle * Double(index))
+			segments.append(Segment(point: Point(x: x, y: y)))
+		}
+		
 		return segments
 	}
 }
