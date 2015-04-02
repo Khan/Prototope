@@ -38,8 +38,8 @@ public class ShapeLayer: Layer {
 	
 	
 	/** Creates a regular polygon path with the given number of sides. */
-	convenience public init(polygonInRectangle rect: Rect, numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: Segment.segmentsForPolygonInRect(rect, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
+	convenience public init(polygonCenteretAtPoint centerPoint: Point, radius: Double, numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
+		self.init(segments: Segment.segmentsForPolygonCenteredAtPoint(centerPoint, radius: radius, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
 	}
 	
 	
@@ -334,7 +334,7 @@ public struct Segment: Printable {
 extension Segment {
 	
 	// Magic number for approximating ellipse control points.
-	static let kappa = 4.0 * (sqrt(2.0) - 1.0) / 3.0
+	private static let kappa = 4.0 * (sqrt(2.0) - 1.0) / 3.0
 	
 	/** Creates a set of segments for drawing an oval in the given rect. Algorithm based on paper.js */
 	static func segmentsForOvalInRect(rect: Rect) -> [Segment] {
@@ -398,12 +398,14 @@ extension Segment {
 	}
 	
 	
+	/** Segments for a line. Algorithm based on something I just made up. */
 	static func segmentsForLineFromFirstPoint(firstPoint: Point, secondPoint: Point) -> [Segment] {
 		return [Segment(point: firstPoint), Segment(point: secondPoint)]
 	}
 	
 	
-	static func segmentsForPolygonInRect(rect: Rect, numberOfSides: Int) -> [Segment] {
+	/** Segments for a polygon with the given number of sides. Must be >= 3 sides or else funnybusiness ensues. */
+	static func segmentsForPolygonCenteredAtPoint(centerPoint: Point, radius: Double, numberOfSides: Int) -> [Segment] {
 		var segments = [Segment]()
 		
 		if numberOfSides < 3 {
@@ -412,14 +414,10 @@ extension Segment {
 		}
 		
 		let angle = Radian(degrees: 360.0 / Double(numberOfSides))
-		let radius = rect.size.width / 2.0
-		
-		// Start the shape at the top-middle of the rectangle
-		var currentPoint = Point(x: radius, y: 0)
 		
 		for index in 0..<numberOfSides {
-			let x = currentPoint.x + radius * cos(angle * Double(index))
-			let y = currentPoint.y + radius * sin(angle * Double(index))
+			let x = centerPoint.x + radius * cos(angle * Double(index))
+			let y = centerPoint.y + radius * sin(angle * Double(index))
 			segments.append(Segment(point: Point(x: x, y: y)))
 		}
 		
