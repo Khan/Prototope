@@ -292,7 +292,6 @@ public class ShapeLayer: Layer {
 		
 		if self.closed && self.segments.count > 0 {
 			drawSegment(self.segments[0])
-			bezierPath.closePath()
 		}
 
 		return bezierPath
