@@ -9,7 +9,7 @@
 import UIKit
 
 
-/** This layer represents a 2D shape, which is drawn from a supplied `Path` object. */
+/** This layer represents a 2D shape, which is drawn from a list of Segments. This class is similar to the Paths in paper.js. */
 public class ShapeLayer: Layer {
 	
 	
