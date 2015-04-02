@@ -158,7 +158,7 @@ public class ShapeLayer: Layer {
 		/** The line cap will have square ends. */
 		case Square
 		
-		internal func capStyleString() -> String {
+		func capStyleString() -> String {
 			switch self {
 			case Butt:
 				return kCALineCapButt
@@ -191,7 +191,7 @@ public class ShapeLayer: Layer {
 		/** Line joins will have beveled edges. */
 		case Bevel
 		
-		internal func joinStyleString() -> String {
+		func joinStyleString() -> String {
 			switch self {
 			case Miter:
 				return kCALineJoinMiter
