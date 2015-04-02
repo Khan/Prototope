@@ -81,7 +81,8 @@ public func *(scalar: Double, a: Point) -> Point {
 }
 
 
-public func*(a: Point, b: Point) -> Point {
+/** Element-wise multiplication. */
+public func *(a: Point, b: Point) -> Point {
 	return Point(x: a.x * b.x, y: a.y * b.y)
 }
 
