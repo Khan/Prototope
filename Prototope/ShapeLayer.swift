@@ -129,14 +129,6 @@ public class ShapeLayer: Layer {
 	}
 	
 	
-	/** Update the shape layer to show a new path. */
-//	public func updatePath(newPath: Path) {
-//		self.path = newPath
-//		self.shapeViewLayer.path = self.path.bezierPath.CGPath
-//		self.bounds = self.path.bounds
-//	}
-	
-	
 	/** Represents the types of cap styles path segment endpoints will show. Only affects open paths. */
 	public enum LineCapStyle {
 		
@@ -239,19 +231,8 @@ public class ShapeLayer: Layer {
 	}
 	
 	
-	
-	
-	
-	// MARK: - Geometry
-	
-	/** Returns the bounds of the path, in its own coordinate space. */
-//	public var bounds: Rect {
-//		return Rect(self.bezierPath.bounds)
-//	}
-	
-	
 	var bezierPath: UIBezierPath {
-		// TODO(jb): Super naiive implementation. doesn't cache, doesn't handle "built in" shape paths, etc.
+		
 		let bezierPath = UIBezierPath()
 		var isFirstSegment = true
 		var currentPoint = Point()
@@ -276,7 +257,6 @@ public class ShapeLayer: Layer {
 				if currentHandleIn == currentPoint && currentHandleOut == previousPoint {
 					bezierPath.addLineToPoint(CGPoint(currentPoint))
 				} else {
-					println("p: \(currentPoint), cp1: \(currentHandleOut), cp2: \(currentHandleIn)")
 					bezierPath.addCurveToPoint(CGPoint(currentPoint), controlPoint1: CGPoint(currentHandleOut), controlPoint2: CGPoint(currentHandleIn))
 				}
 			}
