@@ -66,7 +66,7 @@ public class ShapeLayer: Layer {
 		super.init(parent: parent, name: name, viewClass: ShapeView.self)
 		
 		self.shapeViewLayer.path = self.bezierPath.CGPath
-		self.shapeViewLayerStyleChanged()
+		self.shapeViewLayerStyleDidChange()
 	}
 	
 	
@@ -117,7 +117,7 @@ public class ShapeLayer: Layer {
 	/** The fill colour for the shape. Defaults to `Color.black`. This is distinct from the layer's background colour. */
 	public var fillColor: Color? = Color.black {
 		didSet {
-			shapeViewLayerStyleChanged()
+			shapeViewLayerStyleDidChange()
 		}
 	}
 	
@@ -125,7 +125,7 @@ public class ShapeLayer: Layer {
 	/** The stroke colour for the shape. Defaults to `Color.black`. */
 	public var strokeColor: Color? = Color.black {
 		didSet {
-			shapeViewLayerStyleChanged()
+			shapeViewLayerStyleDidChange()
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class ShapeLayer: Layer {
 	/** The width of the stroke. Defaults to 1.0. */
 	public var strokeWidth = 1.0 {
 		didSet {
-			shapeViewLayerStyleChanged()
+			shapeViewLayerStyleDidChange()
 		}
 	}
 	
@@ -174,7 +174,7 @@ public class ShapeLayer: Layer {
 	/** The line cap style for the path. Defaults to LineCapStyle.Butt. */
 	public var lineCapStyle: LineCapStyle = .Butt {
 		didSet {
-			shapeViewLayerStyleChanged()
+			shapeViewLayerStyleDidChange()
 		}
 	}
 	
@@ -207,7 +207,7 @@ public class ShapeLayer: Layer {
 	/** The line join style for path lines. Defaults to LineJoinStyle.Miter. */
 	public var lineJoinStyle: LineJoinStyle = .Miter {
 		didSet {
-			shapeViewLayerStyleChanged()
+			shapeViewLayerStyleDidChange()
 		}
 	}
 	
@@ -226,7 +226,7 @@ public class ShapeLayer: Layer {
 	}
 	
 	
-	private func shapeViewLayerStyleChanged() {
+	private func shapeViewLayerStyleDidChange() {
 		var layer = self.shapeViewLayer
 		layer.lineCap = self.lineCapStyle.capStyleString()
 		layer.lineJoin = self.lineJoinStyle.joinStyleString()
