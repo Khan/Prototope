@@ -15,25 +15,37 @@ public class ShapeLayer: Layer {
 	
 	/** Creates a circle with the given center and radius. */
 	convenience public init(circleCenter: Point, radius: Double, parent: Layer? = nil, name: String? = nil) {
-		self.init(ovalInRectangle: Rect(x: 0, y: 0, width: radius, height: radius), parent: parent, name: name)
+		self.init(ovalInRectangle: Rect(
+			x: circleCenter.x - radius, 
+			y: circleCenter.y - radius, 
+			width: radius * 2, 
+			height: radius * 2), parent: parent, name: name)
 	}
 	
 	
 	/** Creates an oval within the given rectangle. */
-	convenience public init(ovalInRectangle: Rect, parent: Layer? = nil, name: String? = nil) {		
-		self.init(segments: Segment.segmentsForOvalInRect(ovalInRectangle), closed: true, parent: parent, name: name)
+	convenience public init(ovalInRectangle: Rect, parent: Layer? = nil, name: String? = nil) {
+		var renderRect = ovalInRectangle
+		renderRect.origin = Point()
+		self.init(segments: Segment.segmentsForOvalInRect(renderRect), closed: true, parent: parent, name: name)
+		self.frame = ovalInRectangle
 	}
 	
 	
 	/** Creates a rectangle with an optional corner radius. */
 	convenience public init(rectangle: Rect, cornerRadius: Double = 0, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: Segment.segmentsForRect(rectangle, cornerRadius: cornerRadius), closed: true, parent: parent, name: name)
+		var renderRect = rectangle
+		renderRect.origin = Point()
+		self.init(segments: Segment.segmentsForRect(renderRect, cornerRadius: cornerRadius), closed: true, parent: parent, name: name)
+		self.frame = rectangle
 	}
 	
 	
 	/** Creates a line from two points. */
 	convenience public init(lineFromFirstPoint firstPoint: Point, toSecondPoint secondPoint: Point, parent: Layer? = nil, name: String? = nil) {
-		self.init(segments: Segment.segmentsForLineFromFirstPoint(firstPoint, secondPoint: secondPoint), parent: parent, name: name)
+		let difference = secondPoint - firstPoint
+		self.init(segments: Segment.segmentsForLineFromFirstPoint(Point(), secondPoint: difference), parent: parent, name: name)
+		self.frame = Rect(x: firstPoint.x, y: firstPoint.y, width: difference.x, height: difference.y)
 	}
 	
 	
@@ -51,9 +63,12 @@ public class ShapeLayer: Layer {
 		
 		super.init(parent: parent, name: name, viewClass: ShapeView.self)
 		
-		self.shapeViewLayer.path = self.bezierPath.CGPath
+		let bezierPath = self.bezierPath
+		self.shapeViewLayer.path = bezierPath.CGPath
 		self.shapeViewLayer.strokeColor = Color.black.CGColor
 		self.shapeViewLayer.fillColor = nil
+		
+		self.backgroundColor = Color.lightGray
 	}
 	
 	
@@ -277,7 +292,7 @@ public class ShapeLayer: Layer {
 			drawSegment(self.segments[0])
 			bezierPath.closePath()
 		}
-		bezierPath.applyTransform(CGAffineTransformMakeTranslation(250, 250))
+
 		return bezierPath
 	}
 	
