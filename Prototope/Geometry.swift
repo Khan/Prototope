@@ -80,6 +80,12 @@ public func *(scalar: Double, a: Point) -> Point {
     return a * scalar
 }
 
+
+/** Element-wise multiplication. */
+public func *(a: Point, b: Point) -> Point {
+	return Point(x: a.x * b.x, y: a.y * b.y)
+}
+
 /** Multiplies both point dimensions by scalar. */
 public func *=(inout a: Point, scalar: Double) {
 	a = a * scalar

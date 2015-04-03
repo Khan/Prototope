@@ -22,6 +22,7 @@
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
 		CD3F93A01A852AF500B964FC /* ParticlePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F939F1A852AF500B964FC /* ParticlePreset.swift */; };
+		CD4C5E1B1AC5BBDF002288EB /* ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C5E1A1AC5BBDF002288EB /* ShapeLayer.swift */; };
 		EB04E5CA1A6606D100FD1EE3 /* KFTunableSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB04E5CB1A6606D100FD1EE3 /* KFTunableSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */; };
 		EB04E5CC1A6606D100FD1EE3 /* TunableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */; };
@@ -423,6 +424,7 @@
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
 		CD3F939F1A852AF500B964FC /* ParticlePreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlePreset.swift; sourceTree = "<group>"; };
+		CD4C5E1A1AC5BBDF002288EB /* ShapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLayer.swift; sourceTree = "<group>"; };
 		EB04E5C71A6606D100FD1EE3 /* KFTunableSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFTunableSpec.h; path = ThirdParty/TunableSpec/KFTunableSpec.h; sourceTree = "<group>"; };
 		EB04E5C81A6606D100FD1EE3 /* KFTunableSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KFTunableSpec.m; path = ThirdParty/TunableSpec/KFTunableSpec.m; sourceTree = "<group>"; };
 		EB04E5C91A6606D100FD1EE3 /* TunableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TunableSpec.swift; path = ThirdParty/TunableSpec/TunableSpec.swift; sourceTree = "<group>"; };
@@ -796,6 +798,7 @@
 				EBD43A9E1A9186F900BB2E6A /* TextLayer.swift */,
 				EBCEBBCF1AA8DB7F00B58A6C /* CameraLayer.swift */,
 				961AC2051A93B9D500ED9744 /* Speech.swift */,
+				CD4C5E1A1AC5BBDF002288EB /* ShapeLayer.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
@@ -1655,6 +1658,7 @@
 				EBB3505F1A166E690046AD07 /* Dictionary+Extensions.swift in Sources */,
 				EB05D2AA1A8823F200F4CFD4 /* Environment.swift in Sources */,
 				EBABE67D19E4AEF100483EEF /* Geometry.swift in Sources */,
+				CD4C5E1B1AC5BBDF002288EB /* ShapeLayer.swift in Sources */,
 				EBB565DB19F074B000D93DE3 /* Math.swift in Sources */,
 				CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */,
 				9619D3AC1A8E56F20022DC54 /* Layer+Layout.swift in Sources */,
