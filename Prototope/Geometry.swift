@@ -35,6 +35,18 @@ public struct Point: Equatable {
 		let dy = point.y - self.y
 		return sqrt(dx*dx + dy*dy)
 	}
+	
+	
+	/** Computes the slope between this point and the given point. Returns nil for infinite slopes (i.e., when the x values are the same). */
+	public func slopeToPoint(point: Point) -> Double? {
+		let dx = point.x - self.x
+		let dy = point.y - self.y
+		
+		if dx == 0 {
+			return nil
+		}
+		return dy/dx
+	}
 
 	/** Computes the magnitude of the point, interpreted as a vector. */
 	public var length: Double {
