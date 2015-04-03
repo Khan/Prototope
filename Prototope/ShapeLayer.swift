@@ -45,7 +45,7 @@ public class ShapeLayer: Layer {
 	convenience public init(lineFromFirstPoint firstPoint: Point, toSecondPoint secondPoint: Point, parent: Layer? = nil, name: String? = nil) {
 		let difference = secondPoint - firstPoint
 		self.init(segments: Segment.segmentsForLineFromFirstPoint(Point(), secondPoint: difference), parent: parent, name: name)
-		self.frame = Rect(x: firstPoint.x, y: firstPoint.y, width: difference.x, height: difference.y)
+		self.frame = Rect(x: firstPoint.x, y: firstPoint.y, width: abs(difference.x), height: abs(difference.y))
 	}
 	
 	
