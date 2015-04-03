@@ -50,7 +50,7 @@ public class ShapeLayer: Layer {
 	
 	
 	/** Creates a regular polygon path with the given number of sides. */
-	convenience public init(polygonCenteretAtPoint centerPoint: Point, radius: Double, numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
+	convenience public init(polygonCenteredAtPoint centerPoint: Point, radius: Double, numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
 		let frame = Rect(x: centerPoint.x - radius, y: centerPoint.y - radius, width: radius * 2, height: radius * 2)
 		self.init(segments: Segment.segmentsForPolygonCenteredAtPoint(frame.center, radius: radius, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
 		self.frame = frame
