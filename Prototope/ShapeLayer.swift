@@ -52,7 +52,8 @@ public class ShapeLayer: Layer {
 	/** Creates a regular polygon path with the given number of sides. */
 	convenience public init(polygonCenteredAtPoint centerPoint: Point, radius: Double, numberOfSides: Int, parent: Layer? = nil, name: String? = nil) {
 		let frame = Rect(x: centerPoint.x - radius, y: centerPoint.y - radius, width: radius * 2, height: radius * 2)
-		self.init(segments: Segment.segmentsForPolygonCenteredAtPoint(frame.center, radius: radius, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
+        self.init(segments: Segment.segmentsForPolygonCenteredAtPoint(Point(x: radius, y: radius), radius: radius, numberOfSides: numberOfSides), closed: true, parent: parent, name: name)
+        
 		self.frame = frame
 	}
 	
@@ -428,10 +429,11 @@ extension Segment {
 		}
 		
 		let angle = Radian(degrees: 360.0 / Double(numberOfSides))
+        let fixedRotation = -M_PI_2 // By decree (and appeal to aesthetics): there should always be a vertex on top.
 		
 		for index in 0..<numberOfSides {
-			let x = centerPoint.x + radius * cos(angle * Double(index))
-			let y = centerPoint.y + radius * sin(angle * Double(index))
+			let x = centerPoint.x + radius * cos(angle * Double(index) + fixedRotation)
+			let y = centerPoint.y + radius * sin(angle * Double(index) + fixedRotation)
 			segments.append(Segment(point: Point(x: x, y: y)))
 		}
 		

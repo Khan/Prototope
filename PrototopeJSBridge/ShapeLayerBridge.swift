@@ -33,6 +33,7 @@ import JavaScriptCore
         bridgedShapeLayer.setObject(ShapeLayerOvalBridge.self, forKeyedSubscript: "Oval")
         bridgedShapeLayer.setObject(ShapeLayerRectangleBridge.self, forKeyedSubscript: "Rectangle")
         bridgedShapeLayer.setObject(ShapeLayerLineBridge.self, forKeyedSubscript: "Line")
+        bridgedShapeLayer.setObject(ShapeLayerPolygonBridge.self, forKeyedSubscript: "Polygon")
         context.setObject(bridgedShapeLayer, forKeyedSubscript: "ShapeLayer")
     }
     
@@ -162,6 +163,23 @@ import JavaScriptCore
             super.init(ShapeLayer(lineFromFirstPoint: from, toSecondPoint: to, parent: parentLayer, name: name))
         } else {
             Environment.currentEnvironment!.exceptionHandler("ShapeLayer.Line missing from or to")
+            super.init(args: [:])
+            return nil
+        }
+    }
+}
+
+@objc public class ShapeLayerPolygonBridge: ShapeLayerBridge, ShapeLayerConvenienceConstructorJSExport {
+    public required init?(args: NSDictionary) {
+        let parentLayer = (args["parent"] as? LayerBridge)?.layer
+        let name = args["name"] as? String
+        let center = (args["center"] as? PointBridge)?.point
+        let radius = args["radius"] as? Double
+        let numberOfSides = args["numberOfSides"] as? Double
+        if let center = center, let radius = radius, let numberOfSides = numberOfSides {
+            super.init(ShapeLayer(polygonCenteredAtPoint: center, radius: radius, numberOfSides: Int(numberOfSides), parent: parentLayer, name: name))
+        } else {
+            Environment.currentEnvironment!.exceptionHandler("ShapeLayer.Line missing center, radius, or numberOfSides")
             super.init(args: [:])
             return nil
         }
