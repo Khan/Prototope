@@ -28,7 +28,9 @@ import JavaScriptCore
     var shapeLayer: ShapeLayer { return layer as! ShapeLayer }
     
     public override class func addToContext(context: JSContext) {
-        context.setObject(self, forKeyedSubscript: "ShapeLayer")
+        let bridgedShapeLayer = JSValue(object: self, inContext: context)
+        bridgedShapeLayer.setObject(ShapeLayerCircleBridge.self, forKeyedSubscript: "Circle")
+        context.setObject(bridgedShapeLayer, forKeyedSubscript: "ShapeLayer")
     }
     
     public required init?(args: NSDictionary) {
@@ -37,6 +39,10 @@ import JavaScriptCore
         let segments = ((args["segments"] as? [SegmentBridge]) ?? []).map { $0.segment! }
         let closed = (args["closed"] as? Bool) ?? false
         super.init(ShapeLayer(segments: segments, closed: closed, parent: parentLayer, name: name))
+    }
+    
+    init?(_ wrappingLayer: ShapeLayer?) {
+        super.init(wrappingLayer)
     }
     
     public var segments: [SegmentJSExport] {
@@ -58,12 +64,12 @@ import JavaScriptCore
     
     public var fillColor: ColorJSExport? {
         get { return shapeLayer.fillColor != nil ? ColorBridge(shapeLayer.fillColor!) : nil }
-        set { shapeLayer.fillColor = (newValue as! ColorBridge).color }
+        set { shapeLayer.fillColor = (newValue as! ColorBridge?)?.color }
     }
 
     public var strokeColor: ColorJSExport? {
         get { return shapeLayer.strokeColor != nil ? ColorBridge(shapeLayer.strokeColor!) : nil }
-        set { shapeLayer.strokeColor = (newValue as! ColorBridge).color }
+        set { shapeLayer.strokeColor = (newValue as! ColorBridge?)?.color }
     }
     
     public var strokeWidth: Double {
@@ -86,6 +92,29 @@ import JavaScriptCore
         set { shapeLayer.lineJoinStyle = LineJoinStyleBridge.decodeLineJoinStyle(newValue) }
     }
 }
+
+// MARK: - Convenience constructors
+@objc public protocol ShapeLayerConvenienceConstructorJSExport: JSExport {
+    init?(args: NSDictionary)
+}
+@objc public class ShapeLayerCircleBridge: ShapeLayerBridge, ShapeLayerConvenienceConstructorJSExport {
+    public required init?(args: NSDictionary) {
+        let parentLayer = (args["parent"] as? LayerBridge)?.layer
+        let name = args["name"] as? String
+        let center = (args["center"] as? PointBridge)?.point
+        let radius = args["radius"] as? Double
+        if let center = center, let radius = radius {
+            super.init(ShapeLayer(circleCenter: center, radius: radius, parent: parentLayer, name: name))
+        } else {
+            Environment.currentEnvironment!.exceptionHandler("ShapeLayer.Circle missing center or radius")
+            super.init(args: [:])
+            return nil
+        }
+    }
+}
+
+//============================================================================
+// MARK: - Segment
 
 @objc public protocol SegmentJSExport: JSExport {
     init?(args: JSValue)
@@ -138,6 +167,8 @@ import JavaScriptCore
         set { segment.handleOut = (newValue as! PointBridge).point }
     }
 }
+
+// MARK: - Enums
 
 public class LineCapStyleBridge: NSObject, BridgeType {
     enum RawLineCapStyle: Int {
