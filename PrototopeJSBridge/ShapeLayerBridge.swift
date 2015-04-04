@@ -30,6 +30,7 @@ import JavaScriptCore
     public override class func addToContext(context: JSContext) {
         let bridgedShapeLayer = JSValue(object: self, inContext: context)
         bridgedShapeLayer.setObject(ShapeLayerCircleBridge.self, forKeyedSubscript: "Circle")
+        bridgedShapeLayer.setObject(ShapeLayerOvalBridge.self, forKeyedSubscript: "Oval")
         context.setObject(bridgedShapeLayer, forKeyedSubscript: "ShapeLayer")
     }
     
@@ -93,10 +94,15 @@ import JavaScriptCore
     }
 }
 
+
 // MARK: - Convenience constructors
+
+// We want prototypers to be able to say "new ShapeLayer.Circle({center: pt, radius: r})". These stub classes exist only to have bridged constructors.
+
 @objc public protocol ShapeLayerConvenienceConstructorJSExport: JSExport {
     init?(args: NSDictionary)
 }
+
 @objc public class ShapeLayerCircleBridge: ShapeLayerBridge, ShapeLayerConvenienceConstructorJSExport {
     public required init?(args: NSDictionary) {
         let parentLayer = (args["parent"] as? LayerBridge)?.layer
@@ -112,6 +118,22 @@ import JavaScriptCore
         }
     }
 }
+
+@objc public class ShapeLayerOvalBridge: ShapeLayerBridge, ShapeLayerConvenienceConstructorJSExport {
+    public required init?(args: NSDictionary) {
+        let parentLayer = (args["parent"] as? LayerBridge)?.layer
+        let name = args["name"] as? String
+        let rectangle = (args["rectangle"] as? RectBridge)?.rect
+        if let rectangle = rectangle {
+            super.init(ShapeLayer(ovalInRectangle: rectangle, parent: parentLayer, name: name))
+        } else {
+            Environment.currentEnvironment!.exceptionHandler("ShapeLayer.Oval missing rectangle")
+            super.init(args: [:])
+            return nil
+        }
+    }
+}
+
 
 //============================================================================
 // MARK: - Segment
