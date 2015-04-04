@@ -31,6 +31,7 @@ import JavaScriptCore
         let bridgedShapeLayer = JSValue(object: self, inContext: context)
         bridgedShapeLayer.setObject(ShapeLayerCircleBridge.self, forKeyedSubscript: "Circle")
         bridgedShapeLayer.setObject(ShapeLayerOvalBridge.self, forKeyedSubscript: "Oval")
+        bridgedShapeLayer.setObject(ShapeLayerRectangleBridge.self, forKeyedSubscript: "Rectangle")
         context.setObject(bridgedShapeLayer, forKeyedSubscript: "ShapeLayer")
     }
     
@@ -128,6 +129,22 @@ import JavaScriptCore
             super.init(ShapeLayer(ovalInRectangle: rectangle, parent: parentLayer, name: name))
         } else {
             Environment.currentEnvironment!.exceptionHandler("ShapeLayer.Oval missing rectangle")
+            super.init(args: [:])
+            return nil
+        }
+    }
+}
+
+@objc public class ShapeLayerRectangleBridge: ShapeLayerBridge, ShapeLayerConvenienceConstructorJSExport {
+    public required init?(args: NSDictionary) {
+        let parentLayer = (args["parent"] as? LayerBridge)?.layer
+        let name = args["name"] as? String
+        let rectangle = (args["rectangle"] as? RectBridge)?.rect
+        let cornerRadius = (args["cornerRadius"] as? Double) ?? 0
+        if let rectangle = rectangle {
+            super.init(ShapeLayer(rectangle: rectangle, cornerRadius: cornerRadius, parent: parentLayer, name: name))
+        } else {
+            Environment.currentEnvironment!.exceptionHandler("ShapeLayer.Rectangle missing rectangle")
             super.init(args: [:])
             return nil
         }
