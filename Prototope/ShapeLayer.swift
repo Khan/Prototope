@@ -104,21 +104,8 @@ public class ShapeLayer: Layer {
 	public func addPoint(point: Point) {
 		self.segments.append(Segment(point: point))
 	}
-	
-	
-	/** Replaces the segment at the given index. Throws an environment exception if the given index isn't in the segment list. */
-	public func replaceSegmentAtIndex(index: Int, withSegment segment: Segment) {
-		if index >= self.segments.count {
-			Environment.currentEnvironment?.exceptionHandler("Tried to replace a path segment at index \(index) but there are only \(self.segments.count) elements")
-			return
-		}
 		
-		self.segments[index] = segment
-		
-	}
-	
-	
-	// TODO(jb): How can this be triggered automatically when mutating the segments?
+    
 	/** Redraws the path. You can call this after you change path segments. */
 	private func setNeedsDisplay() {
 		self.view.setNeedsDisplay()
@@ -334,14 +321,14 @@ public class ShapeLayer: Layer {
 public struct Segment: Printable {
 	
 	/** The anchor point / location of this segment. */
-	public let point: Point
+	public var point: Point
 	
 	
 	/** The control point going in to this segment, used when computing curves. */
-	public let handleIn: Point?
+	public var handleIn: Point?
 	
 	/** The control point coming out of this segment, used when computing curves. */
-	public let handleOut: Point?
+	public var handleOut: Point?
 	
 	
 	/** Initialize a segment with the given point and optional handle points. */

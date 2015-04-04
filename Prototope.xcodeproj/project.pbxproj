@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE281A7F1B01001E63CE /* BridgeType.swift */; };
 		6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */; };
+		61A1BA451ACF51A600780650 /* ShapeLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1BA441ACF51A600780650 /* ShapeLayerBridge.swift */; };
 		752064901A89E3A0005E38A2 /* Behaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7520648F1A89E39F005E38A2 /* Behaviors.swift */; };
 		753E20E81A84A12100E30460 /* JSTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 753E20E71A84A12100E30460 /* JSTest.js */; };
 		7541D6331AA97708009374FB /* ExceptionHandlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7541D6231AA97528009374FB /* ExceptionHandlingTests.swift */; };
@@ -411,6 +412,7 @@
 /* Begin PBXFileReference section */
 		6175CE281A7F1B01001E63CE /* BridgeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeType.swift; sourceTree = "<group>"; };
 		6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBridge.swift; sourceTree = "<group>"; };
+		61A1BA441ACF51A600780650 /* ShapeLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLayerBridge.swift; sourceTree = "<group>"; };
 		7520648F1A89E39F005E38A2 /* Behaviors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Behaviors.swift; sourceTree = "<group>"; };
 		753E20E71A84A12100E30460 /* JSTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTest.js; sourceTree = "<group>"; };
 		7541D6231AA97528009374FB /* ExceptionHandlingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandlingTests.swift; sourceTree = "<group>"; };
@@ -1026,6 +1028,7 @@
 				EBD43AAD1A918A8200BB2E6A /* TextLayerBridge.swift */,
 				EBCEBBDE1AA8DC9800B58A6C /* CameraLayerBridge.swift */,
 				961AC2141A93D45D00ED9744 /* SpeechBridge.swift */,
+				61A1BA441ACF51A600780650 /* ShapeLayerBridge.swift */,
 			);
 			name = "Bridged Types";
 			sourceTree = "<group>";
@@ -1537,6 +1540,7 @@
 				6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */,
 				EBC43D881A81C47A0075272A /* SoundBridge.swift in Sources */,
 				EBC43D781A81999B0075272A /* JSContext+BridgingExtensions.swift in Sources */,
+				61A1BA451ACF51A600780650 /* ShapeLayerBridge.swift in Sources */,
 				EBC43D621A8007320075272A /* ShadowBridge.swift in Sources */,
 				EBD43AAF1A918A8900BB2E6A /* TextLayerBridge.swift in Sources */,
 				EBC43D641A8010770075272A /* ImageBridge.swift in Sources */,
