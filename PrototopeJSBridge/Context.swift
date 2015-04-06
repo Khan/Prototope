@@ -82,5 +82,9 @@ public class Context {
 		TextAlignmentBridge.addToContext(context)
 		CameraLayerBridge.addToContext(context)
 		CameraPositionBridge.addToContext(context)
+        ShapeLayerBridge.addToContext(context)
+        SegmentBridge.addToContext(context)
+        LineCapStyleBridge.addToContext(context)
+        LineJoinStyleBridge.addToContext(context)
 	}
 }
