@@ -19,6 +19,7 @@ import Prototope
 	static var zero: PointJSExport { get } // exported manually
 	init(args: NSDictionary) 
 	func distanceToPoint(point: PointJSExport) -> Double
+	func slopeToPoint(point: PointJSExport) -> JSValue
 	var length: Double { get }
 
 	func equals(point: PointJSExport) -> Bool
@@ -56,6 +57,13 @@ import Prototope
 
 	public func distanceToPoint(other: PointJSExport) -> Double {
 		return point.distanceToPoint((other as JSExport as! PointBridge).point)
+	}
+	
+	
+	public func slopeToPoint(point: PointJSExport) -> JSValue {
+		let slope = self.point.slopeToPoint((point as JSExport as! PointBridge).point)
+		let context = JSContext.currentContext()
+		return slope != nil ? JSValue(double: slope!, inContext: context) : JSValue(undefinedInContext: context)
 	}
 
 	public var length: Double { return point.length }

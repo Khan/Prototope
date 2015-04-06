@@ -52,6 +52,9 @@ scrollLayer.updateScrollableSizeToFitSublayers();
 scrollLayer.moveToRightOfSiblingLayer({siblingLayer: layer, margin: 10.0});
 
 Speech.say({text: " "}); // silent, but here for illustration.
-
+var p1 = new Point({x: 50, y: 100});
+var p2 = new Point({x: 100, y: 60});
+var slope = p1.slopeToPoint(p2);
+console.log("slope " + slope);
 console.log("Hello, world!");
 "Done JSTest.js";
