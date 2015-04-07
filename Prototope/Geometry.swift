@@ -176,6 +176,12 @@ extension CGSize {
 	}
 }
 
+extension Size: Printable {
+	public var description: String {
+		return "{width: \(width), height: \(height)}"
+	}
+}
+
 
 // MARK: - Rect
 
@@ -270,5 +276,12 @@ extension CGRect {
 	public init(_ rect: Rect) {
 		self.origin = CGPoint(rect.origin)
 		self.size = CGSize(rect.size)
+	}
+}
+
+
+extension Rect: Printable {
+	public var description: String {
+		return "{origin: \(origin), size: \(size)}"
 	}
 }

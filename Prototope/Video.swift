@@ -9,7 +9,7 @@
 import AVFoundation
 
 /** Represents a video object. Can be any kind iOS natively supports. */
-public struct Video {
+public struct Video: Printable {
 	
 	let name: String
 	let player: AVPlayer
@@ -24,5 +24,10 @@ public struct Video {
             Environment.currentEnvironment?.exceptionHandler("Video named \(name) not found")
             return nil
 		}
+	}
+	
+	
+	public var description: String {
+		return name
 	}
 }

@@ -49,6 +49,10 @@ import Prototope
 		self.point = point
 		super.init()
 	}
+	
+	public override var description: String {
+		return self.point.description
+	}
 
 	public var x: Double { return point.x }
 	public var y: Double { return point.y }
@@ -124,6 +128,11 @@ import Prototope
 		self.size = size
 		super.init()
 	}
+	
+	
+	public override var description: String {
+		return size.description
+	}
 
 	public var width: Double { return size.width }
 	public var height: Double { return size.height }
@@ -181,6 +190,11 @@ import Prototope
 	init(_ rect: Prototope.Rect) {
 		self.rect = rect
 		super.init()
+	}
+	
+	
+	public override var description: String {
+		return rect.description
 	}
     
     public func inset(args: NSDictionary) -> RectJSExport {

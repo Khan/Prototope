@@ -32,6 +32,10 @@ import JavaScriptCore
 			return nil
 		}
 	}
+	
+	public override var description: String {
+		return sound.description
+	}
 
 	public func play() {
 		sound.play()

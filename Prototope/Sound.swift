@@ -10,9 +10,10 @@ import AVFoundation
 import Foundation
 
 /** Provides a simple way to play sound files. Supports .aif, .aiff, .wav, and .caf files. */
-public struct Sound {
+public struct Sound: Printable {
 
 	private let player: AVAudioPlayer
+	private let name: String!
 
 	/** Creates a sound from a filename. No need to include the file extension: Prototope will
 		try all the valid extensions. */
@@ -20,10 +21,15 @@ public struct Sound {
 		if let data = Environment.currentEnvironment!.soundProvider(name) {
 			player = AVAudioPlayer(data: data, error: nil)
 			player.prepareToPlay()
+			self.name = name
 		} else {
             Environment.currentEnvironment?.exceptionHandler("Sound named \(name) not found")
             return nil
 		}
+	}
+	
+	public var description: String {
+		return self.name
 	}
 
 	public func play() {

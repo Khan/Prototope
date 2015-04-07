@@ -32,7 +32,9 @@ layer.backgroundColor = new Color({red: 0.5, green: 0.7, blue: 0.1, alpha: 0.7})
 layer.frame = new Rect({x: 75, y: 80, width: 400, height: 400});
 layer.border = new Border({color: Color.black, width: 2});
 layer.shadow = new Shadow({alpha: 1.0});
-(new Sound({name: 'Glass'})).play();
+console.log(layer);
+
+//(new Sound({name: 'Glass'})).play();
 
 //var video = new Video({name: "countdown.mp4"});
 //var videoLayer = new VideoLayer({parent: Layer.root, video: video });
@@ -55,6 +57,8 @@ Speech.say({text: " "}); // silent, but here for illustration.
 var p1 = new Point({x: 50, y: 100});
 var p2 = new Point({x: 100, y: 60});
 var slope = p1.slopeToPoint(p2);
-console.log("slope " + slope);
+console.log(p1.toString());
+console.log(new Rect({x: 1, y: 2, width: 3, height: 4}));
+
 console.log("Hello, world!");
 "Done JSTest.js";
