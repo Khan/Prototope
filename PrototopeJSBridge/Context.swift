@@ -46,7 +46,7 @@ public class Context {
 		context.setObject(console, forKeyedSubscript: "console")
 		
 		
-		
+		// Capturing `context` here (instead of passing it in as a parameter) causes the compiler to segfault as of Swift 1.2b4.
 		func addBridgedType<T: BridgeType>(bridgedType: T.Type, toContext context: JSContext) {
 			bridgedType.addToContext(context)
 			
@@ -91,17 +91,17 @@ public class Context {
 		addBridgedType(ParticleBridge.self, toContext: context)
 		addBridgedType(ParticleEmitterBridge.self, toContext: context)
 		addBridgedType(ScrollLayerBridge.self, toContext: context)
-        addBridgedType(CollisionBehaviorBridge.self, toContext: context)
-        addBridgedType(ActionBehaviorBridge.self, toContext: context)
-        addBridgedType(CollisionBehaviorKindBridge.self, toContext: context)
+		addBridgedType(CollisionBehaviorBridge.self, toContext: context)
+		addBridgedType(ActionBehaviorBridge.self, toContext: context)
+		addBridgedType(CollisionBehaviorKindBridge.self, toContext: context)
 		addBridgedType(TextLayerBridge.self, toContext: context)
 		addBridgedType(SpeechBridge.self, toContext: context)
 		addBridgedType(TextAlignmentBridge.self, toContext: context)
 		addBridgedType(CameraLayerBridge.self, toContext: context)
 		addBridgedType(CameraPositionBridge.self, toContext: context)
-        addBridgedType(ShapeLayerBridge.self, toContext: context)
-        addBridgedType(SegmentBridge.self, toContext: context)
-        addBridgedType(LineCapStyleBridge.self, toContext: context)
-        addBridgedType(LineJoinStyleBridge.self, toContext: context)
+		addBridgedType(ShapeLayerBridge.self, toContext: context)
+		addBridgedType(SegmentBridge.self, toContext: context)
+		addBridgedType(LineCapStyleBridge.self, toContext: context)
+		addBridgedType(LineJoinStyleBridge.self, toContext: context)
 	}
 }
