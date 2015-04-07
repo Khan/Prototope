@@ -9,7 +9,7 @@
 import UIKit
 
 /** A simple abstraction for a bitmap image. */
-public struct Image {
+public struct Image: Printable {
 	/** The size of the image, in points. */
 	public var size: Size {
 		return Size(uiImage.size)
@@ -33,5 +33,10 @@ public struct Image {
 	/** Constructs an Image from a UIImage. */
 	init(_ image: UIImage) {
 		uiImage = image
+	}
+	
+	
+	public var description: String {
+		return self.name
 	}
 }

@@ -35,4 +35,9 @@ import JavaScriptCore
 		self.image = image
 		super.init()
 	}
+	
+	
+	public override var description: String {
+		return image.description
+	}
 }
