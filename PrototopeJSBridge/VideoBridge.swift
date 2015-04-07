@@ -30,4 +30,9 @@ import JavaScriptCore
 			return nil
 		}
 	}
+	
+	
+	public override var description: String {
+		return video.description
+	}
 }
