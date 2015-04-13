@@ -1,7 +1,12 @@
 function randomPrettyColor() {
+	// 5º increments of hue
     var hue = Math.random()*(72+1) * 5.0/360.0;
+	// 1/8 increments of brightness
     var brightness = Math.max(0.5, Math.random()*(8+1) * 1.0/8.0);
-    var saturation = Math.max(0.5, Math.random()*(8+1) * 1.0/8.0);	return new Color({hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0})
+	// 1/8 increments of saturation
+    var saturation = Math.max(0.5, Math.random()*(8+1) * 1.0/8.0);
+
+	return new Color({hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0})
 }
 
 Layer.root.backgroundColor = randomPrettyColor();
