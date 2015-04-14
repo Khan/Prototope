@@ -113,6 +113,19 @@ public class ShapeLayer: Layer {
 	}
 	
 	
+	// MARK: - Methods
+	
+	/** Returns if the the given point is enclosed within the shape. If the shape is not closed, this always returns `false`. */
+	public func enclosesPoint(point: Point) -> Bool {
+		if !self.closed {
+			return false
+		}
+		
+		let path = self.bezierPath
+		return path.containsPoint(CGPoint(point))
+	}
+	
+	
 	// MARK: - Properties
 	
 	/** The fill colour for the shape. Defaults to `Color.black`. This is distinct from the layer's background colour. */

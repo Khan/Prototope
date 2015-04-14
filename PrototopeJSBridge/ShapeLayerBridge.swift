@@ -16,6 +16,8 @@ import JavaScriptCore
     var firstSegment: SegmentJSExport? { get }
     var lastSegment: SegmentJSExport? { get }
     func addPoint(point: PointJSExport)
+	func enclosesPoint(point: PointJSExport) -> Bool
+	
     var fillColor: ColorJSExport? { get set }
     var strokeColor: ColorJSExport? { get set }
     var strokeWidth: Double { get set }
@@ -65,6 +67,12 @@ import JavaScriptCore
     public func addPoint(point: PointJSExport) {
         shapeLayer.addPoint((point as! PointBridge).point)
     }
+	
+	
+	/** Returns if the the given point is enclosed within the shape. If the shape is not closed, this always returns `false`. */
+	public func enclosesPoint(point: PointJSExport) -> Bool {
+		return shapeLayer.enclosesPoint((point as! PointBridge).point)
+	}
     
     public var fillColor: ColorJSExport? {
         get { return shapeLayer.fillColor != nil ? ColorBridge(shapeLayer.fillColor!) : nil }
