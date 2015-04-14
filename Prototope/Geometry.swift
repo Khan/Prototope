@@ -265,6 +265,13 @@ public struct Rect: Equatable {
         let p = CGPoint(point)
         return r.contains(p)
     }
+	
+	/** Returns if the other rect intersects with the receiver. */
+	public func intersectsRect(rect: Rect) -> Bool {
+		let r = CGRect(self)
+		let otherRect = CGRect(rect)
+		return r.intersects(otherRect)
+	}
 }
 
 public func ==(a: Rect, b: Rect) -> Bool {
