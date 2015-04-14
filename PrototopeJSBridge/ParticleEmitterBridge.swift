@@ -17,10 +17,12 @@ import JavaScriptCore
 	var birthRate: Double { get set }
 	var renderMode: String { get set }
 	var shape: String { get set }
-	var size: SizeBridge { get set }
-	var position: PointBridge { get set }
+	var shapeMode: String { get set }
+	var size: SizeJSExport { get set }
+	var position: PointJSExport { get set }
 	var x: Double { get set }
 	var y: Double { get set }
+
 	var emitterBridge: ParticleEmitterBridge { get }
 }
 
@@ -63,19 +65,26 @@ import JavaScriptCore
 		get { return self.emitter.shape }
 		set { self.emitter.shape = newValue }
 	}
-	
+
+	/** The mode of the emission shape. c.f. CAEmitterLayer for valid strings.
+		TODO make a real enum for this, lazy bum. */
+	public var shapeMode: String {
+		get { return self.emitter.shapeMode }
+		set { self.emitter.shapeMode = newValue }
+	}
+
 	
 	/** The render mode of the emitter. */
-	public var size: SizeBridge {
+	public var size: SizeJSExport {
 		get { return SizeBridge(self.emitter.size) }
-		set { self.emitter.size = newValue.size }
+		set { self.emitter.size = (newValue as! SizeBridge).size }
 	}
 	
 	
 	/** The render mode of the emitter. */
-	public var position: PointBridge {
+	public var position: PointJSExport {
 		get { return PointBridge(self.emitter.position) }
-		set { self.emitter.position = newValue.point }
+		set { self.emitter.position = (newValue as! PointBridge).point }
 	}
 	
 	
@@ -92,7 +101,7 @@ import JavaScriptCore
 		set { self.position = PointBridge(Point(x: self.x, y: newValue)) }
 	}
 	
-	
+
 	public var emitterBridge: ParticleEmitterBridge {
 		return self
 	}

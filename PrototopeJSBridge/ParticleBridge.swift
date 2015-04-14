@@ -20,12 +20,13 @@ import JavaScriptCore
 	var birthRate: Double { get set }
 	var scale: Double { get set }
 	var scaleRange: Double { get set }
+	var scaleSpeed: Double { get set }
 	var spin: Radian { get set }
 	var spinRange: Radian { get set }
 	var velocity: Double { get set }
 	var velocityRange: Double { get set }
 	var emissionRange: Radian { get set }
-	var color: ColorBridge { get set }
+	var color: ColorJSExport { get set }
 	var redRange: Double { get set }
 	var blueRange: Double { get set }
 	var greenRange: Double { get set }
@@ -93,6 +94,12 @@ import JavaScriptCore
 		get { return self.particle.scaleRange }
 		set { self.particle.scaleRange = newValue }
 	}
+
+	/** The speed at which the scale of the particles changes. */
+	public var scaleSpeed: Double {
+		get { return self.particle.scaleSpeed }
+		set { self.particle.scaleSpeed = newValue }
+	}
 	
 	
 	/** The spin of particles. Positive values spin clockwise, negative values spin counter-clockwise. */
@@ -133,9 +140,9 @@ import JavaScriptCore
 	
 	
 	/** The colour of the particle. */
-	public var color: ColorBridge {
+	public var color: ColorJSExport {
 		get { return ColorBridge(self.particle.color) }
-		set { self.particle.color = newValue.color }
+		set { self.particle.color = (newValue as! ColorBridge).color }
 	}
 	
 	

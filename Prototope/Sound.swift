@@ -32,6 +32,11 @@ public struct Sound: Printable {
 		return self.name
 	}
 
+	public var volume: Double {
+		get { return Double(player.volume) }
+		set { player.volume = Float(newValue) }
+	}
+
 	public func play() {
 		player.currentTime = 0
 		player.play()

@@ -62,6 +62,12 @@ public struct Particle {
 		get { return Double(self.emitterCell.scaleRange) }
 		set { self.emitterCell.scaleRange = CGFloat(newValue) }
 	}
+
+	/** The speed at which the scale of the particles changes. */
+	public var scaleSpeed: Double {
+		get { return Double(self.emitterCell.scaleSpeed) }
+		set { self.emitterCell.scaleSpeed = CGFloat(newValue) }
+	}
 	
 	
 	/** The spin of particles. Positive values spin clockwise, negative values spin counter-clockwise. */

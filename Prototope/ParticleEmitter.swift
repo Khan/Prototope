@@ -48,6 +48,13 @@ public class ParticleEmitter {
 		get { return self.emitterLayer.emitterShape }
 		set { self.emitterLayer.emitterShape = newValue }
 	}
+
+	/** The mode of the emission shape. c.f. CAEmitterLayer for valid strings.
+		TODO make a real enum for this, lazy bum. */
+	public var shapeMode: String {
+		get { return self.emitterLayer.emitterMode }
+		set { self.emitterLayer.emitterMode = newValue }
+	}
 	
 	
 	/** The render mode of the emitter. */
