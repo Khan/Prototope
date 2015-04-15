@@ -29,6 +29,7 @@ class ViewController: NSViewController {
 
 	@IBOutlet var deviceListController: NSArrayController!
 	@IBOutlet weak var deviceChooserButton: NSPopUpButton!
+	@IBOutlet weak var deviceSettingsCheckbox: NSButton!
 
 	@IBAction func pathControlDidChange(sender: NSPathControl) {
 		selectedPathDidChange?(sender.URL)
@@ -36,7 +37,7 @@ class ViewController: NSViewController {
 
 	@IBAction func deviceSelectionDidChange(sender: NSPopUpButton) {
 		let service = sender.selectedItem?.representedObject as! NSNetService?
-		lastSelectedDeviceName = service?.name
+		toggleCheckboxForService(service)
 		selectedDeviceDidChange?(service)
 	}
 
@@ -46,11 +47,37 @@ class ViewController: NSViewController {
 			selectedDeviceDidChange?(service)
 			deviceChooserButton.selectItemWithTitle(service.name)
 		}
+		toggleCheckboxForService(service)
+	}
+	
+	
+	func toggleCheckboxForService(service: NSNetService?) {
+		let currentlySelectedDeviceName = self.deviceChooserButton.selectedItem?.title
+		let serviceName = service?.name
+		if currentlySelectedDeviceName != serviceName {
+			return // we don't care!
+		}
+		
+		if serviceName == lastSelectedDeviceName {
+			deviceSettingsCheckbox.state = NSOnState
+		} else {
+			deviceSettingsCheckbox.state = NSOffState
+		}
 	}
 
 	func removeService(service: NSNetService) {
 		deviceListController.removeObject(service)
 	}
 	
+	@IBAction func checkboxDidChange(sender: NSButton) {
+		let currentlySelectedDeviceName = self.deviceChooserButton.selectedItem?.title
+		
+		if sender.state == NSOnState {
+			self.lastSelectedDeviceName = currentlySelectedDeviceName
+		} else if self.lastSelectedDeviceName == currentlySelectedDeviceName {
+			// We've unchecked saving the current device, so forget its name
+			self.lastSelectedDeviceName = nil
+		}
+	}
 }
 

@@ -30,6 +30,8 @@ class ViewController: UIViewController {
 		for i in 0..<5 {
 			let layer = makeRedLayer("Layer \(i)", y: Double(i) * 250)
 		}
+		@IBOutlet weak var connectionSettingsCheckbox: NSButton!
+		@IBOutlet weak var connectionCheckbox: NSButton!
 	}
 
 	func makeRedLayer(name: String, y: Double) -> Layer {
