@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14C81f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7528.3" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7515.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7528.3"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -669,11 +669,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Protocaster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="309" height="89"/>
+                        <rect key="frame" x="0.0" y="0.0" width="309" height="111"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZD2-1A-Qee">
-                                <rect key="frame" x="18" y="49" width="71" height="17"/>
+                                <rect key="frame" x="18" y="71" width="71" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Broadcast:" id="mFa-QZ-50P">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -681,13 +681,13 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5t-mp-8PD">
-                                <rect key="frame" x="93" y="17" width="199" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Hy-yP-Bac" id="Pgs-iI-cxE">
+                                <rect key="frame" x="93" y="39" width="199" height="26"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Pgs-iI-cxE">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="ALu-Y3-Cb8">
                                         <items>
-                                            <menuItem title="Item 1" state="on" id="4Hy-yP-Bac"/>
+                                            <menuItem title="Item 1" id="4Hy-yP-Bac"/>
                                             <menuItem title="Item 2" id="vbr-SX-MGv"/>
                                             <menuItem title="Item 3" id="h7i-hi-Soi"/>
                                         </items>
@@ -710,16 +710,8 @@
                                     <binding destination="XfG-lQ-9wD" name="selectedObject" keyPath="self.selectedDeviceSession" previousBinding="niB-Ew-cjO" id="3p2-23-V5Y"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iIY-jn-0he">
-                                <rect key="frame" x="68" y="23" width="21" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="to:" id="yZw-uk-sjH">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bvu-vC-F6c">
-                                <rect key="frame" x="92" y="45" width="194" height="26"/>
+                                <rect key="frame" x="92" y="67" width="194" height="26"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="Y8C-bM-rL9">
                                     <font key="font" metaFont="system"/>
                                     <allowedTypes>
@@ -731,17 +723,36 @@
                                     <action selector="pathControlDidChange:" target="XfG-lQ-9wD" id="Ls8-zo-S0E"/>
                                 </connections>
                             </pathControl>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0q-HJ-mIn">
+                                <rect key="frame" x="68" y="18" width="175" height="18"/>
+                                <buttonCell key="cell" type="check" title="Reconnect to this device" bezelStyle="regularSquare" imagePosition="left" inset="2" id="mxG-QX-9Yd">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="checkboxDidChange:" target="XfG-lQ-9wD" id="LE2-qi-ALW"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iIY-jn-0he">
+                                <rect key="frame" x="68" y="45" width="21" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="to:" id="yZw-uk-sjH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="deviceChooserButton" destination="D5t-mp-8PD" id="BO8-4X-h7N"/>
                         <outlet property="deviceListController" destination="zaA-yr-IQA" id="sD7-5T-UxZ"/>
+                        <outlet property="deviceSettingsCheckbox" destination="o0q-HJ-mIn" id="0W9-OA-HFo"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="zaA-yr-IQA"/>
             </objects>
-            <point key="canvasLocation" x="-10.5" y="564.5"/>
+            <point key="canvasLocation" x="-10.5" y="575.5"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="e7p-5z-emT">
