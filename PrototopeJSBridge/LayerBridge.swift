@@ -668,12 +668,16 @@ import JavaScriptCore
 	
 	private func layerAndMarginFromArgs(args: JSValue) -> (layer: Layer, margin: Double) {
 		let siblingLayer = args.objectForKeyedSubscript("siblingLayer").toObject() as! LayerBridge
-		var margin = args.objectForKeyedSubscript("margin")?.toDouble()
-		if margin == nil {
-			margin = 0
+		
+		var margin: Double = 0
+		if let jsMargin = args.objectForKeyedSubscript("margin") {
+			margin = jsMargin.toDouble()
+			if margin.isNaN {
+				margin = 0
+			}
 		}
 		
-		return (siblingLayer.layer, margin!)
+		return (siblingLayer.layer, margin)
 	}
 
 }
