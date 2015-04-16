@@ -292,8 +292,20 @@ public class Layer: Equatable, Hashable {
 
 	/** Returns the layer's position in the root layer's coordinate space. */
 	public var globalPosition: Point {
-		get { return convertLocalPointToGlobalPoint(position) }
-		set { position = convertGlobalPointToLocalPoint(newValue) }
+		get {
+			if let parent = parent {
+				return parent.convertLocalPointToGlobalPoint(position)
+			} else {
+				return position
+			}
+		}
+		set {
+			if let parent = parent {
+				position = parent.convertGlobalPointToLocalPoint(newValue)
+			} else {
+				position = newValue
+			}
+		}
 	}
 
 	/** Returns whether the layer contains a given point, interpreted in the root layer's
