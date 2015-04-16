@@ -32,6 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 			}
 		}
 	}
+	
+	private var lastShownNotificationException: String? = nil
     
     private final func sceneURL(fromURL URL: NSURL) -> NSURL? {
         var isDirectoryValue: AnyObject?
@@ -110,10 +112,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, DTBonjourDataConnectionDeleg
 		switch JSONValue.decode(object as! NSData) >>- Message.fromJSON {
 		case let .Some(.PrototypeHitException(exception)):
 			logWindowController.appendException(exception)
-			let notification = NSUserNotification()
-			notification.title = "Protonope!"
-			notification.informativeText = exception
-			NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+			
+			if lastShownNotificationException != exception {
+				let notification = NSUserNotification()
+				notification.title = "Protonope!"
+				notification.informativeText = exception
+				NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+				lastShownNotificationException = exception
+			}
+			
 		case let .Some(.PrototypeConsoleLog(message)):
 			logWindowController.appendConsoleMessage(message)
 		default:
