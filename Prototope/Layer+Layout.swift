@@ -48,7 +48,7 @@ extension Layer {
 	
 	/** Moves the receiver vertically below the given sibling layer. Does not horizontally align automatically. */
 	public func moveBelowSiblingLayer(siblingLayer: Layer, margin: Double = 0.0) {
-		self.originY = siblingLayer.originY + margin
+		self.originY = siblingLayer.frameMaxY + margin
 	}
 	
 	
