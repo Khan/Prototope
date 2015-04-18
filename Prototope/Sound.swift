@@ -57,7 +57,7 @@ public struct Sound: Printable {
 		playingAVAudioPlayers.remove(player)
 	}
 
-	public static var supportedExtensions = ["caf", "aif", "aiff", "wav"]
+	public static let supportedExtensions = ["caf", "aif", "aiff", "wav"]
 
 	// Fancy scheme to keep playing AVAudioPlayers from deallocating while they're playing.
 	@objc private class AVAudioPlayerDelegate: NSObject, AVFoundation.AVAudioPlayerDelegate {
