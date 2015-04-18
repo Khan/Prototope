@@ -75,5 +75,5 @@ public struct Sound: Printable {
 	}
 }
 
-private var playingAVAudioPlayers = Set<(AVAudioPlayer)>()
-private var playingAVAudioPlayerDelegates = Set<(Sound.AVAudioPlayerDelegate)>()
+private var playingAVAudioPlayers = Set<AVAudioPlayer>()
+private var playingAVAudioPlayerDelegates = Set<Sound.AVAudioPlayerDelegate>()
