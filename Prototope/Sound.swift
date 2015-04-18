@@ -39,12 +39,41 @@ public struct Sound: Printable {
 
 	public func play() {
 		player.currentTime = 0
+		if player.delegate == nil {
+			let delegate = AVAudioPlayerDelegate()
+			player.delegate = delegate
+			playingAVAudioPlayerDelegates.insert(delegate)
+		}
+		playingAVAudioPlayers.insert(player)
 		player.play()
 	}
 
 	public func stop() {
 		player.stop()
+		if let delegate = (player.delegate as? Sound.AVAudioPlayerDelegate) {
+			playingAVAudioPlayerDelegates.remove(delegate)
+			player.delegate = nil
+		}
+		playingAVAudioPlayers.remove(player)
 	}
 
 	public static var supportedExtensions = ["caf", "aif", "aiff", "wav"]
+
+	// Fancy scheme to keep playing AVAudioPlayers from deallocating while they're playing.
+	@objc private class AVAudioPlayerDelegate: NSObject, AVFoundation.AVAudioPlayerDelegate {
+		@objc func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+			player.delegate = nil
+			playingAVAudioPlayers.remove(player)
+			playingAVAudioPlayerDelegates.remove(self)
+		}
+
+		@objc func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
+			player.delegate = nil
+			playingAVAudioPlayers.remove(player)
+			playingAVAudioPlayerDelegates.remove(self)
+		}
+	}
 }
+
+private var playingAVAudioPlayers = Set<(AVAudioPlayer)>()
+private var playingAVAudioPlayerDelegates = Set<(Sound.AVAudioPlayerDelegate)>()
