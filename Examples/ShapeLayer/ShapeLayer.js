@@ -1,19 +1,19 @@
 // You can draw by tapping:
 
-var hintLabel = new TextLayer()
+const hintLabel = new TextLayer()
 hintLabel.text = "Tap to draw!"
 hintLabel.fontSize = 40
 hintLabel.x = Layer.root.x
 hintLabel.originY = 30
 
-var drawing = new ShapeLayer()
+const drawing = new ShapeLayer()
 drawing.strokeWidth = 2
 drawing.fillColor = new Color({hue: 0.1, saturation: 0.3, brightness: 1.0})
 drawing.lineCapStyle = LineCapStyle.Round
 drawing.closed = true
 drawing.lineJoinStyle = LineJoinStyle.Round
 
-var currentPointDot = new ShapeLayer.Circle({center: Point.zero, radius: 10})
+const currentPointDot = new ShapeLayer.Circle({center: Point.zero, radius: 10})
 currentPointDot.alpha = 0
 
 Layer.root.touchBeganHandler = function(sequence) {
@@ -23,8 +23,8 @@ Layer.root.touchBeganHandler = function(sequence) {
 }
 
 Layer.root.touchMovedHandler = function(sequence) {
-	var segments = drawing.segments
-	var lastSegment = segments.pop()
+	const segments = drawing.segments
+	const lastSegment = segments.pop()
 	lastSegment.point = sequence.currentSample.globalLocation
 	segments.push(lastSegment)
 	drawing.segments = segments
@@ -38,21 +38,21 @@ Layer.root.touchEndedHandler = Layer.root.touchCancelledHandler = function(seque
 
 // Demo of various shapes.
 
-var circle = new ShapeLayer.Circle({
+const circle = new ShapeLayer.Circle({
 	center: new Point({x: 75, y: Layer.root.frameMaxY - 75}),
 	radius: 50
 })
 circle.fillColor = new Color({hue: 0.3, saturation: 0.6, brightness: 1.0})
 circle.strokeColor = undefined
 
-var oval = new ShapeLayer.Oval({
+const oval = new ShapeLayer.Oval({
 	rectangle: new Rect({x: circle.frameMaxX + 25, y: circle.originY, width: 50, height: circle.height})
 })
 oval.fillColor = undefined
 oval.strokeColor = new Color({hue: 0.6, saturation: 0.6, brightness: 1.0})
 oval.strokeWidth = 4
 
-var polygon = new ShapeLayer.Polygon({center: Point.zero, radius: 50, numberOfSides: 5})
+const polygon = new ShapeLayer.Polygon({center: Point.zero, radius: 50, numberOfSides: 5})
 polygon.strokeWidth = 4
 polygon.fillColor = new Color({hue: 0.8, saturation: 0.6, brightness: 1.0})
 polygon.strokeColor = undefined
@@ -61,7 +61,7 @@ polygon.lineJoinStyle = LineJoinStyle.Round
 polygon.y = oval.y
 polygon.originX = oval.frameMaxX + 25
 
-var pizza = new ShapeLayer()
+const pizza = new ShapeLayer()
 pizza.fillColor = Color.orange
 pizza.strokeColor = undefined
 pizza.segments = [

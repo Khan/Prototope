@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C9ECB8D1AE202E600AB7D96 /* protoscope-bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 0C9ECB8C1AE202E600AB7D96 /* protoscope-bundle.js */; };
 		6175CE291A7F1B01001E63CE /* BridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE281A7F1B01001E63CE /* BridgeType.swift */; };
 		6175CE2B1A7F1B71001E63CE /* ColorBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */; };
 		61A1BA451ACF51A600780650 /* ShapeLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1BA441ACF51A600780650 /* ShapeLayerBridge.swift */; };
@@ -410,6 +411,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C9ECB8C1AE202E600AB7D96 /* protoscope-bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "protoscope-bundle.js"; path = "js/dist/protoscope-bundle.js"; sourceTree = "<group>"; };
 		6175CE281A7F1B01001E63CE /* BridgeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeType.swift; sourceTree = "<group>"; };
 		6175CE2A1A7F1B71001E63CE /* ColorBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBridge.swift; sourceTree = "<group>"; };
 		61A1BA441ACF51A600780650 /* ShapeLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLayerBridge.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 				EB6BFBA91A857479002B4E6A /* 👽 ThirdParty */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		EB306C0A19DF77CC00113FA3 /* 🎁 Products */ = {
 			isa = PBXGroup;
@@ -933,6 +936,7 @@
 				EB6BFBB91A857921002B4E6A /* AppDelegate.swift */,
 				EB6BFBC01A857921002B4E6A /* Images.xcassets */,
 				EB6BFBC21A857921002B4E6A /* LaunchScreen.xib */,
+				0C9ECB8C1AE202E600AB7D96 /* protoscope-bundle.js */,
 				EB6BFBB71A857921002B4E6A /* Supporting Files */,
 				EB6BFBCC1A857921002B4E6A /* Tests */,
 			);
@@ -1487,6 +1491,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C9ECB8D1AE202E600AB7D96 /* protoscope-bundle.js in Resources */,
 				EB6BFBC41A857921002B4E6A /* LaunchScreen.xib in Resources */,
 				EB6BFBC11A857921002B4E6A /* Images.xcassets in Resources */,
 			);

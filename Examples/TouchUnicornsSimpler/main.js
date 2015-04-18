@@ -1,5 +1,5 @@
 function makeUnicornLayer() {
-	var unicornLayer = new Layer({imageName: "unicorn"})
+	const unicornLayer = new Layer({imageName: "unicorn"})
 	unicornLayer.x = 400
 	unicornLayer.y = 512
 	return unicornLayer
@@ -10,11 +10,11 @@ function gimmeSparkle() {
 }
 
 Layer.root.backgroundColor = new Color({hex: "FF31A0"})
-var unicornLayer = makeUnicornLayer()
+const unicornLayer = makeUnicornLayer()
 
 Layer.root.gestures = [new PanGesture({handler: function(phase, centroidSequence) {
-	var finger = centroidSequence.currentSample.globalLocation
-	var sparkle = gimmeSparkle()
+	const finger = centroidSequence.currentSample.globalLocation
+	const sparkle = gimmeSparkle()
 	sparkle.position = finger
 	unicornLayer.position = finger
 	unicornLayer.zPosition = 1

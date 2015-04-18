@@ -63,7 +63,8 @@ class SessionInteractor {
 		let context = PrototopeJSBridge.Context()
 		context.exceptionHandler = { [weak self] value in
 			let lineNumber = value.objectForKeyedSubscript("line")
-			let exception = ("Line \(lineNumber): \(value)")
+			let stack = value.objectForKeyedSubscript("stack")
+			let exception = ("Line \(lineNumber): \(value)\n\n\(stack)")
 			self?.exceptionHandler(exception)
 		}
 		context.consoleLogHandler = { [weak self] message in

@@ -1,11 +1,11 @@
-var cameraLayer = new CameraLayer()
+const cameraLayer = new CameraLayer()
 cameraLayer.width = Layer.root.width * 0.5
 cameraLayer.height = Layer.root.height * 0.5
 cameraLayer.cameraPosition = CameraPosition.Front
 cameraLayer.x = Layer.root.x
 cameraLayer.y = Layer.root.y
 
-var flipButton = new TextLayer()
+const flipButton = new TextLayer()
 flipButton.fontName = "Futura"
 flipButton.fontSize = 30
 flipButton.text = "Flip"

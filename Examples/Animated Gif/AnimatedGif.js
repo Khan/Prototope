@@ -11,17 +11,17 @@ When not animating, blink randomly
 
 Layer.root.backgroundColor = new Color({hex:"150728"})
 
-var touchCatchingLayer = new Layer()
+const touchCatchingLayer = new Layer()
 touchCatchingLayer.frame = Layer.root.bounds
 
-var starterFps = 60
-var numFirstFrame = 1
-var numLastFrame = 62
-var currentFrame = numFirstFrame
-var strFilename = "yayfez-"
+const starterFps = 60
+const numFirstFrame = 1
+const numLastFrame = 62
+let currentFrame = numFirstFrame
+const strFilename = "yayfez-"
 
-var firstFrameName = strFilename + numFirstFrame
-var gifLayer = new Layer({imageName: firstFrameName})
+const firstFrameName = strFilename + numFirstFrame
+const gifLayer = new Layer({imageName: firstFrameName})
 gifLayer.y = Layer.root.height - gifLayer.height/2
 gifLayer.x = Layer.root.x
 
@@ -40,8 +40,8 @@ touchCatchingLayer.touchEndedHandler = touchCatchingLayer.touchCancelledHandler 
 
 }
 
-var playThroughImages = new ActionBehavior({handler:function(layer) {
-	var nextFrameName = strFilename + currentFrame
+const playThroughImages = new ActionBehavior({handler:function(layer) {
+	const nextFrameName = strFilename + currentFrame
 	gifLayer.image = new Image({name:nextFrameName})
 	if (currentFrame + 1 > numLastFrame) {
 		currentFrame = numFirstFrame
@@ -59,7 +59,3 @@ var playThroughImages = new ActionBehavior({handler:function(layer) {
 function playThroughImagesWithSpeed(fps) {
 
 }
-
-
-
-
