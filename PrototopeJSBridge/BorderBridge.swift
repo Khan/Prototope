@@ -12,9 +12,9 @@ import JavaScriptCore
 
 @objc public protocol BorderJSExport: JSExport {
 	init(args: NSDictionary)
-	// TODO: make these work again... will require notifying the owning layer bridge of a change. yuck.
-//	var color: ColorJSExport { get set }
-//	var width: Double { get set }
+	// TODO: make setters work again... will require notifying the owning layer bridge of a change. yuck.
+	var color: ColorJSExport { get }
+	var width: Double { get }
 }
 
 @objc public class BorderBridge: NSObject, BorderJSExport, BridgeType {
@@ -37,13 +37,11 @@ import JavaScriptCore
 		super.init()
 	}
 
-	/*public var color: ColorJSExport {
-		get { return ColorBridge(border.color) }
-		set { border.color = (color as JSExport as ColorBridge).color }
+	public var color: ColorJSExport {
+		return ColorBridge(border.color)
 	}
 
 	public var width: Double {
-		get { return border.width }
-		set { border.width = newValue }
-	}*/
+		return border.width
+	}
 }
