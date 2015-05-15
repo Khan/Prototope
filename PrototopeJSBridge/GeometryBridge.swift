@@ -166,6 +166,7 @@ import Prototope
 	init(args: NSDictionary)
     func inset(args: NSDictionary) -> RectJSExport
 	func intersectsRect(rect: RectJSExport) -> Bool
+	func contains(point: PointJSExport) -> Bool
 }
 
 @objc public class RectBridge: NSObject, RectJSExport, BridgeType {
@@ -228,6 +229,10 @@ import Prototope
 	
 	public func intersectsRect(rect: RectJSExport) -> Bool {
 		return self.rect.intersectsRect((rect as! RectBridge).rect)
+	}
+
+	public func contains(point: PointJSExport) -> Bool {
+		return self.rect.contains((point as! PointBridge).point)
 	}
 
 	public var origin: PointJSExport { return PointBridge(rect.origin) }
