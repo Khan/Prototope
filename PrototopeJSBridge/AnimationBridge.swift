@@ -84,6 +84,7 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 	var springBounciness: Double { get set }
 	var velocity: JSValue? { get set }
 	var completionHandler: JSValue? { get set }
+	func stop()
 }
 
 @objc public class DoubleAnimatorBridge: NSObject, AnimatorJSExport {
@@ -125,6 +126,10 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 				animator.completionHandler = nil
 			}
 		}
+	}
+	
+	public func stop() {
+		animator.stop()
 	}
 }
 
@@ -168,6 +173,10 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 			}
 		}
 	}
+	
+	public func stop() {
+		animator.stop()
+	}
 }
 
 @objc public class SizeAnimatorBridge: NSObject, AnimatorJSExport {
@@ -209,6 +218,10 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 				animator.completionHandler = nil
 			}
 		}
+	}
+	
+	public func stop() {
+		animator.stop()
 	}
 }
 
@@ -252,6 +265,10 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 			}
 		}
 	}
+	
+	public func stop() {
+		animator.stop()
+	}
 }
 
 @objc public class ColorAnimatorBridge: NSObject, AnimatorJSExport {
@@ -293,6 +310,10 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 				animator.completionHandler = nil
 			}
 		}
+	}
+	
+	public func stop() {
+		animator.stop()
 	}
 }
 
