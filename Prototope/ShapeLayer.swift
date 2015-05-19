@@ -160,6 +160,14 @@ public class ShapeLayer: Layer {
 	}
 	
 	
+	/** The dash length of the layer's stroke. This length is used for both the dashes and the space between dashes. Draws a solid stroke when nil. */
+	public var dashLength: Double? {
+		didSet {
+			shapeViewLayerStyleDidChange()
+		}
+	}
+	
+	
 	/** Represents the types of cap styles path segment endpoints will show. Only affects open paths. */
 	public enum LineCapStyle {
 		
@@ -258,19 +266,26 @@ public class ShapeLayer: Layer {
 		layer.lineJoin = self.lineJoinStyle.joinStyleString()
 		
 		if let fillColor = fillColor {
-			self.shapeViewLayer.fillColor = fillColor.CGColor
+			layer.fillColor = fillColor.CGColor
 		} else {
-			self.shapeViewLayer.fillColor = nil
+			layer.fillColor = nil
 		}
 		
 		
 		if let strokeColor = strokeColor {
-			self.shapeViewLayer.strokeColor = strokeColor.CGColor
+			layer.strokeColor = strokeColor.CGColor
 		} else {
-			self.shapeViewLayer.strokeColor = nil
+			layer.strokeColor = nil
 		}
 		
-		self.shapeViewLayer.lineWidth = CGFloat(strokeWidth)
+		
+		if let dashLength = dashLength {
+			layer.lineDashPattern = [dashLength, dashLength]
+		} else {
+			layer.lineDashPattern = []
+		}
+		
+		layer.lineWidth = CGFloat(strokeWidth)
 	}
 	
 	
