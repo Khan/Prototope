@@ -22,6 +22,7 @@ import JavaScriptCore
     var strokeColor: ColorJSExport? { get set }
     var strokeWidth: Double { get set }
     var closed: Bool { get set }
+	var dashLength: JSValue? { get set }
     var lineCapStyle: JSValue { get set }
     var lineJoinStyle: JSValue { get set }
 }
@@ -93,6 +94,25 @@ import JavaScriptCore
         get { return shapeLayer.closed }
         set { shapeLayer.closed = newValue }
     }
+	
+	
+	public var dashLength: JSValue? {
+		get {
+			if let dashLength = shapeLayer.dashLength {
+				return JSValue(double: dashLength, inContext: JSContext.currentContext())
+			}
+			return JSValue(undefinedInContext: JSContext.currentContext())
+		}
+		
+		set {
+			if let value = newValue where value.toDouble().isNaN == false {
+				let length = value.toDouble()
+				shapeLayer.dashLength = length
+			} else {
+				shapeLayer.dashLength = nil
+			}
+		}
+	}
     
     public var lineCapStyle: JSValue {
         get { return LineCapStyleBridge.encodeLineCapStyle(shapeLayer.lineCapStyle, inContext: JSContext.currentContext()) }
