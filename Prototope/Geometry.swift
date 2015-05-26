@@ -266,6 +266,14 @@ public struct Rect: Equatable {
         return r.contains(p)
     }
 	
+	
+	/** Determines whether this rectagle entirely contains the given rectangle. */
+	public func contains(rect: Rect) -> Bool {
+		let r = CGRect(self)
+		let otherRect = CGRect(rect)
+		return r.contains(otherRect)
+	}
+	
 	/** Returns if the other rect intersects with the receiver. */
 	public func intersectsRect(rect: Rect) -> Bool {
 		let r = CGRect(self)
