@@ -277,7 +277,13 @@ import JavaScriptCore
     
     public var backgroundColor: ColorJSExport? {
         get { return layer.backgroundColor != nil ? ColorBridge(layer.backgroundColor!) : nil }
-        set { layer.backgroundColor = (newValue as! ColorBridge).color }
+        set { 
+			if let color = newValue {
+				layer.backgroundColor = (color as! ColorBridge).color
+			} else {
+				Environment.currentEnvironment?.exceptionHandler("Trying to set a layer's background colour to nil. Maybe you misspelled a colour name?")
+			}
+		}
     }
     
     public var alpha: Double {
@@ -671,17 +677,23 @@ import JavaScriptCore
 	
 	
 	private func layerAndMarginFromArgs(args: JSValue) -> (layer: Layer, margin: Double) {
-		let siblingLayer = args.objectForKeyedSubscript("siblingLayer").toObject() as! LayerBridge
-		
-		var margin: Double = 0
-		if let jsMargin = args.objectForKeyedSubscript("margin") {
-			margin = jsMargin.toDouble()
-			if margin.isNaN {
-				margin = 0
+		if let siblingObject: AnyObject = args.objectForKeyedSubscript("siblingLayer").toObject() {
+			let siblingLayer = siblingObject as! LayerBridge
+			
+			var margin: Double = 0
+			if let jsMargin = args.objectForKeyedSubscript("margin") {
+				margin = jsMargin.toDouble()
+				if margin.isNaN {
+					margin = 0
+				}
 			}
+			
+			return (siblingLayer.layer, margin)
+		} else {
+			Environment.currentEnvironment?.exceptionHandler("Can't find sibling layer. Perhaps you didn't include it as an argument? Or maybe you mispelled it? These things happen.")
+			return (Layer(), 0)
 		}
 		
-		return (siblingLayer.layer, margin)
 	}
 
 }
