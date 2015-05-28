@@ -96,6 +96,14 @@ public class Layer: Equatable, Hashable {
 			sublayer.parent = nil
 		}
 	}
+	
+	/** Brings the layer to the front of all sibling layers. */
+	public func comeToFront() {
+		if let parentView = self.parentView {
+			parentView.bringSubviewToFront(self.view)
+			self.parent?.sublayers.insert(self.parent!.sublayerAtFront!, atIndex: 0)
+		}
+	}
 
 	/** Returns the sublayer which will be visually ordered to the front. */
 	public var sublayerAtFront: Layer? { return sublayers.last }

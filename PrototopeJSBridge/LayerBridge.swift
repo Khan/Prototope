@@ -21,6 +21,7 @@ import JavaScriptCore
     var parent: LayerJSExport! { get set }
     var sublayers: [LayerJSExport] { get}
     func removeAllSublayers()
+	func comeToFront()
     var sublayerAtFront: LayerJSExport? { get }
     func sublayerNamed(name: String) -> LayerJSExport?
     func descendentNamed(name: String) -> LayerJSExport?
@@ -171,6 +172,10 @@ import JavaScriptCore
     }
     
     public func removeAllSublayers() { layer.removeAllSublayers() }
+	
+	public func comeToFront() {
+		layer.comeToFront()
+	}
     
     public var sublayerAtFront: LayerJSExport? { return LayerBridge(layer.sublayerAtFront) }
     
