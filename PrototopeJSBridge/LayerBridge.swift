@@ -678,21 +678,22 @@ import JavaScriptCore
 	
 	private func layerAndMarginFromArgs(args: JSValue) -> (layer: Layer, margin: Double) {
 		if let siblingObject: AnyObject = args.objectForKeyedSubscript("siblingLayer").toObject() {
-			let siblingLayer = siblingObject as! LayerBridge
-			
-			var margin: Double = 0
-			if let jsMargin = args.objectForKeyedSubscript("margin") {
-				margin = jsMargin.toDouble()
-				if margin.isNaN {
-					margin = 0
+			if let siblingLayer = siblingObject as? LayerBridge {
+				
+				var margin: Double = 0
+				if let jsMargin = args.objectForKeyedSubscript("margin") {
+					margin = jsMargin.toDouble()
+					if margin.isNaN {
+						margin = 0
+					}
 				}
+				
+				return (siblingLayer.layer, margin)
 			}
-			
-			return (siblingLayer.layer, margin)
-		} else {
-			Environment.currentEnvironment?.exceptionHandler("Can't find sibling layer. Perhaps you didn't include it as an argument? Or maybe you mispelled it? These things happen.")
-			return (Layer(), 0)
 		}
+		Environment.currentEnvironment?.exceptionHandler("Can't find sibling layer. Perhaps you didn't include it as an argument? Or maybe you mispelled it? Maybe you included something that wasn't a Layer? These things happen.")
+		return (Layer(), 0)
+		
 		
 	}
 
