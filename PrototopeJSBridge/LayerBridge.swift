@@ -315,7 +315,7 @@ import JavaScriptCore
 			return BorderBridge(layer.border)
 		}
 		set {
-			if let border = border {
+			if let border = newValue {
 				layer.border = (newValue as! JSExport as! BorderBridge).border
 			} else {
 				layer.border = Border(color: Color.clear, width: 0)
