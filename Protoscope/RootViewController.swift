@@ -89,4 +89,28 @@ class RootViewController: UIViewController {
 	override func prefersStatusBarHidden() -> Bool {
 		return true
 	}
+	
+	
+	func handleKeyCommand(command: UIKeyCommand!) {
+		switch self.state {
+		case .DisplayingScene(let sceneViewController):
+			sceneViewController.resetSceneView()
+			
+		default:
+			return
+		}
+	}
+	
+	// needed to let vc handle keypresses
+	override func canBecomeFirstResponder() -> Bool {
+		return true
+	}
+	
+	override var keyCommands: [AnyObject]? {
+		get {
+			let escape = UIKeyCommand(input: "r", modifierFlags: .Command, action: "handleKeyCommand:")
+			return [escape]
+		}
+	}
+	
 }
