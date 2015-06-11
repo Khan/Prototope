@@ -17,7 +17,7 @@ import JavaScriptCore
 }
 
 @objc public class SoundBridge: NSObject, SoundJSExport, BridgeType {
-	var sound: Sound!
+	var sound: Sound?
 
 	public class func addToContext(context: JSContext) {
 		context.setObject(self, forKeyedSubscript: "Sound")
@@ -34,14 +34,18 @@ import JavaScriptCore
 	}
 	
 	public override var description: String {
-		return sound.description
+		if let sound = sound {
+			return sound.description
+		}
+		
+		return "<no sound>"
 	}
 
 	public func play() {
-		sound.play()
+		sound?.play()
 	}
 
 	public func stop() {
-		sound.stop()
+		sound?.stop()
 	}
 }
