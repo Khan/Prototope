@@ -42,8 +42,10 @@ class SessionInteractor {
 			},
 			soundProvider: { name in
 				for fileExtension in Sound.supportedExtensions {
-					if let data = prototype.resources[name.stringByAppendingPathExtension(fileExtension)!] {
-						return data
+					if let name = name.stringByAppendingPathExtension(fileExtension) {
+						if let data = prototype.resources[name] {
+							return data
+						}
 					}
 				}
 				return nil
