@@ -14,10 +14,12 @@ import JavaScriptCore
 	init?(args: NSDictionary)
 
 	var scrollableSize: SizeJSExport { get set }
+	var scrollPosition: PointJSExport { get set }
 	var showsVerticalScrollIndicator: Bool { get set }
 	var showsHorizontalScrollIndicator: Bool { get set }
 
 	var decelerationRetargetingHandler: JSValue { get set }
+	var didScrollHandler: JSValue { get set }
 
 	func updateScrollableSizeToFitSublayers()
 }
@@ -44,6 +46,13 @@ import JavaScriptCore
 	public var scrollableSize: SizeJSExport {
 		get { return SizeBridge(self.scrollLayer.scrollableSize) }
 		set { self.scrollLayer.scrollableSize = (newValue as! SizeBridge).size }
+	}
+	
+	
+	/** The scroll position of the scroll layer in its own coordinates. */
+	public var scrollPosition: PointJSExport {
+		get { return PointBridge(self.scrollLayer.scrollPosition) }
+		set { self.scrollLayer.scrollPosition = (newValue as! PointBridge).point }
 	}
 	
 	
@@ -86,6 +95,28 @@ import JavaScriptCore
 				}
 			} else {
 				scrollLayer.decelerationRetargetingHandler = nil
+			}
+		}
+	}
+	
+	public var didScrollHandler: JSValue {
+		get {
+			return managedDidScrollHandler?.value ?? JSValue(undefinedInContext: JSContext.currentContext())
+		}
+		set {
+			managedDidScrollHandler = JSManagedValue(value: newValue)
+		}
+	}
+	
+	private var managedDidScrollHandler: JSManagedValue? {
+		didSet {
+			if let managedDidScrollHandler = managedDidScrollHandler?.value {
+				scrollLayer.didScrollHandler = {
+					[weak scrollLayer = self.scrollLayer] in
+					managedDidScrollHandler.callWithArguments(nil)
+				}
+			} else {
+				scrollLayer.didScrollHandler = nil
 			}
 		}
 	}

@@ -30,6 +30,12 @@ public class ScrollLayer: Layer {
 	
 	// MARK: - Properties
 	
+	/** The scroll position of the scroll layer in its own coordinates. */
+	public var scrollPosition: Point {
+		get { return Point(self.scrollView.contentOffset) }
+		set { self.scrollView.contentOffset = CGPoint(newValue) }
+	}
+	
 	/** The scrollable size of the layer. */
 	public var scrollableSize: Size {
 		get { return Size(self.scrollView.contentSize) }
@@ -59,6 +65,14 @@ public class ScrollLayer: Layer {
 	}
 	
 	
+	/** This handler is called when the scrollView scrolls. */
+	public var didScrollHandler: (() -> ())? {
+		didSet {
+			self.scrollViewDelegate.didScrollHandler = didScrollHandler
+		}
+	}
+	
+	
 	// MARK: - Methods
 	
 	/** Updates the scrollable size of the layer to fit its subviews exactly. Does not change the size of the layer, just its scrollable area. */
@@ -73,11 +87,18 @@ public class ScrollLayer: Layer {
 
 	@objc private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
 		var decelerationRetargetingHandler: ((velocity: Point, decelerationTarget: Point) -> Point)?
+		var didScrollHandler: (() -> ())?
 
 		@objc func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
 			if let decelerationRetargetingHandler = decelerationRetargetingHandler {
 				let newTargetContentOffset = decelerationRetargetingHandler(velocity: Point(velocity), decelerationTarget: Point(targetContentOffset.memory))
 				targetContentOffset.memory = CGPoint(newTargetContentOffset)
+			}
+		}
+		
+		@objc func scrollViewDidScroll(scrollView: UIScrollView) {
+			if let didScrollHandler = self.didScrollHandler {
+				didScrollHandler()
 			}
 		}
 	}
