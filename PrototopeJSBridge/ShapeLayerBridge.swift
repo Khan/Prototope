@@ -52,11 +52,19 @@ import JavaScriptCore
         super.init(wrappingLayer)
     }
     
-    public var segments: [SegmentJSExport] {
-        get { return shapeLayer.segments.map { SegmentBridge($0) } }
-        set { shapeLayer.segments = newValue.map { ($0 as! SegmentBridge).segment } }
+	public var segments: [SegmentJSExport] {
+		get { return shapeLayer.segments.map { SegmentBridge($0) } }
+		set {
+			shapeLayer.segments = newValue.map {
+				if let bridged = $0 as? SegmentBridge {
+					return bridged.segment
+				}
+				Environment.currentEnvironment?.exceptionHandler("Error setting segments on a shape. Maybe you passed in Points instead of segment objects?")
+				return Segment(point: Point())
+			}
+		}
     }
-    
+		
     public var firstSegment: SegmentJSExport? {
         return shapeLayer.firstSegment != nil ? SegmentBridge(shapeLayer.firstSegment!) : nil
     }
