@@ -22,6 +22,8 @@ class SessionInteractor {
 	}
 
 	func displayPrototype(prototype: Prototype, rootView: UIView) {
+		let fontProvider = FontProvider(resources: prototype.resources)
+		
 		Prototope.Layer.root?.removeAllSublayers()
 		Prototope.Environment.currentEnvironment = Environment(
 			rootView: rootView,
@@ -50,6 +52,7 @@ class SessionInteractor {
 				}
 				return nil
 			},
+			fontProvider: fontProvider.fontForName,
 			exceptionHandler: { [weak self] exception in
 				self?.exceptionHandler(exception)
 				return

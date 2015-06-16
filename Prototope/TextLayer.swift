@@ -137,9 +137,9 @@ public class TextLayer: Layer {
 			}
 		}
 	}
-
+	
 	private func updateFont() {
-		if let font = UIFont(name: fontName, size: CGFloat(fontSize)) {
+		if let font = Environment.currentEnvironment!.fontProvider(name: fontName, size: fontSize) {
 			label.font = font
 		} else {
 			Environment.currentEnvironment?.exceptionHandler("Couldn't find a font named \(fontName)")

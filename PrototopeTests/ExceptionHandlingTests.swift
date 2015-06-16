@@ -17,7 +17,7 @@ class ExceptionHandlingTests: XCTestCase {
     override func setUp() {
         let aView = UIView()
         
-        let env = Environment(rootView: aView, imageProvider: { _ in return nil }, soundProvider: { _ in return nil }, exceptionHandler: { _ in self.exceptionHandled = true })
+		let env = Environment(rootView: aView, imageProvider: { _ in return nil }, soundProvider: { _ in return nil }, fontProvider: { _ in return nil }, exceptionHandler: { _ in self.exceptionHandled = true })
         
         Environment.runWithEnvironment(env) {
         }
