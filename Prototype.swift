@@ -51,7 +51,7 @@ extension Prototype {
 				return nil
 			}
 
-			var resourceExtensions = Set(["png", "caf", "aif", "aiff", "wav"])
+			var resourceExtensions = Set(["png", "caf", "aif", "aiff", "wav", "otf", "ttf"])
 			for resources in contents!.filter({ resourceExtensions.contains($0.pathExtension) }) {
 				let resourcePath = path.stringByAppendingPathComponent(resources)
 				if let resourceData = NSData(contentsOfFile: resourcePath, options: nil, error: &error) {
