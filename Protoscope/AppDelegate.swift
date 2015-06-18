@@ -19,12 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var sessionInteractor: SessionInteractor!
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		
 		application.idleTimerDisabled = true
 
 		rootViewController = RootViewController()
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
 		window!.rootViewController = rootViewController
 		window!.makeKeyAndVisible()
+		
+		
+		//-----------------------------------------------------------------------
+		// Enable "phony finger" touch dots to show, useful for screen recordings
+		//
+		
+//		Prototope.Screen.touchDotsEnabled = true
 
 		self.sessionInteractor = SessionInteractor(
 			exceptionHandler: { [weak self] exception in
