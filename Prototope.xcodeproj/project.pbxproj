@@ -815,11 +815,11 @@
 				EBCEBBCF1AA8DB7F00B58A6C /* CameraLayer.swift */,
 				961AC2051A93B9D500ED9744 /* Speech.swift */,
 				CD4C5E1A1AC5BBDF002288EB /* ShapeLayer.swift */,
+				CDA4CE051B306CDB00386278 /* Screen.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
 				EB1C2A6D19E4D19B000DC2C1 /* Tests */,
-				CDA4CE051B306CDB00386278 /* Screen.swift */,
 			);
 			name = "📚 Prototope";
 			path = Prototope;

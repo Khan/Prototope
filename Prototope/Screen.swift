@@ -14,6 +14,8 @@ import UIKit.UIGestureRecognizerSubclass
 /** Type representing the Screen of the device. */
 public struct Screen {
 	
+	
+	/** Enable touch dots to be shown. Useful for screen recordings. */
 	public static var touchDotsEnabled: Bool = false {
 		didSet {
 			if touchDotsEnabled {
@@ -26,9 +28,17 @@ public struct Screen {
 	
 	private static var overlayView: TouchDotOverlayView? = nil
 	private static func enableTouchDots() {
-		overlayView = TouchDotOverlayView(frame: CGRect(Layer.root.frame))
-		let window = UIApplication.sharedApplication().delegate?.window
-		window!!.addSubview(overlayView!)
+		let maybeWindow = UIApplication.sharedApplication().delegate!.window
+		if let delegate = UIApplication.sharedApplication().delegate {
+			if let window = delegate.window {
+				
+				// double optional because delegate.window is an optional protocol method that *returns* an optional. TMYK
+				if let window = window {
+					overlayView = TouchDotOverlayView(frame: window.frame)
+					window.addSubview(overlayView!)
+				}
+			}
+		}
 	}
 	
 	
