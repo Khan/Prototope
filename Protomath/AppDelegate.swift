@@ -28,9 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		window?.rootViewController = navigationController
 		
+		let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeBackGesture:")
+		swipeGestureRecognizer.numberOfTouchesRequired = 3
+		swipeGestureRecognizer.direction = .Right
+		window?.addGestureRecognizer(swipeGestureRecognizer)
+		
 		return true
 	}
 
+	func handleSwipeBackGesture(gesture: UIGestureRecognizer!) {
+		self.navigationController.popToRootViewControllerAnimated(true)
+	}
 
 }
 

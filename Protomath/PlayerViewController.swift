@@ -48,5 +48,27 @@ class PlayerViewController: UIViewController {
 		let script = NSString(contentsOfURL: self.jsPath, encoding: NSUTF8StringEncoding, error: nil)!
 		context.evaluateScript(script as String)
 	}
+	
+	
+	func handleKeyCommand(command: UIKeyCommand!) {
+		switch command.input {
+		case UIKeyInputEscape:
+			self.navigationController?.popToRootViewControllerAnimated(true)
+		default:
+			return
+		}
+	}
+	
+	// needed to let vc handle keypresses
+	override func canBecomeFirstResponder() -> Bool {
+		return true
+	}
+	
+	override var keyCommands: [AnyObject]? {
+		get {
+			let escape = UIKeyCommand(input: UIKeyInputEscape, modifierFlags: nil, action: "handleKeyCommand:")
+			return [escape]
+		}
+	}
 
 }
