@@ -19,8 +19,21 @@
 		9619D3AC1A8E56F20022DC54 /* Layer+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */; };
 		961AC2061A93B9D500ED9744 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
 		961AC2151A93D45D00ED9744 /* SpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2141A93D45D00ED9744 /* SpeechBridge.swift */; };
+		962558B41B387040005E4360 /* PrototypeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962558B31B387040005E4360 /* PrototypeProvider.swift */; };
+		962558B61B38729F005E4360 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962558B51B38729F005E4360 /* PlayerViewController.swift */; };
+		962558B71B388588005E4360 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
+		962558B81B388588005E4360 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
+		962558B91B38859C005E4360 /* Prototope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; };
+		962558BA1B38859C005E4360 /* Prototope.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE3A75619DF79C400A77736 /* Prototope.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		962558BD1B38859C005E4360 /* PrototopeJSBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; };
+		962558BE1B38859C005E4360 /* PrototopeJSBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB453D8F1A7AB0B2006F2A72 /* PrototopeJSBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		962558C31B3886D9005E4360 /* protoscope-bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 962558C21B3886D9005E4360 /* protoscope-bundle.js */; };
 		9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6411A8D4C47003D386B /* ScrollLayer.swift */; };
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
+		963D0ED51B386EDA00D6E070 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D0ED41B386EDA00D6E070 /* AppDelegate.swift */; };
+		963D0ED71B386EDA00D6E070 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D0ED61B386EDA00D6E070 /* ViewController.swift */; };
+		963D0EDC1B386EDA00D6E070 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 963D0EDB1B386EDA00D6E070 /* Images.xcassets */; };
+		963D0EDF1B386EDA00D6E070 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 963D0EDD1B386EDA00D6E070 /* LaunchScreen.xib */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -155,6 +168,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		962558BB1B38859C005E4360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EBE3A75519DF79C400A77736;
+			remoteInfo = Prototope;
+		};
+		962558BF1B38859C005E4360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB453D8E1A7AB0B2006F2A72;
+			remoteInfo = PrototopeJSBridge;
+		};
 		EB05D2A41A87F65E00F4CFD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -368,6 +395,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		962558C11B38859C005E4360 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				962558BA1B38859C005E4360 /* Prototope.framework in Embed Frameworks */,
+				962558BE1B38859C005E4360 /* PrototopeJSBridge.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A7B19E4D2AF000DC2C1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -429,8 +468,17 @@
 		9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Layer+Layout.swift"; sourceTree = "<group>"; };
 		961AC2051A93B9D500ED9744 /* Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 		961AC2141A93D45D00ED9744 /* SpeechBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBridge.swift; sourceTree = "<group>"; };
+		962558B31B387040005E4360 /* PrototypeProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeProvider.swift; sourceTree = "<group>"; };
+		962558B51B38729F005E4360 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		962558C21B3886D9005E4360 /* protoscope-bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "protoscope-bundle.js"; path = "Protoscope/js/dist/protoscope-bundle.js"; sourceTree = SOURCE_ROOT; };
 		9632F6411A8D4C47003D386B /* ScrollLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayer.swift; sourceTree = "<group>"; };
 		9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayerBridge.swift; sourceTree = "<group>"; };
+		963D0ED01B386EDA00D6E070 /* Protomath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protomath.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		963D0ED31B386EDA00D6E070 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		963D0ED41B386EDA00D6E070 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		963D0ED61B386EDA00D6E070 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		963D0EDB1B386EDA00D6E070 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		963D0EDE1B386EDA00D6E070 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -562,6 +610,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		963D0ECD1B386EDA00D6E070 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				962558B71B388588005E4360 /* Prototope.framework in Frameworks */,
+				962558BD1B38859C005E4360 /* PrototopeJSBridge.framework in Frameworks */,
+				962558B81B388588005E4360 /* PrototopeJSBridge.framework in Frameworks */,
+				962558B91B38859C005E4360 /* Prototope.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A6919E4D19B000DC2C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -642,6 +701,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		962558B21B387038005E4360 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				962558B31B387040005E4360 /* PrototypeProvider.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		963D0ED11B386EDA00D6E070 /* Protomath */ = {
+			isa = PBXGroup;
+			children = (
+				962558B21B387038005E4360 /* Model */,
+				963D0ED41B386EDA00D6E070 /* AppDelegate.swift */,
+				963D0ED61B386EDA00D6E070 /* ViewController.swift */,
+				962558B51B38729F005E4360 /* PlayerViewController.swift */,
+				963D0EDB1B386EDA00D6E070 /* Images.xcassets */,
+				963D0EDD1B386EDA00D6E070 /* LaunchScreen.xib */,
+				963D0ED21B386EDA00D6E070 /* Supporting Files */,
+			);
+			path = Protomath;
+			sourceTree = "<group>";
+		};
+		963D0ED21B386EDA00D6E070 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				962558C21B3886D9005E4360 /* protoscope-bundle.js */,
+				963D0ED31B386EDA00D6E070 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9EC148211A20FB1C004C7129 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -739,6 +829,7 @@
 				EB6BFBB61A857921002B4E6A /* 🔭 Protoscope */,
 				EB306C0A19DF77CC00113FA3 /* 🎁 Products */,
 				EB6BFBA91A857479002B4E6A /* 👽 ThirdParty */,
+				963D0ED11B386EDA00D6E070 /* Protomath */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 1;
@@ -755,6 +846,7 @@
 				EB6BFB911A857326002B4E6A /* ProtocasterTests.xctest */,
 				EB6BFBB51A857920002B4E6A /* Protoscope.app */,
 				EB6BFBC91A857921002B4E6A /* ProtoscopeTests.xctest */,
+				963D0ED01B386EDA00D6E070 /* Protomath.app */,
 			);
 			name = "🎁 Products";
 			sourceTree = "<group>";
@@ -1082,6 +1174,26 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		963D0ECF1B386EDA00D6E070 /* Protomath */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 963D0EFD1B386EDA00D6E070 /* Build configuration list for PBXNativeTarget "Protomath" */;
+			buildPhases = (
+				963D0ECC1B386EDA00D6E070 /* Sources */,
+				963D0ECD1B386EDA00D6E070 /* Frameworks */,
+				963D0ECE1B386EDA00D6E070 /* Resources */,
+				962558C11B38859C005E4360 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				962558BC1B38859C005E4360 /* PBXTargetDependency */,
+				962558C01B38859C005E4360 /* PBXTargetDependency */,
+			);
+			name = Protomath;
+			productName = Protomath;
+			productReference = 963D0ED01B386EDA00D6E070 /* Protomath.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EB1C2A6B19E4D19B000DC2C1 /* PrototopeTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB1C2A7219E4D19B000DC2C1 /* Build configuration list for PBXNativeTarget "PrototopeTests" */;
@@ -1265,6 +1377,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Khan Academy";
 				TargetAttributes = {
+					963D0ECF1B386EDA00D6E070 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
 					EB1C2A6B19E4D19B000DC2C1 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -1338,6 +1453,7 @@
 				EB6BFB901A857326002B4E6A /* ProtocasterTests */,
 				EB6BFBB41A857920002B4E6A /* Protoscope */,
 				EB6BFBC81A857921002B4E6A /* ProtoscopeTests */,
+				963D0ECF1B386EDA00D6E070 /* Protomath */,
 			);
 		};
 /* End PBXProject section */
@@ -1451,6 +1567,16 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		963D0ECE1B386EDA00D6E070 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				962558C31B3886D9005E4360 /* protoscope-bundle.js in Resources */,
+				963D0EDF1B386EDA00D6E070 /* LaunchScreen.xib in Resources */,
+				963D0EDC1B386EDA00D6E070 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A6A19E4D19B000DC2C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1531,6 +1657,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		963D0ECC1B386EDA00D6E070 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				963D0ED71B386EDA00D6E070 /* ViewController.swift in Sources */,
+				962558B61B38729F005E4360 /* PlayerViewController.swift in Sources */,
+				963D0ED51B386EDA00D6E070 /* AppDelegate.swift in Sources */,
+				962558B41B387040005E4360 /* PrototypeProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A6819E4D19B000DC2C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1705,6 +1842,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		962558BC1B38859C005E4360 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EBE3A75519DF79C400A77736 /* Prototope */;
+			targetProxy = 962558BB1B38859C005E4360 /* PBXContainerItemProxy */;
+		};
+		962558C01B38859C005E4360 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB453D8E1A7AB0B2006F2A72 /* PrototopeJSBridge */;
+			targetProxy = 962558BF1B38859C005E4360 /* PBXContainerItemProxy */;
+		};
 		EB05D2A51A87F65E00F4CFD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EBE3A75519DF79C400A77736 /* Prototope */;
@@ -1783,6 +1930,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		963D0EDD1B386EDA00D6E070 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				963D0EDE1B386EDA00D6E070 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		EB306C1219DF77CD00113FA3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1818,6 +1973,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		963D0EEC1B386EDA00D6E070 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Protomath/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		963D0EED1B386EDA00D6E070 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Protomath/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		EB1C2A7319E4D19B000DC2C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2299,6 +2489,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		963D0EFD1B386EDA00D6E070 /* Build configuration list for PBXNativeTarget "Protomath" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				963D0EEC1B386EDA00D6E070 /* Debug */,
+				963D0EED1B386EDA00D6E070 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EB1C2A7219E4D19B000DC2C1 /* Build configuration list for PBXNativeTarget "PrototopeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
