@@ -30,15 +30,16 @@ class PlayerViewController: UIViewController {
 		view.backgroundColor = UIColor.whiteColor()
 		let defaultEnvironment = Environment.defaultEnvironmentWithRootView(self.view)
 		
+		let prototypeDirectoryURL = self.jsPath.URLByDeletingLastPathComponent!
+		
 		let imageProvider = { 
 			(name: String) -> UIImage? in
 			let scale = UIScreen.mainScreen().scale
 			let filenameWithScale = name.stringByAppendingString("@\(Int(scale))x").stringByAppendingPathExtension("png")!
 			let filename = name.stringByAppendingPathExtension("png")!
 			
-			let path = self.jsPath.URLByDeletingLastPathComponent!
-			let scalePath = path.URLByAppendingPathComponent(filenameWithScale)
-			let noScalePath = path.URLByAppendingPathComponent(filename)
+			let scalePath = prototypeDirectoryURL.URLByAppendingPathComponent(filenameWithScale)
+			let noScalePath = prototypeDirectoryURL.URLByAppendingPathComponent(filename)
 			
 			let loadImage: (String) -> UIImage? = { path in
 				let image = UIImage(contentsOfFile: path)
@@ -48,7 +49,25 @@ class PlayerViewController: UIViewController {
 			return loadImage(scalePath.path!) ?? loadImage(noScalePath.path!)
 		}
 		
-		Environment.currentEnvironment = Environment(rootView: view, imageProvider: imageProvider, soundProvider: defaultEnvironment.soundProvider, fontProvider: defaultEnvironment.fontProvider, exceptionHandler: defaultEnvironment.exceptionHandler)
+		let soundProvider = { 
+			(name: String) -> NSData? in
+			let fileManager = NSFileManager.defaultManager()
+			for fileExtension in Sound.supportedExtensions {
+				let URL = prototypeDirectoryURL.URLByAppendingPathComponent(name).URLByAppendingPathExtension(fileExtension)
+				if fileManager.fileExistsAtPath(URL.path!) {
+					return NSData(contentsOfURL: URL, options: nil, error: nil)
+				}
+			}
+			return nil
+		}
+		
+		Environment.currentEnvironment = Environment(
+			rootView: view, 
+			imageProvider: imageProvider, 
+			soundProvider: soundProvider, 
+			fontProvider: defaultEnvironment.fontProvider, 
+			exceptionHandler: defaultEnvironment.exceptionHandler
+		)
 
 		runJSPrototope()
 	}
