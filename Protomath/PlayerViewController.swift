@@ -28,7 +28,27 @@ class PlayerViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = UIColor.whiteColor()
-		Environment.currentEnvironment = Environment.defaultEnvironmentWithRootView(view)
+		let defaultEnvironment = Environment.defaultEnvironmentWithRootView(self.view)
+		
+		let imageProvider = { 
+			(name: String) -> UIImage? in
+			let scale = UIScreen.mainScreen().scale
+			let filenameWithScale = name.stringByAppendingString("@\(Int(scale))x").stringByAppendingPathExtension("png")!
+			let filename = name.stringByAppendingPathExtension("png")!
+			
+			let path = self.jsPath.URLByDeletingLastPathComponent!
+			let scalePath = path.URLByAppendingPathComponent(filenameWithScale)
+			let noScalePath = path.URLByAppendingPathComponent(filename)
+			
+			let loadImage: (String) -> UIImage? = { path in
+				let image = UIImage(contentsOfFile: path)
+				return image
+			}
+			
+			return loadImage(scalePath.path!) ?? loadImage(noScalePath.path!)
+		}
+		
+		Environment.currentEnvironment = Environment(rootView: view, imageProvider: imageProvider, soundProvider: defaultEnvironment.soundProvider, fontProvider: defaultEnvironment.fontProvider, exceptionHandler: defaultEnvironment.exceptionHandler)
 
 		runJSPrototope()
 	}

@@ -10,3 +10,6 @@
 [submodule "ThirdParty/swiftz"]
 	path = ThirdParty/swiftz
 	url = https://github.com/Khan/swiftz.git
+[submodule "Protomath/Early-Math-Prototypes"]
+	path = Protomath/Early-Math-Prototypes
+	url = git@github.com:Khan/Early-Math-Prototypes.git
