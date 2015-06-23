@@ -11,6 +11,7 @@ import Prototope
 import PrototopeJSBridge
 
 
+/** This view controller hosts and plays Prototypes. */
 class PlayerViewController: UIViewController {
 	var context: Context!
 	let jsPath: NSURL
@@ -28,7 +29,7 @@ class PlayerViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = UIColor.whiteColor()
-		let defaultEnvironment = Environment.defaultEnvironmentWithRootView(self.view)
+		
 		
 		let prototypeDirectoryURL = self.jsPath.URLByDeletingLastPathComponent!
 		
@@ -61,6 +62,8 @@ class PlayerViewController: UIViewController {
 			return nil
 		}
 		
+		
+		let defaultEnvironment = Environment.defaultEnvironmentWithRootView(self.view)
 		Environment.currentEnvironment = Environment(
 			rootView: view, 
 			imageProvider: imageProvider, 

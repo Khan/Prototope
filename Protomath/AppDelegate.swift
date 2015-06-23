@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var rootViewController: ViewController!
+	var prototypeListTableViewController: PrototypeListTableViewController!
 	var navigationController: UINavigationController!
 
 
@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		application.idleTimerDisabled = true
 		
-		rootViewController = ViewController(style: .Plain)
+		prototypeListTableViewController = PrototypeListTableViewController(style: .Plain)
 		
-		navigationController = UINavigationController(rootViewController: rootViewController)
+		navigationController = UINavigationController(rootViewController: prototypeListTableViewController)
 		navigationController.navigationBarHidden = true
 		
 

@@ -8,9 +8,11 @@
 
 import Foundation
 
+
+/** Provides Prototype objects loaded from the application's bundle. */
 struct PrototypeProvider {
 	
-	static let prototypeDirectory = "Early-Math-Prototypes"
+	private static let prototypeDirectory = "Early-Math-Prototypes"
 	let prototypes: [Prototype]
 	
 	init() {
@@ -34,26 +36,10 @@ struct PrototypeProvider {
 		}
 		
 	}
-	
-	
-	func numberOfPrototypes() -> Int {
-		return self.prototypes.count
-	}
-	
-	
-	func prototypeNameAtIndex(index: Int) -> String {
-		return self.prototypes[index].name
-	}
-	
-	
-	func pathForPrototypeAtIndex(index: Int) -> NSURL {
-		return self.prototypes[index].mainFileURL
-	}
-	
-
 }
 
 
+/** Prototype..er, type. Represents a prototype directory on disk with reference to the main javascript file. Derived from Protorope.Prototype. */
 struct Prototype {
 	let mainFileURL: NSURL
 	let name: String

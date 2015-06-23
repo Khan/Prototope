@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PrototypeListTableViewController.swift
 //  Protomath
 //
 //  Created by Jason Brennan on 2015-06-22.
@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+
+/** Shows a list of Prototypes loaded from the application's bundle and lets you tap to play. */
+class PrototypeListTableViewController: UITableViewController {
 	
 	let prototypeProvider = PrototypeProvider()
 
@@ -24,14 +26,14 @@ class ViewController: UITableViewController {
 	
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return prototypeProvider.numberOfPrototypes()
+		return prototypeProvider.prototypes.count
 	}
 	
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier(UITableViewCell.reuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
 		cell.accessoryType = .DisclosureIndicator
-		cell.textLabel?.text = self.prototypeProvider.prototypeNameAtIndex(indexPath.row)
+		cell.textLabel?.text = self.prototypeProvider.prototypes[indexPath.row].name
 		
 		return cell
 	}
@@ -39,7 +41,7 @@ class ViewController: UITableViewController {
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		let player = PlayerViewController(path: self.prototypeProvider.pathForPrototypeAtIndex(indexPath.row))
+		let player = PlayerViewController(path: self.prototypeProvider.prototypes[indexPath.row].mainFileURL)
 		self.navigationController?.pushViewController(player, animated: true)
 	}
 
@@ -48,6 +50,7 @@ class ViewController: UITableViewController {
 
 
 extension UITableViewCell {
+	/** Provides a default reuse identifier for cells. */
 	class var reuseIdentifier: String { return NSStringFromClass(self.self) }
 }
 
