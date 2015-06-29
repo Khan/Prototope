@@ -32,6 +32,7 @@ public struct Sound: Printable {
 		return self.name
 	}
 
+	/// From 0.0 to 1.0
 	public var volume: Double {
 		get { return Double(player.volume) }
 		set { player.volume = Float(newValue) }
