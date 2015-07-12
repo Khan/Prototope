@@ -34,14 +34,28 @@ public func clip<T: Comparable>(value: T, min minValue: T, max maxValue: T) -> T
 	return max(min(value, maxValue), minValue)
 }
 
+#if os(iOS)
+	import UIKit
+	typealias SystemScreen = UIScreen
+	#else
+	import AppKit
+	typealias SystemScreen = NSScreen
+	
+	extension NSScreen {
+		var scale: CGFloat {
+			return self.backingScaleFactor
+		}
+	}
+#endif
+
 /** `ceil`s the value, snapping to screen's pixel values */
 public func pixelAwareCeil(value: Double) -> Double {
-	let scale = Double(UIScreen.mainScreen().scale)
+	let scale = Double(SystemScreen.mainScreen()!.scale)
 	return ceil(value*scale)/scale
 }
 
 /** `floor`s the value, snapping to screen's pixel values */
 public func pixelAwareFloor(value: Double) -> Double {
-	let scale = Double(UIScreen.mainScreen().scale)
+	let scale = Double(SystemScreen.mainScreen()!.scale)
 	return floor(value*scale)/scale
 }

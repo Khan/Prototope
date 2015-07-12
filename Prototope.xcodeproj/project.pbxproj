@@ -24,6 +24,9 @@
 		968C0A281B531D70008212EE /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
 		968C0A2A1B531ED8008212EE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968C0A291B531ED8008212EE /* AVFoundation.framework */; };
 		968C0A2B1B53269B008212EE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
+		968C0A2C1B532790008212EE /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0519E65D1B00C308E5 /* Timing.swift */; };
+		968C0A2D1B53279C008212EE /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8BC1C91A2CE7B5005E799C /* Border.swift */; };
+		968C0A2E1B5327D3008212EE /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB565DA19F074B000D93DE3 /* Math.swift */; };
 		96A192381B531B3300D73B07 /* PrototopeOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 96A192371B531B3300D73B07 /* PrototopeOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
 		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
@@ -1677,7 +1680,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				968C0A281B531D70008212EE /* Speech.swift in Sources */,
+				968C0A2D1B53279C008212EE /* Border.swift in Sources */,
+				968C0A2C1B532790008212EE /* Timing.swift in Sources */,
 				968C0A2B1B53269B008212EE /* Color.swift in Sources */,
+				968C0A2E1B5327D3008212EE /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
