@@ -11,7 +11,14 @@
 	public typealias SystemImage = UIImage
 	#else
 	import AppKit
+	
 	public typealias SystemImage = NSImage
+	extension SystemImage {
+		var CGImage: CGImageRef {
+			var rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+			return self.CGImageForProposedRect(&rect, context: nil, hints: nil)!.takeUnretainedValue()
+		}
+	}
 #endif
 
 

@@ -32,6 +32,11 @@
 		968C0A311B532C3F008212EE /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA8371B1A1DB51000D23C9D /* Sound.swift */; };
 		968C0A321B532CA2008212EE /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBABE67C19E4AEF100483EEF /* Geometry.swift */; };
 		968C0A331B532CE3008212EE /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB43C801A8BEAE400CE943C /* Video.swift */; };
+		968C0A341B532D0C008212EE /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF59A931A2E2B5000AB8C67 /* Shadow.swift */; };
+		968C0A351B532D91008212EE /* ParticlePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F939F1A852AF500B964FC /* ParticlePreset.swift */; };
+		968C0A361B532D9A008212EE /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
+		968C0A371B532D9F008212EE /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
+		968C0A381B532DAA008212EE /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		96A192381B531B3300D73B07 /* PrototopeOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 96A192371B531B3300D73B07 /* PrototopeOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
 		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
@@ -1686,13 +1691,18 @@
 			files = (
 				968C0A301B532A2C008212EE /* Image.swift in Sources */,
 				968C0A281B531D70008212EE /* Speech.swift in Sources */,
+				968C0A351B532D91008212EE /* ParticlePreset.swift in Sources */,
+				968C0A371B532D9F008212EE /* Particle.swift in Sources */,
 				968C0A2F1B532A14008212EE /* Environment.swift in Sources */,
 				968C0A2D1B53279C008212EE /* Border.swift in Sources */,
+				968C0A361B532D9A008212EE /* ParticleEmitter.swift in Sources */,
+				968C0A381B532DAA008212EE /* Radian.swift in Sources */,
 				968C0A2C1B532790008212EE /* Timing.swift in Sources */,
 				968C0A2B1B53269B008212EE /* Color.swift in Sources */,
 				968C0A2E1B5327D3008212EE /* Math.swift in Sources */,
 				968C0A321B532CA2008212EE /* Geometry.swift in Sources */,
 				968C0A311B532C3F008212EE /* Sound.swift in Sources */,
+				968C0A341B532D0C008212EE /* Shadow.swift in Sources */,
 				968C0A331B532CE3008212EE /* Video.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
