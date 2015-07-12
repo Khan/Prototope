@@ -23,6 +23,7 @@
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
 		968C0A281B531D70008212EE /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
 		968C0A2A1B531ED8008212EE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968C0A291B531ED8008212EE /* AVFoundation.framework */; };
+		968C0A2B1B53269B008212EE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1C2A6419E4B534000DC2C1 /* Color.swift */; };
 		96A192381B531B3300D73B07 /* PrototopeOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 96A192371B531B3300D73B07 /* PrototopeOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
 		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
@@ -1676,6 +1677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				968C0A281B531D70008212EE /* Speech.swift in Sources */,
+				968C0A2B1B53269B008212EE /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
