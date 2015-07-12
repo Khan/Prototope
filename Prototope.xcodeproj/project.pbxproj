@@ -21,6 +21,9 @@
 		961AC2151A93D45D00ED9744 /* SpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2141A93D45D00ED9744 /* SpeechBridge.swift */; };
 		9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6411A8D4C47003D386B /* ScrollLayer.swift */; };
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
+		96A192381B531B3300D73B07 /* PrototopeOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 96A192371B531B3300D73B07 /* PrototopeOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
+		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -155,6 +158,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		96A1923F1B531B3300D73B07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96A192321B531B3200D73B07;
+			remoteInfo = PrototopeOSX;
+		};
 		EB05D2A41A87F65E00F4CFD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -431,6 +441,12 @@
 		961AC2141A93D45D00ED9744 /* SpeechBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBridge.swift; sourceTree = "<group>"; };
 		9632F6411A8D4C47003D386B /* ScrollLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayer.swift; sourceTree = "<group>"; };
 		9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLayerBridge.swift; sourceTree = "<group>"; };
+		96A192331B531B3200D73B07 /* PrototopeOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PrototopeOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96A192361B531B3300D73B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96A192371B531B3300D73B07 /* PrototopeOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrototopeOSX.h; sourceTree = "<group>"; };
+		96A1923D1B531B3300D73B07 /* PrototopeOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		96A192431B531B3300D73B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototopeOSXTests.swift; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -562,6 +578,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		96A1922F1B531B3200D73B07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96A1923A1B531B3300D73B07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A6919E4D19B000DC2C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -642,6 +673,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96A192341B531B3300D73B07 /* PrototopeOSX */ = {
+			isa = PBXGroup;
+			children = (
+				96A192371B531B3300D73B07 /* PrototopeOSX.h */,
+				96A192351B531B3300D73B07 /* Supporting Files */,
+			);
+			path = PrototopeOSX;
+			sourceTree = "<group>";
+		};
+		96A192351B531B3300D73B07 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				96A192361B531B3300D73B07 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		96A192411B531B3300D73B07 /* PrototopeOSXTests */ = {
+			isa = PBXGroup;
+			children = (
+				96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */,
+				96A192421B531B3300D73B07 /* Supporting Files */,
+			);
+			path = PrototopeOSXTests;
+			sourceTree = "<group>";
+		};
+		96A192421B531B3300D73B07 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				96A192431B531B3300D73B07 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9EC148211A20FB1C004C7129 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -739,6 +804,8 @@
 				EB6BFBB61A857921002B4E6A /* 🔭 Protoscope */,
 				EB306C0A19DF77CC00113FA3 /* 🎁 Products */,
 				EB6BFBA91A857479002B4E6A /* 👽 ThirdParty */,
+				96A192341B531B3300D73B07 /* PrototopeOSX */,
+				96A192411B531B3300D73B07 /* PrototopeOSXTests */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 1;
@@ -755,6 +822,8 @@
 				EB6BFB911A857326002B4E6A /* ProtocasterTests.xctest */,
 				EB6BFBB51A857920002B4E6A /* Protoscope.app */,
 				EB6BFBC91A857921002B4E6A /* ProtoscopeTests.xctest */,
+				96A192331B531B3200D73B07 /* PrototopeOSX.framework */,
+				96A1923D1B531B3300D73B07 /* PrototopeOSXTests.xctest */,
 			);
 			name = "🎁 Products";
 			sourceTree = "<group>";
@@ -1063,6 +1132,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		96A192301B531B3200D73B07 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96A192381B531B3300D73B07 /* PrototopeOSX.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB453D8C1A7AB0B2006F2A72 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1082,6 +1159,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		96A192321B531B3200D73B07 /* PrototopeOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96A192571B531B3300D73B07 /* Build configuration list for PBXNativeTarget "PrototopeOSX" */;
+			buildPhases = (
+				96A1922E1B531B3200D73B07 /* Sources */,
+				96A1922F1B531B3200D73B07 /* Frameworks */,
+				96A192301B531B3200D73B07 /* Headers */,
+				96A192311B531B3200D73B07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PrototopeOSX;
+			productName = PrototopeOSX;
+			productReference = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		96A1923C1B531B3300D73B07 /* PrototopeOSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96A192581B531B3300D73B07 /* Build configuration list for PBXNativeTarget "PrototopeOSXTests" */;
+			buildPhases = (
+				96A192391B531B3300D73B07 /* Sources */,
+				96A1923A1B531B3300D73B07 /* Frameworks */,
+				96A1923B1B531B3300D73B07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96A192401B531B3300D73B07 /* PBXTargetDependency */,
+			);
+			name = PrototopeOSXTests;
+			productName = PrototopeOSXTests;
+			productReference = 96A1923D1B531B3300D73B07 /* PrototopeOSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EB1C2A6B19E4D19B000DC2C1 /* PrototopeTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB1C2A7219E4D19B000DC2C1 /* Build configuration list for PBXNativeTarget "PrototopeTests" */;
@@ -1265,6 +1378,12 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Khan Academy";
 				TargetAttributes = {
+					96A192321B531B3200D73B07 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					96A1923C1B531B3300D73B07 = {
+						CreatedOnToolsVersion = 6.4;
+					};
 					EB1C2A6B19E4D19B000DC2C1 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -1338,6 +1457,8 @@
 				EB6BFB901A857326002B4E6A /* ProtocasterTests */,
 				EB6BFBB41A857920002B4E6A /* Protoscope */,
 				EB6BFBC81A857921002B4E6A /* ProtoscopeTests */,
+				96A192321B531B3200D73B07 /* PrototopeOSX */,
+				96A1923C1B531B3300D73B07 /* PrototopeOSXTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1451,6 +1572,20 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		96A192311B531B3200D73B07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96A1923B1B531B3300D73B07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A6A19E4D19B000DC2C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1531,6 +1666,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		96A1922E1B531B3200D73B07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96A192391B531B3300D73B07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A6819E4D19B000DC2C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1705,6 +1855,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		96A192401B531B3300D73B07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96A192321B531B3200D73B07 /* PrototopeOSX */;
+			targetProxy = 96A1923F1B531B3300D73B07 /* PBXContainerItemProxy */;
+		};
 		EB05D2A51A87F65E00F4CFD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EBE3A75519DF79C400A77736 /* Prototope */;
@@ -1818,6 +1973,100 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		96A192461B531B3300D73B07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrototopeOSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		96A192471B531B3300D73B07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = PrototopeOSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		96A192481B531B3300D73B07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PrototopeOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		96A192491B531B3300D73B07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = PrototopeOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		EB1C2A7319E4D19B000DC2C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2299,6 +2548,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		96A192571B531B3300D73B07 /* Build configuration list for PBXNativeTarget "PrototopeOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96A192461B531B3300D73B07 /* Debug */,
+				96A192471B531B3300D73B07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96A192581B531B3300D73B07 /* Build configuration list for PBXNativeTarget "PrototopeOSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96A192481B531B3300D73B07 /* Debug */,
+				96A192491B531B3300D73B07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EB1C2A7219E4D19B000DC2C1 /* Build configuration list for PBXNativeTarget "PrototopeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
