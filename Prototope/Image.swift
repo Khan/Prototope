@@ -18,13 +18,11 @@
 /** A simple abstraction for a bitmap image. */
 public struct Image: Printable {
 	
-	#if os(iOS)
-	// TODO(jb): Port this to OS X once geometry compiles for OS X too
+
 	/** The size of the image, in points. */
 	public var size: Size {
-		return Size(uiImage.size)
+		return Size(systemImage.size)
 	}
-	#endif
 
 	public var name: String!
 
