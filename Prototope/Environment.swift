@@ -8,15 +8,6 @@
 
 import Foundation
 
-// TODO(jb): This belongs with Layer
-#if os(iOS)
-	import UIKit
-	public typealias SystemView = UIView
-	#else
-	import AppKit
-	public typealias SystemView = NSView
-#endif
-
 
 // TODO(jb): This belongs with Font
 #if os(iOS)
@@ -30,10 +21,7 @@ import Foundation
 /** Establishes an environment in which Prototope can execute. */
 public struct Environment {
 	
-	#if os(iOS)
-	// TODO(jb): port this to OS X
 	public let rootLayer: Layer
-	#endif
 	public let imageProvider: String -> SystemImage?
 	public let soundProvider: String -> NSData?
 	public let fontProvider: (name: String, size: Double) -> SystemFont?
@@ -48,9 +36,9 @@ public struct Environment {
 
 	public init(rootView: SystemView, imageProvider: String -> SystemImage?, soundProvider: String -> NSData?, fontProvider: (String, Double) -> SystemFont?, exceptionHandler: String -> Void) {
 		
-		#if os(iOS)
 		self.rootLayer = Layer(hostingView: rootView, name: "Root")
 
+		#if os(iOS)
 		// TODO: move defaultSpec into Environment.
 		let gesture = defaultSpec.twoFingerTripleTapGestureRecognizer()
 		rootView.addGestureRecognizer(gesture)

@@ -37,6 +37,7 @@
 		968C0A361B532D9A008212EE /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
 		968C0A371B532D9F008212EE /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		968C0A381B532DAA008212EE /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
+		968C0A391B53324E008212EE /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A74E19DF78D500A77736 /* Layer.swift */; };
 		96A192381B531B3300D73B07 /* PrototopeOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 96A192371B531B3300D73B07 /* PrototopeOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
 		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
@@ -1692,6 +1693,7 @@
 				968C0A301B532A2C008212EE /* Image.swift in Sources */,
 				968C0A281B531D70008212EE /* Speech.swift in Sources */,
 				968C0A351B532D91008212EE /* ParticlePreset.swift in Sources */,
+				968C0A391B53324E008212EE /* Layer.swift in Sources */,
 				968C0A371B532D9F008212EE /* Particle.swift in Sources */,
 				968C0A2F1B532A14008212EE /* Environment.swift in Sources */,
 				968C0A2D1B53279C008212EE /* Border.swift in Sources */,
