@@ -412,7 +412,16 @@ public class Layer: Equatable, Hashable {
 		generate a shadow. */
 	public var shadow: Shadow {
 		get {
-			return Shadow(color: Color(SystemColor(CGColor: layer.shadowColor)!), alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
+			let layer = self.layer
+			let color: Color
+			if let shadowColor = layer.shadowColor {
+				let systemColor = SystemColor(CGColor: shadowColor)!
+				color = Color(systemColor)
+			} else {
+				color = Color.black
+			}
+				
+			return Shadow(color: color, alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
 		}
 		set {
 			layer.shadowColor = newValue.color.uiColor.CGColor
