@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Khan Academy. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
-
+	#endif
 // MARK: - Dynamic animation APIs
 
 extension Layer {
