@@ -19,6 +19,7 @@
 		9619D3AC1A8E56F20022DC54 /* Layer+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */; };
 		961AC2061A93B9D500ED9744 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
 		961AC2151A93D45D00ED9744 /* SpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2141A93D45D00ED9744 /* SpeechBridge.swift */; };
+		96263A741B6C0EF5002664B4 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96263A731B6C0EF5002664B4 /* libpop.a */; };
 		9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6411A8D4C47003D386B /* ScrollLayer.swift */; };
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
 		968C0A281B531D70008212EE /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
@@ -176,6 +177,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		96263A721B6C0EF5002664B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 964A70D81B6AC5200090236D;
+			remoteInfo = "pop-osx-static";
+		};
+		96263A7E1B6C0F04002664B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB12A83B1A19A6AC0018C229 /* pop.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 964A70D71B6AC5200090236D;
+			remoteInfo = "pop-osx-static";
+		};
 		96A1923F1B531B3300D73B07 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB306C0119DF77CC00113FA3 /* Project object */;
@@ -601,6 +616,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96263A741B6C0EF5002664B4 /* libpop.a in Frameworks */,
 				968C0A2A1B531ED8008212EE /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -787,7 +803,8 @@
 				EB7526B61A8A7FDF00D5D187 /* pop.framework */,
 				EB12A8451A19A6AC0018C229 /* pop.framework */,
 				EB12A8471A19A6AC0018C229 /* pop-tests.xctest */,
-				EB12A8491A19A6AC0018C229 /* pop-tests-osx.xctest */,
+				EB12A8491A19A6AC0018C229 /* pop-tests.xctest */,
+				96263A731B6C0EF5002664B4 /* libpop.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1192,6 +1209,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				96263A7F1B6C0F04002664B4 /* PBXTargetDependency */,
 			);
 			name = PrototopeOSX;
 			productName = PrototopeOSX;
@@ -1485,6 +1503,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		96263A731B6C0EF5002664B4 /* libpop.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libpop.a;
+			remoteRef = 96263A721B6C0EF5002664B4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EB05D2CE1A894C2A00F4CFD4 /* swiftz.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1562,7 +1587,7 @@
 			remoteRef = EB12A8461A19A6AC0018C229 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EB12A8491A19A6AC0018C229 /* pop-tests-osx.xctest */ = {
+		EB12A8491A19A6AC0018C229 /* pop-tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "pop-tests.xctest";
@@ -1893,6 +1918,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		96263A7F1B6C0F04002664B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "pop-osx-static";
+			targetProxy = 96263A7E1B6C0F04002664B4 /* PBXContainerItemProxy */;
+		};
 		96A192401B531B3300D73B07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 96A192321B531B3200D73B07 /* PrototopeOSX */;

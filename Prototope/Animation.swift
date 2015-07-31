@@ -8,6 +8,8 @@
 
 #if os(iOS)
 import UIKit
+	#else
+	import pop
 	#endif
 // MARK: - Dynamic animation APIs
 
@@ -71,12 +73,12 @@ public class LayerAnimatorStore {
         
         let animatableOrigin = POPAnimatableProperty.propertyWithName("origin") { property in
             property.readBlock = { obj, values in
-                values[0] = (obj as! UIView).frame.origin.x
-                values[1] = (obj as! UIView).frame.origin.y
+                values[0] = (obj as! SystemView).frame.origin.x
+                values[1] = (obj as! SystemView).frame.origin.y
             }
             property.writeBlock = { obj, values in
-                (obj as! UIView).frame.origin.x = values[0]
-                (obj as! UIView).frame.origin.y = values[1]
+                (obj as! SystemView).frame.origin.x = values[0]
+                (obj as! SystemView).frame.origin.y = values[1]
             }
         } as! POPAnimatableProperty
         origin = Animator(layer: layer, property: animatableOrigin)
@@ -85,8 +87,20 @@ public class LayerAnimatorStore {
 		size = Animator(layer: layer, propertyName: kPOPLayerSize)
 		bounds = Animator(layer: layer, propertyName: kPOPLayerBounds)
 		frame = Animator(layer: layer, propertyName: kPOPViewFrame)
-		backgroundColor = Animator(layer: layer, propertyName: kPOPViewBackgroundColor)
-		alpha = Animator(layer: layer, propertyName: kPOPViewAlpha)
+		
+		#if os(iOS)
+			backgroundColor = Animator(layer: layer, propertyName: kPOPViewBackgroundColor)
+		#else
+			backgroundColor = Animator(layer: layer, propertyName: kPOPLayerBackgroundColor, shouldAnimateLayer: true)
+		#endif
+		
+		#if os(iOS)
+			let alphaPropertyName = kPOPViewAlpha
+		#else
+			let alphaPropertyName = kPOPViewAlphaValue
+		#endif
+		
+		alpha = Animator(layer: layer, propertyName: alphaPropertyName)
 		rotationRadians = Animator(layer: layer, propertyName: kPOPLayerRotation, shouldAnimateLayer: true)
         scale = Animator(layer: layer, propertyName: kPOPLayerScaleXY, shouldAnimateLayer: true)
 		cornerRadius = Animator(layer: layer, propertyName: kPOPLayerCornerRadius, shouldAnimateLayer: true)
@@ -213,6 +227,7 @@ extension Layer {
 		that are already in flight, but that's not always possible. If you're looking to take into
 		account initial velocity or to have a more realistic physical simulation, see Layer.animators. */
 	public class func animateWithDuration(duration: NSTimeInterval, curve: AnimationCurve, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
+		#if os(iOS)
 		var curveOption: UIViewAnimationOptions = nil
 		switch curve {
 		case .Linear:
@@ -225,6 +240,9 @@ extension Layer {
 			curveOption = .CurveEaseInOut
 		}
 		UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction | curveOption, animations: animations, completion: { _ in completionHandler?(); return })
+		#else
+		println("Sorry, animateWithDuration() isn't available on OS X yet!")
+		#endif
 	}
 
 }
