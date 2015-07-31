@@ -1,5 +1,0 @@
-# PrototopeTestApp
-
-This is a barebones sandbox to sanity-check interactive Prototope features during development. Prototypes can be written either in Swift or in JS.
-
-This should probably eventually go away (to be replaced completely by Protoscope and OhaiPrototope).
