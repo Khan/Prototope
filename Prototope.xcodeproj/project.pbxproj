@@ -20,6 +20,7 @@
 		961AC2061A93B9D500ED9744 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
 		961AC2151A93D45D00ED9744 /* SpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2141A93D45D00ED9744 /* SpeechBridge.swift */; };
 		96263A741B6C0EF5002664B4 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96263A731B6C0EF5002664B4 /* libpop.a */; };
+		96263A8B1B6C24BA002664B4 /* libpop.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96263A731B6C0EF5002664B4 /* libpop.a */; };
 		9632F6421A8D4C47003D386B /* ScrollLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6411A8D4C47003D386B /* ScrollLayer.swift */; };
 		9632F6641A8D4D08003D386B /* ScrollLayerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632F6621A8D4CD3003D386B /* ScrollLayerBridge.swift */; };
 		968C0A281B531D70008212EE /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961AC2051A93B9D500ED9744 /* Speech.swift */; };
@@ -43,6 +44,7 @@
 		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
 		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
 		96C2F8FB1B6AA89E00EA3CCA /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
+		96D40D201B7959D3003FE271 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D40D1F1B7959D3003FE271 /* CoreAudio.framework */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -411,6 +413,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		96263A841B6C1487002664B4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				96263A8B1B6C24BA002664B4 /* libpop.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB1C2A7B19E4D2AF000DC2C1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,6 +493,7 @@
 		96A1923D1B531B3300D73B07 /* PrototopeOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96A192431B531B3300D73B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototopeOSXTests.swift; sourceTree = "<group>"; };
+		96D40D1F1B7959D3003FE271 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = DEVELOPER_DIR; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -616,6 +629,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D40D201B7959D3003FE271 /* CoreAudio.framework in Frameworks */,
 				96263A741B6C0EF5002664B4 /* libpop.a in Frameworks */,
 				968C0A2A1B531ED8008212EE /* AVFoundation.framework in Frameworks */,
 			);
@@ -834,6 +848,7 @@
 		EB306C0019DF77CC00113FA3 = {
 			isa = PBXGroup;
 			children = (
+				96D40D1F1B7959D3003FE271 /* CoreAudio.framework */,
 				EB306C3319DF78A900113FA3 /* 📚 Prototope */,
 				EB306C0B19DF77CC00113FA3 /* 🚦 PrototopeTestApp */,
 				EB453D901A7AB0B2006F2A72 /* 🚡 PrototopeJSBridge */,
@@ -1205,6 +1220,7 @@
 				96A1922F1B531B3200D73B07 /* Frameworks */,
 				96A192301B531B3200D73B07 /* Headers */,
 				96A192311B531B3200D73B07 /* Resources */,
+				96263A841B6C1487002664B4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2044,6 +2060,7 @@
 		96A192461B531B3300D73B07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2060,10 +2077,16 @@
 				INFOPLIST_FILE = PrototopeOSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-lc++",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = pop;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2072,6 +2095,7 @@
 		96A192471B531B3300D73B07 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2085,10 +2109,16 @@
 				INFOPLIST_FILE = PrototopeOSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-lc++",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = pop;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
