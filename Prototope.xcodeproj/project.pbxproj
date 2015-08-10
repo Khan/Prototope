@@ -44,7 +44,6 @@
 		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
 		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
 		96C2F8FB1B6AA89E00EA3CCA /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
-		96D40D201B7959D3003FE271 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D40D1F1B7959D3003FE271 /* CoreAudio.framework */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -493,7 +492,6 @@
 		96A1923D1B531B3300D73B07 /* PrototopeOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96A192431B531B3300D73B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototopeOSXTests.swift; sourceTree = "<group>"; };
-		96D40D1F1B7959D3003FE271 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = DEVELOPER_DIR; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -629,7 +627,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96D40D201B7959D3003FE271 /* CoreAudio.framework in Frameworks */,
 				96263A741B6C0EF5002664B4 /* libpop.a in Frameworks */,
 				968C0A2A1B531ED8008212EE /* AVFoundation.framework in Frameworks */,
 			);
@@ -848,7 +845,6 @@
 		EB306C0019DF77CC00113FA3 = {
 			isa = PBXGroup;
 			children = (
-				96D40D1F1B7959D3003FE271 /* CoreAudio.framework */,
 				EB306C3319DF78A900113FA3 /* 📚 Prototope */,
 				EB306C0B19DF77CC00113FA3 /* 🚦 PrototopeTestApp */,
 				EB453D901A7AB0B2006F2A72 /* 🚡 PrototopeJSBridge */,
