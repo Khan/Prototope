@@ -44,6 +44,8 @@
 		96A1923E1B531B3300D73B07 /* PrototopeOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A192331B531B3200D73B07 /* PrototopeOSX.framework */; };
 		96A192451B531B3300D73B07 /* PrototopeOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */; };
 		96C2F8FB1B6AA89E00EA3CCA /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
+		96D40D361B7966D7003FE271 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
+		96D40D381B797B49003FE271 /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D40D371B797B49003FE271 /* DisplayLink.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -492,6 +494,7 @@
 		96A1923D1B531B3300D73B07 /* PrototopeOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototopeOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96A192431B531B3300D73B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototopeOSXTests.swift; sourceTree = "<group>"; };
+		96D40D371B797B49003FE271 /* DisplayLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -1134,6 +1137,7 @@
 				EBB3505E1A166E690046AD07 /* Dictionary+Extensions.swift */,
 				CD26ECC51A83CE1000E8EC3B /* Radian.swift */,
 				CD4C5E3B1AE6D401002288EB /* Double+Extensions.swift */,
+				96D40D371B797B49003FE271 /* DisplayLink.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1736,8 +1740,10 @@
 				968C0A371B532D9F008212EE /* Particle.swift in Sources */,
 				968C0A2F1B532A14008212EE /* Environment.swift in Sources */,
 				968C0A2D1B53279C008212EE /* Border.swift in Sources */,
+				96D40D361B7966D7003FE271 /* Heartbeat.swift in Sources */,
 				968C0A361B532D9A008212EE /* ParticleEmitter.swift in Sources */,
 				968C0A381B532DAA008212EE /* Radian.swift in Sources */,
+				96D40D381B797B49003FE271 /* DisplayLink.swift in Sources */,
 				968C0A2C1B532790008212EE /* Timing.swift in Sources */,
 				968C0A2B1B53269B008212EE /* Color.swift in Sources */,
 				968C0A2E1B5327D3008212EE /* Math.swift in Sources */,
