@@ -840,14 +840,12 @@ public class Layer: Equatable, Hashable {
 		}
 	}
     
-	// TODO(jb): Port this to OS X when Behavior is ported
-	#if os(iOS)
+
     public var behaviors: [BehaviorType] = [] {
         didSet {
             Environment.currentEnvironment?.behaviorDriver.updateWithLayer(self, behaviors: behaviors)
         }
     }
-	#endif
 }
 
 extension Layer: Hashable {
