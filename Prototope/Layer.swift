@@ -708,7 +708,10 @@ public class Layer: Equatable, Hashable {
         self.parentView = hostingView
 		self.frame = Rect(hostingView.bounds)
 		#if os(iOS)
-		self.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+			self.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+		#else
+			self.view.autoresizingMask = NSAutoresizingMaskOptions.ViewWidthSizable | NSAutoresizingMaskOptions.ViewHeightSizable
+			
 		#endif
     }
 
