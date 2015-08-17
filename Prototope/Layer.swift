@@ -107,12 +107,21 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 	
-	#if os(iOS) // TODO(jb): create a non-sucky port of this for OS X
+	#if os(iOS)
 	/** Brings the layer to the front of all sibling layers. */
 	public func comeToFront() {
 		if let parentView = self.parentView {
 			parentView.bringSubviewToFront(self.view)
 			self.parent?.sublayers.insert(self.parent!.sublayerAtFront!, atIndex: 0)
+		}
+	}
+	#else
+	public func comeToFront() {
+		if let parentView = self.parentView {
+			// TODO(jb): Should be doing this with parentView.sortSubviewsUsingFunction() but I don't want to deal with C function pointers in Swift / I don't think I can do this until Swift 2.0
+			let subview = self.view
+			subview.removeFromSuperview()
+			parentView.addSubview(subview)
 		}
 	}
 	#endif
@@ -641,7 +650,7 @@ public class Layer: Equatable, Hashable {
 
 	
 	// TODO(jb): Add this to OS X once the animation stuff is ported
-	#if os(iOS)
+//	#if os(iOS)
 	public func fadeOutAndRemoveAfterDuration(duration: NSTimeInterval) {
 		willBeRemovedSoon = true
 		Layer.animateWithDuration(duration, animations: {
@@ -650,7 +659,7 @@ public class Layer: Equatable, Hashable {
 				self.parent = nil
 		})
 	}
-	#endif
+//	#endif
 
 	// MARK: - Internal interfaces
 

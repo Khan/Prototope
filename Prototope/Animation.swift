@@ -249,6 +249,7 @@ extension Layer {
 		UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction | curveOption, animations: animations, completion: { _ in completionHandler?(); return })
 		#else
 		println("Sorry, animateWithDuration() isn't available on OS X yet!")
+			completionHandler?()
 		#endif
 	}
 
