@@ -26,11 +26,7 @@ public struct Environment {
 	public let soundProvider: String -> NSData?
 	public let fontProvider: (name: String, size: Double) -> SystemFont?
 	public let exceptionHandler: String -> Void
-	
-	#if os(iOS)
-	// TODO(jb): port this to OS X
     let behaviorDriver: BehaviorDriver
-	#endif
 
 	public static var currentEnvironment: Environment?
 
@@ -45,8 +41,8 @@ public struct Environment {
 		gesture.cancelsTouchesInView = false
 		gesture.delaysTouchesEnded = false
 			
-		self.behaviorDriver = BehaviorDriver()
 		#endif
+		self.behaviorDriver = BehaviorDriver()
 
 		self.imageProvider = imageProvider
 		self.soundProvider = soundProvider
