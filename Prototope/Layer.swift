@@ -806,6 +806,12 @@ public class Layer: Equatable, Hashable {
 				super.touchesCancelled(touches as Set<NSObject>, withEvent: event)
 			}
 		}
+		#else
+		
+		// We want the coordinates to be flipped so they're the same as on iOS.
+		override var flipped: Bool {
+			return true
+		}
 		#endif // iOS
 	}
 
