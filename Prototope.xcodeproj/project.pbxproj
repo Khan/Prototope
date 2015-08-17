@@ -46,6 +46,7 @@
 		96C2F8FB1B6AA89E00EA3CCA /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE17A0719E65E5500C308E5 /* Animation.swift */; };
 		96D40D361B7966D7003FE271 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA837161A1DADDF00D23C9D /* Heartbeat.swift */; };
 		96D40D381B797B49003FE271 /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D40D371B797B49003FE271 /* DisplayLink.swift */; };
+		96D40D391B7AD138003FE271 /* VideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB43C811A8BEAE400CE943C /* VideoLayer.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -1735,6 +1736,7 @@
 				968C0A301B532A2C008212EE /* Image.swift in Sources */,
 				968C0A281B531D70008212EE /* Speech.swift in Sources */,
 				968C0A351B532D91008212EE /* ParticlePreset.swift in Sources */,
+				96D40D391B7AD138003FE271 /* VideoLayer.swift in Sources */,
 				96C2F8FB1B6AA89E00EA3CCA /* Animation.swift in Sources */,
 				968C0A391B53324E008212EE /* Layer.swift in Sources */,
 				968C0A371B532D9F008212EE /* Particle.swift in Sources */,
