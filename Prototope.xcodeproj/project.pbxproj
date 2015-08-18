@@ -50,6 +50,8 @@
 		96D40D3B1B825F07003FE271 /* Behaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7520648F1A89E39F005E38A2 /* Behaviors.swift */; };
 		96D40D3C1B825F67003FE271 /* Layer+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619D3AB1A8E56F20022DC54 /* Layer+Layout.swift */; };
 		96D40D3D1B82615C003FE271 /* CameraLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCEBBCF1AA8DB7F00B58A6C /* CameraLayer.swift */; };
+		96D40D411B82CF2C003FE271 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D40D401B82CF2C003FE271 /* NSView+Extensions.swift */; };
+		96D40D431B82D3B6003FE271 /* InputEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D40D421B82D3B6003FE271 /* InputEvent.swift */; };
 		CD11D82B1A815AD3004F1197 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11D82A1A815AD3004F1197 /* Particle.swift */; };
 		CD26ECC61A83CE1000E8EC3B /* Radian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECC51A83CE1000E8EC3B /* Radian.swift */; };
 		CD26ECCB1A83FECC00E8EC3B /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */; };
@@ -499,6 +501,8 @@
 		96A192431B531B3300D73B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96A192441B531B3300D73B07 /* PrototopeOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototopeOSXTests.swift; sourceTree = "<group>"; };
 		96D40D371B797B49003FE271 /* DisplayLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
+		96D40D401B82CF2C003FE271 /* NSView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
+		96D40D421B82D3B6003FE271 /* InputEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputEvent.swift; sourceTree = "<group>"; };
 		CD11D82A1A815AD3004F1197 /* Particle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		CD26ECC51A83CE1000E8EC3B /* Radian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radian.swift; sourceTree = "<group>"; };
 		CD26ECCA1A83FECC00E8EC3B /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
@@ -941,6 +945,7 @@
 				961AC2051A93B9D500ED9744 /* Speech.swift */,
 				CD4C5E1A1AC5BBDF002288EB /* ShapeLayer.swift */,
 				CDA4CE051B306CDB00386278 /* Screen.swift */,
+				96D40D421B82D3B6003FE271 /* InputEvent.swift */,
 				9EC148211A20FB1C004C7129 /* ThirdParty */,
 				EBB3505D1A166E5E0046AD07 /* Utilities */,
 				EBE3A75819DF79C400A77736 /* Supporting Files */,
@@ -1142,6 +1147,7 @@
 				CD26ECC51A83CE1000E8EC3B /* Radian.swift */,
 				CD4C5E3B1AE6D401002288EB /* Double+Extensions.swift */,
 				96D40D371B797B49003FE271 /* DisplayLink.swift */,
+				96D40D401B82CF2C003FE271 /* NSView+Extensions.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1737,6 +1743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				968C0A301B532A2C008212EE /* Image.swift in Sources */,
+				96D40D431B82D3B6003FE271 /* InputEvent.swift in Sources */,
 				968C0A281B531D70008212EE /* Speech.swift in Sources */,
 				968C0A351B532D91008212EE /* ParticlePreset.swift in Sources */,
 				96D40D391B7AD138003FE271 /* VideoLayer.swift in Sources */,
@@ -1753,6 +1760,7 @@
 				968C0A2B1B53269B008212EE /* Color.swift in Sources */,
 				968C0A2E1B5327D3008212EE /* Math.swift in Sources */,
 				968C0A321B532CA2008212EE /* Geometry.swift in Sources */,
+				96D40D411B82CF2C003FE271 /* NSView+Extensions.swift in Sources */,
 				968C0A311B532C3F008212EE /* Sound.swift in Sources */,
 				96D40D3D1B82615C003FE271 /* CameraLayer.swift in Sources */,
 				968C0A341B532D0C008212EE /* Shadow.swift in Sources */,

@@ -11,12 +11,9 @@ import AppKit
 
 typealias HeartbeatDisplayLinkCallback = (sender: SystemDisplayLink) -> Void
 
-/** Crappy wrapper around CVDisplayLink to act pretty close to a CADisplayLink. */
+/** Crappy wrapper around CVDisplayLink to act pretty close to a CADisplayLink. Only OS X kids get this. */
 class DisplayLink: NSObject {
-	
 
-	
-	
 	private let displayLink:CVDisplayLink? = {
 		var linkRef:Unmanaged<CVDisplayLink>?
 		CVDisplayLinkCreateWithActiveCGDisplays(&linkRef)

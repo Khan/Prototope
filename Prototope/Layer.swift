@@ -204,18 +204,33 @@ public class Layer: Equatable, Hashable {
 
     /** The position of the layer's origin point (the upper left-hand corner), 
         relative to the origin of its parent layer and expressed in the parent coordinate space. */
+	#if os(iOS) // TODO(jb): Why can't I put this #if block inside the var declaration?
     public var origin: Point {
         get { return Point(layer.frame.origin) }
         set { layer.frame.origin = CGPoint(newValue) }
+	}
+	#else
+	public var origin: Point {
+		get { return Point(view.frame.origin) }
+		set { view.setFrameOrigin(CGPoint(newValue)) }
     }
+	#endif
 
 	/** The position of the layer's anchor point (by default the center), relative to the
 		origin of its parent layer and expressed in the parent coordinate space.
 		Animatable. */
+	#if os(iOS)
 	public var position: Point {
 		get { return Point(layer.position) }
 		set { layer.position = CGPoint(newValue) }
 	}
+	#else
+	public var position: Point {
+		get { return view.frameCenter }
+		set { view.frameCenter = newValue }
+	}
+	#endif
+	
 
 	/** The layer's width, expressed in its own coordinate space. Animatable (but not yet
 		via the dynamic animators). */
@@ -468,6 +483,41 @@ public class Layer: Equatable, Hashable {
 	#endif
 
 	
+	// MARK: Particles
+	
+	/** An array of the layer's particle emitters. */
+	private var particleEmitters: [ParticleEmitter] = []
+	
+	
+	/** Adds the particle emitter to the layer. */
+	public func addParticleEmitter(particleEmitter: ParticleEmitter, forDuration duration: TimeInterval? = nil) {
+		self.particleEmitters.append(particleEmitter)
+		self.layer.addSublayer(particleEmitter.emitterLayer)
+		particleEmitter.emitterLayer.frame = self.layer.bounds
+		particleEmitter.size = self.size
+		particleEmitter.position = Point(particleEmitter.emitterLayer.position)
+		
+		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
+		self.layer.masksToBounds = false
+		
+		if let duration = duration {
+			afterDuration(duration) {
+				self.removeParticleEmitter(particleEmitter)
+			}
+		}
+	}
+	
+	
+	/** Removes the given particle emitter from the layer. */
+	public func removeParticleEmitter(particleEmitter: ParticleEmitter) {
+		particleEmitter.emitterLayer.removeFromSuperlayer()
+		self.particleEmitters = self.particleEmitters.filter {
+			(emitter: ParticleEmitter) -> Bool in
+			return emitter !== particleEmitter
+		}
+	}
+	
+	
 	// TODO(jb): Port touches / gestures to OS X. What makes sense here?
 	#if os(iOS)
     // MARK: Touches and gestures
@@ -478,45 +528,8 @@ public class Layer: Equatable, Hashable {
 		get { return view.userInteractionEnabled }
 		set { view.userInteractionEnabled = newValue }
 	}
-	#endif
-
-
-	// MARK: Particles
-
-	/** An array of the layer's particle emitters. */
-	private var particleEmitters: [ParticleEmitter] = []
-
-
-	/** Adds the particle emitter to the layer. */
-	public func addParticleEmitter(particleEmitter: ParticleEmitter, forDuration duration: TimeInterval? = nil) {
-		self.particleEmitters.append(particleEmitter)
-		self.layer.addSublayer(particleEmitter.emitterLayer)
-		particleEmitter.emitterLayer.frame = self.layer.bounds
-		particleEmitter.size = self.size
-		particleEmitter.position = Point(particleEmitter.emitterLayer.position)
-
-		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
-		self.layer.masksToBounds = false
-
-		if let duration = duration {
-			afterDuration(duration) {
-				self.removeParticleEmitter(particleEmitter)
-			}
-		}
-	}
-
-
-	/** Removes the given particle emitter from the layer. */
-	public func removeParticleEmitter(particleEmitter: ParticleEmitter) {
-		particleEmitter.emitterLayer.removeFromSuperlayer()
-		self.particleEmitters = self.particleEmitters.filter {
-			(emitter: ParticleEmitter) -> Bool in
-			return emitter !== particleEmitter
-		}
-	}
 
 	
-	#if os(iOS)
 	/** An array of the layer's gestures. Append a gesture to this list to add it to the layer.
 
 		Gestures are like a higher-level abstraction than the Layer touch handler API. For
@@ -637,6 +650,50 @@ public class Layer: Equatable, Hashable {
 		return accumulator
 	}
 	#endif // touch + gesture stuff
+	
+	// MARK: Mouse handling
+	#if os(OSX)
+	public typealias MouseHandler = InputEvent -> Void
+	public var mouseDownHandler: MouseHandler? {
+		get { return imageView?.mouseDownHandler }
+		set { imageView?.mouseDownHandler = newValue}
+	}
+	
+	
+	public var mouseDraggedHandler: MouseHandler? {
+		get { return imageView?.mouseDraggedHandler }
+		set { imageView?.mouseDraggedHandler = newValue}
+	}
+	
+	
+	public var mouseUpHandler: MouseHandler? {
+		get { return imageView?.mouseUpHandler }
+		set { imageView?.mouseUpHandler = newValue}
+	}
+	
+	
+	
+	public var mouseEnteredHandler: MouseHandler? {
+		get { return imageView?.mouseEnteredHandler }
+		set { imageView?.mouseEnteredHandler = newValue}
+	}
+	
+	
+	public var mouseExitedHandler: MouseHandler? {
+		get { return imageView?.mouseExitedHandler }
+		set { imageView?.mouseExitedHandler = newValue}
+	}
+	
+	
+	
+	/** Called when the mouse moves at all. See also mouseDraggedHandler. */
+	public var mouseMovedHandler: MouseHandler? {
+		get { return imageView?.mouseMovedHandler }
+		set { imageView?.mouseMovedHandler = newValue}
+	}
+	
+	
+	#endif
 
 	// MARK: Convenience utilities
 
@@ -820,11 +877,45 @@ public class Layer: Equatable, Hashable {
 		}
 		#else
 		
+//		override var acceptsFirstResponder: Bool {
+//			return true
+//		}
+		
 		// We want the coordinates to be flipped so they're the same as on iOS.
 		override var flipped: Bool {
 			return true
 		}
-		#endif // iOS
+		
+		var mouseDownHandler: MouseHandler?
+		override func mouseDown(event: NSEvent) {
+			mouseDownHandler?(InputEvent(event: event))
+		}
+		
+		
+		var mouseMovedHandler: MouseHandler?
+		override func mouseMoved(event: NSEvent) {
+			mouseMovedHandler?(InputEvent(event: event))
+		}
+		
+		
+		var mouseUpHandler: MouseHandler?
+		override func mouseUp(event: NSEvent) {
+			mouseUpHandler?(InputEvent(event: event))
+		}
+
+		var mouseDraggedHandler: MouseHandler?
+		override func mouseDragged(event: NSEvent) {
+			mouseDraggedHandler?(InputEvent(event: event))
+		}
+		var mouseEnteredHandler: MouseHandler?
+		override func mouseEntered(event: NSEvent) {
+			mouseEnteredHandler?(InputEvent(event: event))
+		}
+		var mouseExitedHandler: MouseHandler?
+		override func mouseExited(event: NSEvent) {
+			mouseExitedHandler?(InputEvent(event: event))
+		}
+		#endif
 	}
 
 	// MARK: CALayerWrappingView
