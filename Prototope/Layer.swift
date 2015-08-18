@@ -803,6 +803,11 @@ public class Layer: Equatable, Hashable {
 			super.init(frame: frame)
 			#if os(OSX)
 				self.wantsLayer = true
+				
+				// TODO(jb): Can probably lazily add this when a mouse Entered/moved/exited event happens, so not all layers need to have tracking areas by default.
+				let options = NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.ActiveInActiveApp | NSTrackingAreaOptions.InVisibleRect
+				let trackingArea = NSTrackingArea(rect: self.visibleRect, options: options, owner: self, userInfo: nil)
+				self.addTrackingArea(trackingArea)
 			#endif
 		}
 
