@@ -882,10 +882,6 @@ public class Layer: Equatable, Hashable {
 		}
 		#else
 		
-//		override var acceptsFirstResponder: Bool {
-//			return true
-//		}
-		
 		// We want the coordinates to be flipped so they're the same as on iOS.
 		override var flipped: Bool {
 			return true
