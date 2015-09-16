@@ -518,7 +518,7 @@ public class Layer: Equatable, Hashable {
 	}
 	
 	
-	// TODO(jb): Port touches / gestures to OS X. What makes sense here?
+	// TODO(jb): Port touches / gestures to OS X? What makes sense here?
 	#if os(iOS)
     // MARK: Touches and gestures
 
@@ -653,32 +653,39 @@ public class Layer: Equatable, Hashable {
 	
 	// MARK: Mouse handling
 	#if os(OSX)
+	
+	/** This type is used for handling mouse input events. */
 	public typealias MouseHandler = InputEvent -> Void
+	
+	/** Called when the mouse button is clicked down. */
 	public var mouseDownHandler: MouseHandler? {
 		get { return imageView?.mouseDownHandler }
 		set { imageView?.mouseDownHandler = newValue}
 	}
 	
 	
+	/** Called when the mouse buttin is dragged. */
 	public var mouseDraggedHandler: MouseHandler? {
 		get { return imageView?.mouseDraggedHandler }
 		set { imageView?.mouseDraggedHandler = newValue}
 	}
 	
 	
+	/** Called when the mouse button is released. */
 	public var mouseUpHandler: MouseHandler? {
 		get { return imageView?.mouseUpHandler }
 		set { imageView?.mouseUpHandler = newValue}
 	}
 	
 	
-	
+	/** Called when the mouse enters the layer. */
 	public var mouseEnteredHandler: MouseHandler? {
 		get { return imageView?.mouseEnteredHandler }
 		set { imageView?.mouseEnteredHandler = newValue}
 	}
 	
 	
+	/** Called when the mouse exits the layer. */
 	public var mouseExitedHandler: MouseHandler? {
 		get { return imageView?.mouseExitedHandler }
 		set { imageView?.mouseExitedHandler = newValue}
@@ -686,7 +693,7 @@ public class Layer: Equatable, Hashable {
 	
 	
 	
-	/** Called when the mouse moves at all. See also mouseDraggedHandler. */
+	/** Called when the mouse moves at all on the layer. See also mouseDraggedHandler. */
 	public var mouseMovedHandler: MouseHandler? {
 		get { return imageView?.mouseMovedHandler }
 		set { imageView?.mouseMovedHandler = newValue}
@@ -706,8 +713,6 @@ public class Layer: Equatable, Hashable {
 	}
 
 	
-	// TODO(jb): Add this to OS X once the animation stuff is ported
-//	#if os(iOS)
 	public func fadeOutAndRemoveAfterDuration(duration: NSTimeInterval) {
 		willBeRemovedSoon = true
 		Layer.animateWithDuration(duration, animations: {
@@ -716,7 +721,6 @@ public class Layer: Equatable, Hashable {
 				self.parent = nil
 		})
 	}
-//	#endif
 
 	// MARK: - Internal interfaces
 

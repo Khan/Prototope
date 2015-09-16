@@ -11,7 +11,6 @@ import AppKit
 /* Represents input from a person, like pointer (mouse) or keyboard. */
 public struct InputEvent {
 	let event: NSEvent
-//	let view: NSView
 	
 	public var globalLocation: Point {
 		let rootView = Environment.currentEnvironment!.rootLayer.view
