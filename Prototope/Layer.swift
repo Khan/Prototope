@@ -788,7 +788,13 @@ public class Layer: Equatable, Hashable {
 	// MARK: UIKit mapping
 
 	var view: SystemView
-	private var layer: CALayer { return view.layer! }
+	private var layer: CALayer {
+		#if os(iOS)
+		return view.layer
+		#else
+		return view.layer!
+		#endif
+	}
 	private var imageView: TouchForwardingImageView? { return view as? TouchForwardingImageView }
 
 	private var parentView: SystemView? {
@@ -932,7 +938,11 @@ public class Layer: Equatable, Hashable {
 
 			super.init(frame: wrappedLayer.frame)
 
-			layer!.addSublayer(wrappedLayer)
+			#if os(iOS)
+				layer.addSublayer(wrappedLayer)
+			#else
+				layer!.addSublayer(wrappedLayer)
+			#endif
 			setNeedsLayout()
 		}
 

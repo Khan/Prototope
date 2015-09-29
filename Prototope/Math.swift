@@ -48,14 +48,27 @@ public func clip<T: Comparable>(value: T, min minValue: T, max maxValue: T) -> T
 	}
 #endif
 
+extension SystemScreen {
+	
+	/** Returns the main screen's scale. */
+	class var mainScreenScale: Double {
+		#if os(iOS)
+			let mainScreen = SystemScreen.mainScreen()
+			#else
+			let mainScreen = SystemScreen.mainScreen()!
+		#endif
+		return Double(mainScreen.scale)
+	}
+}
+
 /** `ceil`s the value, snapping to screen's pixel values */
 public func pixelAwareCeil(value: Double) -> Double {
-	let scale = Double(SystemScreen.mainScreen()!.scale)
-	return ceil(value*scale)/scale
+	let scale = SystemScreen.mainScreenScale
+	return ceil(value * scale) / scale
 }
 
 /** `floor`s the value, snapping to screen's pixel values */
 public func pixelAwareFloor(value: Double) -> Double {
-	let scale = Double(SystemScreen.mainScreen()!.scale)
-	return floor(value*scale)/scale
+	let scale = SystemScreen.mainScreenScale
+	return floor(value * scale) / scale
 }
