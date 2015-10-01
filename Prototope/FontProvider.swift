@@ -23,19 +23,19 @@ public class FontProvider {
 		for URL in registeredFontsURLs {
 			var fontError: Unmanaged<CFError>?
 			if CTFontManagerUnregisterFontsForURL(URL, CTFontManagerScope.Process, &fontError) {
-				println("Successfully unloaded font: '\(URL)'.")
+				print("Successfully unloaded font: '\(URL)'.")
 			} else if let fontError = fontError?.takeRetainedValue() {
 				let errorDescription = CFErrorCopyDescription(fontError)
-				println("Failed to unload font '\(URL)': \(errorDescription)")
+				print("Failed to unload font '\(URL)': \(errorDescription)")
 			} else {
-				println("Failed to unload font '\(URL)'.")
+				print("Failed to unload font '\(URL)'.")
 			}
 		}
 	}
 	
 	func resourceForFontWithName(name: String) -> NSData? {
 		for fileExtension in FontProvider.supportedExtensions {
-			if let data = resources[name.stringByAppendingPathExtension(fileExtension)!] {
+			if let data = resources[name + ".\(fileExtension)"] {
 				return data
 			}
 		}
@@ -49,7 +49,7 @@ public class FontProvider {
 		}
 		
 		if let customFontData = resourceForFontWithName(name) {
-			let URL = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.CachesDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first as! NSURL
+			let URL = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.CachesDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first as NSURL!
 			
 			let fontFileURL = URL.URLByAppendingPathComponent(name)
 			
@@ -59,15 +59,15 @@ public class FontProvider {
 			if CTFontManagerRegisterFontsForURL(fontFileURL, CTFontManagerScope.Process, &fontError) {
 				registeredFontsURLs += [fontFileURL]
 				
-				println("Successfully loaded font: '\(name)'.")
+				print("Successfully loaded font: '\(name)'.")
 				if let font = UIFont(name: name, size: CGFloat(size)) {
 					return font
 				}
 			} else if let fontError = fontError?.takeRetainedValue() {
 				let errorDescription = CFErrorCopyDescription(fontError)
-				println("Failed to load font '\(name)': \(errorDescription)")
+				print("Failed to load font '\(name)': \(errorDescription)")
 			} else {
-				println("Failed to load font '\(name)'.")
+				print("Failed to load font '\(name)'.")
 			}
 		}
 		

@@ -235,7 +235,7 @@ extension Layer {
 		account initial velocity or to have a more realistic physical simulation, see Layer.animators. */
 	public class func animateWithDuration(duration: NSTimeInterval, curve: AnimationCurve, animations: () -> Void, completionHandler: (() -> Void)? = nil) {
 		#if os(iOS)
-		var curveOption: UIViewAnimationOptions = nil
+		var curveOption: UIViewAnimationOptions
 		switch curve {
 		case .Linear:
 			curveOption = .CurveLinear
@@ -246,7 +246,7 @@ extension Layer {
 		case .EaseInOut:
 			curveOption = .CurveEaseInOut
 		}
-		UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction | curveOption, animations: animations, completion: { _ in completionHandler?(); return })
+		UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction.union(curveOption), animations: animations, completion: { _ in completionHandler?(); return })
 		#else
 		println("Sorry, animateWithDuration() isn't available on OS X yet!")
 			completionHandler?()

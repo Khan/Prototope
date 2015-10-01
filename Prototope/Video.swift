@@ -9,7 +9,7 @@
 import AVFoundation
 
 /** Represents a video object. Can be any kind iOS natively supports. */
-public struct Video: Printable {
+public struct Video: CustomStringConvertible {
 	
 	let name: String
 	let player: AVPlayer

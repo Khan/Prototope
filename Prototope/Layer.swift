@@ -29,7 +29,7 @@
 		redLayer.backgroundColor = Color.red
 		redLayer.frame = Rect(x: 50, y: 50, width: 100, height: 100)
 */
-public class Layer: Equatable, Hashable {
+public class Layer: Equatable {
 
 	// MARK: Creating and identifying layers
 
@@ -42,7 +42,7 @@ public class Layer: Equatable, Hashable {
 		self.name = name
 
 		if let viewClass = viewClass {
-			self.view = viewClass()
+			self.view = viewClass.init()
 		} else {
 			self.view = TouchForwardingImageView() // TODO: dynamically switch the view type depending on whether we're using an image or not
 		}
@@ -87,7 +87,7 @@ public class Layer: Equatable, Hashable {
 	public weak var parent: Layer? {
 		willSet {
 			if let parent = self.parent {
-				parent.sublayers.removeAtIndex(find(parent.sublayers, self)!)
+				parent.sublayers.removeAtIndex(parent.sublayers.indexOf(self)!)
 				view.removeFromSuperview()
 			}
 		}
@@ -131,7 +131,7 @@ public class Layer: Equatable, Hashable {
 
 	/** Returns the sublayer whose name matches the argument, or nil if it is not found. */
 	public func sublayerNamed(name: String) -> Layer? {
-		return filter(sublayers){ $0.name == name }.first
+		return sublayers.filter{ $0.name == name }.first
 	}
 
 	/** Returns the descendent (at any level) whose name matches the argument, or nil
@@ -160,7 +160,7 @@ public class Layer: Equatable, Hashable {
 			a.descendentAtPath(["foo", "bar"]) // returns c
 			a.descendentAtPath(["foo", "quux"]) // returns nil */
 	public func descendentAtPath(pathElements: [String]) -> Layer? {
-		return reduce(pathElements, self) { $0?.sublayerNamed($1) }
+		return pathElements.reduce(self) { $0?.sublayerNamed($1) }
 	}
 
 	/** Attempts to find a layer in the series of parent layers between the receiver and
@@ -423,7 +423,7 @@ public class Layer: Equatable, Hashable {
 		a 0 width. */
 	public var border: Border {
 		get {
-			return Border(color: Color(SystemColor(CGColor: layer.borderColor)!), width: Double(layer.borderWidth))
+			return Border(color: Color(SystemColor(CGColor: layer.borderColor!)), width: Double(layer.borderWidth))
 		}
 		set {
 			layer.borderColor = newValue.color.uiColor.CGColor
@@ -439,7 +439,7 @@ public class Layer: Equatable, Hashable {
 			let layer = self.layer
 			let color: Color
 			if let shadowColor = layer.shadowColor {
-				let systemColor = SystemColor(CGColor: shadowColor)!
+				let systemColor = SystemColor(CGColor: shadowColor)
 				color = Color(systemColor)
 			} else {
 				color = Color.black
@@ -725,7 +725,7 @@ public class Layer: Equatable, Hashable {
 	// MARK: - Internal interfaces
 
 	private func _shouldMaskToBounds() -> Bool {
-		if let image = image {
+		if image != nil {
 			if (self.shadow.alpha > 0 && self.cornerRadius > 0) {
 				var prefix: String = "layers"
 				if let offendingLayer = self.name {
@@ -778,7 +778,7 @@ public class Layer: Equatable, Hashable {
         self.parentView = hostingView
 		self.frame = Rect(hostingView.bounds)
 		#if os(iOS)
-			self.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+			self.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
 		#else
 			self.view.autoresizingMask = NSAutoresizingMaskOptions.ViewWidthSizable | NSAutoresizingMaskOptions.ViewHeightSizable
 			
@@ -805,7 +805,7 @@ public class Layer: Equatable, Hashable {
 	// MARK: Touch handling implementation
 
 	class TouchForwardingImageView: SystemImageView {
-		required init(coder aDecoder: NSCoder) {
+		required init?(coder aDecoder: NSCoder) {
 			fatalError("This method intentionally not implemented.")
 		}
 
@@ -830,7 +830,7 @@ public class Layer: Equatable, Hashable {
 			// Try to hit test the presentation layer instead of the model layer.
 			if let presentationLayer = layer.presentationLayer() as? CALayer {
 				let screenPoint = layer.convertPoint(point, toLayer: nil)
-				let presentationLayerPoint = layer.presentationLayer().convertPoint(screenPoint, fromLayer: nil)
+				let presentationLayerPoint = presentationLayer.convertPoint(screenPoint, fromLayer: nil)
 				return super.pointInside(presentationLayerPoint, withEvent: event)
 			} else {
 				return super.pointInside(point, withEvent: event)
@@ -840,7 +840,7 @@ public class Layer: Equatable, Hashable {
 		private typealias TouchSequenceMapping = [UITouchID: UITouchSequence]
 		private var activeTouchSequences = TouchSequenceMapping()
 
-		private func handleTouches(touches: NSSet, event: UIEvent, touchesHandler: TouchesHandler?, touchHandler: TouchHandler?, touchSequenceMappingMergeFunction: (TouchSequenceMapping, TouchSequenceMapping) -> TouchSequenceMapping) -> Bool {
+		private func handleTouches(touches: NSSet, event: UIEvent?, touchesHandler: TouchesHandler?, touchHandler: TouchHandler?, touchSequenceMappingMergeFunction: (TouchSequenceMapping, TouchSequenceMapping) -> TouchSequenceMapping) -> Bool {
 			precondition(touchesHandler == nil || touchHandler == nil, "Can't set both a touches*Handler and a touch*Handler")
 
 			let newSequenceMappings = incorporateTouches(touches, intoTouchSequenceMappings: activeTouchSequences)
@@ -861,33 +861,33 @@ public class Layer: Equatable, Hashable {
 
 		var touchesBeganHandler: TouchesHandler?
 		var touchBeganHandler: TouchHandler?
-		override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) -> Void {
+		override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) -> Void {
 			if !handleTouches(touches, event: event, touchesHandler: touchesBeganHandler, touchHandler: touchBeganHandler, touchSequenceMappingMergeFunction: +) {
-				super.touchesBegan(touches as Set<NSObject>, withEvent: event)
+				super.touchesBegan(touches, withEvent: event)
 			}
 		}
 
 		var touchesMovedHandler: TouchesHandler?
 		var touchMovedHandler: TouchHandler?
-		override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+		override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 			if !handleTouches(touches, event: event, touchesHandler: touchesMovedHandler, touchHandler: touchMovedHandler, touchSequenceMappingMergeFunction: +) {
-				super.touchesMoved(touches as Set<NSObject>, withEvent: event)
+				super.touchesMoved(touches, withEvent: event)
 			}
 		}
 
 		var touchesEndedHandler: TouchesHandler?
 		var touchEndedHandler: TouchHandler?
-		override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+		override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
 			if !handleTouches(touches, event: event, touchesHandler: touchesEndedHandler, touchHandler: touchEndedHandler, touchSequenceMappingMergeFunction: -) {
-				super.touchesEnded(touches as Set<NSObject>, withEvent: event)
+				super.touchesEnded(touches, withEvent: event)
 			}
 		}
 
 		var touchesCancelledHandler: TouchesHandler?
 		var touchCancelledHandler: TouchHandler?
-		override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
-			if !handleTouches(touches, event: event, touchesHandler: touchesCancelledHandler, touchHandler: touchCancelledHandler, touchSequenceMappingMergeFunction: -) {
-				super.touchesCancelled(touches as Set<NSObject>, withEvent: event)
+		override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+			if !handleTouches(touches!, event: event, touchesHandler: touchesCancelledHandler, touchHandler: touchCancelledHandler, touchSequenceMappingMergeFunction: -) {
+				super.touchesCancelled(touches, withEvent: event)
 			}
 		}
 		#else
@@ -946,7 +946,7 @@ public class Layer: Equatable, Hashable {
 			setNeedsLayout()
 		}
 
-		required init(coder aDecoder: NSCoder) {
+		required init?(coder aDecoder: NSCoder) {
 			fatalError("init(coder:) has intentionally not been implemented")
 		}
 
@@ -969,7 +969,7 @@ extension Layer: Hashable {
 	}
 }
 
-extension Layer: Printable {
+extension Layer: CustomStringConvertible {
 	public var description: String {
 		var output = ""
 		if let name = name {
@@ -989,7 +989,7 @@ public func ==(a: Layer, b: Layer) -> Bool {
 private typealias UITouchSequence = TouchSequence<UITouchID>
 
 private func touchSequencesFromTouchSet(touches: NSSet) -> [UITouchSequence] {
-	return map(touches) {
+	return touches.map {
 		let touch = $0 as! UITouch
 		return TouchSequence(samples: [TouchSample(touch)], id: UITouchID(touch))
 	}

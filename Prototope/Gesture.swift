@@ -29,14 +29,14 @@ public struct TouchSample: SampleType {
 	}
 }
 
-extension TouchSample: Printable {
+extension TouchSample: CustomStringConvertible {
 	public var description: String {
 		return "<TouchSample: globalLocation: \(globalLocation), timestamp: \(timestamp)>"
 	}
 }
 
 /** Only public because Swift requires it. Intended to be an opaque wrapper of UITouches. */
-public struct UITouchID: Hashable, Printable {
+public struct UITouchID: Hashable, CustomStringConvertible {
 	init(_ touch: UITouch) {
 		self.touch = touch
 		if UITouchID.touchesToIdentifiers[touch] == nil {
@@ -117,7 +117,7 @@ public class TapGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
 
 	public weak var hostLayer: Layer? {
-		didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
+		didSet { handleTransferOfGesture(self, fromLayer: oldValue, toLayer: hostLayer) }
 	}
 
 	@objc class TapGestureHandler: NSObject {
@@ -176,7 +176,7 @@ public class PanGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
 
 	public weak var hostLayer: Layer? {
-		didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
+		didSet { handleTransferOfGesture(self, fromLayer: oldValue, toLayer: hostLayer) }
 	}
 
 	deinit {
@@ -278,7 +278,7 @@ public class RotationGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
     
     public weak var hostLayer: Layer? {
-        didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
+        didSet { handleTransferOfGesture(self, fromLayer: oldValue, toLayer: hostLayer) }
     }
     
     deinit {
@@ -376,7 +376,7 @@ public class PinchGesture: GestureType {
     public var shouldRecognizeSimultaneouslyWithGesture: GestureType -> Bool
     
     public weak var hostLayer: Layer? {
-        didSet { handleTransferOfGesture(self, oldValue, hostLayer) }
+        didSet { handleTransferOfGesture(self, fromLayer: oldValue, toLayer: hostLayer) }
     }
     
     deinit {
@@ -436,7 +436,7 @@ public enum ContinuousGesturePhase {
 	case Cancelled
 }
 
-extension ContinuousGesturePhase: Printable {
+extension ContinuousGesturePhase: CustomStringConvertible {
 	public var description: String {
 		switch self {
 		case .Began:
@@ -470,14 +470,14 @@ private extension ContinuousGesturePhase {
 
 // MARK: - Samples and sequences
 
-public protocol SampleType: Printable {
+public protocol SampleType: CustomStringConvertible {
     
 }
 
 // MARK: SampleSequenceType
-public protocol SampleSequenceType : Printable {
+public protocol SampleSequenceType : CustomStringConvertible {
     typealias Sample
-    typealias ID : Printable
+    typealias ID : CustomStringConvertible
     
     var samples: [Sample] { get }
     
@@ -511,9 +511,9 @@ public func +<Seq: SampleSequenceType>(a: Seq, b: Seq) -> Seq {
 /** Represents a series of samples over time.
     Provides convenience methods for accessing samples that might be relevant
     when processing gestures. */
-public struct SampleSequence<S: SampleType, I: Printable> : SampleSequenceType {
-    typealias Sample = S
-    typealias ID = I
+public struct SampleSequence<S: SampleType, I: CustomStringConvertible> : SampleSequenceType {
+    public typealias Sample = S
+    public typealias ID = I
 
     /** Samples ordered by arrival time. */
     public let samples: [Sample]
@@ -560,9 +560,9 @@ public struct SampleSequence<S: SampleType, I: Printable> : SampleSequenceType {
 /** Represents a series of touch samples over time.
 This is a decorator on SampleSequence, specializing it to use touch samples
 and extending it with velocity calculation and smoothing methods */
-public struct TouchSequence<I: Printable> : SampleSequenceType {
-    typealias Sample = TouchSample
-    typealias ID = I
+public struct TouchSequence<I: CustomStringConvertible> : SampleSequenceType {
+    public typealias Sample = TouchSample
+    public typealias ID = I
     
     /** Inner sequence */
     private let sequence: SampleSequence<TouchSample, ID>

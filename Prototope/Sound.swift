@@ -10,7 +10,7 @@ import AVFoundation
 import Foundation
 
 /** Provides a simple way to play sound files. Supports .aif, .aiff, .wav, and .caf files. */
-public struct Sound: Printable {
+public struct Sound: CustomStringConvertible {
 
 	private let player: AVAudioPlayer
 	private let name: String!
@@ -19,7 +19,7 @@ public struct Sound: Printable {
 		try all the valid extensions. */
 	public init?(name: String) {
 		if let data = Environment.currentEnvironment!.soundProvider(name) {
-			player = AVAudioPlayer(data: data, error: nil)
+			player = try! AVAudioPlayer(data: data)
 			player.prepareToPlay()
 			self.name = name
 		} else {
@@ -62,13 +62,13 @@ public struct Sound: Printable {
 
 	// Fancy scheme to keep playing AVAudioPlayers from deallocating while they're playing.
 	@objc private class AVAudioPlayerDelegate: NSObject, AVFoundation.AVAudioPlayerDelegate {
-		@objc func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+		@objc func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
 			player.delegate = nil
 			playingAVAudioPlayers.remove(player)
 			playingAVAudioPlayerDelegates.remove(self)
 		}
 
-		@objc func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
+		@objc func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?) {
 			player.delegate = nil
 			playingAVAudioPlayers.remove(player)
 			playingAVAudioPlayerDelegates.remove(self)
