@@ -63,7 +63,7 @@ public struct Environment {
 			soundProvider: { name in
 				for fileExtension in Sound.supportedExtensions {
 					if let URL = NSBundle.mainBundle().URLForResource(name, withExtension: fileExtension) {
-						return NSData(contentsOfURL: URL, options: nil, error: nil)
+						return try? NSData(contentsOfURL: URL, options: [])
 					}
 				}
 				return nil

@@ -23,7 +23,7 @@
 
 
 /** A simple abstraction for a bitmap image. */
-public struct Image: Printable {
+public struct Image: CustomStringConvertible {
 	
 
 	/** The size of the image, in points. */
