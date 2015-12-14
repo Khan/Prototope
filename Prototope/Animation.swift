@@ -82,15 +82,7 @@ public class LayerAnimatorStore {
             }
         } as! POPAnimatableProperty
         origin = Animator(layer: layer, property: animatableOrigin)
-        
-		#if os(iOS)
-		position = Animator(layer: layer, propertyName: kPOPLayerPosition)
-			#else
-			// I suspect all the kPOPLayer* properties should *not* be used on our Layer's UIView, but instead its CALayer.
-			// This was causing crashes on OS X.
-			// I suspect it works on iOS because UIView forwards things like position to its layer, but NSView does not.
-			position = Animator(layer: layer, propertyName: kPOPLayerPosition, shouldAnimateLayer: true)
-		#endif
+		position = Animator(layer: layer, propertyName: kPOPLayerPosition, shouldAnimateLayer: true)
 		size = Animator(layer: layer, propertyName: kPOPLayerSize)
 		bounds = Animator(layer: layer, propertyName: kPOPLayerBounds)
 		frame = Animator(layer: layer, propertyName: kPOPViewFrame)
