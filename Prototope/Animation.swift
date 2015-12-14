@@ -288,7 +288,7 @@ extension Rect: AnimatorValueConvertible {
 
 extension Color: AnimatorValueConvertible {
 	public func toAnimatorValue() -> AnyObject {
-		return self.uiColor
+		return self.systemColor
 	}
 }
 

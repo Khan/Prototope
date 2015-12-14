@@ -17,26 +17,26 @@
 
 /** A simple representation of color. */
 public struct Color {
-	let uiColor: SystemColor
+	let systemColor: SystemColor
 	
 	/** The underlying CGColor of this colour. */
 	var CGColor: CGColorRef {
-		return self.uiColor.CGColor
+		return self.systemColor.CGColor
 	}
 
 	/** Constructs a color from RGB and alpha values. Arguments range from 0.0 to 1.0. */
 	public init(red: Double, green: Double, blue: Double, alpha: Double = 1.0) {
-		uiColor = SystemColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
+		systemColor = SystemColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
 	}
 
 	/** Constructs a grayscale color. Arguments range from 0.0 to 1.0.  */
 	public init(white: Double, alpha: Double = 1.0) {
-		uiColor = SystemColor(white: CGFloat(white), alpha: CGFloat(alpha))
+		systemColor = SystemColor(white: CGFloat(white), alpha: CGFloat(alpha))
 	}
 
 	/** Constructs a color from HSB and alpha values. Arguments range from 0.0 to 1.0. */
 	public init(hue: Double, saturation: Double, brightness: Double, alpha: Double = 1.0) {
-		uiColor = SystemColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: CGFloat(brightness), alpha: CGFloat(alpha))
+		systemColor = SystemColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: CGFloat(brightness), alpha: CGFloat(alpha))
 	}
 
 	/** Construct a color from a hex value and with alpha from 0.0 - 1.0.
@@ -46,7 +46,7 @@ public struct Color {
 	    var r = CGFloat((hex >> 16) & 0xff) / 255.0
 	    var g = CGFloat((hex >> 8) & 0xff) / 255.0
 	    var b = CGFloat(hex & 0xff) / 255.0
-	    uiColor = SystemColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(alpha))
+	    systemColor = SystemColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(alpha))
 	}
 
 	/** Construct an opaque color from a hex value
@@ -57,8 +57,8 @@ public struct Color {
 	}
 
 	/** Constructs a Color from a UIColor. */
-	init(_ uiColor: SystemColor) {
-		self.uiColor = uiColor
+	init(_ systemColor: SystemColor) {
+		self.systemColor = systemColor
 	}
 
 	public static var black: Color { return Color(SystemColor.blackColor()) }

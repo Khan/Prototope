@@ -83,7 +83,7 @@ public class TextLayer: Layer {
 
 	public var textColor: Color {
 		get { return Color(label.textColor) }
-		set { label.textColor = newValue.uiColor }
+		set { label.textColor = newValue.systemColor }
 	}
 
 	public var wraps: Bool {

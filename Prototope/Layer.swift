@@ -393,7 +393,7 @@ public class Layer: Equatable, Hashable {
 		shadows. Defaults to nil. Animatable. */
 	public var backgroundColor: Color? {
 		get { return view.backgroundColor != nil ? Color(view.backgroundColor!) : nil }
-		set { view.backgroundColor = newValue?.uiColor }
+		set { view.backgroundColor = newValue?.systemColor }
 	}
 
 	/** The layer's opacity (from 0 to 1). Animatable. Defaults to 1. */
@@ -426,7 +426,7 @@ public class Layer: Equatable, Hashable {
 			return Border(color: Color(SystemColor(CGColor: layer.borderColor)!), width: Double(layer.borderWidth))
 		}
 		set {
-			layer.borderColor = newValue.color.uiColor.CGColor
+			layer.borderColor = newValue.color.systemColor.CGColor
 			layer.borderWidth = CGFloat(newValue.width)
 		}
 	}
@@ -448,7 +448,7 @@ public class Layer: Equatable, Hashable {
 			return Shadow(color: color, alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
 		}
 		set {
-			layer.shadowColor = newValue.color.uiColor.CGColor
+			layer.shadowColor = newValue.color.systemColor.CGColor
 			layer.shadowOpacity = Float(newValue.alpha)
 			layer.shadowOffset = CGSize(newValue.offset)
 			layer.shadowRadius = CGFloat(newValue.radius)
