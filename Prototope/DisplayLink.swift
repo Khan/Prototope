@@ -6,6 +6,12 @@
 //  Copyright (c) 2015 Khan Academy. All rights reserved.
 //
 
+/******************************************
+
+OS X Only, folks
+(also it's currently pretty broken, sorry!)
+
+*/
 import AppKit
 
 
