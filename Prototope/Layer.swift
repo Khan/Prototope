@@ -1038,7 +1038,7 @@ private func incorporateTouches(touches: NSSet, intoTouchSequenceMappings mappin
 				if let systemColor = newValue {
 					self.layer?.backgroundColor = systemColor.CGColor
 				} else {
-					self.layer?.backgroundColor = SystemColor.clearColor().CGColor
+					self.layer?.backgroundColor = nil
 				}
 			}
 		}
