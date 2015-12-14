@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 Khan Academy. All rights reserved.
 //
 
+/////////////////////////////////////////////
+// OS X Only
+/////////////////////////////////////////////
+
 import AppKit
 
 /* Represents input from a person, like pointer (mouse) or keyboard. */
