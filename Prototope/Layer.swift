@@ -1020,7 +1020,8 @@ private func incorporateTouches(touches: NSSet, intoTouchSequenceMappings mappin
 	
 	extension SystemView {
 		func setNeedsLayout() {
-			setNeedsLayout(true)
+			// TODO(jb): What's the OS X equiv of this again?
+			// no-op?
 		}
 		
 		func layoutSubviews() {
