@@ -46,6 +46,7 @@ public struct Color {
 	    let r = CGFloat((hex >> 16) & 0xff) / 255.0
 	    let g = CGFloat((hex >> 8) & 0xff) / 255.0
 	    let b = CGFloat(hex & 0xff) / 255.0
+		
 	    systemColor = SystemColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(alpha))
 	}
 
