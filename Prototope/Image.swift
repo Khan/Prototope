@@ -56,3 +56,29 @@ public struct Image: CustomStringConvertible {
 		return self.name
 	}
 }
+
+
+extension Image {
+	
+	/** Creates an image by rendering the given text into an image. */
+	public init(text: String, font: SystemFont = SystemFont.boldSystemFontOfSize(SystemFont.systemFontSize()), textColor: Color = Color.black) {
+		
+		self.init(Image.imageFromText(text, font: font, textColor: textColor))
+	}
+	
+	static func imageFromText(text: String, font: SystemFont = SystemFont.boldSystemFontOfSize(SystemFont.systemFontSize()), textColor: Color = Color.black) -> SystemImage {
+		let attributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: textColor.systemColor]
+		let size = (text as NSString).sizeWithAttributes(attributes)
+		
+		let isOpaque = false
+		let automaticScale: CGFloat = 0.0
+		UIGraphicsBeginImageContextWithOptions(size, isOpaque, automaticScale)
+		(text as NSString).drawAtPoint(CGPoint(), withAttributes: attributes)
+		
+		let image = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		return image
+	}
+}
+
