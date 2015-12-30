@@ -6,7 +6,11 @@
 //  Copyright (c) 2015 Khan Academy. All rights reserved.
 //
 
-import UIKit
+#if os(iOS)
+	import UIKit
+#else
+	import AppKit
+#endif
 import AVFoundation
 
 /** This layer can play a video object. */
@@ -50,11 +54,16 @@ public class VideoLayer: Layer {
 	
 	
 	/** Underlying video view class. */
-	private class VideoView: UIView {
-		
+	private class VideoView: SystemView {
+		#if os(iOS)
 		override class func layerClass() -> AnyClass {
 			return AVPlayerLayer.self
 		}
+		#else
+		override func makeBackingLayer() -> CALayer {
+			return AVPlayerLayer()
+		}
+		#endif
 	}
 }
 

@@ -78,9 +78,15 @@ public class CameraLayer: Layer {
 	}
 
 	/** Underlying camera view class. */
-	private class CameraView: UIView {
+	private class CameraView: SystemView {
+		#if os(iOS)
 		override class func layerClass() -> AnyClass {
 			return AVCaptureVideoPreviewLayer.self
 		}
+		#else
+		override func makeBackingLayer() -> CALayer {
+			return AVCaptureVideoPreviewLayer()
+		}
+		#endif
 	}
 }
