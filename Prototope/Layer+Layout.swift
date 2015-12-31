@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Khan Academy. All rights reserved.
 //
 
-import UIKit
 
 /** Positioning layers. */
 extension Layer {

@@ -6,7 +6,14 @@
 //  Copyright (c) 2014 Khan Academy. All rights reserved.
 //
 
-import UIKit
+
+#if os(iOS)
+	import UIKit
+	public typealias SystemView = UIView
+	#else
+	import AppKit
+	public typealias SystemView = NSView
+#endif
 
 /**
 	Layers are the fundamental building block of Prototope.
@@ -30,7 +37,7 @@ public class Layer: Equatable, Hashable {
 	public class var root: Layer! { return Environment.currentEnvironment?.rootLayer }
 
 	/** Creates a layer with an optional parent and name. */
-	public init(parent: Layer? = Layer.root, name: String? = nil, viewClass: UIView.Type? = nil) {
+	public init(parent: Layer? = Layer.root, name: String? = nil, viewClass: SystemView.Type? = nil) {
 		self.parent = parent ?? Layer.root
 		self.name = name
 
@@ -39,8 +46,11 @@ public class Layer: Equatable, Hashable {
 		} else {
 			self.view = TouchForwardingImageView() // TODO: dynamically switch the view type depending on whether we're using an image or not
 		}
+		
+		#if os(iOS)
 		self.view.multipleTouchEnabled = true
 		self.view.userInteractionEnabled = true
+		#endif
 
 		self.parentDidChange()
 
@@ -97,6 +107,7 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 	
+	#if os(iOS)
 	/** Brings the layer to the front of all sibling layers. */
 	public func comeToFront() {
 		if let parentView = self.parentView {
@@ -104,6 +115,16 @@ public class Layer: Equatable, Hashable {
 			self.parent?.sublayers.insert(self.parent!.sublayerAtFront!, atIndex: 0)
 		}
 	}
+	#else
+	public func comeToFront() {
+		if let parentView = self.parentView {
+			// TODO(jb): Should be doing this with parentView.sortSubviewsUsingFunction() but I don't want to deal with C function pointers in Swift / I don't think I can do this until Swift 2.0
+			let subview = self.view
+			subview.removeFromSuperview()
+			parentView.addSubview(subview)
+		}
+	}
+	#endif
 
 	/** Returns the sublayer which will be visually ordered to the front. */
 	public var sublayerAtFront: Layer? { return sublayers.last }
@@ -183,18 +204,33 @@ public class Layer: Equatable, Hashable {
 
     /** The position of the layer's origin point (the upper left-hand corner), 
         relative to the origin of its parent layer and expressed in the parent coordinate space. */
+	#if os(iOS) // TODO(jb): Why can't I put this #if block inside the var declaration?
     public var origin: Point {
         get { return Point(layer.frame.origin) }
         set { layer.frame.origin = CGPoint(newValue) }
+	}
+	#else
+	public var origin: Point {
+		get { return Point(view.frame.origin) }
+		set { view.setFrameOrigin(CGPoint(newValue)) }
     }
+	#endif
 
 	/** The position of the layer's anchor point (by default the center), relative to the
 		origin of its parent layer and expressed in the parent coordinate space.
 		Animatable. */
+	#if os(iOS)
 	public var position: Point {
 		get { return Point(layer.position) }
 		set { layer.position = CGPoint(newValue) }
 	}
+	#else
+	public var position: Point {
+		get { return view.frameCenter }
+		set { view.frameCenter = newValue }
+	}
+	#endif
+	
 
 	/** The layer's width, expressed in its own coordinate space. Animatable (but not yet
 		via the dynamic animators). */
@@ -219,8 +255,22 @@ public class Layer: Equatable, Hashable {
 	/** The origin and extent of the layer expressed in its parent layer's coordinate space.
 		Animatable. */
 	public var frame: Rect {
-		get { return Rect(layer.frame) }
-		set { layer.frame = CGRect(newValue) }
+		get {
+			// TODO(jb): Do we need to make this distinction? Can't UIKit's version just use view.frame instead of layer.frame?
+			// TODO(jb): Treat self.bounds the same way as here.
+			#if os(iOS)
+			return Rect(layer.frame)
+			#else
+			return Rect(self.view.frame)
+			#endif
+		}
+		set {
+			#if os(iOS)
+			layer.frame = CGRect(newValue)
+			#else
+			self.view.frame = CGRect(newValue)
+			#endif
+		}
 	}
 
 	/** The visible region of the layer, expressed in its own coordinate space. The x and y
@@ -298,6 +348,8 @@ public class Layer: Equatable, Hashable {
         }
 	}
 
+	// TODO(jb): Just being lazy now, this really needs to be ported to OS X
+	#if os(iOS)
 	/** Returns the layer's position in the root layer's coordinate space. */
 	public var globalPosition: Point {
 		get {
@@ -333,6 +385,7 @@ public class Layer: Equatable, Hashable {
 	public func convertLocalPointToGlobalPoint(localPoint: Point) -> Point {
 		return Point(view.convertPoint(CGPoint(localPoint), toCoordinateSpace: UIScreen.mainScreen().coordinateSpace))
 	}
+	#endif
 
 	// MARK: Appearance
 
@@ -340,7 +393,7 @@ public class Layer: Equatable, Hashable {
 		shadows. Defaults to nil. Animatable. */
 	public var backgroundColor: Color? {
 		get { return view.backgroundColor != nil ? Color(view.backgroundColor!) : nil }
-		set { view.backgroundColor = newValue?.uiColor }
+		set { view.backgroundColor = newValue?.systemColor }
 	}
 
 	/** The layer's opacity (from 0 to 1). Animatable. Defaults to 1. */
@@ -370,10 +423,10 @@ public class Layer: Equatable, Hashable {
 		a 0 width. */
 	public var border: Border {
 		get {
-			return Border(color: Color(UIColor(CGColor: layer.borderColor)!), width: Double(layer.borderWidth))
+			return Border(color: Color(SystemColor(CGColor: layer.borderColor)!), width: Double(layer.borderWidth))
 		}
 		set {
-			layer.borderColor = newValue.color.uiColor.CGColor
+			layer.borderColor = newValue.color.systemColor.CGColor
 			layer.borderWidth = CGFloat(newValue.width)
 		}
 	}
@@ -383,10 +436,19 @@ public class Layer: Equatable, Hashable {
 		generate a shadow. */
 	public var shadow: Shadow {
 		get {
-			return Shadow(color: Color(UIColor(CGColor: layer.shadowColor)!), alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
+			let layer = self.layer
+			let color: Color
+			if let shadowColor = layer.shadowColor {
+				let systemColor = SystemColor(CGColor: shadowColor)!
+				color = Color(systemColor)
+			} else {
+				color = Color.black
+			}
+				
+			return Shadow(color: color, alpha: Double(layer.shadowOpacity), offset: Size(layer.shadowOffset), radius: Double(layer.shadowRadius))
 		}
 		set {
-			layer.shadowColor = newValue.color.uiColor.CGColor
+			layer.shadowColor = newValue.color.systemColor.CGColor
 			layer.shadowOpacity = Float(newValue.alpha)
 			layer.shadowOffset = CGSize(newValue.offset)
 			layer.shadowRadius = CGFloat(newValue.radius)
@@ -394,6 +456,9 @@ public class Layer: Equatable, Hashable {
 		}
 	}
     
+	
+	// TODO(jb): port masked layer stuff to OS X.
+	#if os(iOS)
     /** The mask layer is used to clip or filter the contents of a layer. Those contents will be
         rendered only where the mask layer's contents are opaque. Partially transparent regions
         of the mask layer will result in partially transparent renderings of the host layer.
@@ -415,7 +480,46 @@ public class Layer: Equatable, Hashable {
     }
     
     private weak var maskedLayer: Layer?
+	#endif
 
+	
+	// MARK: Particles
+	
+	/** An array of the layer's particle emitters. */
+	private var particleEmitters: [ParticleEmitter] = []
+	
+	
+	/** Adds the particle emitter to the layer. */
+	public func addParticleEmitter(particleEmitter: ParticleEmitter, forDuration duration: TimeInterval? = nil) {
+		self.particleEmitters.append(particleEmitter)
+		self.layer.addSublayer(particleEmitter.emitterLayer)
+		particleEmitter.emitterLayer.frame = self.layer.bounds
+		particleEmitter.size = self.size
+		particleEmitter.position = Point(particleEmitter.emitterLayer.position)
+		
+		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
+		self.layer.masksToBounds = false
+		
+		if let duration = duration {
+			afterDuration(duration) {
+				self.removeParticleEmitter(particleEmitter)
+			}
+		}
+	}
+	
+	
+	/** Removes the given particle emitter from the layer. */
+	public func removeParticleEmitter(particleEmitter: ParticleEmitter) {
+		particleEmitter.emitterLayer.removeFromSuperlayer()
+		self.particleEmitters = self.particleEmitters.filter {
+			(emitter: ParticleEmitter) -> Bool in
+			return emitter !== particleEmitter
+		}
+	}
+	
+	
+	// TODO(jb): Port touches / gestures to OS X? What makes sense here?
+	#if os(iOS)
     // MARK: Touches and gestures
 
 	/** When false, touches that hit this layer or its sublayers are discarded. Defaults
@@ -425,41 +529,7 @@ public class Layer: Equatable, Hashable {
 		set { view.userInteractionEnabled = newValue }
 	}
 
-
-	// MARK: Particles
-
-	/** An array of the layer's particle emitters. */
-	private var particleEmitters: [ParticleEmitter] = []
-
-
-	/** Adds the particle emitter to the layer. */
-	public func addParticleEmitter(particleEmitter: ParticleEmitter, forDuration duration: TimeInterval? = nil) {
-		self.particleEmitters.append(particleEmitter)
-		self.view.layer.addSublayer(particleEmitter.emitterLayer)
-		particleEmitter.emitterLayer.frame = self.view.layer.bounds
-		particleEmitter.size = self.size
-		particleEmitter.position = Point(particleEmitter.emitterLayer.position)
-
-		// TODO(jb): Should we disable bounds clipping on self.view.layer or instruct devs to instead emit the particles from a parent layer?
-		self.view.layer.masksToBounds = false
-
-		if let duration = duration {
-			afterDuration(duration) {
-				self.removeParticleEmitter(particleEmitter)
-			}
-		}
-	}
-
-
-	/** Removes the given particle emitter from the layer. */
-	public func removeParticleEmitter(particleEmitter: ParticleEmitter) {
-		particleEmitter.emitterLayer.removeFromSuperlayer()
-		self.particleEmitters = self.particleEmitters.filter {
-			(emitter: ParticleEmitter) -> Bool in
-			return emitter !== particleEmitter
-		}
-	}
-
+	
 	/** An array of the layer's gestures. Append a gesture to this list to add it to the layer.
 
 		Gestures are like a higher-level abstraction than the Layer touch handler API. For
@@ -579,6 +649,58 @@ public class Layer: Equatable, Hashable {
 		}
 		return accumulator
 	}
+	#endif // touch + gesture stuff
+	
+	// MARK: Mouse handling
+	#if os(OSX)
+	
+	/** This type is used for handling mouse input events. */
+	public typealias MouseHandler = InputEvent -> Void
+	
+	/** Called when the mouse button is clicked down. */
+	public var mouseDownHandler: MouseHandler? {
+		get { return imageView?.mouseDownHandler }
+		set { imageView?.mouseDownHandler = newValue}
+	}
+	
+	
+	/** Called when the mouse buttin is dragged. */
+	public var mouseDraggedHandler: MouseHandler? {
+		get { return imageView?.mouseDraggedHandler }
+		set { imageView?.mouseDraggedHandler = newValue}
+	}
+	
+	
+	/** Called when the mouse button is released. */
+	public var mouseUpHandler: MouseHandler? {
+		get { return imageView?.mouseUpHandler }
+		set { imageView?.mouseUpHandler = newValue}
+	}
+	
+	
+	/** Called when the mouse enters the layer. */
+	public var mouseEnteredHandler: MouseHandler? {
+		get { return imageView?.mouseEnteredHandler }
+		set { imageView?.mouseEnteredHandler = newValue}
+	}
+	
+	
+	/** Called when the mouse exits the layer. */
+	public var mouseExitedHandler: MouseHandler? {
+		get { return imageView?.mouseExitedHandler }
+		set { imageView?.mouseExitedHandler = newValue}
+	}
+	
+	
+	
+	/** Called when the mouse moves at all on the layer. See also mouseDraggedHandler. */
+	public var mouseMovedHandler: MouseHandler? {
+		get { return imageView?.mouseMovedHandler }
+		set { imageView?.mouseMovedHandler = newValue}
+	}
+	
+	
+	#endif
 
 	// MARK: Convenience utilities
 
@@ -590,6 +712,7 @@ public class Layer: Equatable, Hashable {
 		}
 	}
 
+	
 	public func fadeOutAndRemoveAfterDuration(duration: NSTimeInterval) {
 		willBeRemovedSoon = true
 		Layer.animateWithDuration(duration, animations: {
@@ -637,52 +760,72 @@ public class Layer: Equatable, Hashable {
 
 	private func imageDidChange() {
 		if let image = image {
-			imageView?.image = image.uiImage
+			imageView?.image = image.systemImage
 			size = image.size
 			layer.masksToBounds = self._shouldMaskToBounds()
 		}
 	}
 
-	private init(wrappingView: UIView, name: String? = nil) {
+	private init(wrappingView: SystemView, name: String? = nil) {
 		view = wrappingView
 		self.name = name
 	}
     
     
 	/** Creates a new layer hosted by the given view. The layer wraps its own view, which is sized to the full dimensions of the hosting view. */
-    convenience init(hostingView: UIView, name: String? = nil) {
+    convenience init(hostingView: SystemView, name: String? = nil) {
         self.init()
         self.parentView = hostingView
 		self.frame = Rect(hostingView.bounds)
-		self.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+		#if os(iOS)
+			self.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+		#else
+			self.view.autoresizingMask = NSAutoresizingMaskOptions.ViewWidthSizable | NSAutoresizingMaskOptions.ViewHeightSizable
+			
+		#endif
     }
 
 	// MARK: UIKit mapping
 
-	var view: UIView
-	private var layer: CALayer { return view.layer }
+	var view: SystemView
+	private var layer: CALayer {
+		#if os(iOS)
+		return view.layer
+		#else
+		return view.layer!
+		#endif
+	}
 	private var imageView: TouchForwardingImageView? { return view as? TouchForwardingImageView }
 
-	private var parentView: UIView? {
+	private var parentView: SystemView? {
 		get { return view.superview }
 		set { newValue?.addSubview(view) }
 	}
 
 	// MARK: Touch handling implementation
 
-	class TouchForwardingImageView: UIImageView {
+	class TouchForwardingImageView: SystemImageView {
 		required init(coder aDecoder: NSCoder) {
 			fatalError("This method intentionally not implemented.")
 		}
 
 		override init(frame: CGRect) {
 			super.init(frame: frame)
+			#if os(OSX)
+				self.wantsLayer = true
+				
+				// TODO(jb): Can probably lazily add this when a mouse Entered/moved/exited event happens, so not all layers need to have tracking areas by default.
+				let options = NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.ActiveInActiveApp | NSTrackingAreaOptions.InVisibleRect
+				let trackingArea = NSTrackingArea(rect: self.visibleRect, options: options, owner: self, userInfo: nil)
+				self.addTrackingArea(trackingArea)
+			#endif
 		}
 
 		convenience init() {
 			self.init(frame: CGRect())
 		}
-
+		
+		#if os(iOS)
 		override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
 			// Try to hit test the presentation layer instead of the model layer.
 			if let presentationLayer = layer.presentationLayer() as? CALayer {
@@ -747,18 +890,59 @@ public class Layer: Equatable, Hashable {
 				super.touchesCancelled(touches as Set<NSObject>, withEvent: event)
 			}
 		}
+		#else
+		
+		// We want the coordinates to be flipped so they're the same as on iOS.
+		override var flipped: Bool {
+			return true
+		}
+		
+		var mouseDownHandler: MouseHandler?
+		override func mouseDown(event: NSEvent) {
+			mouseDownHandler?(InputEvent(event: event))
+		}
+		
+		
+		var mouseMovedHandler: MouseHandler?
+		override func mouseMoved(event: NSEvent) {
+			mouseMovedHandler?(InputEvent(event: event))
+		}
+		
+		
+		var mouseUpHandler: MouseHandler?
+		override func mouseUp(event: NSEvent) {
+			mouseUpHandler?(InputEvent(event: event))
+		}
+
+		var mouseDraggedHandler: MouseHandler?
+		override func mouseDragged(event: NSEvent) {
+			mouseDraggedHandler?(InputEvent(event: event))
+		}
+		var mouseEnteredHandler: MouseHandler?
+		override func mouseEntered(event: NSEvent) {
+			mouseEnteredHandler?(InputEvent(event: event))
+		}
+		var mouseExitedHandler: MouseHandler?
+		override func mouseExited(event: NSEvent) {
+			mouseExitedHandler?(InputEvent(event: event))
+		}
+		#endif
 	}
 
 	// MARK: CALayerWrappingView
 
-	class CALayerWrappingView: UIView {
+	class CALayerWrappingView: SystemView {
 		let wrappedLayer: CALayer
 		init(wrappedLayer: CALayer) {
 			self.wrappedLayer = wrappedLayer
 
 			super.init(frame: wrappedLayer.frame)
 
-			layer.addSublayer(wrappedLayer)
+			#if os(iOS)
+				layer.addSublayer(wrappedLayer)
+			#else
+				layer!.addSublayer(wrappedLayer)
+			#endif
 			setNeedsLayout()
 		}
 
@@ -771,6 +955,7 @@ public class Layer: Equatable, Hashable {
 		}
 	}
     
+
     public var behaviors: [BehaviorType] = [] {
         didSet {
             Environment.currentEnvironment?.behaviorDriver.updateWithLayer(self, behaviors: behaviors)
@@ -799,6 +984,8 @@ public func ==(a: Layer, b: Layer) -> Bool {
 	return a === b
 }
 
+
+#if os(iOS)
 private typealias UITouchSequence = TouchSequence<UITouchID>
 
 private func touchSequencesFromTouchSet(touches: NSSet) -> [UITouchSequence] {
@@ -820,3 +1007,47 @@ private func incorporateTouches(touches: NSSet, intoTouchSequenceMappings mappin
 	let updatedTouchSequences = incorporateTouchSequences(touchSequencesFromTouchSet(touches), intoTouchSequenceMappings: mappings)
 	return touchSequenceMappingsFromTouchSequences(updatedTouchSequences)
 }
+
+#endif
+
+
+#if os(iOS)
+	import UIKit
+	public typealias SystemImageView = UIImageView
+	#else
+	import AppKit
+	public typealias SystemImageView = NSImageView
+	
+	extension SystemView {
+		func setNeedsLayout() {
+			// TODO(jb): What's the OS X equiv of this again?
+			// no-op?
+		}
+		
+		func layoutSubviews() {
+			self.resizeSubviewsWithOldSize(self.frame.size)
+		}
+		
+		var backgroundColor: SystemColor? {
+			get { 
+				if let color = self.layer?.backgroundColor {
+					return SystemColor(CGColor: color)
+				}
+				return nil
+			}
+			set {
+				if let systemColor = newValue {
+					self.layer?.backgroundColor = systemColor.CGColor
+				} else {
+					self.layer?.backgroundColor = nil
+				}
+			}
+		}
+		
+		
+		var alpha: CGFloat {
+			get { return CGFloat(self.layer!.opacity) }
+			set { self.layer?.opacity = Float(self.alpha) }
+		}
+	}
+#endif

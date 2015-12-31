@@ -8,31 +8,46 @@
 
 import Foundation
 
+
+// TODO(jb): This belongs with Font
+#if os(iOS)
+	import UIKit
+	public typealias SystemFont = UIFont
+	#else
+	import AppKit
+	public typealias SystemFont = NSFont
+#endif
+
 /** Establishes an environment in which Prototope can execute. */
 public struct Environment {
+	
 	public let rootLayer: Layer
-	public let imageProvider: String -> UIImage?
+	public let imageProvider: String -> SystemImage?
 	public let soundProvider: String -> NSData?
-	public let fontProvider: (name: String, size: Double) -> UIFont?
+	public let fontProvider: (name: String, size: Double) -> SystemFont?
 	public let exceptionHandler: String -> Void
     let behaviorDriver: BehaviorDriver
 
 	public static var currentEnvironment: Environment?
 
-	public init(rootView: UIView, imageProvider: String -> UIImage?, soundProvider: String -> NSData?, fontProvider: (String, Double) -> UIFont?, exceptionHandler: String -> Void) {
+	public init(rootView: SystemView, imageProvider: String -> SystemImage?, soundProvider: String -> NSData?, fontProvider: (String, Double) -> SystemFont?, exceptionHandler: String -> Void) {
+		
 		self.rootLayer = Layer(hostingView: rootView, name: "Root")
 
+		#if os(iOS)
 		// TODO: move defaultSpec into Environment.
 		let gesture = defaultSpec.twoFingerTripleTapGestureRecognizer()
 		rootView.addGestureRecognizer(gesture)
 		gesture.cancelsTouchesInView = false
 		gesture.delaysTouchesEnded = false
+			
+		#endif
+		self.behaviorDriver = BehaviorDriver()
 
 		self.imageProvider = imageProvider
 		self.soundProvider = soundProvider
 		self.fontProvider = fontProvider
 		self.exceptionHandler = exceptionHandler
-        self.behaviorDriver = BehaviorDriver()
 	}
 
 	public static func runWithEnvironment(environment: Environment, action: () -> Void) {
@@ -41,10 +56,10 @@ public struct Environment {
 		action()
 	}
 
-	public static func defaultEnvironmentWithRootView(rootView: UIView) -> Environment {
+	public static func defaultEnvironmentWithRootView(rootView: SystemView) -> Environment {
 		return Environment(
 			rootView: rootView,
-			imageProvider: { UIImage(named: $0) },
+			imageProvider: { SystemImage(named: $0) },
 			soundProvider: { name in
 				for fileExtension in Sound.supportedExtensions {
 					if let URL = NSBundle.mainBundle().URLForResource(name, withExtension: fileExtension) {
@@ -54,7 +69,7 @@ public struct Environment {
 				return nil
 			},
 			fontProvider: { name, size in
-				return UIFont(name: name, size: CGFloat(size))
+				return SystemFont(name: name, size: CGFloat(size))
 			},
 			exceptionHandler: { exception in
 				fatalError("⚠️ Prototope exception: \(exception)")

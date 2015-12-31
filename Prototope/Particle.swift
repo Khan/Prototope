@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Khan Academy. All rights reserved.
 //
 
-import UIKit
+import QuartzCore
 
 
 /** Particles represent little pieces of some kind of animation, like confetti or rain drops or sparkles or flames, etc. */
@@ -18,10 +18,10 @@ public struct Particle {
 	
 	/** Create a new particle with the given image name and optional preset. */
 	public init(imageName: String, preset: ParticlePreset = .IKnowWhatImDoing) {
-		self.image = Image(name: imageName) ?? Image(UIImage())
+		self.image = Image(name: imageName) ?? Image(SystemImage())
 		
 		self.emitterCell = CAEmitterCell()
-		self.emitterCell.contents = self.image.uiImage.CGImage
+		self.emitterCell.contents = self.image.systemImage.CGImage
 		
 		preset.configureParticle(self)
 	}
@@ -109,7 +109,7 @@ public struct Particle {
 	
 	/** The colour of the particle. */
 	public var color: Color {
-		get { return Color(UIColor(CGColor: self.emitterCell.color)!) }
+		get { return Color(SystemColor(CGColor: self.emitterCell.color)!) }
 		set { self.emitterCell.color = newValue.CGColor }
 	}
 	

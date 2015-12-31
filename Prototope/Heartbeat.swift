@@ -26,7 +26,11 @@ public class Heartbeat {
 		properties from within the closure). */
 	public init(handler: Heartbeat -> ()) {
 		self.handler = handler
-		displayLink = CADisplayLink(target: self, selector: "handleDisplayLink:")
+		#if os(iOS)
+		displayLink = SystemDisplayLink(target: self, selector: "handleDisplayLink:")
+			#else
+			displayLink = SystemDisplayLink(heartbeatCallback: handleDisplayLink)
+			#endif
 		displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
 	}
 
@@ -38,10 +42,20 @@ public class Heartbeat {
     // MARK: Private interfaces
     
     private let handler: Heartbeat -> ()
-    private var displayLink: CADisplayLink!
+    private var displayLink: SystemDisplayLink!
     
-    @objc private func handleDisplayLink(sender: CADisplayLink) {
+    @objc private func handleDisplayLink(sender: SystemDisplayLink) {
         precondition(displayLink === sender)
         handler(self)
     }
 }
+
+
+#if os(iOS)
+	import UIKit
+	typealias SystemDisplayLink = CADisplayLink
+	#else
+	import AppKit
+	typealias SystemDisplayLink = DisplayLink
+#endif
+
