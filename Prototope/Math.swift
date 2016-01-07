@@ -25,7 +25,7 @@ public func interpolate(from fromValue: Double, to toValue: Double, at fraction:
 		map(value: 0.4, fromInterval: (0, 1), toInterval: (0, 10)) // Returns 4
 
 	Like Processing's map(). */
-public func map(value: Double, #fromInterval: (Double, Double), #toInterval: (Double, Double)) -> Double {
+public func map(value: Double, fromInterval: (Double, Double), toInterval: (Double, Double)) -> Double {
 	return interpolate(from: toInterval.0, to: toInterval.1, at: (value - fromInterval.0) / (fromInterval.1 - fromInterval.0))
 }
 

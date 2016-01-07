@@ -18,7 +18,7 @@ public class ParticleEmitter {
 	public init(particles: [Particle]) {
 		self.particles = particles
 		self.emitterLayer.emitterCells = self.particles.map {
-			(particle: Particle) -> AnyObject in
+			(particle: Particle) -> CAEmitterCell in
 			return particle.emitterCell
 		}
 	}
