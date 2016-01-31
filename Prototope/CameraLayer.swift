@@ -11,7 +11,7 @@ import AVFoundation
 
 /** A layer that shows the output of one of the device's cameras. Defaults to using the back camera. */
 public class CameraLayer: Layer {
-	public enum CameraPosition: Printable {
+	public enum CameraPosition: CustomStringConvertible {
 		/** The device's front-facing camera. */
 		case Front
 
@@ -53,9 +53,10 @@ public class CameraLayer: Layer {
 	private func updateSession() {
 		// Find device matching camera setting
 		let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo) as! [AVCaptureDevice]
-		if let device = filter(devices, { device in return device.position == self.cameraPosition.avCaptureDevicePosition }).first {
+		if let device = devices.filter({ device in return device.position == self.cameraPosition.avCaptureDevicePosition }).first {
 			var error: NSError?
-			if let input = AVCaptureDeviceInput(device: device, error: &error) {
+			do {
+				let input = try AVCaptureDeviceInput(device: device)
 				captureSession?.stopRunning()
 
 				captureSession = AVCaptureSession()
@@ -63,7 +64,8 @@ public class CameraLayer: Layer {
 				captureSession!.startRunning()
 				cameraLayer.session = captureSession!
 				cameraLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-			} else {
+			} catch let error1 as NSError {
+				error = error1
 				Environment.currentEnvironment!.exceptionHandler("Couldn't create camera device: \(error)")
 			}
 

@@ -58,7 +58,7 @@ public func ==(a: Point, b: Point) -> Bool {
 	return a.x == b.x && a.y == b.y
 }
 
-extension Point: Printable {
+extension Point: CustomStringConvertible {
 	public var description: String {
 		return "{x: \(x), y: \(y)}"
 	}
@@ -176,7 +176,7 @@ extension CGSize {
 	}
 }
 
-extension Size: Printable {
+extension Size: CustomStringConvertible {
 	public var description: String {
 		return "{width: \(width), height: \(height)}"
 	}
@@ -233,7 +233,7 @@ public struct Rect: Equatable {
 	}
     
     /** Returns a Rect constructed by insetting the receiver. */
-    public func inset(top: Double = 0, right: Double = 0, bottom: Double = 0, left: Double = 0) -> Rect {
+    public func inset(top top: Double = 0, right: Double = 0, bottom: Double = 0, left: Double = 0) -> Rect {
         if top + bottom > size.height {
             Environment.currentEnvironment?.exceptionHandler("Trying to inset \(self) with vertical insets (\(top),\(bottom)) greater than the height")
         } else if left + right > size.width {
@@ -295,7 +295,7 @@ extension CGRect {
 }
 
 
-extension Rect: Printable {
+extension Rect: CustomStringConvertible {
 	public var description: String {
 		return "{origin: \(origin), size: \(size)}"
 	}

@@ -254,14 +254,14 @@ public class ShapeLayer: Layer {
 			self.layer.setNeedsDisplay()
 		}
 		
-		@objc override func displayLayer(layer: CALayer!) {
+		@objc override func displayLayer(layer: CALayer) {
 			self.displayHandler?()
 		}
 	}
 	
 	
 	private func shapeViewLayerStyleDidChange() {
-		var layer = self.shapeViewLayer
+		let layer = self.shapeViewLayer
 		layer.lineCap = self.lineCapStyle.capStyleString()
 		layer.lineJoin = self.lineJoinStyle.joinStyleString()
 		
@@ -347,7 +347,7 @@ public class ShapeLayer: Layer {
 }
 
 /** A segment represents a point on a path, and may optionally have control handles for a curve on either side. */
-public struct Segment: Printable {
+public struct Segment: CustomStringConvertible {
 	
 	/** The anchor point / location of this segment. */
 	public var point: Point
