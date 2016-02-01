@@ -16,16 +16,16 @@ let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args 
 	let animationsHandler = args.valueForProperty("animations")
 	let completionHandler = args.valueForProperty("completionHandler")
 
-	if !durationValue.isUndefined() && !animationsHandler.isUndefined() {
+	if !durationValue.isUndefined && !animationsHandler.isUndefined {
 		let animationsHandler: () -> Void = {
 			animationsHandler.callWithArguments([])
 			return
 		}
-		let completionHandler: (() -> Void)? = completionHandler.isUndefined() ? nil : {
+		let completionHandler: (() -> Void)? = completionHandler.isUndefined ? nil : {
 			completionHandler.callWithArguments([])
 			return
 		}
-		if curveValue.isUndefined() {
+		if curveValue.isUndefined {
 			Prototope.Layer.animateWithDuration(
 				durationValue.toDouble(),
 				animations: animationsHandler,

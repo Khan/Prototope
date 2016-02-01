@@ -23,11 +23,11 @@ public struct TunableBridge: BridgeType {
 		let maxValue = args.objectForKeyedSubscript("max")
 		let maintainValue = args.objectForKeyedSubscript("changeHandler")
 
-		let name = nameValue.isUndefined() ? nil : nameValue.toString()
-		let defaultValue = defaultValueValue.isUndefined() ? nil : defaultValueValue.toNumber()
-		let min: Double? = minValue.isUndefined() ? nil : minValue.toDouble()
-		let max: Double? = maxValue.isUndefined() ? nil : maxValue.toDouble()
-		let maintain: JSValue? = maintainValue.isUndefined() ? nil : maintainValue
+		let name = nameValue.isUndefined ? nil : nameValue.toString()
+		let defaultValue = defaultValueValue.isUndefined ? nil : defaultValueValue.toNumber()
+		let min: Double? = minValue.isUndefined ? nil : minValue.toDouble()
+		let max: Double? = maxValue.isUndefined ? nil : maxValue.toDouble()
+		let maintain: JSValue? = maintainValue.isUndefined ? nil : maintainValue
 
 		if let name = name {
 			if let defaultValue = defaultValue {

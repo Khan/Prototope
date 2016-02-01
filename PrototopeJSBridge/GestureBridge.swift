@@ -32,7 +32,7 @@ import JavaScriptCore
 		let globalLocationValue = args.valueForProperty("globalLocation")
 		let timestampValue = args.valueForProperty("timestamp")
 
-		if !globalLocationValue.isUndefined() && !timestampValue.isUndefined() {
+		if !globalLocationValue.isUndefined && !timestampValue.isUndefined {
 			touchSample = Prototope.TouchSample(
 				globalLocation: (globalLocationValue.toObject() as! JSExport as! PointBridge).point,
 				timestamp: Prototope.Timestamp(timestampValue.toDouble())
@@ -98,7 +98,7 @@ extension JSValue: SampleType {}
 		let samplesValue = args.valueForProperty("samples")
 		let idValue = args.valueForProperty("id")
 
-		if !samplesValue.isUndefined() && !idValue.isUndefined() {
+		if !samplesValue.isUndefined && !idValue.isUndefined {
 			let sampleBridges = samplesValue.toArray().map { JSValue(object: $0, inContext: JSContext.currentContext())! }
 			sampleSequence = Prototope.SampleSequence(samples: sampleBridges, id: idValue)
 			super.init()
@@ -151,7 +151,7 @@ extension JSValue: SampleType {}
 		let samplesValue = args.valueForProperty("samples")
 		let idValue = args.valueForProperty("id")
 
-		if !samplesValue.isUndefined() && !idValue.isUndefined() {
+		if !samplesValue.isUndefined && !idValue.isUndefined {
 			let sampleBridges = samplesValue.toArray() as! [TouchSampleBridge]
 			touchSequence = Prototope.TouchSequence(
 				samples: sampleBridges.map { $0.touchSample },
@@ -257,15 +257,15 @@ func gestureForGestureBridge(gestureBridge: GestureBridgeType) -> GestureType {
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
-		if !handler.isUndefined() {
+		if !handler.isUndefined {
 			let cancelsTouchesInLayerValue = args.valueForProperty("cancelsTouchesInLayer")
-			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined() ? true : cancelsTouchesInLayerValue.toBool()
+			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined ? true : cancelsTouchesInLayerValue.toBool()
 
 			let numberOfTapsRequiredValue = args.valueForProperty("numberOfTapsRequired")
-			let numberOfTapsRequired = numberOfTapsRequiredValue.isUndefined() ? 1 : Int(numberOfTapsRequiredValue.toInt32())
+			let numberOfTapsRequired = numberOfTapsRequiredValue.isUndefined ? 1 : Int(numberOfTapsRequiredValue.toInt32())
 
 			let numberOfTouchesRequiredValue = args.valueForProperty("numberOfTouchesRequired")
-			let numberOfTouchesRequired = numberOfTouchesRequiredValue.isUndefined() ? 1 : Int(numberOfTouchesRequiredValue.toInt32())
+			let numberOfTouchesRequired = numberOfTouchesRequiredValue.isUndefined ? 1 : Int(numberOfTouchesRequiredValue.toInt32())
 
 			tapGesture = TapGesture(
 				cancelsTouchesInLayer: cancelsTouchesInLayer,
@@ -355,15 +355,15 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
-		if !handler.isUndefined() {
+		if !handler.isUndefined {
 			let cancelsTouchesInLayerValue = args.valueForProperty("cancelsTouchesInLayer")
-			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined() ? true : cancelsTouchesInLayerValue.toBool()
+			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined ? true : cancelsTouchesInLayerValue.toBool()
 
 			let minimumNumberOfTouchesValue = args.valueForProperty("minimumNumberOfTouches")
-			let minimumNumberOfTouches = minimumNumberOfTouchesValue.isUndefined() ? 1 : Int(minimumNumberOfTouchesValue.toInt32())
+			let minimumNumberOfTouches = minimumNumberOfTouchesValue.isUndefined ? 1 : Int(minimumNumberOfTouchesValue.toInt32())
 
 			let maximumNumberOfTouchesValue = args.valueForProperty("maximumNumberOfTouches")
-			let maximumNumberOfTouches = maximumNumberOfTouchesValue.isUndefined() ? Int.max : Int(maximumNumberOfTouchesValue.toInt32())
+			let maximumNumberOfTouches = maximumNumberOfTouchesValue.isUndefined ? Int.max : Int(maximumNumberOfTouchesValue.toInt32())
 
 			panGesture = PanGesture(
 				minimumNumberOfTouches: minimumNumberOfTouches,
@@ -450,9 +450,9 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
-		if !handler.isUndefined() {
+		if !handler.isUndefined {
 			let cancelsTouchesInLayerValue = args.valueForProperty("cancelsTouchesInLayer")
-			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined() ? true : cancelsTouchesInLayerValue.toBool()
+			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined ? true : cancelsTouchesInLayerValue.toBool()
 
 			rotationGesture = RotationGesture(
 				cancelsTouchesInLayer: cancelsTouchesInLayer,
@@ -534,9 +534,9 @@ public class ContinuousGesturePhaseBridge: NSObject, BridgeType {
 
 	public required init?(args: JSValue) {
 		let handler = args.valueForProperty("handler")
-		if !handler.isUndefined() {
+		if !handler.isUndefined {
 			let cancelsTouchesInLayerValue = args.valueForProperty("cancelsTouchesInLayer")
-			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined() ? true : cancelsTouchesInLayerValue.toBool()
+			let cancelsTouchesInLayer = cancelsTouchesInLayerValue.isUndefined ? true : cancelsTouchesInLayerValue.toBool()
 
 			pinchGesture = PinchGesture(
 				cancelsTouchesInLayer: cancelsTouchesInLayer,

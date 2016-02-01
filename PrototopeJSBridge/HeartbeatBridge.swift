@@ -27,7 +27,7 @@ import JavaScriptCore
 	required public init?(args: JSValue) {
 		super.init()
 		let handler = args.objectForKeyedSubscript("handler")
-		if !handler.isUndefined() {
+		if !handler.isUndefined {
 			heartbeat = Heartbeat { [weak self] heartbeat in
 				if let strongSelf = self {
 					handler.callWithArguments([strongSelf])

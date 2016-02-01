@@ -28,7 +28,7 @@ import JavaScriptCore
 let sayTrampoline: @objc_block JSValue -> Void = { args in
 	let text = args.valueForProperty("text")
 	
-	if !text.isUndefined() {
+	if !text.isUndefined {
 		Speech.say(text.toString())
 	}
 

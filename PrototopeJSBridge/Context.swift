@@ -18,7 +18,7 @@ public class Context {
 					if handlingException {
 						// Exception thrown while normalizing or presenting error -- this indicates a mistake in this code, but bail out here to prevent an infinite loop of exceptions
 						let stack = value.valueForProperty("stack")
-						println("JS error thrown while handling error:\n\(value)\n\n\(stack)")
+						print("JS error thrown while handling error:\n\(value)\n\n\(stack)")
 						abort()
 					}
 					handlingException = true
@@ -33,7 +33,7 @@ public class Context {
 	}
 
 	public var consoleLogHandler: (String -> Void)? = { str in
-		println(str)
+		print(str)
 	}
 
 	private let vm = JSVirtualMachine()
@@ -52,7 +52,7 @@ public class Context {
 
 	public func evaluateScript(script: String!) -> JSValue {
 		let transformed = context.objectForKeyedSubscript("Protoscope").invokeMethod("transform", withArguments: [script])
-		if transformed.isUndefined() {
+		if transformed.isUndefined {
 			// In case of a transform error, an exception will be thrown (and handled by the exception handler), so we get undefined back here and can pass that up in turn.
 			return transformed
 		}
@@ -86,7 +86,7 @@ public class Context {
 
 	private func loadRuntime() {
 		let path = NSBundle.mainBundle().pathForResource("protoscope-bundle", ofType: "js")
-		context.evaluateScript(String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil), withSourceURL: NSURL(string: "protoscope-bundle.js"))
+		context.evaluateScript(try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding), withSourceURL: NSURL(string: "protoscope-bundle.js"))
 	}
 
 	private func addBridgedTypes() {

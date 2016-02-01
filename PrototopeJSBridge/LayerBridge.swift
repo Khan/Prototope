@@ -110,7 +110,7 @@ import JavaScriptCore
     func moveToCenterOfParentLayer()
 }
 
-@objc public class LayerBridge: NSObject, LayerJSExport, Printable, BridgeType {
+@objc public class LayerBridge: NSObject, LayerJSExport, CustomStringConvertible, BridgeType {
     
     public class func addToContext(context: JSContext) {
         context.setObject(LayerBridge.self, forKeyedSubscript: "Layer")
