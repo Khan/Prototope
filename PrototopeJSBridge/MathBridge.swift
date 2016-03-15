@@ -53,6 +53,6 @@ public struct MathBridge: BridgeType {
 				(args["value"] as! Double?) ?? 0
 			)
 		}
-		context.setFunctionForKey("pixelAwareFloor", fn: pixelAwareCeil)
+		context.setFunctionForKey("pixelAwareFloor", fn: pixelAwareFloor)
 	}
 }
