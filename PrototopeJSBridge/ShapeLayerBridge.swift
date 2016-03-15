@@ -27,7 +27,7 @@ import JavaScriptCore
     var lineJoinStyle: JSValue { get set }
 }
 
-@objc public class ShapeLayerBridge: LayerBridge, ShapeLayerJSExport, LayerJSExport, BridgeType {
+@objc public class ShapeLayerBridge: LayerBridge, ShapeLayerJSExport {
     var shapeLayer: ShapeLayer { return layer as! ShapeLayer }
     
     public override class func addToContext(context: JSContext) {

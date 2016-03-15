@@ -17,7 +17,7 @@ import JavaScriptCore
 }
 
 
-@objc public class VideoLayerBridge: LayerBridge, VideoLayerJSExport, BridgeType {
+@objc public class VideoLayerBridge: LayerBridge, VideoLayerJSExport {
 	var videoLayer: VideoLayer { return layer as! VideoLayer }
 	
 	public override class func addToContext(context: JSContext) {

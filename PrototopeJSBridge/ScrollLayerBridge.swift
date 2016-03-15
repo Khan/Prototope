@@ -25,7 +25,7 @@ import JavaScriptCore
 }
 
 
-@objc public class ScrollLayerBridge: LayerBridge, ScrollLayerJSExport, BridgeType {
+@objc public class ScrollLayerBridge: LayerBridge, ScrollLayerJSExport {
 	var scrollLayer: ScrollLayer { return layer as! ScrollLayer }
 	
 	public override class func addToContext(context: JSContext) {

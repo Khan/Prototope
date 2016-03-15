@@ -14,7 +14,7 @@ import JavaScriptCore
 	var cameraPosition: JSValue { get set }
 }
 
-@objc public class CameraLayerBridge: LayerBridge, CameraLayerJSExport, BridgeType {
+@objc public class CameraLayerBridge: LayerBridge, CameraLayerJSExport {
 	var cameraLayer: CameraLayer { return layer as! CameraLayer }
 
 	public override class func addToContext(context: JSContext) {

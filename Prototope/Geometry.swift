@@ -250,12 +250,12 @@ public struct Rect: Equatable {
     }
     
     /** Convenience function. Returns a Rect constructed by insetting the receiver. */
-    public func inset(vertical: Double = 0, horizontal: Double = 0) -> Rect {
+    public func inset(vertical vertical: Double = 0, horizontal: Double = 0) -> Rect {
         return inset(top: vertical, right: horizontal, bottom: vertical, left: horizontal)
     }
     
     /** Convenience function. Returns a Rect constructed by insetting the receiver. */
-    public func inset(value: Double = 0) -> Rect {
+    public func inset(value value: Double = 0) -> Rect {
         return inset(top: value, right: value, bottom: value, left: value)
     }
     

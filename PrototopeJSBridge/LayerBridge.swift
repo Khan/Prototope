@@ -110,7 +110,7 @@ import JavaScriptCore
     func moveToCenterOfParentLayer()
 }
 
-@objc public class LayerBridge: NSObject, LayerJSExport, CustomStringConvertible, BridgeType {
+@objc public class LayerBridge: NSObject, LayerJSExport, BridgeType {
     
     public class func addToContext(context: JSContext) {
         context.setObject(LayerBridge.self, forKeyedSubscript: "Layer")
@@ -358,7 +358,7 @@ import JavaScriptCore
         let output = JSValue(newObjectInContext: context)
         for (_, sequence) in mapping {
 			let bridgedSequence = bridgeTouchSequence(sequence, context: context)
-            output.setObject(bridgedSequence, forKeyedSubscript: bridgedSequence.id)
+            output.setObject(bridgedSequence, forKeyedSubscript: bridgedSequence.id.toString())
         }
         return output
     }

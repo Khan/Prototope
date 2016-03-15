@@ -21,7 +21,7 @@ import JavaScriptCore
 	func alignWithBaselineOf(layer: TextLayerJSExport)
 }
 
-@objc public class TextLayerBridge: LayerBridge, TextLayerJSExport, BridgeType {
+@objc public class TextLayerBridge: LayerBridge, TextLayerJSExport {
 	var textLayer: TextLayer { return layer as! TextLayer }
 
 	public override class func addToContext(context: JSContext) {
