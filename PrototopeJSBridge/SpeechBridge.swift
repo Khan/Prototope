@@ -25,7 +25,7 @@ import JavaScriptCore
 }
 
 
-let sayTrampoline: @objc_block JSValue -> Void = { args in
+let sayTrampoline: @convention(block) JSValue -> Void = { args in
 	let text = args.valueForProperty("text")
 	
 	if !text.isUndefined {
@@ -35,6 +35,6 @@ let sayTrampoline: @objc_block JSValue -> Void = { args in
 }
 
 
-let shhhTrampoline: @objc_block JSValue -> Void = { args in
+let shhhTrampoline: @convention(block) JSValue -> Void = { args in
 	Speech.shhh()
 }

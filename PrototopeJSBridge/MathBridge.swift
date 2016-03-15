@@ -12,7 +12,7 @@ import JavaScriptCore
 
 public struct MathBridge: BridgeType {
 	public static func addToContext(context: JSContext) {
-		let interpolateTrampoline: @objc_block NSDictionary -> Double = { args in
+		let interpolateTrampoline: @convention(block) NSDictionary -> Double = { args in
 			Prototope.interpolate(
 				from: (args["from"] as! Double?) ?? 0,
 				to: (args["to"] as! Double?) ?? 0,
@@ -21,7 +21,7 @@ public struct MathBridge: BridgeType {
 		}
 		context.setFunctionForKey("interpolate", fn: interpolateTrampoline)
 
-		let mapTrampoline: @objc_block NSDictionary -> Double = { args in
+		let mapTrampoline: @convention(block) NSDictionary -> Double = { args in
 			let fromInterval = (args["fromInterval"] as! [Double]?) ?? [0, 0]
 			let toInterval = (args["toInterval"] as! [Double]?) ?? [0, 0]
 			return Prototope.map(
@@ -32,7 +32,7 @@ public struct MathBridge: BridgeType {
 		}
 		context.setFunctionForKey("map", fn: mapTrampoline)
 
-		let clipTrampoline: @objc_block NSDictionary -> Double = { args in
+		let clipTrampoline: @convention(block) NSDictionary -> Double = { args in
 			Prototope.clip(
 				(args["value"] as! Double?) ?? 0,
 				min: (args["min"] as! Double?) ?? 0,
@@ -41,14 +41,14 @@ public struct MathBridge: BridgeType {
 		}
 		context.setFunctionForKey("clip", fn: clipTrampoline)
 		
-		let pixelAwareCeil: @objc_block NSDictionary -> Double = { args in
+		let pixelAwareCeil: @convention(block) NSDictionary -> Double = { args in
 			Prototope.pixelAwareCeil(
 				(args["value"] as! Double?) ?? 0
 			)
 		}
 		context.setFunctionForKey("pixelAwareCeil", fn: pixelAwareCeil)
 		
-		let pixelAwareFloor: @objc_block NSDictionary -> Double = { args in
+		let pixelAwareFloor: @convention(block) NSDictionary -> Double = { args in
 			Prototope.pixelAwareFloor(
 				(args["value"] as! Double?) ?? 0
 			)

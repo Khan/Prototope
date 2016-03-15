@@ -91,7 +91,7 @@ public class Context {
 
 	private func addBridgedTypes() {
 		let console = JSValue(newObjectInContext: context)
-		let loggingTrampoline: @objc_block JSValue -> Void = { [weak self] value in
+		let loggingTrampoline: @convention(block) JSValue -> Void = { [weak self] value in
 			self?.consoleLogHandler?(value.toString())
 			return
 		}
@@ -107,7 +107,7 @@ public class Context {
 				
 				let bridgedConstructor = JSValue(object: bridgedNSObject, inContext: context)
 				let prototype = bridgedConstructor.valueForProperty("prototype")
-				let toStringImpl: @objc_block () -> String = {
+				let toStringImpl: @convention(block) () -> String = {
 					let this = JSContext.currentThis()
 					return this.description 
 				}

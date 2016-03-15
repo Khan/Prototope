@@ -15,10 +15,10 @@ public class TimingBridge: BridgeType {
     	let timestampObject = JSValue(newObjectInContext: context)
     	context.setObject(timestampObject, forKeyedSubscript: "Timestamp")
 
-    	let currentTimestampFunction: @objc_block Void -> Double = { return Prototope.Timestamp.currentTimestamp.nsTimeInterval }
+    	let currentTimestampFunction: @convention(block) Void -> Double = { return Prototope.Timestamp.currentTimestamp.nsTimeInterval }
     	timestampObject.setFunctionForKey("currentTimestamp", fn: currentTimestampFunction)
 
-    	let afterDurationFunction: @objc_block (Double, JSValue) -> Void = { duration, callable in
+    	let afterDurationFunction: @convention(block) (Double, JSValue) -> Void = { duration, callable in
     		Prototope.afterDuration(duration) {
     			callable.callWithArguments([])
 				return

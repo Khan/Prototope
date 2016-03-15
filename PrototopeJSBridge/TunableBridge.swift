@@ -12,7 +12,7 @@ import JavaScriptCore
 
 public struct TunableBridge: BridgeType {
 	public static func addToContext(context: JSContext) {
-		let tunableTrampoline: @objc_block JSValue -> NSNumber = { TunableBridge.tunable($0) }
+		let tunableTrampoline: @convention(block) JSValue -> NSNumber = { TunableBridge.tunable($0) }
 		context.setFunctionForKey("tunable", fn: tunableTrampoline)
 	}
 

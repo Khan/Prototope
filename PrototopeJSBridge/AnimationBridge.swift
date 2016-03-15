@@ -10,7 +10,7 @@ import Foundation
 import JavaScriptCore
 import Prototope
 
-let animateWithDurationBridgingTrampoline: @objc_block JSValue -> Void = { args in
+let animateWithDurationBridgingTrampoline: @convention(block) JSValue -> Void = { args in
 	let durationValue = args.valueForProperty("duration")
 	let curveValue = args.valueForProperty("curve")
 	let animationsHandler = args.valueForProperty("animations")
