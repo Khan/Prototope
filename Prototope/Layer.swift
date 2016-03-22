@@ -64,6 +64,16 @@ public class Layer: Equatable {
 		self.image = Image(name: imageName)
 		imageDidChange()
 	}
+	
+	
+	/** Convenience initializer; makes a layer which displays the given image.
+		The layer will adopt its size from the image. */
+	public convenience init(parent: Layer?, image: Image) {
+		self.init(parent: parent)
+		self.image = image
+		imageDidChange()
+	}
+	
 
 	/** Creates a Prototope Layer by wrapping a CALayer. The result may not have
 	access to all the normal Prototope functionality--beware! You should mostly
