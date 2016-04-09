@@ -15,7 +15,9 @@ import JavaScriptCore
 @objc public protocol TouchSampleJSExport: JSExport {
 	init?(args: JSValue)
 	var globalLocation: PointJSExport { get }
+	var preciseGlobalLocation: PointJSExport { get }
 	var timestamp: Double { get }
+	var force: Double { get }
 	func locationInLayer(layer: LayerJSExport) -> PointJSExport
 }
 
@@ -48,7 +50,11 @@ import JavaScriptCore
 	}
 
 	public var globalLocation: PointJSExport { return PointBridge(touchSample.globalLocation) }
+	public var preciseGlobalLocation: PointJSExport { return PointBridge(touchSample.preciseGlobalLocation) }
+	
 	public var timestamp: Double { return touchSample.timestamp.nsTimeInterval }
+	public var force: Double { return touchSample.force }
+	
 	public func locationInLayer(layer: LayerJSExport) -> PointJSExport {
 		return PointBridge(touchSample.locationInLayer((layer as JSExport as! LayerBridge).layer))
 	}

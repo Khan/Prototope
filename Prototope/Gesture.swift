@@ -14,18 +14,27 @@ import UIKit
 public struct TouchSample: SampleType {
 	/** The location of the touch sample in the root layer's coordinate system. */
 	public let globalLocation: Point
+	
+	/** The precise location of the touch sample in the root layer's coordinate system. This should only be used for Stylus, not finger, input. */
+	public let preciseGlobalLocation: Point
 
 	/** The time at which the touch arrived. */
 	public let timestamp: Timestamp
+	
+	
+	/** The force of the touch. Available only for certain devices (3D touch devices like iPhone 6S or Apple Pencil). */
+	public let force: Double?
 
 	/** The location of the touch sample, converted into a target layer's coordinate system. */
 	public func locationInLayer(layer: Layer) -> Point {
 		return layer.convertGlobalPointToLocalPoint(globalLocation)
 	}
 
-	public init(globalLocation: Point, timestamp: Timestamp) {
+	public init(globalLocation: Point, preciseGlobalLocation: Point? = nil, timestamp: Timestamp, force: Double? = nil) {
 		self.globalLocation = globalLocation
+		self.preciseGlobalLocation = preciseGlobalLocation ?? globalLocation
 		self.timestamp = timestamp
+		self.force = force
 	}
 }
 
@@ -695,6 +704,8 @@ public func ==(lhs: _GestureType,rhs: _GestureType) -> Bool {
 extension TouchSample {
 	init(_ touch: UITouch) {
 		globalLocation = Point(touch.locationInView(nil))
+		preciseGlobalLocation = Point(touch.preciseLocationInView(nil))
 		timestamp = Timestamp(touch.timestamp)
+		force = UIScreen.mainScreen().traitCollection.forceTouchCapability == .Available ? Double(touch.force) : nil
 	}
 }
