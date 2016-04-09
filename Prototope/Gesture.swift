@@ -23,14 +23,14 @@ public struct TouchSample: SampleType {
 	
 	
 	/** The force of the touch. Available only for certain devices (3D touch devices like iPhone 6S or Apple Pencil). */
-	public let force: Double
+	public let force: Double?
 
 	/** The location of the touch sample, converted into a target layer's coordinate system. */
 	public func locationInLayer(layer: Layer) -> Point {
 		return layer.convertGlobalPointToLocalPoint(globalLocation)
 	}
 
-	public init(globalLocation: Point, preciseGlobalLocation: Point? = nil, timestamp: Timestamp, force: Double = 0.0) {
+	public init(globalLocation: Point, preciseGlobalLocation: Point? = nil, timestamp: Timestamp, force: Double? = nil) {
 		self.globalLocation = globalLocation
 		self.preciseGlobalLocation = preciseGlobalLocation ?? globalLocation
 		self.timestamp = timestamp
@@ -706,6 +706,6 @@ extension TouchSample {
 		globalLocation = Point(touch.locationInView(nil))
 		preciseGlobalLocation = Point(touch.preciseLocationInView(nil))
 		timestamp = Timestamp(touch.timestamp)
-		force = Double(touch.force)
+		force = UIScreen.mainScreen().traitCollection.forceTouchCapability == .Available ? Double(touch.force) : nil
 	}
 }
