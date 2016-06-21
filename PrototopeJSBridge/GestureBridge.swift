@@ -17,7 +17,7 @@ import JavaScriptCore
 	var globalLocation: PointJSExport { get }
 	var preciseGlobalLocation: PointJSExport { get }
 	var timestamp: Double { get }
-	var force: Double { get }
+	var force: JSValue { get }
 	func locationInLayer(layer: LayerJSExport) -> PointJSExport
 }
 
@@ -53,8 +53,15 @@ import JavaScriptCore
 	public var preciseGlobalLocation: PointJSExport { return PointBridge(touchSample.preciseGlobalLocation) }
 	
 	public var timestamp: Double { return touchSample.timestamp.nsTimeInterval }
-	public var force: Double { return touchSample.force }
-	
+	public var force: JSValue {
+		let context = JSContext.currentContext()
+		if let force = touchSample.force {
+			return JSValue(double: force, inContext: context)
+		} else {
+			return JSValue(nullInContext: context)
+		}
+	}
+
 	public func locationInLayer(layer: LayerJSExport) -> PointJSExport {
 		return PointBridge(touchSample.locationInLayer((layer as JSExport as! LayerBridge).layer))
 	}
